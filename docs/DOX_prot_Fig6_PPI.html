@@ -1,0 +1,1179 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Omar Johnson" />
+
+<meta name="date" content="2024-12-08" />
+
+<title>DOX_prot_Fig6_PPI</title>
+
+<script src="site_libs/header-attrs-2.28/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.13.2/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-6.4.2/css/all.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet" />
+
+<link rel="icon" href="https://github.com/workflowr/workflowr-assets/raw/main/img/reproducible.png">
+<!-- Add a small amount of space between sections. -->
+<style type="text/css">
+div.section {
+  padding-top: 12px;
+}
+</style>
+
+
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">DNA_damage_DOX_project</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="about.html">About</a>
+</li>
+<li>
+  <a href="license.html">License</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/Omar-Johnson/DNA_damage_DOX">
+    <span class="fab fa-github"></span>
+     
+    Source code
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">DOX_prot_Fig6_PPI</h1>
+<h4 class="author">Omar Johnson</h4>
+<h4 class="date">2024-12-08</h4>
+
+</div>
+
+
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
+<span class="glyphicon glyphicon-list" aria-hidden="true"></span>
+workflowr <span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span>
+</button>
+</p>
+<div id="workflowr-report" class="collapse">
+<ul class="nav nav-tabs">
+<li class="active">
+<a data-toggle="tab" href="#summary">Summary</a>
+</li>
+<li>
+<a data-toggle="tab" href="#checks"> Checks <span
+class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
+</a>
+</li>
+<li>
+<a data-toggle="tab" href="#versions">Past versions</a>
+</li>
+</ul>
+<div class="tab-content">
+<div id="summary" class="tab-pane fade in active">
+<p>
+<strong>Last updated:</strong> 2024-12-08
+</p>
+<p>
+<strong>Checks:</strong> <span
+class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7
+<span class="glyphicon glyphicon-exclamation-sign text-danger"
+aria-hidden="true"></span> 0
+</p>
+<p>
+<strong>Knit directory:</strong> <code>DNA_damage_DOX/</code> <span
+class="glyphicon glyphicon-question-sign" aria-hidden="true"
+title="This is the local directory in which the code in this file was executed.">
+</span>
+</p>
+<p>
+This reproducible <a href="https://rmarkdown.rstudio.com">R Markdown</a>
+analysis was created with <a
+  href="https://github.com/workflowr/workflowr">workflowr</a> (version
+1.7.1). The <em>Checks</em> tab describes the reproducibility checks
+that were applied when the results were created. The <em>Past
+versions</em> tab lists the development history.
+</p>
+<hr>
+</div>
+<div id="checks" class="tab-pane fade">
+<div id="workflowr-checks" class="panel-group">
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date
+</a>
+</p>
+</div>
+<div id="strongRMarkdownfilestronguptodate"
+class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great! Since the R Markdown file has been committed to the Git
+repository, you know the exact version of the code that produced these
+results.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongEnvironmentstrongempty">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Environment:</strong> empty </a>
+</p>
+</div>
+<div id="strongEnvironmentstrongempty" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! The global environment was empty. Objects defined in the
+global environment can affect the analysis in your R Markdown file in
+unknown ways. For reproduciblity it’s best to always run the code in an
+empty environment.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSeedstrongcodesetseed20241207code">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Seed:</strong>
+<code>set.seed(20241207)</code> </a>
+</p>
+</div>
+<div id="strongSeedstrongcodesetseed20241207code"
+class="panel-collapse collapse">
+<div class="panel-body">
+<p>The command <code>set.seed(20241207)</code> was run prior to running
+the code in the R Markdown file. Setting a seed ensures that any results
+that rely on randomness, e.g. subsampling or permutations, are
+reproducible.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSessioninformationstrongrecorded">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Session information:</strong>
+recorded </a>
+</p>
+</div>
+<div id="strongSessioninformationstrongrecorded"
+class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Recording the operating system, R version, and package
+versions is critical for reproducibility.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongCachestrongnone">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Cache:</strong> none </a>
+</p>
+</div>
+<div id="strongCachestrongnone" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Nice! There were no cached chunks for this analysis, so you can be
+confident that you successfully produced the results during this
+run.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongFilepathsstrongrelative">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>File paths:</strong> relative </a>
+</p>
+</div>
+<div id="strongFilepathsstrongrelative" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Using relative paths to the files within your workflowr
+project makes it easier to run your code on other machines.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomOmarJohnsonDNAdamageDOXtree5596b631fe8b06c02d2699da3c9259c7ead56e76targetblank5596b63a">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Repository version:</strong>
+<a href="https://github.com/Omar-Johnson/DNA_damage_DOX/tree/5596b631fe8b06c02d2699da3c9259c7ead56e76" target="_blank">5596b63</a>
+</a>
+</p>
+</div>
+<div
+id="strongRepositoryversionstrongahrefhttpsgithubcomOmarJohnsonDNAdamageDOXtree5596b631fe8b06c02d2699da3c9259c7ead56e76targetblank5596b63a"
+class="panel-collapse collapse">
+<div class="panel-body">
+<p>
+Great! You are using Git for version control. Tracking code development
+and connecting the code version to the results is critical for
+reproducibility.
+</p>
+<p>
+The results in this page were generated with repository version
+<a href="https://github.com/Omar-Johnson/DNA_damage_DOX/tree/5596b631fe8b06c02d2699da3c9259c7ead56e76" target="_blank">5596b63</a>.
+See the <em>Past versions</em> tab to see a history of the changes made
+to the R Markdown and HTML files.
+</p>
+<p>
+Note that you need to be careful to ensure that all relevant files for
+the analysis have been committed to Git prior to generating the results
+(you can use <code>wflow_publish</code> or
+<code>wflow_git_commit</code>). workflowr only checks the R Markdown
+file, but you know if there are other scripts or data files that it
+depends on. Below is the status of the Git repository when the results
+were generated:
+</p>
+<pre><code>
+Ignored files:
+    Ignored:    .DS_Store
+
+</code></pre>
+<p>
+Note that any generated files, e.g. HTML, png, CSS, etc., are not
+included in this status report because it is ok for generated content to
+have uncommitted changes.
+</p>
+</div>
+</div>
+</div>
+</div>
+<hr>
+</div>
+<div id="versions" class="tab-pane fade">
+
+<p>
+These are the previous versions of the repository in which changes were
+made to the R Markdown (<code>analysis/DOX_prot_Fig6_PPI.Rmd</code>) and
+HTML (<code>docs/DOX_prot_Fig6_PPI.html</code>) files. If you’ve
+configured a remote Git repository (see <code>?wflow_git_remote</code>),
+click on the hyperlinks in the table below to view the files as they
+were in that past version.
+</p>
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+File
+</th>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+<th>
+Message
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/Omar-Johnson/DNA_damage_DOX/blob/5596b631fe8b06c02d2699da3c9259c7ead56e76/analysis/DOX_prot_Fig6_PPI.Rmd" target="_blank">5596b63</a>
+</td>
+<td>
+Omar-Johnson
+</td>
+<td>
+2024-12-08
+</td>
+<td>
+Publish
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr>
+</div>
+</div>
+</div>
+<div id="load-libraries" class="section level1">
+<h1>Load Libraries</h1>
+</div>
+<div id="read-in-data" class="section level1">
+<h1>Read in Data</h1>
+</div>
+<div id="functions" class="section level1">
+<h1>Functions</h1>
+</div>
+<div id="b-odds-of-being-cvd-pro" class="section level1">
+<h1>6B-Odds of being CVD pro</h1>
+<pre class="r"><code>BigGWASsumstat &lt;- read_tsv(file = File_path_1)</code></pre>
+<pre><code>Rows: 5709 Columns: 15
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: &quot;\t&quot;
+chr (13): riskAllele, pValueAnnotation, riskFrequency, orValue, beta, ci, ma...
+dbl  (2): pValue, pubmedId
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+<pre class="r"><code>BigGWASsumstat_sep &lt;- separate_rows(BigGWASsumstat, mappedGenes, sep = &quot;,&quot;)
+BigGWASsumstat_sep %&gt;% nrow()</code></pre>
+<pre><code>[1] 7843</code></pre>
+<pre class="r"><code>GWAS_Traits_to_remove &lt;- BigGWASsumstat_sep[BigGWASsumstat_sep$mappedGenes == &quot;-&quot;, ]$traitName %&gt;% unique()
+
+
+BigGWASsumstat_sep_filt &lt;- BigGWASsumstat_sep[!BigGWASsumstat_sep$traitName %in% GWAS_Traits_to_remove, ]
+CVD_GWAS_genes &lt;- BigGWASsumstat_sep_filt$mappedGenes %&gt;% unique()
+
+GWAS_pros &lt;- PPI_Name_Key[PPI_Name_Key$hgnc_symbol %in% CVD_GWAS_genes, ]$uniprotswissprot
+
+
+
+pQTL_data_summary_merged &lt;- Toptable_Modules
+
+
+
+pQTL_data_summary_merged &lt;- pQTL_data_summary_merged %&gt;%
+  mutate(Is_hub = if_else(Toptable_Modules$Protein %in% hubs$Gene, 1, 0))
+
+
+pQTL_data_summary_merged &lt;- pQTL_data_summary_merged %&gt;%
+  mutate(Is_DA = if_else(P.Value &lt; 0.05, 1, 0))
+
+pQTL_data_summary_merged &lt;- pQTL_data_summary_merged %&gt;%
+  mutate(Is_GWAS = if_else(Protein %in% GWAS_pros, 1, 0))
+
+
+pQTL_data_summary_merged &lt;- pQTL_data_summary_merged %&gt;%
+  mutate(Is_DOXcorr = if_else((Modules %in% c(&quot;green&quot;,&quot;darkgreen&quot;,&quot;midnightblue&quot;,&quot;salmon&quot;,&quot;lightyellow&quot;)), 1, 0))
+
+
+result_pLI_DOXcorr &lt;- perform_fisher_test_FP(vec1 = pQTL_data_summary_merged$Is_DOXcorr, vec2 = pQTL_data_summary_merged$Is_GWAS, vec1_name = &quot;DAP&quot;, vec2_name = &quot;GWAS_Pro&quot;,  plot = FALSE)
+
+
+result_pLI_HUB &lt;- perform_fisher_test_FP(vec1 = pQTL_data_summary_merged$Is_hub, vec2 = pQTL_data_summary_merged$Is_GWAS, vec1_name = &quot;Hub&quot;, vec2_name = &quot;GWAS_Pro&quot;,  plot = FALSE)
+
+
+pQTL_data_summary_merged_hubs &lt;- pQTL_data_summary_merged[pQTL_data_summary_merged$Is_hub == TRUE, ]
+
+
+result_pLI_DOX_corr_hub &lt;- perform_fisher_test_FP(vec1 = pQTL_data_summary_merged_hubs$Is_DOXcorr, vec2 = pQTL_data_summary_merged_hubs$Is_GWAS, vec1_name = &quot;DOXcorr hub&quot;, vec2_name = &quot;GWAS_Pro&quot;,  plot = TRUE)
+
+
+FP_List &lt;- list(result_pLI_DOX_corr_hub, result_pLI_HUB, result_pLI_DOXcorr)
+
+FP_DF &lt;- data.frame(
+  Odds_ratio = numeric(length(FP_List)),
+  Lower_CI = numeric(length(FP_List)),
+  Upper_CI = numeric(length(FP_List)), 
+  Pval = numeric(length(FP_List))
+)
+
+for (i in 1:length(FP_List)) {
+  FP_DF$Odds_ratio[i] &lt;- FP_List[[i]]$Odds_ratio
+  FP_DF$Lower_CI[i] &lt;- FP_List[[i]]$Confidence_Interval[1]
+  FP_DF$Upper_CI[i] &lt;- FP_List[[i]]$Confidence_Interval[2]
+  FP_DF$Pval[i] &lt;- FP_List[[i]]$PValue
+}
+
+# Add row names for the labels in the forest plot
+FP_DF$Label &lt;- c(&quot;DOXcorrhub&quot;, &quot;hub&quot;, &quot;DOXcorr&quot;)
+
+
+FP_DF$Label &lt;- factor(FP_DF$Label, levels = rev(c( &quot;hub&quot;, &quot;DOXcorr&quot;, &quot;DOXcorrhub&quot;)))
+
+ggplot(FP_DF, aes(x = Label, y = Odds_ratio, ymin = Lower_CI, ymax = Upper_CI)) +
+  geom_pointrange() +
+  geom_hline(yintercept = 1, linetype = &quot;dashed&quot;, color = &quot;red&quot;) +
+  coord_flip() +
+  labs(
+    title = &quot;CVD risk protein enrichment across network proteins&quot;,
+    x = &quot;&quot;,
+    y = &quot;Odds of being CVD protein (95% CI)&quot;
+  ) +
+  theme_classic()</code></pre>
+<p><img src="figure/DOX_prot_Fig6_PPI.Rmd/unnamed-chunk-1-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="d-odds-of-being-cvd-ppi" class="section level1">
+<h1>6D-Odds of being CVD-PPI</h1>
+<pre class="r"><code>Enrichment_DF_ALL_GWASuni &lt;- Enrichment_DF_ALL_GWASuni %&gt;%
+  mutate(Is_DOXcorr = if_else(Enrichment_DF_ALL_GWASuni$Modules %in% c(&quot;green&quot;,&quot;darkgreen&quot;,&quot;midnightblue&quot;,&quot;salmon&quot;,&quot;lightyellow&quot;), 1, 0))
+
+FP_DOXcorr_PPI &lt;- perform_fisher_test_FP(vec1 = Enrichment_DF_ALL_GWASuni$Is_GWAS_PPI, vec2 = Enrichment_DF_ALL_GWASuni$Is_DOXcorr, vec1_name = &quot;PPI with GWAS protein&quot;, vec2_name = &quot;DOXcorr.Hub&quot;,  plot = TRUE)
+
+
+FP_Hub_PPI &lt;- perform_fisher_test_FP(vec1 = Enrichment_DF_ALL_GWASuni$Is_GWAS_PPI, vec2 = Enrichment_DF_ALL_GWASuni$Is_Hub, vec1_name = &quot;PPI with GWAS protein&quot;, vec2_name = &quot;DAPs&quot;,  plot = TRUE)
+
+
+
+Enrichment_DF_ALL_GWASuni_hub &lt;- Enrichment_DF_ALL_GWASuni[Enrichment_DF_ALL_GWASuni$Is_Hub == 1, ]
+
+FP_DOXcorr_Hub_PPI &lt;- perform_fisher_test_FP(vec1 = Enrichment_DF_ALL_GWASuni_hub$Is_GWAS_PPI, vec2 = Enrichment_DF_ALL_GWASuni_hub$Is_DOXcorr.Hub, vec1_name = &quot;PPI with GWAS protein&quot;, vec2_name = &quot;DOX Corr. hub&quot;,  plot = TRUE)
+
+
+FP_List &lt;- list(FP_DOXcorr_Hub_PPI, FP_Hub_PPI, FP_DOXcorr_PPI)
+
+FP_DF &lt;- data.frame(
+  Odds_ratio = numeric(length(FP_List)),
+  Lower_CI = numeric(length(FP_List)),
+  Upper_CI = numeric(length(FP_List)), 
+  Pval = numeric(length(FP_List))
+)
+
+for (i in 1:length(FP_List)) {
+  FP_DF$Odds_ratio[i] &lt;- FP_List[[i]]$Odds_ratio
+  FP_DF$Lower_CI[i] &lt;- FP_List[[i]]$Confidence_Interval[1]
+  FP_DF$Upper_CI[i] &lt;- FP_List[[i]]$Confidence_Interval[2]
+  FP_DF$Pval[i] &lt;- FP_List[[i]]$PValue
+}
+
+# Add row names for the labels in the forest plot
+FP_DF$Label &lt;- c(&quot;DOXcorrhub&quot;, &quot;hub&quot;, &quot;DOXcorr&quot;)
+
+
+FP_DF$Label &lt;- factor(FP_DF$Label, levels = rev(c(&quot;hub&quot;, &quot;DOXcorr&quot;, &quot;DOXcorrhub&quot;)))
+
+ggplot(FP_DF, aes(x = Label, y = Odds_ratio, ymin = Lower_CI, ymax = Upper_CI)) +
+  geom_pointrange() +
+  geom_hline(yintercept = 1, linetype = &quot;dashed&quot;, color = &quot;red&quot;) +
+  coord_flip() +
+  labs(
+    title = &quot;CVD risk protein physical interactor enrichment&quot;,
+    x = &quot;&quot;,
+    y = &quot;Odds of being physical protein interactor with CVD proteins (95% CI)&quot;
+  ) +
+  theme_minimal()+
+  ylim(c(0,16))</code></pre>
+<p><img src="figure/DOX_prot_Fig6_PPI.Rmd/unnamed-chunk-2-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="c-cvd-pro-vs-cvd-ppi-pli-scores" class="section level1">
+<h1>6C-CVD-pro vs CVD-PPI pLI scores</h1>
+<pre class="r"><code>pLI_Data &lt;- read.csv(file = File_path_2, header = TRUE)
+pLI_Data_sub &lt;- merge(pLI_Data, New_RNA_PRO_DF_3, by.x = &quot;gene&quot;, by.y = &quot;hgnc_symbol&quot;)
+pLI_Data_sub2 &lt;- pLI_Data_sub[,c(1,2,3)]
+
+Toptable_Modules_pLI &lt;- merge(Toptable_Modules, pLI_Data_sub2, by.x = &quot;Protein&quot; , by.y = &quot;Protein&quot;)
+
+# CVD protein pLI distribution 
+Toptable_Modules_pLI[Toptable_Modules_pLI$Is_CVD_protein == 1, ]$pLI %&gt;% hist()</code></pre>
+<p><img src="figure/DOX_prot_Fig6_PPI.Rmd/unnamed-chunk-3-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code># CVD protein-PPI pLI distrbution
+Toptable_Modules_pLI[Toptable_Modules_pLI$Is_CVD_PPI_protein == 1, ]$pLI %&gt;% hist()</code></pre>
+<p><img src="figure/DOX_prot_Fig6_PPI.Rmd/unnamed-chunk-3-2.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>wilcox.test(Toptable_Modules_pLI[Toptable_Modules_pLI$Is_CVD_protein == 1, ]$pLI, Toptable_Modules_pLI[Toptable_Modules_pLI$Is_CVD_PPI_protein == 1, ]$pLI)</code></pre>
+<pre><code>
+    Wilcoxon rank sum test with continuity correction
+
+data:  Toptable_Modules_pLI[Toptable_Modules_pLI$Is_CVD_protein == 1, ]$pLI and Toptable_Modules_pLI[Toptable_Modules_pLI$Is_CVD_PPI_protein == 1, ]$pLI
+W = 46186, p-value = 0.0001457
+alternative hypothesis: true location shift is not equal to 0</code></pre>
+<pre class="r"><code>pLI_Boxplot &lt;- data.frame(
+  values = c(Toptable_Modules_pLI[Toptable_Modules_pLI$Is_CVD_protein == 1, ]$pLI,
+             
+             Toptable_Modules_pLI[Toptable_Modules_pLI$Is_CVD_PPI_protein == 1, ]$pLI),
+  
+  
+  group = factor(c(rep(&quot;GWAS Pro&quot;, length(Toptable_Modules_pLI[Toptable_Modules_pLI$Is_CVD_protein == 1, ]$pLI)), rep(&quot;GWAS Pro-Interactors&quot;, length(Toptable_Modules_pLI[Toptable_Modules_pLI$Is_CVD_PPI_protein == 1, ]$pLI))))
+)
+
+
+
+# Create boxplot
+ggplot(pLI_Boxplot, aes(x = group, y = values)) +
+  geom_boxplot() +
+  labs(x = &quot;Group&quot;, y = &quot;Mutation intolerance (pLI)&quot;) +
+  theme_minimal()</code></pre>
+<p><img src="figure/DOX_prot_Fig6_PPI.Rmd/unnamed-chunk-3-3.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="e--cvd-pro-ppi-network" class="section level1">
+<h1>8E- CVD pro PPI network</h1>
+<pre class="r"><code>gwas_proteins &lt;- Toptable_Modules[Toptable_Modules$Is_CVD_protein == 1, ]$Protein
+
+##### Net-1####
+# Create the igraph object from the specific columns
+g &lt;- graph_from_data_frame(d = CVD_net[, c(&quot;query_term1&quot;, &quot;query_term2&quot;, &quot;Weight&quot;)], directed = FALSE)
+
+# Annotate the graph with additional information
+V(g)$is_hub &lt;- V(g)$name %in% hubs$Gene
+V(g)$is_dox_correlated &lt;- V(g)$name %in% Toptable_Modules[Toptable_Modules$Modules %in% c(&quot;green&quot;, &quot;darkgreen&quot;, &quot;midnightblue&quot;, &quot;salmon&quot;, &quot;lightyellow&quot;), ]$Protein
+V(g)$is_cvd_pro &lt;- V(g)$name %in% gwas_proteins
+
+# Set vertex size based on is_hub
+V(g)$size &lt;- ifelse(V(g)$is_hub, 10, 5)  # Hubs will be larger
+
+# Set vertex shape based on is_cvd_pro
+V(g)$shape &lt;- ifelse(V(g)$is_cvd_pro, &quot;square&quot;, &quot;circle&quot;)  # CVD proteins will be square
+
+# Set vertex color based on is_dox_correlated
+V(g)$color &lt;- ifelse(V(g)$is_dox_correlated, &quot;red&quot;, &quot;blue&quot;)  # Dox correlated proteins will be red, others blue
+
+# Option1 
+# Plot the graph
+plot(g, vertex.label = NA) </code></pre>
+<p><img src="figure/DOX_prot_Fig6_PPI.Rmd/unnamed-chunk-4-1.png" width="1920" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>##### Net-2 #####
+
+# Create the igraph object from the specific columns
+g &lt;- graph_from_data_frame(d = CVD_net[, c(&quot;query_term1&quot;, &quot;query_term2&quot;, &quot;Weight&quot;)], directed = FALSE)
+
+# Convert igraph object to tidygraph object
+tg &lt;- as_tbl_graph(g)
+
+# Annotate the graph with additional information
+tg &lt;- tg %&gt;%
+  mutate(is_hub = name %in% hubs$Gene,
+         is_dox_correlated = name %in% Toptable_Modules[Toptable_Modules$Modules %in% c(&quot;green&quot;, &quot;darkgreen&quot;, &quot;midnightblue&quot;, &quot;salmon&quot;, &quot;lightyellow&quot;), ]$Protein,
+         is_cvd_pro = name %in% gwas_proteins,
+         size = ifelse(is_hub, 10, 5),  # Hubs will be larger
+         shape = ifelse(is_cvd_pro, &quot;square&quot;, &quot;circle&quot;),  # CVD proteins will be square
+         color = ifelse(is_dox_correlated, &quot;red&quot;, &quot;blue&quot;))  # Dox correlated proteins will be red, others blue
+
+# Plot
+ggraph(tg, layout = &quot;kk&quot;) +
+  geom_edge_link0(aes(edge_color = Weight, edge_width = Weight), show.legend = TRUE) +
+  geom_node_point(aes(size = size, shape = shape, color = color), show.legend = TRUE) +
+  geom_node_text(aes(label = name), fontface = &quot;bold&quot;) +
+  scale_edge_color_continuous(low = &quot;white&quot;, high = &quot;black&quot;) +
+  scale_edge_width(range = c(0.1, .2)) +
+  scale_size_continuous(range = c(5, 10)) +  # Ensure the size range is the same as in the annotations
+  scale_shape_manual(values = c(&quot;circle&quot; = 16, &quot;square&quot; = 15)) +  # Use specific shapes
+  scale_color_manual(values = c(&quot;red&quot;, &quot;blue&quot;)) +  # Ensure the colors are used as in the annotations
+  theme_graph() +
+  coord_fixed()</code></pre>
+<p><img src="figure/DOX_prot_Fig6_PPI.Rmd/unnamed-chunk-4-2.png" width="1920" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>#### Net-3 ##### 
+
+# Convert igraph object to tidygraph object
+tg &lt;- as_tbl_graph(g)
+
+# Annotate the graph with additional information
+tg &lt;- tg %&gt;%
+  mutate(is_hub = name %in% hubs$Gene,
+         is_dox_correlated = name %in% Toptable_Modules[Toptable_Modules$Modules %in% c(&quot;green&quot;, &quot;darkgreen&quot;, &quot;midnightblue&quot;, &quot;salmon&quot;, &quot;lightyellow&quot;), ]$Protein,
+         is_cvd_pro = name %in% gwas_proteins,
+         size = ifelse(is_hub, 10, 5),  # Hubs will be larger
+         shape = ifelse(is_cvd_pro, &quot;square&quot;, &quot;circle&quot;),  # CVD proteins will be square
+         color = ifelse(is_dox_correlated, &quot;red&quot;, &quot;blue&quot;))  # Dox correlated proteins will be red, others blue
+
+# Define edge color based on the sign of the weight
+tg &lt;- tg %&gt;%
+  activate(edges) %&gt;%
+  mutate(edge_color = ifelse(Weight &gt; 0, &quot;darkgreen&quot;, &quot;darkred&quot;))
+
+# Plot the graph using ggraph
+ggraph(tg, layout = &quot;kk&quot;) +
+  geom_edge_link(aes(edge_color = edge_color, edge_width = abs(Weight)), show.legend = TRUE) +
+  geom_node_point(aes(size = size, shape = shape, color = color), show.legend = TRUE) +
+  geom_node_text(aes(label = name), fontface = &quot;bold&quot;) +
+  scale_edge_color_manual(values = c(&quot;darkgreen&quot; = &quot;darkgreen&quot;, &quot;darkred&quot; = &quot;darkred&quot;)) +
+  scale_edge_width(range = c(0.5, 2)) +  # Thicker edges
+  scale_size_continuous(range = c(5, 10)) +  # Ensure the size range is the same as in the annotations
+  scale_shape_manual(values = c(&quot;circle&quot; = 16, &quot;square&quot; = 15)) +  # Use specific shapes
+  scale_color_manual(values = c(&quot;red&quot; = &quot;red&quot;, &quot;blue&quot; = &quot;blue&quot;)) +  # Ensure the colors are used as in the annotations
+  theme_graph() +
+  coord_fixed()</code></pre>
+<p><img src="figure/DOX_prot_Fig6_PPI.Rmd/unnamed-chunk-4-3.png" width="1920" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>##### Net-4 #### 
+# Network with protein names 
+
+Name_Key &lt;- read.csv(file = &quot;/Users/omarjohnson/Downloads/idmapping_2024_07_01.csv&quot;, header = TRUE)
+
+Toptable_Modules_key &lt;- merge(New_RNA_PRO_DF_3,Name_Key, by.x =&quot;Protein&quot; , by.y = &quot;From&quot; )
+
+# Create the igraph object from the specific columns
+g &lt;- graph_from_data_frame(d = CVD_net[, c(&quot;query_term1&quot;, &quot;query_term2&quot;, &quot;Weight&quot;)], directed = FALSE)
+
+
+# Create lookup vectors for Protein to Gene name conversion
+protein_to_gene &lt;- setNames(New_RNA_PRO_DF_3$hgnc_symbol, New_RNA_PRO_DF_3$Protein)
+
+
+# Replace protein names in query_term1 and query_term2 with gene names using recode
+CVD_net_2 &lt;- CVD_net %&gt;%
+  mutate(Gene1 = recode(query_term1, !!!protein_to_gene),
+         Gene2 = recode(query_term2, !!!protein_to_gene))
+
+
+# Select the columns with Gene names and Weight
+CVD_net_3 &lt;- CVD_net_2 %&gt;%
+  select(Gene1, Gene2, Weight)
+
+
+
+
+# Create the igraph object from the specific columns
+g &lt;- graph_from_data_frame(d = CVD_net_3, directed = FALSE)
+
+# Convert igraph object to tidygraph object
+tg &lt;- as_tbl_graph(g)
+
+
+
+
+New_RNA_PRO_DF_3_hubs &lt;- merge(New_RNA_PRO_DF_3, hubs, by.x = &quot;Protein&quot;, by.y = &quot;Gene&quot;)
+
+
+
+
+# Annotate the graph with additional information
+tg &lt;- tg %&gt;%
+  mutate(is_hub = name %in% New_RNA_PRO_DF_3_hubs$hgnc_symbol,
+         is_dox_correlated = name %in% New_RNA_PRO_DF_3[New_RNA_PRO_DF_3$Modules %in% c(&quot;green&quot;, &quot;darkgreen&quot;, &quot;midnightblue&quot;, &quot;salmon&quot;, &quot;lightyellow&quot;), ]$hgnc_symbol,
+         is_cvd_pro = name %in% CVD_GWAS_genes,
+         size = ifelse(is_hub, 10, 5),  # Hubs will be larger
+         shape = ifelse(is_cvd_pro, &quot;square&quot;, &quot;circle&quot;), 
+          # CVD proteins will be square
+         color = ifelse(is_dox_correlated, &quot;red&quot;, &quot;blue&quot;))  # CVD proteins will be square
+
+
+
+
+ggraph(tg, layout = &quot;kk&quot;) +
+  geom_edge_link0(aes(edge_color = Weight, edge_width = Weight), show.legend = TRUE) +
+  geom_node_point(aes(size = size, shape = shape, color = color), show.legend = TRUE) +
+  geom_node_text(aes(label = name), fontface = &quot;bold&quot;) +
+  scale_edge_color_continuous(low = &quot;white&quot;, high = &quot;black&quot;) +
+  scale_edge_width(range = c(0.1, .2)) +
+  scale_size_continuous(range = c(5, 10)) +  # Ensure the size range is the same as in the annotations
+  scale_shape_manual(values = c(&quot;circle&quot; = 16, &quot;square&quot; = 15)) +  # Use specific shapes
+  scale_color_manual(values = c(&quot;red&quot;, &quot;blue&quot;)) +  # Ensure the colors are used as in the annotations
+  theme_graph() +
+  coord_fixed()</code></pre>
+<p><img src="figure/DOX_prot_Fig6_PPI.Rmd/unnamed-chunk-4-4.png" width="1920" style="display: block; margin: auto;" /></p>
+<br>
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
+<span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>
+Session information
+</button>
+</p>
+<div id="workflowr-sessioninfo" class="collapse">
+<pre class="r"><code>sessionInfo()</code></pre>
+<pre><code>R version 4.4.1 (2024-06-14)
+Platform: x86_64-apple-darwin20
+Running under: macOS Sonoma 14.6.1
+
+Matrix products: default
+BLAS:   /Library/Frameworks/R.framework/Versions/4.4-x86_64/Resources/lib/libRblas.0.dylib 
+LAPACK: /Library/Frameworks/R.framework/Versions/4.4-x86_64/Resources/lib/libRlapack.dylib;  LAPACK version 3.12.0
+
+locale:
+[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
+
+time zone: America/Chicago
+tzcode source: internal
+
+attached base packages:
+[1] stats4    stats     graphics  grDevices utils     datasets  methods  
+[8] base     
+
+other attached packages:
+ [1] tidygraph_1.3.1             igraph_2.0.3               
+ [3] ggraph_2.2.1                scales_1.3.0               
+ [5] impute_1.78.0               WGCNA_1.72-5               
+ [7] fastcluster_1.2.6           dynamicTreeCut_1.63-1      
+ [9] BioNERO_1.12.0              reshape2_1.4.4             
+[11] ggridges_0.5.6              biomaRt_2.60.1             
+[13] UpSetR_1.4.0                DOSE_3.30.4                
+[15] org.Hs.eg.db_3.19.1         AnnotationDbi_1.66.0       
+[17] clusterProfiler_4.12.6      pheatmap_1.0.12            
+[19] qvalue_2.36.0               cluster_2.1.6              
+[21] ggfortify_0.4.17            lubridate_1.9.3            
+[23] forcats_1.0.0               stringr_1.5.1              
+[25] dplyr_1.1.4                 purrr_1.0.2                
+[27] readr_2.1.5                 tidyr_1.3.1                
+[29] tibble_3.2.1                ggplot2_3.5.1              
+[31] tidyverse_2.0.0             RColorBrewer_1.1-3         
+[33] RUVSeq_1.38.0               edgeR_4.2.1                
+[35] limma_3.60.4                EDASeq_2.38.0              
+[37] ShortRead_1.62.0            GenomicAlignments_1.40.0   
+[39] SummarizedExperiment_1.34.0 MatrixGenerics_1.16.0      
+[41] matrixStats_1.4.1           Rsamtools_2.20.0           
+[43] GenomicRanges_1.56.2        Biostrings_2.72.1          
+[45] GenomeInfoDb_1.40.1         XVector_0.44.0             
+[47] IRanges_2.38.1              S4Vectors_0.42.1           
+[49] BiocParallel_1.38.0         Biobase_2.64.0             
+[51] BiocGenerics_0.50.0         workflowr_1.7.1            
+
+loaded via a namespace (and not attached):
+  [1] fs_1.6.4                bitops_1.0-8            enrichplot_1.24.2      
+  [4] httr_1.4.7              doParallel_1.0.17       backports_1.5.0        
+  [7] tools_4.4.1             utf8_1.2.4              R6_2.5.1               
+ [10] mgcv_1.9-1              lazyeval_0.2.2          GetoptLong_1.0.5       
+ [13] withr_3.0.1             prettyunits_1.2.0       gridExtra_2.3          
+ [16] preprocessCore_1.66.0   cli_3.6.3               network_1.18.2         
+ [19] scatterpie_0.2.4        labeling_0.4.3          sass_0.4.9             
+ [22] genefilter_1.86.0       yulab.utils_0.1.7       foreign_0.8-87         
+ [25] gson_0.1.0              R.utils_2.12.3          rstudioapi_0.16.0      
+ [28] RSQLite_2.3.7           generics_0.1.3          gridGraphics_0.5-1     
+ [31] shape_1.4.6.1           BiocIO_1.14.0           hwriter_1.3.2.1        
+ [34] vroom_1.6.5             GO.db_3.19.1            Matrix_1.7-0           
+ [37] interp_1.1-6            fansi_1.0.6             abind_1.4-8            
+ [40] R.methodsS3_1.8.2       lifecycle_1.0.4         whisker_0.4.1          
+ [43] yaml_2.3.10             SparseArray_1.4.8       BiocFileCache_2.12.0   
+ [46] grid_4.4.1              blob_1.2.4              promises_1.3.0         
+ [49] crayon_1.5.3            pwalign_1.0.0           lattice_0.22-6         
+ [52] cowplot_1.1.3           annotate_1.82.0         GenomicFeatures_1.56.0 
+ [55] KEGGREST_1.44.1         pillar_1.9.0            knitr_1.48             
+ [58] ComplexHeatmap_2.20.0   fgsea_1.30.0            rjson_0.2.22           
+ [61] codetools_0.2-20        fastmatch_1.1-4         glue_1.7.0             
+ [64] getPass_0.2-4           ggfun_0.1.6             data.table_1.16.0      
+ [67] vctrs_0.6.5             png_0.1-8               treeio_1.28.0          
+ [70] gtable_0.3.5            cachem_1.1.0            aroma.light_3.34.0     
+ [73] xfun_0.47               S4Arrays_1.4.1          coda_0.19-4.1          
+ [76] survival_3.7-0          iterators_1.0.14        statmod_1.5.0          
+ [79] nlme_3.1-166            ggtree_3.12.0           bit64_4.0.5            
+ [82] progress_1.2.3          filelock_1.0.3          GENIE3_1.26.0          
+ [85] rprojroot_2.0.4         bslib_0.8.0             rpart_4.1.23           
+ [88] Hmisc_5.1-3             colorspace_2.1-1        DBI_1.2.3              
+ [91] nnet_7.3-19             tidyselect_1.2.1        processx_3.8.4         
+ [94] bit_4.0.5               compiler_4.4.1          curl_5.2.2             
+ [97] git2r_0.35.0            httr2_1.0.4             htmlTable_2.4.3        
+[100] intergraph_2.0-4        xml2_1.3.6              ggdendro_0.2.0         
+[103] DelayedArray_0.30.1     shadowtext_0.1.4        rtracklayer_1.64.0     
+[106] checkmate_2.3.2         callr_3.7.6             rappdirs_0.3.3         
+[109] digest_0.6.37           rmarkdown_2.28          RhpcBLASctl_0.23-42    
+[112] base64enc_0.1-3         htmltools_0.5.8.1       pkgconfig_2.0.3        
+[115] jpeg_0.1-10             highr_0.11              dbplyr_2.5.0           
+[118] fastmap_1.2.0           htmlwidgets_1.6.4       rlang_1.1.4            
+[121] GlobalOptions_0.1.2     UCSC.utils_1.0.0        farver_2.1.2           
+[124] jquerylib_0.1.4         jsonlite_1.8.8          statnet.common_4.9.0   
+[127] GOSemSim_2.30.2         R.oo_1.26.0             RCurl_1.98-1.16        
+[130] magrittr_2.0.3          ggnetwork_0.5.13        Formula_1.2-5          
+[133] GenomeInfoDbData_1.2.12 ggplotify_0.1.2         patchwork_1.2.0        
+[136] munsell_0.5.1           Rcpp_1.0.13             ape_5.8                
+[139] viridis_0.6.5           minet_3.62.0            stringi_1.8.4          
+[142] zlibbioc_1.50.0         MASS_7.3-61             plyr_1.8.9             
+[145] parallel_4.4.1          ggrepel_0.9.6           deldir_2.0-4           
+[148] graphlayouts_1.1.1      splines_4.4.1           hms_1.1.3              
+[151] circlize_0.4.16         locfit_1.5-9.10         ps_1.8.0               
+[154] XML_3.99-0.17           evaluate_0.24.0         latticeExtra_0.6-30    
+[157] tzdb_0.4.0              foreach_1.5.2           tweenr_2.0.3           
+[160] httpuv_1.6.15           polyclip_1.10-7         clue_0.3-65            
+[163] ggforce_0.4.2           xtable_1.8-4            restfulr_0.0.15        
+[166] NetRep_1.2.7            tidytree_0.4.6          later_1.3.2            
+[169] viridisLite_0.4.2       aplot_0.2.3             memoise_2.0.1          
+[172] sva_3.52.0              timechange_0.3.0       </code></pre>
+</div>
+</div>
+
+
+<!-- Adjust MathJax settings so that all math formulae are shown using
+TeX fonts only; see
+https://docs.mathjax.org/en/latest/web/configuration.html. This will make
+the presentation more consistent at the cost of the webpage sometimes
+taking slightly longer to load. Note that this only works because the
+footer is added to webpages before the MathJax javascript. -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    "HTML-CSS": { availableFonts: ["TeX"] }
+  });
+</script>
+
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

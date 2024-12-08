@@ -1,0 +1,3009 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Omar Johnson" />
+
+<meta name="date" content="2024-12-08" />
+
+<title>DOX_prot_Fig5_AFHF</title>
+
+<script src="site_libs/header-attrs-2.28/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.13.2/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-6.4.2/css/all.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet" />
+
+<link rel="icon" href="https://github.com/workflowr/workflowr-assets/raw/main/img/reproducible.png">
+<!-- Add a small amount of space between sections. -->
+<style type="text/css">
+div.section {
+  padding-top: 12px;
+}
+</style>
+
+
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">DNA_damage_DOX_project</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="about.html">About</a>
+</li>
+<li>
+  <a href="license.html">License</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/Omar-Johnson/DNA_damage_DOX">
+    <span class="fab fa-github"></span>
+     
+    Source code
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">DOX_prot_Fig5_AFHF</h1>
+<h4 class="author">Omar Johnson</h4>
+<h4 class="date">2024-12-08</h4>
+
+</div>
+
+
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
+<span class="glyphicon glyphicon-list" aria-hidden="true"></span>
+workflowr <span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span>
+</button>
+</p>
+<div id="workflowr-report" class="collapse">
+<ul class="nav nav-tabs">
+<li class="active">
+<a data-toggle="tab" href="#summary">Summary</a>
+</li>
+<li>
+<a data-toggle="tab" href="#checks"> Checks <span
+class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
+</a>
+</li>
+<li>
+<a data-toggle="tab" href="#versions">Past versions</a>
+</li>
+</ul>
+<div class="tab-content">
+<div id="summary" class="tab-pane fade in active">
+<p>
+<strong>Last updated:</strong> 2024-12-08
+</p>
+<p>
+<strong>Checks:</strong> <span
+class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7
+<span class="glyphicon glyphicon-exclamation-sign text-danger"
+aria-hidden="true"></span> 0
+</p>
+<p>
+<strong>Knit directory:</strong> <code>DNA_damage_DOX/</code> <span
+class="glyphicon glyphicon-question-sign" aria-hidden="true"
+title="This is the local directory in which the code in this file was executed.">
+</span>
+</p>
+<p>
+This reproducible <a href="https://rmarkdown.rstudio.com">R Markdown</a>
+analysis was created with <a
+  href="https://github.com/workflowr/workflowr">workflowr</a> (version
+1.7.1). The <em>Checks</em> tab describes the reproducibility checks
+that were applied when the results were created. The <em>Past
+versions</em> tab lists the development history.
+</p>
+<hr>
+</div>
+<div id="checks" class="tab-pane fade">
+<div id="workflowr-checks" class="panel-group">
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date
+</a>
+</p>
+</div>
+<div id="strongRMarkdownfilestronguptodate"
+class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great! Since the R Markdown file has been committed to the Git
+repository, you know the exact version of the code that produced these
+results.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongEnvironmentstrongempty">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Environment:</strong> empty </a>
+</p>
+</div>
+<div id="strongEnvironmentstrongempty" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! The global environment was empty. Objects defined in the
+global environment can affect the analysis in your R Markdown file in
+unknown ways. For reproduciblity it’s best to always run the code in an
+empty environment.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSeedstrongcodesetseed20241207code">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Seed:</strong>
+<code>set.seed(20241207)</code> </a>
+</p>
+</div>
+<div id="strongSeedstrongcodesetseed20241207code"
+class="panel-collapse collapse">
+<div class="panel-body">
+<p>The command <code>set.seed(20241207)</code> was run prior to running
+the code in the R Markdown file. Setting a seed ensures that any results
+that rely on randomness, e.g. subsampling or permutations, are
+reproducible.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSessioninformationstrongrecorded">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Session information:</strong>
+recorded </a>
+</p>
+</div>
+<div id="strongSessioninformationstrongrecorded"
+class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Recording the operating system, R version, and package
+versions is critical for reproducibility.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongCachestrongnone">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Cache:</strong> none </a>
+</p>
+</div>
+<div id="strongCachestrongnone" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Nice! There were no cached chunks for this analysis, so you can be
+confident that you successfully produced the results during this
+run.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongFilepathsstrongrelative">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>File paths:</strong> relative </a>
+</p>
+</div>
+<div id="strongFilepathsstrongrelative" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Using relative paths to the files within your workflowr
+project makes it easier to run your code on other machines.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomOmarJohnsonDNAdamageDOXtree5596b631fe8b06c02d2699da3c9259c7ead56e76targetblank5596b63a">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Repository version:</strong>
+<a href="https://github.com/Omar-Johnson/DNA_damage_DOX/tree/5596b631fe8b06c02d2699da3c9259c7ead56e76" target="_blank">5596b63</a>
+</a>
+</p>
+</div>
+<div
+id="strongRepositoryversionstrongahrefhttpsgithubcomOmarJohnsonDNAdamageDOXtree5596b631fe8b06c02d2699da3c9259c7ead56e76targetblank5596b63a"
+class="panel-collapse collapse">
+<div class="panel-body">
+<p>
+Great! You are using Git for version control. Tracking code development
+and connecting the code version to the results is critical for
+reproducibility.
+</p>
+<p>
+The results in this page were generated with repository version
+<a href="https://github.com/Omar-Johnson/DNA_damage_DOX/tree/5596b631fe8b06c02d2699da3c9259c7ead56e76" target="_blank">5596b63</a>.
+See the <em>Past versions</em> tab to see a history of the changes made
+to the R Markdown and HTML files.
+</p>
+<p>
+Note that you need to be careful to ensure that all relevant files for
+the analysis have been committed to Git prior to generating the results
+(you can use <code>wflow_publish</code> or
+<code>wflow_git_commit</code>). workflowr only checks the R Markdown
+file, but you know if there are other scripts or data files that it
+depends on. Below is the status of the Git repository when the results
+were generated:
+</p>
+<pre><code>
+Ignored files:
+    Ignored:    .DS_Store
+
+</code></pre>
+<p>
+Note that any generated files, e.g. HTML, png, CSS, etc., are not
+included in this status report because it is ok for generated content to
+have uncommitted changes.
+</p>
+</div>
+</div>
+</div>
+</div>
+<hr>
+</div>
+<div id="versions" class="tab-pane fade">
+
+<p>
+These are the previous versions of the repository in which changes were
+made to the R Markdown (<code>analysis/DOX_prot_Fig5_AFHF.Rmd</code>)
+and HTML (<code>docs/DOX_prot_Fig5_AFHF.html</code>) files. If you’ve
+configured a remote Git repository (see <code>?wflow_git_remote</code>),
+click on the hyperlinks in the table below to view the files as they
+were in that past version.
+</p>
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+File
+</th>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+<th>
+Message
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/Omar-Johnson/DNA_damage_DOX/blob/5596b631fe8b06c02d2699da3c9259c7ead56e76/analysis/DOX_prot_Fig5_AFHF.Rmd" target="_blank">5596b63</a>
+</td>
+<td>
+Omar-Johnson
+</td>
+<td>
+2024-12-08
+</td>
+<td>
+Publish
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr>
+</div>
+</div>
+</div>
+<div id="load-libraries" class="section level1">
+<h1>Load Libraries</h1>
+</div>
+<div id="read-in-data" class="section level1">
+<h1>Read in Data</h1>
+</div>
+<div id="functions" class="section level1">
+<h1>Functions</h1>
+</div>
+<div
+id="fig-5d-using--heatmap-for-heart-failure-and-atrial-fibrillation"
+class="section level1">
+<h1>Fig 5D Using- heatmap for heart failure and atrial fibrillation</h1>
+<pre class="r"><code># Data frame with 
+unique_genes_df_2 %&gt;% head()</code></pre>
+<pre><code>      Genes    Modules Atrial.fibrillation Heart.failure Protein Is_DA
+7    ACAD10  royalblue                   0             1  Q6JQN1     0
+8     ALDH2    darkred                   0             1  P05091     0
+9     ANXA4  royalblue                   1             0  P09525     0
+10 ARHGAP10 lightgreen                   1             0  A1A4S6     0
+11    ASAH1    darkred                   1             0  Q13510     0
+12    ATXN2      green                   0             1  Q99700     0
+   Is_DOXcorrelated Is_Hub   Pro_LogFC
+7                 0      0  0.07043402
+8                 0      1  0.13472763
+9                 0      0  0.32147822
+10                0      0  0.14066972
+11                0      0  0.09581227
+12                1      0 -0.36774764</code></pre>
+<pre class="r"><code>unique_genes_df_2_DOXcorr. &lt;- unique_genes_df_2[unique_genes_df_2$Is_DOXcorrelated ==1, ]
+
+
+
+# Geom tile with All Risk proteins 
+# Plot 1: LogFC Heatmap
+logfc_plot &lt;- ggplot(unique_genes_df_2, aes(x = &quot;LogFC&quot;, y = Genes, fill = Pro_LogFC)) +
+  geom_tile(color = &quot;white&quot;) +
+  scale_fill_gradient2(low = &quot;blue&quot;, mid = &quot;white&quot;, high = &quot;red&quot;, midpoint = 0, name = &quot;LogFC&quot;) +
+  labs(title = &quot;LogFC Heatmap&quot;, x = &quot;&quot;, y = &quot;Genes&quot;) +
+  theme_void() +
+  theme(axis.text.x = element_blank(), axis.ticks.x = element_blank(), axis.text.y = element_text(size = 8))
+logfc_plot</code></pre>
+<p><img src="figure/DOX_prot_Fig5_AFHF.Rmd/unnamed-chunk-1-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>module_plot &lt;- ggplot(unique_genes_df_2, aes(x = &quot;Module&quot;, y = Genes, fill = Modules)) +
+  geom_tile(color = &quot;white&quot;) +
+  scale_fill_identity() +
+  labs(title = &quot;Module Heatmap&quot;, x = &quot;&quot;, y = &quot;Genes&quot;) +
+  theme_void() +
+  theme(axis.text.x = element_blank(), axis.ticks.x = element_blank(), axis.text.y = element_text(size = 8))
+module_plot</code></pre>
+<p><img src="figure/DOX_prot_Fig5_AFHF.Rmd/unnamed-chunk-1-2.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code># Plot 3: Binary Attributes Heatmap
+# Reshape the binary data
+binary_data &lt;- unique_genes_df_2 %&gt;%
+  dplyr::select(Genes, Is_DA, Is_DOXcorrelated, Is_Hub, Atrial.fibrillation, Heart.failure) %&gt;%
+  pivot_longer(cols = -Genes, names_to = &quot;Attribute&quot;, values_to = &quot;Value&quot;)
+
+binary_plot &lt;- ggplot(binary_data, aes(x = Attribute, y = Genes, fill = as.factor(Value))) +
+  geom_tile(color = &quot;white&quot;) +
+  scale_fill_manual(values = c(&quot;0&quot; = &quot;steelblue&quot;, &quot;1&quot; = &quot;orange&quot;), name = &quot;Binary&quot;) +
+  labs(title = &quot;Binary Attributes Heatmap (1= Yes, 0 =No)&quot;, x = &quot;Attributes&quot;, y = &quot;Genes&quot;) +
+  theme_void() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 8), axis.text.y = element_text(size = 8))
+binary_plot</code></pre>
+<p><img src="figure/DOX_prot_Fig5_AFHF.Rmd/unnamed-chunk-1-3.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>binary_data_2 &lt;- unique_genes_df_2 %&gt;%
+  dplyr::select(Genes, Is_Hub) %&gt;%
+  pivot_longer(cols = -Genes, names_to = &quot;Attribute&quot;, values_to = &quot;Value&quot;)
+
+binary_plot_2 &lt;- ggplot(binary_data_2, aes(x = Attribute, y = Genes, fill = as.factor(Value))) +
+  geom_tile(color = &quot;white&quot;) +
+  scale_fill_manual(values = c(&quot;0&quot; = &quot;grey&quot;, &quot;1&quot; = &quot;black&quot;), name = &quot;Binary&quot;) +
+  labs(title = &quot;Binary Attributes Heatmap (1= Yes, 0 =No)&quot;, x = &quot;Attributes&quot;, y = &quot;Genes&quot;) +
+  theme_void() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 8), axis.text.y = element_text(size = 8))
+binary_plot_2</code></pre>
+<p><img src="figure/DOX_prot_Fig5_AFHF.Rmd/unnamed-chunk-1-4.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="fig-5-bc-afhf-enrrichment-tests" class="section level1">
+<h1>Fig 5 B&amp;C AF/HF enrrichment tests</h1>
+<pre class="r"><code># assigning AF/HF gene vectors 
+Afib_genes &lt;- unique_genes_df_2[(unique_genes_df_2$Atrial.fibrillation == 1) &amp; (!unique_genes_df_2$Genes %in% c(&quot;&quot;)), ]$Genes
+HF_genes &lt;- unique_genes_df_2[(unique_genes_df_2$Heart.failure == 1) &amp; (!unique_genes_df_2$Genes %in% c(&quot;&quot;)), ]$Genes
+
+# gene names 
+Afib_genes</code></pre>
+<pre><code> [1] &quot;ANXA4&quot;    &quot;ARHGAP10&quot; &quot;ASAH1&quot;    &quot;CAMK2D&quot;   &quot;CAND2&quot;    &quot;CASQ2&quot;   
+ [7] &quot;CASZ1&quot;    &quot;CAV1&quot;     &quot;CAV2&quot;     &quot;CDC27&quot;    &quot;CFL2&quot;     &quot;CGNL1&quot;   
+[13] &quot;CPEB4&quot;    &quot;CUL4A&quot;    &quot;DPF3&quot;     &quot;FAF1&quot;     &quot;FILIP1&quot;   &quot;GATA4&quot;   
+[19] &quot;GNB4&quot;     &quot;GOSR2&quot;    &quot;GTF2I&quot;    &quot;GYPC&quot;     &quot;HBEGF&quot;    &quot;HCN4&quot;    
+[25] &quot;HMGA1&quot;    &quot;HSPG2&quot;    &quot;IGF1R&quot;    &quot;LRRC10&quot;   &quot;MAIP1&quot;    &quot;MANBA&quot;   
+[31] &quot;MICU2&quot;    &quot;MPRIP&quot;    &quot;MYH11&quot;    &quot;MYH6&quot;     &quot;MYH7&quot;     &quot;MYO18B&quot;  
+[37] &quot;NACA&quot;     &quot;NCOR2&quot;    &quot;NEBL&quot;     &quot;NUCKS1&quot;   &quot;PAK2&quot;     &quot;PCCA&quot;    
+[43] &quot;PCM1&quot;     &quot;PHLDB2&quot;   &quot;PKP2&quot;     &quot;PMVK&quot;     &quot;PPFIA4&quot;   &quot;PSMB7&quot;   
+[49] &quot;PTGES3&quot;   &quot;RAB1A&quot;    &quot;RAB3IP&quot;   &quot;RBM20&quot;    &quot;REEP3&quot;    &quot;RPS2&quot;    
+[55] &quot;SCN5A&quot;    &quot;SDF2L1&quot;   &quot;SLC25A26&quot; &quot;SLC27A6&quot;  &quot;SLIT3&quot;    &quot;SPATS2L&quot; 
+[61] &quot;STIM1&quot;    &quot;SUN1&quot;     &quot;SYNE2&quot;    &quot;SYNPO2L&quot;  &quot;TTN&quot;      &quot;WDR1&quot;    
+[67] &quot;XPO1&quot;     &quot;XPO7&quot;     &quot;XXYLT1&quot;   &quot;YWHAE&quot;   </code></pre>
+<pre class="r"><code>HF_genes</code></pre>
+<pre><code> [1] &quot;ACAD10&quot;   &quot;ALDH2&quot;    &quot;ATXN2&quot;    &quot;BAG3&quot;     &quot;CACNB2&quot;   &quot;CAMK2D&quot;  
+ [7] &quot;CYB5B&quot;    &quot;FAF1&quot;     &quot;FTO&quot;      &quot;GTF2I&quot;    &quot;HSD17B12&quot; &quot;MIA3&quot;    
+[13] &quot;NPC1&quot;     &quot;PHIP&quot;     &quot;POM121C&quot;  &quot;SCARB1&quot;   &quot;SPATS2L&quot;  &quot;STRN&quot;    
+[19] &quot;SYMPK&quot;    &quot;SYNPO2L&quot; </code></pre>
+<pre class="r"><code># gene set lengths 
+Afib_genes %&gt;% length()</code></pre>
+<pre><code>[1] 70</code></pre>
+<pre class="r"><code>HF_genes %&gt;% length()</code></pre>
+<pre><code>[1] 20</code></pre>
+<pre class="r"><code># Adding risk gene info into data frame
+New_RNA_PRO_DF_5 &lt;-New_RNA_PRO_DF_3
+New_RNA_PRO_DF_5$Modules</code></pre>
+<pre><code>   [1] &quot;darkred&quot;      &quot;darkred&quot;      &quot;royalblue&quot;    &quot;royalblue&quot;   
+   [5] &quot;lightgreen&quot;   &quot;lightgreen&quot;   &quot;lightyellow&quot;  &quot;royalblue&quot;   
+   [9] &quot;magenta&quot;      &quot;lightyellow&quot;  &quot;royalblue&quot;    &quot;darkred&quot;     
+  [13] &quot;grey&quot;         &quot;royalblue&quot;    &quot;salmon&quot;       &quot;green&quot;       
+  [17] &quot;lightgreen&quot;   &quot;lightyellow&quot;  &quot;darkgreen&quot;    &quot;darkred&quot;     
+  [21] &quot;lightgreen&quot;   &quot;darkred&quot;      &quot;darkred&quot;      &quot;royalblue&quot;   
+  [25] &quot;royalblue&quot;    &quot;darkred&quot;      &quot;royalblue&quot;    &quot;midnightblue&quot;
+  [29] &quot;lightyellow&quot;  &quot;salmon&quot;       &quot;lightgreen&quot;   &quot;grey&quot;        
+  [33] &quot;royalblue&quot;    &quot;lightyellow&quot;  &quot;lightgreen&quot;   &quot;lightyellow&quot; 
+  [37] &quot;royalblue&quot;    &quot;grey&quot;         &quot;royalblue&quot;    &quot;royalblue&quot;   
+  [41] &quot;darkgreen&quot;    &quot;lightgreen&quot;   &quot;darkred&quot;      &quot;royalblue&quot;   
+  [45] &quot;royalblue&quot;    &quot;green&quot;        &quot;darkgreen&quot;    &quot;lightyellow&quot; 
+  [49] &quot;salmon&quot;       &quot;lightyellow&quot;  &quot;lightyellow&quot;  &quot;darkred&quot;     
+  [53] &quot;blue&quot;         &quot;lightyellow&quot;  &quot;green&quot;        &quot;green&quot;       
+  [57] &quot;royalblue&quot;    &quot;darkred&quot;      &quot;lightyellow&quot;  &quot;darkgreen&quot;   
+  [61] &quot;darkred&quot;      &quot;royalblue&quot;    &quot;darkred&quot;      &quot;lightyellow&quot; 
+  [65] &quot;green&quot;        &quot;darkred&quot;      &quot;darkred&quot;      &quot;darkgreen&quot;   
+  [69] &quot;midnightblue&quot; &quot;lightyellow&quot;  &quot;darkred&quot;      &quot;darkgreen&quot;   
+  [73] &quot;darkgreen&quot;    &quot;green&quot;        &quot;darkred&quot;      &quot;salmon&quot;      
+  [77] &quot;green&quot;        &quot;lightgreen&quot;   &quot;darkred&quot;      &quot;darkred&quot;     
+  [81] &quot;green&quot;        &quot;royalblue&quot;    &quot;midnightblue&quot; &quot;lightyellow&quot; 
+  [85] &quot;blue&quot;         &quot;lightgreen&quot;   &quot;midnightblue&quot; &quot;darkgreen&quot;   
+  [89] &quot;darkred&quot;      &quot;darkred&quot;      &quot;darkred&quot;      &quot;darkgreen&quot;   
+  [93] &quot;darkred&quot;      &quot;darkred&quot;      &quot;lightyellow&quot;  &quot;green&quot;       
+  [97] &quot;darkred&quot;      &quot;midnightblue&quot; &quot;darkgreen&quot;    &quot;royalblue&quot;   
+ [101] &quot;darkred&quot;      &quot;brown&quot;        &quot;darkgreen&quot;    &quot;salmon&quot;      
+ [105] &quot;darkgreen&quot;    &quot;lightyellow&quot;  &quot;royalblue&quot;    &quot;lightyellow&quot; 
+ [109] &quot;lightyellow&quot;  &quot;midnightblue&quot; &quot;darkgreen&quot;    &quot;darkgreen&quot;   
+ [113] &quot;royalblue&quot;    &quot;royalblue&quot;    &quot;royalblue&quot;    &quot;royalblue&quot;   
+ [117] &quot;brown&quot;        &quot;midnightblue&quot; &quot;darkgreen&quot;    &quot;midnightblue&quot;
+ [121] &quot;darkgreen&quot;    &quot;green&quot;        &quot;darkgreen&quot;    &quot;darkred&quot;     
+ [125] &quot;darkgreen&quot;    &quot;midnightblue&quot; &quot;darkgreen&quot;    &quot;brown&quot;       
+ [129] &quot;lightyellow&quot;  &quot;darkred&quot;      &quot;darkred&quot;      &quot;darkred&quot;     
+ [133] &quot;darkred&quot;      &quot;lightgreen&quot;   &quot;lightgreen&quot;   &quot;lightyellow&quot; 
+ [137] &quot;lightyellow&quot;  &quot;darkgreen&quot;    &quot;darkred&quot;      &quot;lightyellow&quot; 
+ [141] &quot;salmon&quot;       &quot;darkred&quot;      &quot;darkgreen&quot;    &quot;grey&quot;        
+ [145] &quot;royalblue&quot;    &quot;royalblue&quot;    &quot;midnightblue&quot; &quot;green&quot;       
+ [149] &quot;magenta&quot;      &quot;midnightblue&quot; &quot;darkred&quot;      &quot;darkred&quot;     
+ [153] &quot;royalblue&quot;    &quot;green&quot;        &quot;magenta&quot;      &quot;darkgreen&quot;   
+ [157] &quot;salmon&quot;       &quot;salmon&quot;       &quot;green&quot;        &quot;yellow&quot;      
+ [161] &quot;lightyellow&quot;  &quot;darkred&quot;      &quot;magenta&quot;      &quot;darkgreen&quot;   
+ [165] &quot;midnightblue&quot; &quot;royalblue&quot;    &quot;green&quot;        &quot;green&quot;       
+ [169] &quot;green&quot;        &quot;royalblue&quot;    &quot;royalblue&quot;    &quot;lightyellow&quot; 
+ [173] &quot;darkred&quot;      &quot;yellow&quot;       &quot;darkred&quot;      &quot;darkgreen&quot;   
+ [177] &quot;darkred&quot;      &quot;midnightblue&quot; &quot;green&quot;        &quot;green&quot;       
+ [181] &quot;grey&quot;         &quot;green&quot;        &quot;blue&quot;         &quot;darkred&quot;     
+ [185] &quot;royalblue&quot;    &quot;lightgreen&quot;   &quot;midnightblue&quot; &quot;darkgreen&quot;   
+ [189] &quot;lightyellow&quot;  &quot;lightyellow&quot;  &quot;green&quot;        &quot;royalblue&quot;   
+ [193] &quot;lightyellow&quot;  &quot;magenta&quot;      &quot;darkgreen&quot;    &quot;royalblue&quot;   
+ [197] &quot;midnightblue&quot; &quot;green&quot;        &quot;lightyellow&quot;  &quot;midnightblue&quot;
+ [201] &quot;royalblue&quot;    &quot;royalblue&quot;    &quot;green&quot;        &quot;green&quot;       
+ [205] &quot;royalblue&quot;    &quot;green&quot;        &quot;royalblue&quot;    &quot;green&quot;       
+ [209] &quot;lightgreen&quot;   &quot;green&quot;        &quot;darkred&quot;      &quot;darkred&quot;     
+ [213] &quot;royalblue&quot;    &quot;darkgreen&quot;    &quot;green&quot;        &quot;royalblue&quot;   
+ [217] &quot;green&quot;        &quot;royalblue&quot;    &quot;darkgreen&quot;    &quot;salmon&quot;      
+ [221] &quot;blue&quot;         &quot;royalblue&quot;    &quot;darkred&quot;      &quot;lightyellow&quot; 
+ [225] &quot;green&quot;        &quot;green&quot;        &quot;darkred&quot;      &quot;royalblue&quot;   
+ [229] &quot;lightgreen&quot;   &quot;darkred&quot;      &quot;lightgreen&quot;   &quot;green&quot;       
+ [233] &quot;darkgreen&quot;    &quot;darkgreen&quot;    &quot;darkred&quot;      &quot;royalblue&quot;   
+ [237] &quot;royalblue&quot;    &quot;green&quot;        &quot;darkred&quot;      &quot;salmon&quot;      
+ [241] &quot;magenta&quot;      &quot;green&quot;        &quot;royalblue&quot;    &quot;lightyellow&quot; 
+ [245] &quot;lightyellow&quot;  &quot;salmon&quot;       &quot;magenta&quot;      &quot;green&quot;       
+ [249] &quot;royalblue&quot;    &quot;royalblue&quot;    &quot;lightgreen&quot;   &quot;darkred&quot;     
+ [253] &quot;darkgreen&quot;    &quot;midnightblue&quot; &quot;magenta&quot;      &quot;darkgreen&quot;   
+ [257] &quot;darkred&quot;      &quot;lightyellow&quot;  &quot;royalblue&quot;    &quot;salmon&quot;      
+ [261] &quot;darkred&quot;      &quot;darkred&quot;      &quot;royalblue&quot;    &quot;brown&quot;       
+ [265] &quot;salmon&quot;       &quot;darkred&quot;      &quot;royalblue&quot;    &quot;midnightblue&quot;
+ [269] &quot;magenta&quot;      &quot;green&quot;        &quot;darkred&quot;      &quot;blue&quot;        
+ [273] &quot;darkred&quot;      &quot;lightgreen&quot;   &quot;lightyellow&quot;  &quot;salmon&quot;      
+ [277] &quot;royalblue&quot;    &quot;green&quot;        &quot;green&quot;        &quot;green&quot;       
+ [281] &quot;green&quot;        &quot;royalblue&quot;    &quot;darkred&quot;      &quot;green&quot;       
+ [285] &quot;lightyellow&quot;  &quot;green&quot;        &quot;darkred&quot;      &quot;darkred&quot;     
+ [289] &quot;darkred&quot;      &quot;lightyellow&quot;  &quot;salmon&quot;       &quot;green&quot;       
+ [293] &quot;darkred&quot;      &quot;lightyellow&quot;  &quot;royalblue&quot;    &quot;darkgreen&quot;   
+ [297] &quot;magenta&quot;      &quot;darkgreen&quot;    &quot;salmon&quot;       &quot;royalblue&quot;   
+ [301] &quot;darkgreen&quot;    &quot;green&quot;        &quot;lightyellow&quot;  &quot;magenta&quot;     
+ [305] &quot;darkred&quot;      &quot;green&quot;        &quot;darkgreen&quot;    &quot;royalblue&quot;   
+ [309] &quot;royalblue&quot;    &quot;royalblue&quot;    &quot;royalblue&quot;    &quot;midnightblue&quot;
+ [313] &quot;lightgreen&quot;   &quot;salmon&quot;       &quot;darkgreen&quot;    &quot;green&quot;       
+ [317] &quot;lightyellow&quot;  &quot;darkred&quot;      &quot;royalblue&quot;    &quot;darkred&quot;     
+ [321] &quot;salmon&quot;       &quot;green&quot;        &quot;grey&quot;         &quot;darkred&quot;     
+ [325] &quot;darkred&quot;      &quot;green&quot;        &quot;lightyellow&quot;  &quot;lightgreen&quot;  
+ [329] &quot;midnightblue&quot; &quot;darkred&quot;      &quot;green&quot;        &quot;green&quot;       
+ [333] &quot;midnightblue&quot; &quot;darkgreen&quot;    &quot;royalblue&quot;    &quot;darkgreen&quot;   
+ [337] &quot;lightyellow&quot;  &quot;darkgreen&quot;    &quot;royalblue&quot;    &quot;lightyellow&quot; 
+ [341] &quot;midnightblue&quot; &quot;green&quot;        &quot;darkgreen&quot;    &quot;darkred&quot;     
+ [345] &quot;royalblue&quot;    &quot;royalblue&quot;    &quot;green&quot;        &quot;grey&quot;        
+ [349] &quot;green&quot;        &quot;magenta&quot;      &quot;green&quot;        &quot;darkred&quot;     
+ [353] &quot;salmon&quot;       &quot;lightgreen&quot;   &quot;darkred&quot;      &quot;royalblue&quot;   
+ [357] &quot;darkred&quot;      &quot;lightgreen&quot;   &quot;darkgreen&quot;    &quot;lightyellow&quot; 
+ [361] &quot;grey&quot;         &quot;darkred&quot;      &quot;darkgreen&quot;    &quot;green&quot;       
+ [365] &quot;lightgreen&quot;   &quot;lightyellow&quot;  &quot;midnightblue&quot; &quot;midnightblue&quot;
+ [369] &quot;darkgreen&quot;    &quot;lightgreen&quot;   &quot;lightyellow&quot;  &quot;darkgreen&quot;   
+ [373] &quot;lightyellow&quot;  &quot;green&quot;        &quot;lightyellow&quot;  &quot;salmon&quot;      
+ [377] &quot;darkred&quot;      &quot;salmon&quot;       &quot;darkred&quot;      &quot;brown&quot;       
+ [381] &quot;darkred&quot;      &quot;darkgreen&quot;    &quot;midnightblue&quot; &quot;grey&quot;        
+ [385] &quot;darkred&quot;      &quot;royalblue&quot;    &quot;darkred&quot;      &quot;royalblue&quot;   
+ [389] &quot;lightyellow&quot;  &quot;lightyellow&quot;  &quot;darkgreen&quot;    &quot;royalblue&quot;   
+ [393] &quot;darkred&quot;      &quot;green&quot;        &quot;brown&quot;        &quot;green&quot;       
+ [397] &quot;darkred&quot;      &quot;darkred&quot;      &quot;darkred&quot;      &quot;darkgreen&quot;   
+ [401] &quot;midnightblue&quot; &quot;darkgreen&quot;    &quot;darkgreen&quot;    &quot;darkred&quot;     
+ [405] &quot;lightgreen&quot;   &quot;darkred&quot;      &quot;lightgreen&quot;   &quot;royalblue&quot;   
+ [409] &quot;darkgreen&quot;    &quot;green&quot;        &quot;darkgreen&quot;    &quot;lightyellow&quot; 
+ [413] &quot;salmon&quot;       &quot;darkred&quot;      &quot;darkgreen&quot;    &quot;green&quot;       
+ [417] &quot;grey&quot;         &quot;green&quot;        &quot;grey&quot;         &quot;green&quot;       
+ [421] &quot;royalblue&quot;    &quot;royalblue&quot;    &quot;green&quot;        &quot;green&quot;       
+ [425] &quot;salmon&quot;       &quot;green&quot;        &quot;royalblue&quot;    &quot;midnightblue&quot;
+ [429] &quot;darkred&quot;      &quot;darkred&quot;      &quot;darkgreen&quot;    &quot;lightyellow&quot; 
+ [433] &quot;darkred&quot;      &quot;green&quot;        &quot;lightgreen&quot;   &quot;green&quot;       
+ [437] &quot;green&quot;        &quot;midnightblue&quot; &quot;darkgreen&quot;    &quot;royalblue&quot;   
+ [441] &quot;midnightblue&quot; &quot;darkgreen&quot;    &quot;green&quot;        &quot;lightyellow&quot; 
+ [445] &quot;brown&quot;        &quot;darkred&quot;      &quot;green&quot;        &quot;salmon&quot;      
+ [449] &quot;darkgreen&quot;    &quot;darkgreen&quot;    &quot;royalblue&quot;    &quot;green&quot;       
+ [453] &quot;royalblue&quot;    &quot;lightgreen&quot;   &quot;lightgreen&quot;   &quot;midnightblue&quot;
+ [457] &quot;green&quot;        &quot;royalblue&quot;    &quot;midnightblue&quot; &quot;lightyellow&quot; 
+ [461] &quot;green&quot;        &quot;magenta&quot;      &quot;grey&quot;         &quot;midnightblue&quot;
+ [465] &quot;green&quot;        &quot;darkred&quot;      &quot;lightgreen&quot;   &quot;green&quot;       
+ [469] &quot;salmon&quot;       &quot;blue&quot;         &quot;green&quot;        &quot;lightyellow&quot; 
+ [473] &quot;lightyellow&quot;  &quot;lightgreen&quot;   &quot;lightgreen&quot;   &quot;darkred&quot;     
+ [477] &quot;darkgreen&quot;    &quot;darkred&quot;      &quot;green&quot;        &quot;darkred&quot;     
+ [481] &quot;blue&quot;         &quot;darkred&quot;      &quot;green&quot;        &quot;darkgreen&quot;   
+ [485] &quot;salmon&quot;       &quot;green&quot;        &quot;lightyellow&quot;  &quot;darkgreen&quot;   
+ [489] &quot;royalblue&quot;    &quot;grey&quot;         &quot;grey&quot;         &quot;royalblue&quot;   
+ [493] &quot;green&quot;        &quot;darkgreen&quot;    &quot;darkred&quot;      &quot;darkgreen&quot;   
+ [497] &quot;darkgreen&quot;    &quot;grey&quot;         &quot;midnightblue&quot; &quot;darkgreen&quot;   
+ [501] &quot;lightgreen&quot;   &quot;darkgreen&quot;    &quot;green&quot;        &quot;blue&quot;        
+ [505] &quot;midnightblue&quot; &quot;darkred&quot;      &quot;magenta&quot;      &quot;darkgreen&quot;   
+ [509] &quot;magenta&quot;      &quot;darkred&quot;      &quot;royalblue&quot;    &quot;royalblue&quot;   
+ [513] &quot;green&quot;        &quot;royalblue&quot;    &quot;darkred&quot;      &quot;midnightblue&quot;
+ [517] &quot;royalblue&quot;    &quot;royalblue&quot;    &quot;green&quot;        &quot;darkred&quot;     
+ [521] &quot;green&quot;        &quot;darkred&quot;      &quot;royalblue&quot;    &quot;green&quot;       
+ [525] &quot;salmon&quot;       &quot;darkred&quot;      &quot;darkred&quot;      &quot;darkred&quot;     
+ [529] &quot;darkred&quot;      &quot;royalblue&quot;    &quot;darkred&quot;      &quot;salmon&quot;      
+ [533] &quot;midnightblue&quot; &quot;royalblue&quot;    &quot;lightgreen&quot;   &quot;green&quot;       
+ [537] &quot;salmon&quot;       &quot;royalblue&quot;    &quot;royalblue&quot;    &quot;salmon&quot;      
+ [541] &quot;lightyellow&quot;  &quot;green&quot;        &quot;royalblue&quot;    &quot;darkred&quot;     
+ [545] &quot;midnightblue&quot; &quot;darkgreen&quot;    &quot;darkgreen&quot;    &quot;midnightblue&quot;
+ [549] &quot;darkgreen&quot;    &quot;darkgreen&quot;    &quot;darkgreen&quot;    &quot;darkred&quot;     
+ [553] &quot;darkgreen&quot;    &quot;lightyellow&quot;  &quot;darkred&quot;      &quot;royalblue&quot;   
+ [557] &quot;royalblue&quot;    &quot;green&quot;        &quot;salmon&quot;       &quot;darkred&quot;     
+ [561] &quot;darkred&quot;      &quot;magenta&quot;      &quot;green&quot;        &quot;lightyellow&quot; 
+ [565] &quot;magenta&quot;      &quot;green&quot;        &quot;magenta&quot;      &quot;royalblue&quot;   
+ [569] &quot;lightyellow&quot;  &quot;lightyellow&quot;  &quot;lightyellow&quot;  &quot;darkred&quot;     
+ [573] &quot;darkred&quot;      &quot;royalblue&quot;    &quot;royalblue&quot;    &quot;darkgreen&quot;   
+ [577] &quot;darkred&quot;      &quot;lightgreen&quot;   &quot;midnightblue&quot; &quot;darkred&quot;     
+ [581] &quot;darkgreen&quot;    &quot;darkgreen&quot;    &quot;royalblue&quot;    &quot;darkred&quot;     
+ [585] &quot;darkred&quot;      &quot;darkgreen&quot;    &quot;green&quot;        &quot;midnightblue&quot;
+ [589] &quot;darkred&quot;      &quot;darkred&quot;      &quot;darkgreen&quot;    &quot;darkred&quot;     
+ [593] &quot;royalblue&quot;    &quot;brown&quot;        &quot;brown&quot;        &quot;royalblue&quot;   
+ [597] &quot;darkgreen&quot;    &quot;lightgreen&quot;   &quot;royalblue&quot;    &quot;darkred&quot;     
+ [601] &quot;royalblue&quot;    &quot;lightgreen&quot;   &quot;royalblue&quot;    &quot;darkred&quot;     
+ [605] &quot;darkred&quot;      &quot;magenta&quot;      &quot;royalblue&quot;    &quot;grey&quot;        
+ [609] &quot;lightgreen&quot;   &quot;lightgreen&quot;   &quot;lightyellow&quot;  &quot;darkgreen&quot;   
+ [613] &quot;royalblue&quot;    &quot;midnightblue&quot; &quot;midnightblue&quot; &quot;darkred&quot;     
+ [617] &quot;darkgreen&quot;    &quot;lightyellow&quot;  &quot;darkgreen&quot;    &quot;green&quot;       
+ [621] &quot;lightyellow&quot;  &quot;darkred&quot;      &quot;darkgreen&quot;    &quot;grey&quot;        
+ [625] &quot;darkgreen&quot;    &quot;lightyellow&quot;  &quot;darkred&quot;      &quot;darkred&quot;     
+ [629] &quot;royalblue&quot;    &quot;darkred&quot;      &quot;green&quot;        &quot;lightgreen&quot;  
+ [633] &quot;midnightblue&quot; &quot;royalblue&quot;    &quot;midnightblue&quot; &quot;darkgreen&quot;   
+ [637] &quot;royalblue&quot;    &quot;midnightblue&quot; &quot;lightgreen&quot;   &quot;royalblue&quot;   
+ [641] &quot;lightyellow&quot;  &quot;royalblue&quot;    &quot;royalblue&quot;    &quot;midnightblue&quot;
+ [645] &quot;darkgreen&quot;    &quot;darkgreen&quot;    &quot;royalblue&quot;    &quot;midnightblue&quot;
+ [649] &quot;darkgreen&quot;    &quot;darkgreen&quot;    &quot;darkred&quot;      &quot;royalblue&quot;   
+ [653] &quot;darkred&quot;      &quot;darkred&quot;      &quot;darkgreen&quot;    &quot;royalblue&quot;   
+ [657] &quot;royalblue&quot;    &quot;darkgreen&quot;    &quot;lightgreen&quot;   &quot;grey&quot;        
+ [661] &quot;green&quot;        &quot;lightgreen&quot;   &quot;darkgreen&quot;    &quot;royalblue&quot;   
+ [665] &quot;royalblue&quot;    &quot;darkred&quot;      &quot;royalblue&quot;    &quot;darkred&quot;     
+ [669] &quot;royalblue&quot;    &quot;darkgreen&quot;    &quot;darkred&quot;      &quot;darkgreen&quot;   
+ [673] &quot;darkred&quot;      &quot;royalblue&quot;    &quot;royalblue&quot;    &quot;darkgreen&quot;   
+ [677] &quot;royalblue&quot;    &quot;grey&quot;         &quot;darkred&quot;      &quot;royalblue&quot;   
+ [681] &quot;lightyellow&quot;  &quot;darkred&quot;      &quot;midnightblue&quot; &quot;green&quot;       
+ [685] &quot;royalblue&quot;    &quot;lightyellow&quot;  &quot;darkgreen&quot;    &quot;darkred&quot;     
+ [689] &quot;green&quot;        &quot;royalblue&quot;    &quot;darkred&quot;      &quot;lightyellow&quot; 
+ [693] &quot;royalblue&quot;    &quot;magenta&quot;      &quot;green&quot;        &quot;darkred&quot;     
+ [697] &quot;brown&quot;        &quot;darkred&quot;      &quot;darkred&quot;      &quot;darkred&quot;     
+ [701] &quot;grey&quot;         &quot;darkred&quot;      &quot;darkgreen&quot;    &quot;darkgreen&quot;   
+ [705] &quot;lightgreen&quot;   &quot;lightgreen&quot;   &quot;royalblue&quot;    &quot;royalblue&quot;   
+ [709] &quot;grey&quot;         &quot;yellow&quot;       &quot;salmon&quot;       &quot;royalblue&quot;   
+ [713] &quot;lightyellow&quot;  &quot;darkred&quot;      &quot;darkred&quot;      &quot;darkgreen&quot;   
+ [717] &quot;darkred&quot;      &quot;salmon&quot;       &quot;darkred&quot;      &quot;royalblue&quot;   
+ [721] &quot;royalblue&quot;    &quot;royalblue&quot;    &quot;midnightblue&quot; &quot;green&quot;       
+ [725] &quot;green&quot;        &quot;midnightblue&quot; &quot;royalblue&quot;    &quot;royalblue&quot;   
+ [729] &quot;darkgreen&quot;    &quot;darkgreen&quot;    &quot;lightgreen&quot;   &quot;darkred&quot;     
+ [733] &quot;lightgreen&quot;   &quot;royalblue&quot;    &quot;grey&quot;         &quot;royalblue&quot;   
+ [737] &quot;darkred&quot;      &quot;darkgreen&quot;    &quot;darkgreen&quot;    &quot;royalblue&quot;   
+ [741] &quot;magenta&quot;      &quot;royalblue&quot;    &quot;darkred&quot;      &quot;royalblue&quot;   
+ [745] &quot;darkred&quot;      &quot;magenta&quot;      &quot;magenta&quot;      &quot;darkred&quot;     
+ [749] &quot;royalblue&quot;    &quot;darkgreen&quot;    &quot;royalblue&quot;    &quot;darkgreen&quot;   
+ [753] &quot;darkgreen&quot;    &quot;midnightblue&quot; &quot;magenta&quot;      &quot;darkred&quot;     
+ [757] &quot;royalblue&quot;    &quot;royalblue&quot;    &quot;lightyellow&quot;  &quot;darkred&quot;     
+ [761] &quot;darkgreen&quot;    &quot;green&quot;        &quot;darkred&quot;      &quot;darkred&quot;     
+ [765] &quot;darkgreen&quot;    &quot;darkred&quot;      &quot;darkgreen&quot;    &quot;lightyellow&quot; 
+ [769] &quot;darkred&quot;      &quot;royalblue&quot;    &quot;yellow&quot;       &quot;royalblue&quot;   
+ [773] &quot;darkgreen&quot;    &quot;midnightblue&quot; &quot;darkgreen&quot;    &quot;darkgreen&quot;   
+ [777] &quot;darkred&quot;      &quot;darkgreen&quot;    &quot;darkgreen&quot;    &quot;darkred&quot;     
+ [781] &quot;darkred&quot;      &quot;darkred&quot;      &quot;darkred&quot;      &quot;royalblue&quot;   
+ [785] &quot;royalblue&quot;    &quot;lightgreen&quot;   &quot;darkred&quot;      &quot;royalblue&quot;   
+ [789] &quot;darkgreen&quot;    &quot;royalblue&quot;    &quot;royalblue&quot;    &quot;royalblue&quot;   
+ [793] &quot;lightgreen&quot;   &quot;royalblue&quot;    &quot;darkgreen&quot;    &quot;darkgreen&quot;   
+ [797] &quot;royalblue&quot;    &quot;darkred&quot;      &quot;darkgreen&quot;    &quot;royalblue&quot;   
+ [801] &quot;brown&quot;        &quot;magenta&quot;      &quot;darkred&quot;      &quot;lightgreen&quot;  
+ [805] &quot;darkred&quot;      &quot;darkgreen&quot;    &quot;darkgreen&quot;    &quot;darkred&quot;     
+ [809] &quot;darkred&quot;      &quot;darkred&quot;      &quot;darkgreen&quot;    &quot;lightgreen&quot;  
+ [813] &quot;darkred&quot;      &quot;darkred&quot;      &quot;darkgreen&quot;    &quot;green&quot;       
+ [817] &quot;midnightblue&quot; &quot;lightyellow&quot;  &quot;royalblue&quot;    &quot;midnightblue&quot;
+ [821] &quot;darkred&quot;      &quot;lightgreen&quot;   &quot;royalblue&quot;    &quot;darkred&quot;     
+ [825] &quot;darkred&quot;      &quot;grey&quot;         &quot;royalblue&quot;    &quot;royalblue&quot;   
+ [829] &quot;magenta&quot;      &quot;salmon&quot;       &quot;magenta&quot;      &quot;lightgreen&quot;  
+ [833] &quot;green&quot;        &quot;darkred&quot;      &quot;royalblue&quot;    &quot;lightyellow&quot; 
+ [837] &quot;royalblue&quot;    &quot;royalblue&quot;    &quot;darkred&quot;      &quot;darkred&quot;     
+ [841] &quot;midnightblue&quot; &quot;darkred&quot;      &quot;grey&quot;         &quot;darkred&quot;     
+ [845] &quot;darkgreen&quot;    &quot;darkred&quot;      &quot;grey&quot;         &quot;darkred&quot;     
+ [849] &quot;lightyellow&quot;  &quot;lightgreen&quot;   &quot;darkgreen&quot;    &quot;darkred&quot;     
+ [853] &quot;darkred&quot;      &quot;darkgreen&quot;    &quot;green&quot;        &quot;midnightblue&quot;
+ [857] &quot;darkgreen&quot;    &quot;darkred&quot;      &quot;lightyellow&quot;  &quot;brown&quot;       
+ [861] &quot;green&quot;        &quot;darkred&quot;      &quot;royalblue&quot;    &quot;lightgreen&quot;  
+ [865] &quot;darkred&quot;      &quot;darkred&quot;      &quot;royalblue&quot;    &quot;royalblue&quot;   
+ [869] &quot;royalblue&quot;    &quot;darkgreen&quot;    &quot;darkgreen&quot;    &quot;darkred&quot;     
+ [873] &quot;salmon&quot;       &quot;midnightblue&quot; &quot;midnightblue&quot; &quot;darkred&quot;     
+ [877] &quot;royalblue&quot;    &quot;darkred&quot;      &quot;green&quot;        &quot;darkred&quot;     
+ [881] &quot;royalblue&quot;    &quot;royalblue&quot;    &quot;darkgreen&quot;    &quot;darkgreen&quot;   
+ [885] &quot;royalblue&quot;    &quot;salmon&quot;       &quot;lightyellow&quot;  &quot;darkgreen&quot;   
+ [889] &quot;darkred&quot;      &quot;lightyellow&quot;  &quot;royalblue&quot;    &quot;green&quot;       
+ [893] &quot;lightyellow&quot;  &quot;darkred&quot;      &quot;darkgreen&quot;    &quot;green&quot;       
+ [897] &quot;lightyellow&quot;  &quot;royalblue&quot;    &quot;salmon&quot;       &quot;royalblue&quot;   
+ [901] &quot;lightyellow&quot;  &quot;green&quot;        &quot;royalblue&quot;    &quot;lightyellow&quot; 
+ [905] &quot;green&quot;        &quot;lightgreen&quot;   &quot;salmon&quot;       &quot;brown&quot;       
+ [909] &quot;royalblue&quot;    &quot;lightyellow&quot;  &quot;darkgreen&quot;    &quot;darkgreen&quot;   
+ [913] &quot;darkgreen&quot;    &quot;royalblue&quot;    &quot;midnightblue&quot; &quot;lightyellow&quot; 
+ [917] &quot;midnightblue&quot; &quot;green&quot;        &quot;salmon&quot;       &quot;darkred&quot;     
+ [921] &quot;green&quot;        &quot;magenta&quot;      &quot;green&quot;        &quot;darkgreen&quot;   
+ [925] &quot;darkred&quot;      &quot;lightgreen&quot;   &quot;royalblue&quot;    &quot;royalblue&quot;   
+ [929] &quot;lightyellow&quot;  &quot;darkgreen&quot;    &quot;lightyellow&quot;  &quot;royalblue&quot;   
+ [933] &quot;royalblue&quot;    &quot;royalblue&quot;    &quot;darkred&quot;      &quot;darkred&quot;     
+ [937] &quot;lightyellow&quot;  &quot;royalblue&quot;    &quot;darkgreen&quot;    &quot;darkred&quot;     
+ [941] &quot;royalblue&quot;    &quot;royalblue&quot;    &quot;darkred&quot;      &quot;royalblue&quot;   
+ [945] &quot;royalblue&quot;    &quot;midnightblue&quot; &quot;darkred&quot;      &quot;brown&quot;       
+ [949] &quot;royalblue&quot;    &quot;darkgreen&quot;    &quot;darkred&quot;      &quot;royalblue&quot;   
+ [953] &quot;darkgreen&quot;    &quot;royalblue&quot;    &quot;darkred&quot;      &quot;royalblue&quot;   
+ [957] &quot;lightyellow&quot;  &quot;midnightblue&quot; &quot;darkgreen&quot;    &quot;darkred&quot;     
+ [961] &quot;royalblue&quot;    &quot;royalblue&quot;    &quot;darkgreen&quot;    &quot;lightyellow&quot; 
+ [965] &quot;magenta&quot;      &quot;royalblue&quot;    &quot;darkred&quot;      &quot;darkred&quot;     
+ [969] &quot;darkred&quot;      &quot;lightyellow&quot;  &quot;grey&quot;         &quot;royalblue&quot;   
+ [973] &quot;lightgreen&quot;   &quot;darkred&quot;      &quot;royalblue&quot;    &quot;lightyellow&quot; 
+ [977] &quot;midnightblue&quot; &quot;darkred&quot;      &quot;darkgreen&quot;    &quot;royalblue&quot;   
+ [981] &quot;midnightblue&quot; &quot;lightgreen&quot;   &quot;salmon&quot;       &quot;midnightblue&quot;
+ [985] &quot;lightgreen&quot;   &quot;darkred&quot;      &quot;lightyellow&quot;  &quot;darkgreen&quot;   
+ [989] &quot;lightgreen&quot;   &quot;darkred&quot;      &quot;darkgreen&quot;    &quot;salmon&quot;      
+ [993] &quot;green&quot;        &quot;green&quot;        &quot;darkgreen&quot;    &quot;lightyellow&quot; 
+ [997] &quot;darkred&quot;      &quot;darkgreen&quot;    &quot;lightgreen&quot;   &quot;royalblue&quot;   
+[1001] &quot;darkred&quot;      &quot;lightyellow&quot;  &quot;lightyellow&quot;  &quot;green&quot;       
+[1005] &quot;salmon&quot;       &quot;darkgreen&quot;    &quot;lightgreen&quot;   &quot;green&quot;       
+[1009] &quot;darkred&quot;      &quot;darkgreen&quot;    &quot;darkgreen&quot;    &quot;green&quot;       
+[1013] &quot;lightgreen&quot;   &quot;lightyellow&quot;  &quot;lightyellow&quot;  &quot;royalblue&quot;   
+[1017] &quot;salmon&quot;       &quot;royalblue&quot;    &quot;lightyellow&quot;  &quot;royalblue&quot;   
+[1021] &quot;darkgreen&quot;    &quot;midnightblue&quot; &quot;darkred&quot;      &quot;royalblue&quot;   
+[1025] &quot;royalblue&quot;    &quot;darkgreen&quot;    &quot;brown&quot;        &quot;midnightblue&quot;
+[1029] &quot;darkred&quot;      &quot;darkred&quot;      &quot;magenta&quot;      &quot;royalblue&quot;   
+[1033] &quot;lightyellow&quot;  &quot;darkred&quot;      &quot;green&quot;        &quot;darkgreen&quot;   
+[1037] &quot;midnightblue&quot; &quot;darkgreen&quot;    &quot;midnightblue&quot; &quot;darkred&quot;     
+[1041] &quot;darkgreen&quot;    &quot;salmon&quot;       &quot;royalblue&quot;    &quot;darkred&quot;     
+[1045] &quot;darkgreen&quot;    &quot;darkgreen&quot;    &quot;lightgreen&quot;   &quot;green&quot;       
+[1049] &quot;royalblue&quot;    &quot;salmon&quot;       &quot;royalblue&quot;    &quot;darkred&quot;     
+[1053] &quot;midnightblue&quot; &quot;grey&quot;         &quot;royalblue&quot;    &quot;darkred&quot;     
+[1057] &quot;darkred&quot;      &quot;lightgreen&quot;   &quot;darkred&quot;      &quot;darkgreen&quot;   
+[1061] &quot;royalblue&quot;    &quot;lightyellow&quot;  &quot;brown&quot;        &quot;midnightblue&quot;
+[1065] &quot;darkgreen&quot;    &quot;darkred&quot;      &quot;darkgreen&quot;    &quot;darkred&quot;     
+[1069] &quot;grey&quot;         &quot;darkgreen&quot;    &quot;lightyellow&quot;  &quot;lightyellow&quot; 
+[1073] &quot;lightgreen&quot;   &quot;darkred&quot;      &quot;darkred&quot;      &quot;royalblue&quot;   
+[1077] &quot;darkred&quot;      &quot;darkred&quot;      &quot;green&quot;        &quot;darkred&quot;     
+[1081] &quot;darkgreen&quot;    &quot;magenta&quot;      &quot;lightgreen&quot;   &quot;midnightblue&quot;
+[1085] &quot;darkred&quot;      &quot;midnightblue&quot; &quot;green&quot;        &quot;royalblue&quot;   
+[1089] &quot;green&quot;        &quot;grey&quot;         &quot;midnightblue&quot; &quot;darkgreen&quot;   
+[1093] &quot;darkred&quot;      &quot;darkred&quot;      &quot;brown&quot;        &quot;darkred&quot;     
+[1097] &quot;yellow&quot;       &quot;darkgreen&quot;    &quot;royalblue&quot;    &quot;lightyellow&quot; 
+[1101] &quot;darkred&quot;      &quot;royalblue&quot;    &quot;darkred&quot;      &quot;darkgreen&quot;   
+[1105] &quot;darkred&quot;      &quot;lightyellow&quot;  &quot;magenta&quot;      &quot;darkgreen&quot;   
+[1109] &quot;darkred&quot;      &quot;darkred&quot;      &quot;darkred&quot;      &quot;darkred&quot;     
+[1113] &quot;darkred&quot;      &quot;royalblue&quot;    &quot;royalblue&quot;    &quot;darkred&quot;     
+[1117] &quot;darkred&quot;      &quot;lightyellow&quot;  &quot;darkgreen&quot;    &quot;darkred&quot;     
+[1121] &quot;royalblue&quot;    &quot;lightgreen&quot;   &quot;royalblue&quot;    &quot;royalblue&quot;   
+[1125] &quot;brown&quot;        &quot;darkgreen&quot;    &quot;royalblue&quot;    &quot;darkred&quot;     
+[1129] &quot;green&quot;        &quot;lightyellow&quot;  &quot;royalblue&quot;    &quot;lightyellow&quot; 
+[1133] &quot;midnightblue&quot; &quot;green&quot;        &quot;darkred&quot;      &quot;royalblue&quot;   
+[1137] &quot;darkgreen&quot;    &quot;magenta&quot;      &quot;royalblue&quot;    &quot;darkred&quot;     
+[1141] &quot;darkred&quot;      &quot;royalblue&quot;    &quot;salmon&quot;       &quot;lightyellow&quot; 
+[1145] &quot;midnightblue&quot; &quot;royalblue&quot;    &quot;darkred&quot;      &quot;royalblue&quot;   
+[1149] &quot;darkred&quot;      &quot;grey&quot;         &quot;darkred&quot;      &quot;darkgreen&quot;   
+[1153] &quot;green&quot;        &quot;darkred&quot;      &quot;lightyellow&quot;  &quot;darkred&quot;     
+[1157] &quot;darkred&quot;      &quot;green&quot;        &quot;grey&quot;         &quot;darkgreen&quot;   
+[1161] &quot;green&quot;        &quot;salmon&quot;       &quot;blue&quot;         &quot;darkred&quot;     
+[1165] &quot;darkgreen&quot;    &quot;darkgreen&quot;    &quot;brown&quot;        &quot;darkred&quot;     
+[1169] &quot;green&quot;        &quot;darkgreen&quot;    &quot;royalblue&quot;    &quot;darkred&quot;     
+[1173] &quot;lightyellow&quot;  &quot;lightyellow&quot;  &quot;lightyellow&quot;  &quot;green&quot;       
+[1177] &quot;darkgreen&quot;    &quot;darkgreen&quot;    &quot;lightgreen&quot;   &quot;green&quot;       
+[1181] &quot;darkgreen&quot;    &quot;green&quot;        &quot;darkgreen&quot;    &quot;green&quot;       
+[1185] &quot;lightyellow&quot;  &quot;green&quot;        &quot;darkred&quot;      &quot;darkred&quot;     
+[1189] &quot;darkgreen&quot;    &quot;lightyellow&quot;  &quot;grey&quot;         &quot;darkgreen&quot;   
+[1193] &quot;darkred&quot;      &quot;green&quot;        &quot;lightgreen&quot;   &quot;royalblue&quot;   
+[1197] &quot;darkred&quot;      &quot;darkred&quot;      &quot;green&quot;        &quot;yellow&quot;      
+[1201] &quot;royalblue&quot;    &quot;darkgreen&quot;    &quot;darkred&quot;      &quot;darkgreen&quot;   
+[1205] &quot;green&quot;        &quot;lightgreen&quot;   &quot;darkgreen&quot;    &quot;darkred&quot;     
+[1209] &quot;midnightblue&quot; &quot;green&quot;        &quot;magenta&quot;      &quot;darkgreen&quot;   
+[1213] &quot;salmon&quot;       &quot;darkgreen&quot;    &quot;darkred&quot;      &quot;lightgreen&quot;  
+[1217] &quot;royalblue&quot;    &quot;darkred&quot;      &quot;lightgreen&quot;   &quot;darkgreen&quot;   
+[1221] &quot;lightyellow&quot;  &quot;darkgreen&quot;    &quot;darkred&quot;      &quot;blue&quot;        
+[1225] &quot;brown&quot;        &quot;darkred&quot;      &quot;darkred&quot;      &quot;green&quot;       
+[1229] &quot;royalblue&quot;    &quot;lightyellow&quot;  &quot;royalblue&quot;    &quot;darkgreen&quot;   
+[1233] &quot;darkred&quot;      &quot;royalblue&quot;    &quot;darkgreen&quot;    &quot;darkgreen&quot;   
+[1237] &quot;magenta&quot;      &quot;darkgreen&quot;    &quot;green&quot;        &quot;darkgreen&quot;   
+[1241] &quot;darkred&quot;      &quot;darkred&quot;      &quot;darkgreen&quot;    &quot;darkred&quot;     
+[1245] &quot;lightyellow&quot;  &quot;lightyellow&quot;  &quot;lightyellow&quot;  &quot;lightyellow&quot; 
+[1249] &quot;lightyellow&quot;  &quot;lightyellow&quot;  &quot;lightyellow&quot;  &quot;lightyellow&quot; 
+[1253] &quot;darkred&quot;      &quot;darkred&quot;      &quot;lightgreen&quot;   &quot;royalblue&quot;   
+[1257] &quot;darkred&quot;      &quot;darkgreen&quot;    &quot;darkred&quot;      &quot;darkgreen&quot;   
+[1261] &quot;darkgreen&quot;    &quot;lightgreen&quot;   &quot;darkgreen&quot;    &quot;salmon&quot;      
+[1265] &quot;darkred&quot;      &quot;salmon&quot;       &quot;midnightblue&quot; &quot;darkred&quot;     
+[1269] &quot;darkgreen&quot;    &quot;darkgreen&quot;    &quot;darkred&quot;      &quot;darkgreen&quot;   
+[1273] &quot;magenta&quot;      &quot;midnightblue&quot; &quot;salmon&quot;       &quot;green&quot;       
+[1277] &quot;darkgreen&quot;    &quot;darkgreen&quot;    &quot;darkgreen&quot;    &quot;lightgreen&quot;  
+[1281] &quot;darkgreen&quot;    &quot;royalblue&quot;    &quot;lightyellow&quot;  &quot;green&quot;       
+[1285] &quot;grey&quot;         &quot;royalblue&quot;    &quot;salmon&quot;       &quot;royalblue&quot;   
+[1289] &quot;lightyellow&quot;  &quot;yellow&quot;       &quot;midnightblue&quot; &quot;royalblue&quot;   
+[1293] &quot;salmon&quot;       &quot;darkred&quot;      &quot;darkgreen&quot;    &quot;darkred&quot;     
+[1297] &quot;lightgreen&quot;   &quot;darkgreen&quot;    &quot;darkred&quot;      &quot;darkgreen&quot;   
+[1301] &quot;grey&quot;         &quot;lightgreen&quot;   &quot;royalblue&quot;    &quot;darkred&quot;     
+[1305] &quot;darkred&quot;      &quot;darkgreen&quot;    &quot;darkred&quot;      &quot;darkred&quot;     
+[1309] &quot;royalblue&quot;    &quot;green&quot;        &quot;darkgreen&quot;    &quot;brown&quot;       
+[1313] &quot;darkred&quot;      &quot;darkgreen&quot;    &quot;green&quot;        &quot;darkgreen&quot;   
+[1317] &quot;midnightblue&quot; &quot;darkred&quot;      &quot;green&quot;        &quot;darkred&quot;     
+[1321] &quot;royalblue&quot;    &quot;darkgreen&quot;    &quot;darkgreen&quot;    &quot;green&quot;       
+[1325] &quot;grey&quot;         &quot;darkgreen&quot;    &quot;darkgreen&quot;    &quot;lightyellow&quot; 
+[1329] &quot;darkgreen&quot;    &quot;royalblue&quot;    &quot;midnightblue&quot; &quot;lightgreen&quot;  
+[1333] &quot;magenta&quot;      &quot;darkgreen&quot;    &quot;darkred&quot;      &quot;royalblue&quot;   
+[1337] &quot;darkred&quot;      &quot;royalblue&quot;    &quot;darkgreen&quot;    &quot;royalblue&quot;   
+[1341] &quot;darkgreen&quot;    &quot;royalblue&quot;    &quot;royalblue&quot;    &quot;darkred&quot;     
+[1345] &quot;midnightblue&quot; &quot;grey&quot;         &quot;royalblue&quot;    &quot;midnightblue&quot;
+[1349] &quot;royalblue&quot;    &quot;darkred&quot;      &quot;royalblue&quot;    &quot;darkred&quot;     
+[1353] &quot;darkred&quot;      &quot;royalblue&quot;    &quot;lightyellow&quot;  &quot;darkgreen&quot;   
+[1357] &quot;royalblue&quot;    &quot;lightyellow&quot;  &quot;darkgreen&quot;    &quot;darkgreen&quot;   
+[1361] &quot;darkgreen&quot;    &quot;royalblue&quot;    &quot;lightyellow&quot;  &quot;lightyellow&quot; 
+[1365] &quot;royalblue&quot;    &quot;darkgreen&quot;    &quot;green&quot;        &quot;royalblue&quot;   
+[1369] &quot;magenta&quot;      &quot;darkgreen&quot;    &quot;lightgreen&quot;   &quot;green&quot;       
+[1373] &quot;green&quot;        &quot;midnightblue&quot; &quot;green&quot;        &quot;royalblue&quot;   
+[1377] &quot;lightgreen&quot;   &quot;royalblue&quot;    &quot;darkgreen&quot;    &quot;lightyellow&quot; 
+[1381] &quot;lightgreen&quot;   &quot;darkred&quot;      &quot;darkred&quot;      &quot;darkgreen&quot;   
+[1385] &quot;royalblue&quot;    &quot;royalblue&quot;    &quot;royalblue&quot;    &quot;darkgreen&quot;   
+[1389] &quot;royalblue&quot;    &quot;lightgreen&quot;   &quot;royalblue&quot;    &quot;darkgreen&quot;   
+[1393] &quot;blue&quot;         &quot;darkred&quot;      &quot;royalblue&quot;    &quot;darkred&quot;     
+[1397] &quot;royalblue&quot;    &quot;salmon&quot;       &quot;grey&quot;         &quot;darkred&quot;     
+[1401] &quot;darkgreen&quot;    &quot;green&quot;        &quot;darkred&quot;      &quot;darkred&quot;     
+[1405] &quot;salmon&quot;       &quot;darkgreen&quot;    &quot;green&quot;        &quot;darkgreen&quot;   
+[1409] &quot;darkgreen&quot;    &quot;royalblue&quot;    &quot;darkgreen&quot;    &quot;yellow&quot;      
+[1413] &quot;lightgreen&quot;   &quot;midnightblue&quot; &quot;magenta&quot;      &quot;lightyellow&quot; 
+[1417] &quot;lightyellow&quot;  &quot;darkgreen&quot;    &quot;midnightblue&quot; &quot;lightgreen&quot;  
+[1421] &quot;grey&quot;         &quot;lightyellow&quot;  &quot;darkgreen&quot;    &quot;royalblue&quot;   
+[1425] &quot;darkred&quot;      &quot;darkred&quot;      &quot;darkgreen&quot;    &quot;green&quot;       
+[1429] &quot;darkgreen&quot;    &quot;darkred&quot;      &quot;darkred&quot;      &quot;royalblue&quot;   
+[1433] &quot;yellow&quot;       &quot;salmon&quot;       &quot;yellow&quot;       &quot;darkred&quot;     
+[1437] &quot;lightgreen&quot;   &quot;royalblue&quot;    &quot;lightyellow&quot;  &quot;darkred&quot;     
+[1441] &quot;midnightblue&quot; &quot;darkgreen&quot;    &quot;darkgreen&quot;    &quot;midnightblue&quot;
+[1445] &quot;royalblue&quot;    &quot;darkred&quot;      &quot;darkred&quot;      &quot;midnightblue&quot;
+[1449] &quot;darkgreen&quot;    &quot;darkred&quot;      &quot;midnightblue&quot; &quot;blue&quot;        
+[1453] &quot;royalblue&quot;    &quot;darkgreen&quot;    &quot;royalblue&quot;    &quot;darkred&quot;     
+[1457] &quot;salmon&quot;       &quot;magenta&quot;      &quot;lightyellow&quot;  &quot;magenta&quot;     
+[1461] &quot;darkgreen&quot;    &quot;darkgreen&quot;    &quot;lightyellow&quot;  &quot;grey&quot;        
+[1465] &quot;midnightblue&quot; &quot;darkred&quot;      &quot;lightyellow&quot;  &quot;darkgreen&quot;   
+[1469] &quot;salmon&quot;       &quot;lightgreen&quot;   &quot;darkgreen&quot;    &quot;grey&quot;        
+[1473] &quot;green&quot;        &quot;darkred&quot;      &quot;salmon&quot;       &quot;royalblue&quot;   
+[1477] &quot;darkred&quot;      &quot;royalblue&quot;    &quot;darkred&quot;      &quot;lightgreen&quot;  
+[1481] &quot;green&quot;        &quot;darkgreen&quot;    &quot;lightgreen&quot;   &quot;grey&quot;        
+[1485] &quot;lightyellow&quot;  &quot;midnightblue&quot; &quot;brown&quot;        &quot;darkgreen&quot;   
+[1489] &quot;darkred&quot;      &quot;lightyellow&quot;  &quot;royalblue&quot;    &quot;lightyellow&quot; 
+[1493] &quot;darkgreen&quot;    &quot;green&quot;        &quot;magenta&quot;      &quot;green&quot;       
+[1497] &quot;royalblue&quot;    &quot;midnightblue&quot; &quot;lightyellow&quot;  &quot;yellow&quot;      
+[1501] &quot;darkred&quot;      &quot;yellow&quot;       &quot;grey&quot;         &quot;magenta&quot;     
+[1505] &quot;darkred&quot;      &quot;royalblue&quot;    &quot;lightyellow&quot;  &quot;salmon&quot;      
+[1509] &quot;grey&quot;         &quot;royalblue&quot;    &quot;salmon&quot;       &quot;darkred&quot;     
+[1513] &quot;lightyellow&quot;  &quot;green&quot;        &quot;darkred&quot;      &quot;darkgreen&quot;   
+[1517] &quot;darkred&quot;      &quot;green&quot;        &quot;salmon&quot;       &quot;lightyellow&quot; 
+[1521] &quot;lightgreen&quot;   &quot;darkred&quot;      &quot;darkgreen&quot;    &quot;royalblue&quot;   
+[1525] &quot;grey&quot;         &quot;darkgreen&quot;    &quot;blue&quot;         &quot;royalblue&quot;   
+[1529] &quot;darkred&quot;      &quot;green&quot;        &quot;blue&quot;         &quot;magenta&quot;     
+[1533] &quot;darkred&quot;      &quot;darkgreen&quot;    &quot;lightyellow&quot;  &quot;midnightblue&quot;
+[1537] &quot;midnightblue&quot; &quot;darkred&quot;      &quot;royalblue&quot;    &quot;darkgreen&quot;   
+[1541] &quot;darkred&quot;      &quot;royalblue&quot;    &quot;royalblue&quot;    &quot;lightyellow&quot; 
+[1545] &quot;salmon&quot;       &quot;lightyellow&quot;  &quot;lightyellow&quot;  &quot;lightyellow&quot; 
+[1549] &quot;lightyellow&quot;  &quot;lightyellow&quot;  &quot;darkred&quot;      &quot;lightyellow&quot; 
+[1553] &quot;green&quot;        &quot;midnightblue&quot; &quot;lightgreen&quot;   &quot;lightyellow&quot; 
+[1557] &quot;grey&quot;         &quot;royalblue&quot;    &quot;grey&quot;         &quot;lightgreen&quot;  
+[1561] &quot;royalblue&quot;    &quot;salmon&quot;       &quot;darkgreen&quot;    &quot;salmon&quot;      
+[1565] &quot;midnightblue&quot; &quot;grey&quot;         &quot;green&quot;        &quot;salmon&quot;      
+[1569] &quot;lightgreen&quot;   &quot;royalblue&quot;    &quot;lightyellow&quot;  &quot;lightyellow&quot; 
+[1573] &quot;brown&quot;        &quot;darkred&quot;      &quot;blue&quot;         &quot;lightyellow&quot; 
+[1577] &quot;lightyellow&quot;  &quot;lightyellow&quot;  &quot;salmon&quot;       &quot;lightyellow&quot; 
+[1581] &quot;lightyellow&quot;  &quot;salmon&quot;       &quot;salmon&quot;       &quot;lightyellow&quot; 
+[1585] &quot;lightyellow&quot;  &quot;lightgreen&quot;   &quot;green&quot;        &quot;green&quot;       
+[1589] &quot;lightyellow&quot;  &quot;salmon&quot;       &quot;salmon&quot;       &quot;royalblue&quot;   
+[1593] &quot;royalblue&quot;    &quot;magenta&quot;      &quot;salmon&quot;       &quot;darkred&quot;     
+[1597] &quot;green&quot;        &quot;lightyellow&quot;  &quot;darkgreen&quot;    &quot;salmon&quot;      
+[1601] &quot;salmon&quot;       &quot;lightyellow&quot;  &quot;royalblue&quot;    &quot;lightyellow&quot; 
+[1605] &quot;lightyellow&quot;  &quot;lightyellow&quot;  &quot;lightyellow&quot;  &quot;lightyellow&quot; 
+[1609] &quot;lightyellow&quot;  &quot;lightyellow&quot;  &quot;lightyellow&quot;  &quot;lightyellow&quot; 
+[1613] &quot;lightyellow&quot;  &quot;lightyellow&quot;  &quot;lightyellow&quot;  &quot;lightyellow&quot; 
+[1617] &quot;lightyellow&quot;  &quot;lightyellow&quot;  &quot;lightyellow&quot;  &quot;lightyellow&quot; 
+[1621] &quot;lightyellow&quot;  &quot;lightyellow&quot;  &quot;lightyellow&quot;  &quot;lightyellow&quot; 
+[1625] &quot;lightyellow&quot;  &quot;lightyellow&quot;  &quot;lightyellow&quot;  &quot;lightyellow&quot; 
+[1629] &quot;lightyellow&quot;  &quot;lightyellow&quot;  &quot;lightyellow&quot;  &quot;lightyellow&quot; 
+[1633] &quot;lightyellow&quot;  &quot;lightyellow&quot;  &quot;lightyellow&quot;  &quot;lightyellow&quot; 
+[1637] &quot;lightyellow&quot;  &quot;lightyellow&quot;  &quot;lightyellow&quot;  &quot;lightyellow&quot; 
+[1641] &quot;lightyellow&quot;  &quot;lightyellow&quot;  &quot;lightyellow&quot;  &quot;lightyellow&quot; 
+[1645] &quot;lightyellow&quot;  &quot;lightyellow&quot;  &quot;lightyellow&quot;  &quot;lightyellow&quot; 
+[1649] &quot;lightyellow&quot;  &quot;lightyellow&quot;  &quot;lightyellow&quot;  &quot;lightyellow&quot; 
+[1653] &quot;lightyellow&quot;  &quot;lightyellow&quot;  &quot;lightyellow&quot;  &quot;lightyellow&quot; 
+[1657] &quot;lightyellow&quot;  &quot;lightyellow&quot;  &quot;lightyellow&quot;  &quot;magenta&quot;     
+[1661] &quot;darkgreen&quot;    &quot;green&quot;        &quot;royalblue&quot;    &quot;grey&quot;        
+[1665] &quot;lightyellow&quot;  &quot;lightyellow&quot;  &quot;salmon&quot;       &quot;salmon&quot;      
+[1669] &quot;salmon&quot;       &quot;salmon&quot;       &quot;royalblue&quot;    &quot;lightgreen&quot;  
+[1673] &quot;salmon&quot;       &quot;lightyellow&quot;  &quot;lightyellow&quot;  &quot;salmon&quot;      
+[1677] &quot;salmon&quot;       &quot;lightyellow&quot;  &quot;lightyellow&quot;  &quot;darkgreen&quot;   
+[1681] &quot;grey&quot;         &quot;green&quot;        &quot;magenta&quot;      &quot;darkred&quot;     
+[1685] &quot;royalblue&quot;    &quot;darkred&quot;      &quot;green&quot;        &quot;royalblue&quot;   
+[1689] &quot;midnightblue&quot; &quot;salmon&quot;       &quot;darkgreen&quot;    &quot;royalblue&quot;   
+[1693] &quot;salmon&quot;       &quot;darkgreen&quot;    &quot;lightgreen&quot;   &quot;salmon&quot;      
+[1697] &quot;darkred&quot;      &quot;lightyellow&quot;  &quot;royalblue&quot;    &quot;green&quot;       
+[1701] &quot;lightgreen&quot;   &quot;darkred&quot;      &quot;salmon&quot;       &quot;royalblue&quot;   
+[1705] &quot;lightyellow&quot;  &quot;lightgreen&quot;   &quot;lightyellow&quot;  &quot;grey&quot;        
+[1709] &quot;darkred&quot;      &quot;darkgreen&quot;    &quot;darkred&quot;      &quot;darkred&quot;     
+[1713] &quot;lightgreen&quot;   &quot;lightgreen&quot;   &quot;lightgreen&quot;   &quot;lightgreen&quot;  
+[1717] &quot;lightgreen&quot;   &quot;lightgreen&quot;   &quot;lightgreen&quot;   &quot;lightgreen&quot;  
+[1721] &quot;lightgreen&quot;   &quot;lightgreen&quot;   &quot;lightgreen&quot;   &quot;lightgreen&quot;  
+[1725] &quot;lightgreen&quot;   &quot;lightgreen&quot;   &quot;lightgreen&quot;   &quot;lightgreen&quot;  
+[1729] &quot;lightgreen&quot;   &quot;lightgreen&quot;   &quot;lightgreen&quot;   &quot;lightgreen&quot;  
+[1733] &quot;lightgreen&quot;   &quot;lightgreen&quot;   &quot;lightgreen&quot;   &quot;lightgreen&quot;  
+[1737] &quot;lightgreen&quot;   &quot;lightgreen&quot;   &quot;lightgreen&quot;   &quot;lightgreen&quot;  
+[1741] &quot;lightgreen&quot;   &quot;lightgreen&quot;   &quot;lightgreen&quot;   &quot;royalblue&quot;   
+[1745] &quot;royalblue&quot;    &quot;lightgreen&quot;   &quot;green&quot;        &quot;green&quot;       
+[1749] &quot;darkgreen&quot;    &quot;darkgreen&quot;    &quot;magenta&quot;      &quot;darkgreen&quot;   
+[1753] &quot;lightyellow&quot;  &quot;yellow&quot;       &quot;darkred&quot;      &quot;darkred&quot;     
+[1757] &quot;darkgreen&quot;    &quot;yellow&quot;       &quot;lightgreen&quot;   &quot;lightgreen&quot;  
+[1761] &quot;magenta&quot;      &quot;darkred&quot;      &quot;salmon&quot;       &quot;darkred&quot;     
+[1765] &quot;lightyellow&quot;  &quot;darkred&quot;      &quot;magenta&quot;      &quot;salmon&quot;      
+[1769] &quot;lightyellow&quot;  &quot;darkred&quot;      &quot;lightgreen&quot;   &quot;darkred&quot;     
+[1773] &quot;salmon&quot;       &quot;salmon&quot;       &quot;salmon&quot;       &quot;brown&quot;       
+[1777] &quot;darkred&quot;      &quot;green&quot;        &quot;royalblue&quot;    &quot;lightyellow&quot; 
+[1781] &quot;darkred&quot;      &quot;lightyellow&quot;  &quot;lightgreen&quot;   &quot;darkred&quot;     
+[1785] &quot;darkred&quot;      &quot;green&quot;        &quot;green&quot;        &quot;lightyellow&quot; 
+[1789] &quot;darkred&quot;      &quot;magenta&quot;      &quot;green&quot;        &quot;green&quot;       
+[1793] &quot;magenta&quot;      &quot;green&quot;        &quot;green&quot;        &quot;royalblue&quot;   
+[1797] &quot;blue&quot;         &quot;lightgreen&quot;   &quot;salmon&quot;       &quot;darkgreen&quot;   
+[1801] &quot;salmon&quot;       &quot;darkred&quot;      &quot;grey&quot;         &quot;lightyellow&quot; 
+[1805] &quot;darkred&quot;      &quot;lightyellow&quot;  &quot;lightyellow&quot;  &quot;darkred&quot;     
+[1809] &quot;darkred&quot;      &quot;royalblue&quot;    &quot;darkgreen&quot;    &quot;green&quot;       
+[1813] &quot;green&quot;        &quot;darkgreen&quot;    &quot;green&quot;        &quot;royalblue&quot;   
+[1817] &quot;green&quot;        &quot;darkgreen&quot;    &quot;royalblue&quot;    &quot;midnightblue&quot;
+[1821] &quot;darkgreen&quot;    &quot;darkgreen&quot;    &quot;darkred&quot;      &quot;green&quot;       
+[1825] &quot;darkgreen&quot;    &quot;darkred&quot;      &quot;darkred&quot;      &quot;royalblue&quot;   
+[1829] &quot;darkgreen&quot;    &quot;royalblue&quot;    &quot;green&quot;        &quot;brown&quot;       
+[1833] &quot;darkred&quot;      &quot;royalblue&quot;    &quot;lightyellow&quot;  &quot;royalblue&quot;   
+[1837] &quot;royalblue&quot;    &quot;darkgreen&quot;    &quot;darkred&quot;      &quot;grey&quot;        
+[1841] &quot;grey&quot;         &quot;royalblue&quot;    &quot;lightyellow&quot;  &quot;green&quot;       
+[1845] &quot;darkred&quot;      &quot;darkred&quot;      &quot;green&quot;        &quot;salmon&quot;      
+[1849] &quot;darkred&quot;      &quot;lightyellow&quot;  &quot;royalblue&quot;    &quot;grey&quot;        
+[1853] &quot;lightyellow&quot;  &quot;royalblue&quot;    &quot;royalblue&quot;    &quot;darkgreen&quot;   
+[1857] &quot;royalblue&quot;    &quot;darkred&quot;      &quot;lightyellow&quot;  &quot;darkred&quot;     
+[1861] &quot;lightyellow&quot;  &quot;darkred&quot;      &quot;darkred&quot;      &quot;salmon&quot;      
+[1865] &quot;royalblue&quot;    &quot;darkgreen&quot;    &quot;grey&quot;         &quot;green&quot;       
+[1869] &quot;darkgreen&quot;    &quot;royalblue&quot;    &quot;darkgreen&quot;    &quot;darkgreen&quot;   
+[1873] &quot;green&quot;        &quot;lightyellow&quot;  &quot;darkred&quot;      &quot;magenta&quot;     
+[1877] &quot;darkgreen&quot;    &quot;lightyellow&quot;  &quot;midnightblue&quot; &quot;royalblue&quot;   
+[1881] &quot;green&quot;        &quot;green&quot;        &quot;darkgreen&quot;    &quot;royalblue&quot;   
+[1885] &quot;darkred&quot;      &quot;darkred&quot;      &quot;green&quot;        &quot;darkgreen&quot;   
+[1889] &quot;midnightblue&quot; &quot;darkgreen&quot;    &quot;darkred&quot;      &quot;darkred&quot;     
+[1893] &quot;royalblue&quot;    &quot;darkgreen&quot;    &quot;darkred&quot;      &quot;darkred&quot;     
+[1897] &quot;lightyellow&quot;  &quot;green&quot;        &quot;grey&quot;         &quot;darkgreen&quot;   
+[1901] &quot;royalblue&quot;    &quot;darkgreen&quot;    &quot;darkred&quot;      &quot;lightgreen&quot;  
+[1905] &quot;midnightblue&quot; &quot;green&quot;        &quot;darkred&quot;      &quot;royalblue&quot;   
+[1909] &quot;royalblue&quot;    &quot;green&quot;        &quot;green&quot;        &quot;lightgreen&quot;  
+[1913] &quot;green&quot;        &quot;darkred&quot;      &quot;magenta&quot;      &quot;darkred&quot;     
+[1917] &quot;darkred&quot;      &quot;lightyellow&quot;  &quot;darkgreen&quot;    &quot;green&quot;       
+[1921] &quot;darkgreen&quot;    &quot;darkgreen&quot;    &quot;darkred&quot;      &quot;yellow&quot;      
+[1925] &quot;green&quot;        &quot;darkred&quot;      &quot;darkred&quot;      &quot;darkred&quot;     
+[1929] &quot;royalblue&quot;    &quot;green&quot;        &quot;darkred&quot;      &quot;royalblue&quot;   
+[1933] &quot;green&quot;        &quot;royalblue&quot;    &quot;green&quot;        &quot;green&quot;       
+[1937] &quot;salmon&quot;       &quot;darkred&quot;      &quot;darkred&quot;      &quot;green&quot;       
+[1941] &quot;green&quot;        &quot;darkgreen&quot;    &quot;darkred&quot;      &quot;royalblue&quot;   
+[1945] &quot;royalblue&quot;    &quot;lightyellow&quot;  &quot;salmon&quot;       &quot;green&quot;       
+[1949] &quot;salmon&quot;       &quot;darkgreen&quot;    &quot;royalblue&quot;    &quot;royalblue&quot;   
+[1953] &quot;green&quot;        &quot;darkred&quot;      &quot;darkgreen&quot;    &quot;salmon&quot;      
+[1957] &quot;lightyellow&quot;  &quot;lightyellow&quot;  &quot;green&quot;        &quot;royalblue&quot;   
+[1961] &quot;darkred&quot;      &quot;green&quot;        &quot;green&quot;        &quot;darkred&quot;     
+[1965] &quot;darkgreen&quot;    &quot;darkgreen&quot;    &quot;lightgreen&quot;   &quot;royalblue&quot;   
+[1969] &quot;darkgreen&quot;    &quot;darkgreen&quot;    &quot;darkred&quot;      &quot;royalblue&quot;   
+[1973] &quot;lightgreen&quot;   &quot;green&quot;        &quot;green&quot;        &quot;green&quot;       
+[1977] &quot;green&quot;        &quot;yellow&quot;       &quot;darkgreen&quot;    &quot;lightyellow&quot; 
+[1981] &quot;darkgreen&quot;    &quot;green&quot;        &quot;lightyellow&quot;  &quot;darkred&quot;     
+[1985] &quot;lightyellow&quot;  &quot;green&quot;        &quot;darkred&quot;      &quot;green&quot;       
+[1989] &quot;darkgreen&quot;    &quot;royalblue&quot;    &quot;royalblue&quot;    &quot;darkred&quot;     
+[1993] &quot;darkgreen&quot;    &quot;royalblue&quot;    &quot;green&quot;        &quot;green&quot;       
+[1997] &quot;green&quot;        &quot;lightgreen&quot;   &quot;lightyellow&quot;  &quot;darkgreen&quot;   
+[2001] &quot;blue&quot;         &quot;royalblue&quot;    &quot;darkgreen&quot;    &quot;midnightblue&quot;
+[2005] &quot;lightyellow&quot;  &quot;green&quot;        &quot;royalblue&quot;    &quot;darkgreen&quot;   
+[2009] &quot;darkred&quot;      &quot;green&quot;        &quot;darkred&quot;      &quot;green&quot;       
+[2013] &quot;darkred&quot;      &quot;salmon&quot;       &quot;darkgreen&quot;    &quot;green&quot;       
+[2017] &quot;midnightblue&quot; &quot;midnightblue&quot; &quot;darkred&quot;      &quot;magenta&quot;     
+[2021] &quot;midnightblue&quot; &quot;darkgreen&quot;    &quot;lightyellow&quot;  &quot;darkred&quot;     
+[2025] &quot;darkred&quot;      &quot;lightyellow&quot;  &quot;darkgreen&quot;    &quot;darkred&quot;     
+[2029] &quot;lightyellow&quot;  &quot;darkgreen&quot;    &quot;darkgreen&quot;    &quot;royalblue&quot;   
+[2033] &quot;royalblue&quot;    &quot;royalblue&quot;    &quot;green&quot;        &quot;salmon&quot;      
+[2037] &quot;darkred&quot;      &quot;darkgreen&quot;    &quot;lightyellow&quot;  &quot;darkgreen&quot;   
+[2041] &quot;green&quot;        &quot;darkred&quot;      &quot;royalblue&quot;    &quot;yellow&quot;      
+[2045] &quot;salmon&quot;       &quot;royalblue&quot;    &quot;salmon&quot;       &quot;darkred&quot;     
+[2049] &quot;lightgreen&quot;   &quot;darkred&quot;      &quot;green&quot;        &quot;royalblue&quot;   
+[2053] &quot;green&quot;        &quot;midnightblue&quot; &quot;royalblue&quot;    &quot;royalblue&quot;   
+[2057] &quot;royalblue&quot;    &quot;darkgreen&quot;    &quot;midnightblue&quot; &quot;salmon&quot;      
+[2061] &quot;lightyellow&quot;  &quot;lightyellow&quot;  &quot;lightgreen&quot;   &quot;midnightblue&quot;
+[2065] &quot;brown&quot;        &quot;royalblue&quot;    &quot;darkred&quot;      &quot;darkgreen&quot;   
+[2069] &quot;royalblue&quot;    &quot;royalblue&quot;    &quot;royalblue&quot;    &quot;royalblue&quot;   
+[2073] &quot;darkgreen&quot;    &quot;lightyellow&quot;  &quot;green&quot;        &quot;darkred&quot;     
+[2077] &quot;darkred&quot;      &quot;darkred&quot;      &quot;lightyellow&quot;  &quot;midnightblue&quot;
+[2081] &quot;royalblue&quot;    &quot;royalblue&quot;    &quot;lightgreen&quot;   &quot;darkred&quot;     
+[2085] &quot;darkgreen&quot;    &quot;royalblue&quot;    &quot;green&quot;        &quot;lightyellow&quot; 
+[2089] &quot;green&quot;        &quot;lightgreen&quot;   &quot;royalblue&quot;    &quot;green&quot;       
+[2093] &quot;green&quot;        &quot;green&quot;        &quot;blue&quot;         &quot;green&quot;       
+[2097] &quot;darkgreen&quot;    &quot;darkred&quot;      &quot;magenta&quot;      &quot;lightyellow&quot; 
+[2101] &quot;darkred&quot;      &quot;royalblue&quot;    &quot;darkred&quot;      &quot;darkred&quot;     
+[2105] &quot;lightyellow&quot;  &quot;grey&quot;         &quot;lightyellow&quot;  &quot;green&quot;       
+[2109] &quot;green&quot;        &quot;lightyellow&quot;  &quot;midnightblue&quot; &quot;royalblue&quot;   
+[2113] &quot;royalblue&quot;    &quot;royalblue&quot;    &quot;darkgreen&quot;    &quot;darkred&quot;     
+[2117] &quot;royalblue&quot;    &quot;green&quot;        &quot;green&quot;        &quot;green&quot;       
+[2121] &quot;royalblue&quot;    &quot;darkred&quot;      &quot;darkred&quot;      &quot;darkred&quot;     
+[2125] &quot;royalblue&quot;    &quot;green&quot;        &quot;grey&quot;         &quot;royalblue&quot;   
+[2129] &quot;green&quot;        &quot;royalblue&quot;    &quot;lightyellow&quot;  &quot;blue&quot;        
+[2133] &quot;lightyellow&quot;  &quot;royalblue&quot;    &quot;lightgreen&quot;   &quot;green&quot;       
+[2137] &quot;midnightblue&quot; &quot;royalblue&quot;    &quot;green&quot;        &quot;blue&quot;        
+[2141] &quot;royalblue&quot;    &quot;magenta&quot;      &quot;lightyellow&quot;  &quot;darkred&quot;     
+[2145] &quot;lightyellow&quot;  &quot;royalblue&quot;    &quot;darkgreen&quot;    &quot;darkgreen&quot;   
+[2149] &quot;darkred&quot;      &quot;darkgreen&quot;    &quot;royalblue&quot;    &quot;darkred&quot;     
+[2153] &quot;magenta&quot;      &quot;green&quot;        &quot;magenta&quot;      &quot;midnightblue&quot;
+[2157] &quot;brown&quot;        &quot;magenta&quot;      &quot;darkred&quot;      &quot;lightyellow&quot; 
+[2161] &quot;royalblue&quot;    &quot;darkred&quot;      &quot;salmon&quot;       &quot;darkgreen&quot;   
+[2165] &quot;yellow&quot;       &quot;royalblue&quot;    &quot;green&quot;        &quot;darkred&quot;     
+[2169] &quot;royalblue&quot;    &quot;darkgreen&quot;    &quot;royalblue&quot;    &quot;green&quot;       
+[2173] &quot;yellow&quot;       &quot;lightgreen&quot;   &quot;darkgreen&quot;    &quot;green&quot;       
+[2177] &quot;darkgreen&quot;    &quot;darkred&quot;      &quot;green&quot;        &quot;green&quot;       
+[2181] &quot;lightgreen&quot;   &quot;salmon&quot;       &quot;lightyellow&quot;  &quot;darkred&quot;     
+[2185] &quot;darkred&quot;      &quot;lightyellow&quot;  &quot;green&quot;        &quot;lightyellow&quot; 
+[2189] &quot;lightyellow&quot;  &quot;midnightblue&quot; &quot;royalblue&quot;    &quot;green&quot;       
+[2193] &quot;blue&quot;         &quot;green&quot;        &quot;lightyellow&quot;  &quot;darkred&quot;     
+[2197] &quot;green&quot;        &quot;darkred&quot;      &quot;royalblue&quot;    &quot;darkred&quot;     
+[2201] &quot;darkred&quot;      &quot;darkgreen&quot;    &quot;darkred&quot;      &quot;green&quot;       
+[2205] &quot;green&quot;        &quot;green&quot;        &quot;lightgreen&quot;   &quot;green&quot;       
+[2209] &quot;magenta&quot;      &quot;green&quot;        &quot;royalblue&quot;    &quot;darkgreen&quot;   
+[2213] &quot;royalblue&quot;    &quot;darkgreen&quot;    &quot;darkred&quot;      &quot;magenta&quot;     
+[2217] &quot;darkgreen&quot;    &quot;green&quot;        &quot;darkgreen&quot;    &quot;midnightblue&quot;
+[2221] &quot;royalblue&quot;    &quot;magenta&quot;      &quot;royalblue&quot;    &quot;magenta&quot;     
+[2225] &quot;darkgreen&quot;    &quot;midnightblue&quot; &quot;darkgreen&quot;    &quot;green&quot;       
+[2229] &quot;royalblue&quot;    &quot;darkred&quot;      &quot;lightyellow&quot;  &quot;darkred&quot;     
+[2233] &quot;midnightblue&quot; &quot;darkred&quot;      &quot;lightgreen&quot;   &quot;salmon&quot;      
+[2237] &quot;lightgreen&quot;   &quot;darkred&quot;      &quot;lightgreen&quot;   &quot;darkred&quot;     
+[2241] &quot;lightgreen&quot;   &quot;lightgreen&quot;   &quot;darkred&quot;      &quot;midnightblue&quot;
+[2245] &quot;magenta&quot;      &quot;magenta&quot;      &quot;magenta&quot;      &quot;magenta&quot;     
+[2249] &quot;royalblue&quot;    &quot;darkgreen&quot;    &quot;darkred&quot;      &quot;lightyellow&quot; 
+[2253] &quot;salmon&quot;       &quot;darkred&quot;      &quot;brown&quot;        &quot;darkred&quot;     
+[2257] &quot;darkgreen&quot;    &quot;darkred&quot;      &quot;darkred&quot;      &quot;darkred&quot;     
+[2261] &quot;green&quot;        &quot;darkgreen&quot;    &quot;darkred&quot;      &quot;lightgreen&quot;  
+[2265] &quot;darkgreen&quot;    &quot;brown&quot;        &quot;lightyellow&quot;  &quot;green&quot;       
+[2269] &quot;green&quot;        &quot;royalblue&quot;    &quot;green&quot;        &quot;grey&quot;        
+[2273] &quot;darkred&quot;      &quot;green&quot;        &quot;green&quot;        &quot;lightgreen&quot;  
+[2277] &quot;darkred&quot;      &quot;midnightblue&quot; &quot;salmon&quot;       &quot;green&quot;       
+[2281] &quot;salmon&quot;       &quot;darkgreen&quot;    &quot;royalblue&quot;    &quot;royalblue&quot;   
+[2285] &quot;blue&quot;         &quot;darkred&quot;      &quot;midnightblue&quot; &quot;lightyellow&quot; 
+[2289] &quot;green&quot;        &quot;midnightblue&quot; &quot;lightgreen&quot;   &quot;darkred&quot;     
+[2293] &quot;darkred&quot;      &quot;royalblue&quot;    &quot;darkred&quot;      &quot;green&quot;       
+[2297] &quot;darkgreen&quot;    &quot;magenta&quot;      &quot;green&quot;        &quot;darkgreen&quot;   
+[2301] &quot;lightgreen&quot;   &quot;darkred&quot;      &quot;royalblue&quot;    &quot;midnightblue&quot;
+[2305] &quot;salmon&quot;       &quot;lightgreen&quot;   &quot;darkgreen&quot;    &quot;lightyellow&quot; 
+[2309] &quot;green&quot;        &quot;royalblue&quot;    &quot;green&quot;        &quot;darkgreen&quot;   
+[2313] &quot;blue&quot;         &quot;grey&quot;         &quot;lightgreen&quot;   &quot;lightyellow&quot; 
+[2317] &quot;royalblue&quot;    &quot;green&quot;        &quot;darkgreen&quot;    &quot;darkred&quot;     
+[2321] &quot;lightyellow&quot;  &quot;salmon&quot;       &quot;royalblue&quot;    &quot;magenta&quot;     
+[2325] &quot;royalblue&quot;    &quot;magenta&quot;      &quot;lightyellow&quot;  &quot;green&quot;       
+[2329] &quot;darkred&quot;      &quot;royalblue&quot;    &quot;royalblue&quot;    &quot;green&quot;       
+[2333] &quot;green&quot;        &quot;darkred&quot;      &quot;darkred&quot;      &quot;royalblue&quot;   
+[2337] &quot;salmon&quot;       &quot;darkred&quot;      &quot;grey&quot;         &quot;lightyellow&quot; 
+[2341] &quot;royalblue&quot;    &quot;lightgreen&quot;   &quot;royalblue&quot;    &quot;darkgreen&quot;   
+[2345] &quot;royalblue&quot;    &quot;royalblue&quot;    &quot;lightyellow&quot;  &quot;darkred&quot;     
+[2349] &quot;darkred&quot;      &quot;darkgreen&quot;    &quot;green&quot;        &quot;lightyellow&quot; 
+[2353] &quot;royalblue&quot;    &quot;royalblue&quot;    &quot;lightyellow&quot;  &quot;lightyellow&quot; 
+[2357] &quot;royalblue&quot;    &quot;salmon&quot;       &quot;darkred&quot;      &quot;midnightblue&quot;
+[2361] &quot;grey&quot;         &quot;green&quot;        &quot;lightgreen&quot;   &quot;darkred&quot;     
+[2365] &quot;royalblue&quot;    &quot;green&quot;        &quot;green&quot;        &quot;lightgreen&quot;  
+[2369] &quot;royalblue&quot;    &quot;darkred&quot;      &quot;midnightblue&quot; &quot;green&quot;       
+[2373] &quot;darkgreen&quot;    &quot;yellow&quot;       &quot;midnightblue&quot; &quot;green&quot;       
+[2377] &quot;royalblue&quot;    &quot;darkred&quot;      &quot;lightyellow&quot;  &quot;green&quot;       
+[2381] &quot;green&quot;        &quot;darkred&quot;      &quot;green&quot;        &quot;green&quot;       
+[2385] &quot;darkred&quot;      &quot;royalblue&quot;    &quot;lightyellow&quot;  &quot;royalblue&quot;   
+[2389] &quot;yellow&quot;       &quot;royalblue&quot;    &quot;lightyellow&quot;  &quot;darkred&quot;     
+[2393] &quot;darkred&quot;      &quot;green&quot;        &quot;royalblue&quot;    &quot;grey&quot;        
+[2397] &quot;lightyellow&quot;  &quot;lightgreen&quot;   &quot;royalblue&quot;    &quot;green&quot;       
+[2401] &quot;lightgreen&quot;   &quot;lightgreen&quot;   &quot;royalblue&quot;    &quot;royalblue&quot;   
+[2405] &quot;royalblue&quot;    &quot;darkgreen&quot;    &quot;green&quot;        &quot;darkred&quot;     
+[2409] &quot;lightgreen&quot;   &quot;darkgreen&quot;    &quot;royalblue&quot;    &quot;darkred&quot;     
+[2413] &quot;darkgreen&quot;    &quot;darkgreen&quot;    &quot;royalblue&quot;    &quot;green&quot;       
+[2417] &quot;darkgreen&quot;    &quot;darkred&quot;      &quot;green&quot;        &quot;midnightblue&quot;
+[2421] &quot;midnightblue&quot; &quot;green&quot;        &quot;darkred&quot;      &quot;lightyellow&quot; 
+[2425] &quot;royalblue&quot;    &quot;salmon&quot;       &quot;darkred&quot;      &quot;darkgreen&quot;   
+[2429] &quot;darkgreen&quot;    &quot;royalblue&quot;    &quot;royalblue&quot;    &quot;magenta&quot;     
+[2433] &quot;darkred&quot;      &quot;lightyellow&quot;  &quot;royalblue&quot;    &quot;royalblue&quot;   
+[2437] &quot;green&quot;        &quot;royalblue&quot;    &quot;darkred&quot;      &quot;darkred&quot;     
+[2441] &quot;royalblue&quot;    &quot;royalblue&quot;    &quot;royalblue&quot;    &quot;green&quot;       
+[2445] &quot;darkred&quot;      &quot;lightyellow&quot;  &quot;grey&quot;         &quot;royalblue&quot;   
+[2449] &quot;royalblue&quot;    &quot;green&quot;        &quot;green&quot;        &quot;royalblue&quot;   
+[2453] &quot;green&quot;        &quot;lightyellow&quot;  &quot;royalblue&quot;    &quot;darkred&quot;     
+[2457] &quot;darkred&quot;      &quot;midnightblue&quot; &quot;salmon&quot;       &quot;lightyellow&quot; 
+[2461] &quot;darkred&quot;      &quot;darkred&quot;      &quot;green&quot;        &quot;darkred&quot;     
+[2465] &quot;darkred&quot;      &quot;royalblue&quot;    &quot;lightyellow&quot;  &quot;lightgreen&quot;  
+[2469] &quot;royalblue&quot;    &quot;green&quot;        &quot;green&quot;        &quot;green&quot;       
+[2473] &quot;blue&quot;         &quot;lightgreen&quot;   &quot;green&quot;        &quot;midnightblue&quot;
+[2477] &quot;green&quot;        &quot;darkred&quot;      &quot;royalblue&quot;    &quot;lightgreen&quot;  
+[2481] &quot;darkgreen&quot;    &quot;green&quot;        &quot;lightyellow&quot;  &quot;midnightblue&quot;
+[2485] &quot;royalblue&quot;    &quot;lightgreen&quot;   &quot;green&quot;        &quot;darkred&quot;     
+[2489] &quot;green&quot;        &quot;royalblue&quot;    &quot;royalblue&quot;    &quot;green&quot;       
+[2493] &quot;midnightblue&quot; &quot;royalblue&quot;    &quot;grey&quot;         &quot;royalblue&quot;   
+[2497] &quot;midnightblue&quot; &quot;lightyellow&quot;  &quot;green&quot;        &quot;darkgreen&quot;   
+[2501] &quot;royalblue&quot;    &quot;green&quot;        &quot;royalblue&quot;    &quot;darkgreen&quot;   
+[2505] &quot;lightyellow&quot;  &quot;midnightblue&quot; &quot;royalblue&quot;    &quot;lightgreen&quot;  
+[2509] &quot;royalblue&quot;    &quot;darkred&quot;      &quot;green&quot;        &quot;royalblue&quot;   
+[2513] &quot;grey&quot;         &quot;royalblue&quot;    &quot;green&quot;        &quot;darkred&quot;     
+[2517] &quot;green&quot;        &quot;green&quot;        &quot;darkred&quot;      &quot;green&quot;       
+[2521] &quot;royalblue&quot;    &quot;green&quot;        &quot;green&quot;        &quot;royalblue&quot;   
+[2525] &quot;royalblue&quot;    &quot;darkgreen&quot;    &quot;midnightblue&quot; &quot;darkgreen&quot;   
+[2529] &quot;brown&quot;        &quot;midnightblue&quot; &quot;royalblue&quot;    &quot;green&quot;       
+[2533] &quot;lightyellow&quot;  &quot;green&quot;        &quot;royalblue&quot;    &quot;royalblue&quot;   
+[2537] &quot;darkred&quot;      &quot;lightyellow&quot;  &quot;darkgreen&quot;    &quot;darkred&quot;     
+[2541] &quot;darkgreen&quot;    &quot;blue&quot;         &quot;grey&quot;         &quot;royalblue&quot;   
+[2545] &quot;darkred&quot;      &quot;green&quot;        &quot;lightyellow&quot;  &quot;green&quot;       
+[2549] &quot;royalblue&quot;    &quot;darkgreen&quot;    &quot;lightyellow&quot;  &quot;darkgreen&quot;   
+[2553] &quot;darkred&quot;      &quot;royalblue&quot;    &quot;darkgreen&quot;    &quot;darkred&quot;     
+[2557] &quot;green&quot;        &quot;lightgreen&quot;   &quot;blue&quot;         &quot;green&quot;       
+[2561] &quot;green&quot;        &quot;green&quot;        &quot;darkgreen&quot;    &quot;green&quot;       
+[2565] &quot;darkred&quot;      &quot;green&quot;        &quot;darkgreen&quot;    &quot;salmon&quot;      
+[2569] &quot;darkgreen&quot;    &quot;lightgreen&quot;   &quot;lightgreen&quot;   &quot;darkred&quot;     
+[2573] &quot;grey&quot;         &quot;green&quot;        &quot;magenta&quot;      &quot;lightyellow&quot; 
+[2577] &quot;lightyellow&quot;  &quot;royalblue&quot;    &quot;darkgreen&quot;    &quot;lightyellow&quot; 
+[2581] &quot;darkred&quot;      &quot;darkgreen&quot;    &quot;royalblue&quot;    &quot;lightgreen&quot;  
+[2585] &quot;darkgreen&quot;    &quot;darkred&quot;      &quot;darkgreen&quot;    &quot;darkred&quot;     
+[2589] &quot;green&quot;        &quot;lightyellow&quot;  &quot;darkred&quot;      &quot;salmon&quot;      
+[2593] &quot;darkred&quot;      &quot;magenta&quot;      &quot;lightgreen&quot;   &quot;royalblue&quot;   
+[2597] &quot;royalblue&quot;    &quot;lightgreen&quot;   &quot;royalblue&quot;    &quot;darkred&quot;     
+[2601] &quot;darkgreen&quot;    &quot;darkred&quot;      &quot;darkred&quot;      &quot;magenta&quot;     
+[2605] &quot;darkgreen&quot;    &quot;darkred&quot;      &quot;green&quot;        &quot;green&quot;       
+[2609] &quot;green&quot;        &quot;green&quot;        &quot;royalblue&quot;    &quot;lightgreen&quot;  
+[2613] &quot;green&quot;        &quot;blue&quot;         &quot;midnightblue&quot; &quot;darkred&quot;     
+[2617] &quot;green&quot;        &quot;royalblue&quot;    &quot;green&quot;        &quot;green&quot;       
+[2621] &quot;royalblue&quot;    &quot;royalblue&quot;    &quot;royalblue&quot;    &quot;grey&quot;        
+[2625] &quot;darkgreen&quot;    &quot;royalblue&quot;    &quot;green&quot;        &quot;lightgreen&quot;  
+[2629] &quot;royalblue&quot;    &quot;darkred&quot;      &quot;green&quot;        &quot;darkred&quot;     
+[2633] &quot;darkred&quot;      &quot;yellow&quot;       &quot;darkgreen&quot;    &quot;darkgreen&quot;   
+[2637] &quot;green&quot;        &quot;lightyellow&quot;  &quot;darkred&quot;      &quot;salmon&quot;      
+[2641] &quot;lightyellow&quot;  &quot;midnightblue&quot; &quot;lightyellow&quot;  &quot;darkgreen&quot;   
+[2645] &quot;green&quot;        &quot;darkred&quot;      &quot;green&quot;        &quot;royalblue&quot;   
+[2649] &quot;green&quot;        &quot;lightyellow&quot;  &quot;darkred&quot;      &quot;salmon&quot;      
+[2653] &quot;green&quot;        &quot;darkgreen&quot;    &quot;royalblue&quot;    &quot;lightyellow&quot; 
+[2657] &quot;darkred&quot;      &quot;darkred&quot;      &quot;darkred&quot;      &quot;yellow&quot;      
+[2661] &quot;green&quot;        &quot;darkgreen&quot;    &quot;darkred&quot;      &quot;royalblue&quot;   
+[2665] &quot;royalblue&quot;    &quot;lightyellow&quot;  &quot;green&quot;        &quot;lightgreen&quot;  
+[2669] &quot;royalblue&quot;    &quot;lightyellow&quot;  &quot;darkred&quot;      &quot;darkgreen&quot;   
+[2673] &quot;magenta&quot;      &quot;lightyellow&quot;  &quot;green&quot;        &quot;darkred&quot;     
+[2677] &quot;darkred&quot;      &quot;darkgreen&quot;    &quot;magenta&quot;      &quot;yellow&quot;      
+[2681] &quot;salmon&quot;       &quot;darkred&quot;      &quot;lightgreen&quot;   &quot;royalblue&quot;   
+[2685] &quot;green&quot;        &quot;green&quot;        &quot;darkgreen&quot;    &quot;midnightblue&quot;
+[2689] &quot;lightyellow&quot;  &quot;darkgreen&quot;    &quot;darkgreen&quot;    &quot;darkgreen&quot;   
+[2693] &quot;darkred&quot;      &quot;darkred&quot;      &quot;brown&quot;        &quot;royalblue&quot;   
+[2697] &quot;royalblue&quot;    &quot;midnightblue&quot; &quot;magenta&quot;      &quot;lightyellow&quot; 
+[2701] &quot;royalblue&quot;    &quot;royalblue&quot;    &quot;royalblue&quot;    &quot;midnightblue&quot;
+[2705] &quot;royalblue&quot;    &quot;lightgreen&quot;   &quot;darkred&quot;      &quot;darkred&quot;     
+[2709] &quot;green&quot;        &quot;lightgreen&quot;   &quot;darkgreen&quot;    &quot;royalblue&quot;   
+[2713] &quot;royalblue&quot;    &quot;magenta&quot;      &quot;green&quot;        &quot;royalblue&quot;   
+[2717] &quot;royalblue&quot;    &quot;midnightblue&quot; &quot;darkred&quot;      &quot;grey&quot;        
+[2721] &quot;darkgreen&quot;    &quot;lightgreen&quot;   &quot;darkred&quot;      &quot;darkgreen&quot;   
+[2725] &quot;green&quot;        &quot;royalblue&quot;    &quot;lightgreen&quot;   &quot;green&quot;       
+[2729] &quot;darkred&quot;      &quot;darkred&quot;      &quot;green&quot;        &quot;darkred&quot;     
+[2733] &quot;royalblue&quot;    &quot;darkred&quot;      &quot;lightgreen&quot;   &quot;darkgreen&quot;   
+[2737] &quot;salmon&quot;       &quot;green&quot;        &quot;darkred&quot;      &quot;lightyellow&quot; 
+[2741] &quot;darkred&quot;      &quot;salmon&quot;       &quot;lightyellow&quot;  &quot;green&quot;       
+[2745] &quot;green&quot;        &quot;darkred&quot;      &quot;lightyellow&quot;  &quot;lightgreen&quot;  
+[2749] &quot;darkgreen&quot;    &quot;green&quot;        &quot;darkred&quot;      &quot;darkgreen&quot;   
+[2753] &quot;lightgreen&quot;   &quot;salmon&quot;       &quot;darkgreen&quot;    &quot;midnightblue&quot;
+[2757] &quot;green&quot;        &quot;darkgreen&quot;    &quot;darkred&quot;      &quot;darkred&quot;     
+[2761] &quot;royalblue&quot;    &quot;royalblue&quot;    &quot;royalblue&quot;    &quot;darkgreen&quot;   
+[2765] &quot;darkgreen&quot;    &quot;darkgreen&quot;    &quot;royalblue&quot;    &quot;lightyellow&quot; 
+[2769] &quot;magenta&quot;      &quot;lightgreen&quot;   &quot;darkred&quot;      &quot;royalblue&quot;   
+[2773] &quot;darkred&quot;      &quot;lightyellow&quot;  &quot;royalblue&quot;    &quot;darkred&quot;     
+[2777] &quot;lightgreen&quot;   &quot;lightyellow&quot;  &quot;lightyellow&quot;  &quot;royalblue&quot;   
+[2781] &quot;lightyellow&quot;  &quot;darkred&quot;      &quot;darkgreen&quot;    &quot;brown&quot;       
+[2785] &quot;darkgreen&quot;    &quot;midnightblue&quot; &quot;brown&quot;        &quot;darkred&quot;     
+[2789] &quot;royalblue&quot;    &quot;royalblue&quot;    &quot;lightyellow&quot;  &quot;grey&quot;        
+[2793] &quot;royalblue&quot;    &quot;darkred&quot;      &quot;royalblue&quot;    &quot;darkred&quot;     
+[2797] &quot;lightyellow&quot;  &quot;darkred&quot;      &quot;royalblue&quot;    &quot;darkred&quot;     
+[2801] &quot;royalblue&quot;    &quot;green&quot;        &quot;green&quot;        &quot;royalblue&quot;   
+[2805] &quot;darkred&quot;      &quot;blue&quot;         &quot;midnightblue&quot; &quot;royalblue&quot;   
+[2809] &quot;salmon&quot;       &quot;lightyellow&quot;  &quot;darkgreen&quot;    &quot;darkred&quot;     
+[2813] &quot;darkgreen&quot;    &quot;darkred&quot;      &quot;darkred&quot;      &quot;royalblue&quot;   
+[2817] &quot;yellow&quot;       &quot;darkred&quot;      &quot;darkgreen&quot;    &quot;green&quot;       
+[2821] &quot;darkgreen&quot;    &quot;salmon&quot;       &quot;royalblue&quot;    &quot;green&quot;       
+[2825] &quot;darkred&quot;      &quot;darkgreen&quot;    &quot;royalblue&quot;    &quot;darkgreen&quot;   
+[2829] &quot;lightyellow&quot;  &quot;darkred&quot;      &quot;green&quot;        &quot;darkgreen&quot;   
+[2833] &quot;yellow&quot;       &quot;magenta&quot;      &quot;midnightblue&quot; &quot;midnightblue&quot;
+[2837] &quot;darkgreen&quot;    &quot;royalblue&quot;    &quot;salmon&quot;       &quot;lightyellow&quot; 
+[2841] &quot;midnightblue&quot; &quot;darkgreen&quot;    &quot;midnightblue&quot; &quot;royalblue&quot;   
+[2845] &quot;lightgreen&quot;   &quot;lightyellow&quot;  &quot;lightgreen&quot;   &quot;lightgreen&quot;  
+[2849] &quot;green&quot;        &quot;green&quot;        &quot;salmon&quot;       &quot;midnightblue&quot;
+[2853] &quot;darkred&quot;      &quot;green&quot;        &quot;green&quot;        &quot;lightgreen&quot;  
+[2857] &quot;magenta&quot;      &quot;royalblue&quot;    &quot;darkgreen&quot;    &quot;darkred&quot;     
+[2861] &quot;green&quot;        &quot;royalblue&quot;    &quot;royalblue&quot;    &quot;darkred&quot;     
+[2865] &quot;green&quot;        &quot;darkgreen&quot;    &quot;green&quot;        &quot;blue&quot;        
+[2869] &quot;darkgreen&quot;    &quot;midnightblue&quot; &quot;royalblue&quot;    &quot;green&quot;       
+[2873] &quot;royalblue&quot;    &quot;royalblue&quot;    &quot;lightyellow&quot;  &quot;midnightblue&quot;
+[2877] &quot;lightgreen&quot;   &quot;lightgreen&quot;   &quot;salmon&quot;       &quot;royalblue&quot;   
+[2881] &quot;green&quot;        &quot;lightyellow&quot;  &quot;royalblue&quot;    &quot;lightgreen&quot;  
+[2885] &quot;midnightblue&quot; &quot;royalblue&quot;    &quot;yellow&quot;       &quot;green&quot;       
+[2889] &quot;royalblue&quot;    &quot;green&quot;        &quot;yellow&quot;       &quot;royalblue&quot;   
+[2893] &quot;green&quot;        &quot;green&quot;        &quot;lightyellow&quot;  &quot;green&quot;       
+[2897] &quot;green&quot;        &quot;green&quot;        &quot;darkred&quot;      &quot;darkgreen&quot;   
+[2901] &quot;green&quot;        &quot;darkred&quot;      &quot;green&quot;        &quot;lightyellow&quot; 
+[2905] &quot;darkred&quot;      &quot;royalblue&quot;    &quot;darkgreen&quot;    &quot;lightyellow&quot; 
+[2909] &quot;magenta&quot;      &quot;darkred&quot;      &quot;darkred&quot;      &quot;midnightblue&quot;
+[2913] &quot;lightyellow&quot;  &quot;green&quot;        &quot;yellow&quot;       &quot;magenta&quot;     
+[2917] &quot;lightgreen&quot;   &quot;green&quot;        &quot;salmon&quot;       &quot;green&quot;       
+[2921] &quot;darkred&quot;      &quot;darkred&quot;      &quot;darkgreen&quot;    &quot;darkred&quot;     
+[2925] &quot;royalblue&quot;    &quot;green&quot;        &quot;lightyellow&quot;  &quot;darkred&quot;     
+[2929] &quot;darkgreen&quot;    &quot;darkgreen&quot;    &quot;royalblue&quot;    &quot;darkgreen&quot;   
+[2933] &quot;darkgreen&quot;    &quot;green&quot;        &quot;grey&quot;         &quot;royalblue&quot;   
+[2937] &quot;darkgreen&quot;    &quot;darkgreen&quot;    &quot;royalblue&quot;    &quot;midnightblue&quot;
+[2941] &quot;lightgreen&quot;   &quot;green&quot;        &quot;brown&quot;        &quot;green&quot;       
+[2945] &quot;darkred&quot;      &quot;green&quot;        &quot;darkred&quot;      &quot;lightyellow&quot; 
+[2949] &quot;midnightblue&quot; &quot;salmon&quot;       &quot;darkred&quot;      &quot;green&quot;       
+[2953] &quot;lightyellow&quot;  &quot;green&quot;        &quot;darkred&quot;      &quot;lightyellow&quot; 
+[2957] &quot;green&quot;        &quot;darkred&quot;      &quot;green&quot;        &quot;green&quot;       
+[2961] &quot;darkgreen&quot;    &quot;lightgreen&quot;   &quot;royalblue&quot;    &quot;salmon&quot;      
+[2965] &quot;darkred&quot;      &quot;darkred&quot;      &quot;darkgreen&quot;    &quot;darkred&quot;     
+[2969] &quot;darkgreen&quot;    &quot;green&quot;        &quot;blue&quot;         &quot;darkgreen&quot;   
+[2973] &quot;midnightblue&quot; &quot;royalblue&quot;    &quot;green&quot;        &quot;royalblue&quot;   
+[2977] &quot;darkgreen&quot;    &quot;magenta&quot;      &quot;darkgreen&quot;    &quot;darkgreen&quot;   
+[2981] &quot;green&quot;        &quot;darkred&quot;      &quot;salmon&quot;       &quot;royalblue&quot;   
+[2985] &quot;lightgreen&quot;   &quot;darkred&quot;      &quot;lightyellow&quot;  &quot;royalblue&quot;   
+[2989] &quot;darkgreen&quot;    &quot;darkred&quot;      &quot;darkred&quot;      &quot;salmon&quot;      
+[2993] &quot;magenta&quot;      &quot;lightyellow&quot;  &quot;royalblue&quot;    &quot;darkgreen&quot;   
+[2997] &quot;magenta&quot;      &quot;darkgreen&quot;    &quot;green&quot;        &quot;darkred&quot;     
+[3001] &quot;lightyellow&quot;  &quot;green&quot;        &quot;darkred&quot;      &quot;midnightblue&quot;
+[3005] &quot;darkgreen&quot;    &quot;darkred&quot;      &quot;green&quot;        &quot;grey&quot;        
+[3009] &quot;darkred&quot;      &quot;royalblue&quot;    &quot;darkred&quot;      &quot;blue&quot;        
+[3013] &quot;salmon&quot;       &quot;lightyellow&quot;  &quot;lightyellow&quot;  &quot;midnightblue&quot;
+[3017] &quot;lightgreen&quot;   &quot;darkgreen&quot;    &quot;green&quot;        &quot;darkred&quot;     
+[3021] &quot;royalblue&quot;    &quot;green&quot;        &quot;lightgreen&quot;   &quot;salmon&quot;      
+[3025] &quot;royalblue&quot;    &quot;darkred&quot;      &quot;royalblue&quot;    &quot;lightyellow&quot; 
+[3029] &quot;lightyellow&quot;  &quot;green&quot;        &quot;lightyellow&quot;  &quot;green&quot;       
+[3033] &quot;green&quot;        &quot;salmon&quot;       &quot;darkgreen&quot;    &quot;salmon&quot;      
+[3037] &quot;lightyellow&quot;  &quot;magenta&quot;      &quot;lightyellow&quot;  &quot;darkred&quot;     
+[3041] &quot;midnightblue&quot; &quot;lightyellow&quot;  &quot;lightyellow&quot;  &quot;royalblue&quot;   
+[3045] &quot;lightyellow&quot;  &quot;darkred&quot;      &quot;lightyellow&quot;  &quot;yellow&quot;      
+[3049] &quot;green&quot;        &quot;darkred&quot;      &quot;magenta&quot;      &quot;royalblue&quot;   
+[3053] &quot;green&quot;        &quot;green&quot;        &quot;lightgreen&quot;   &quot;lightgreen&quot;  
+[3057] &quot;lightyellow&quot;  &quot;salmon&quot;       &quot;darkred&quot;      &quot;midnightblue&quot;
+[3061] &quot;darkgreen&quot;    &quot;yellow&quot;       &quot;darkred&quot;      &quot;royalblue&quot;   
+[3065] &quot;green&quot;        &quot;darkred&quot;      &quot;royalblue&quot;    &quot;darkred&quot;     
+[3069] &quot;royalblue&quot;    &quot;royalblue&quot;    &quot;magenta&quot;      &quot;lightyellow&quot; 
+[3073] &quot;darkred&quot;      &quot;darkgreen&quot;    &quot;lightyellow&quot;  &quot;darkred&quot;     
+[3077] &quot;green&quot;        &quot;lightyellow&quot;  &quot;darkred&quot;      &quot;green&quot;       
+[3081] &quot;green&quot;        &quot;lightyellow&quot;  &quot;green&quot;        &quot;lightgreen&quot;  
+[3085] &quot;darkred&quot;      &quot;lightgreen&quot;   &quot;darkgreen&quot;    &quot;lightyellow&quot; 
+[3089] &quot;darkgreen&quot;    &quot;royalblue&quot;    &quot;lightgreen&quot;   &quot;lightyellow&quot; 
+[3093] &quot;blue&quot;         &quot;lightyellow&quot;  &quot;darkgreen&quot;    &quot;lightgreen&quot;  
+[3097] &quot;green&quot;        &quot;darkred&quot;      &quot;darkgreen&quot;    &quot;lightyellow&quot; 
+[3101] &quot;salmon&quot;       &quot;salmon&quot;       &quot;darkred&quot;      &quot;magenta&quot;     
+[3105] &quot;royalblue&quot;    &quot;lightyellow&quot;  &quot;green&quot;        &quot;darkred&quot;     
+[3109] &quot;darkred&quot;      &quot;green&quot;        &quot;green&quot;        &quot;royalblue&quot;   
+[3113] &quot;brown&quot;        &quot;lightyellow&quot;  &quot;magenta&quot;      &quot;green&quot;       
+[3117] &quot;royalblue&quot;    &quot;salmon&quot;       &quot;lightgreen&quot;   &quot;darkred&quot;     
+[3121] &quot;green&quot;        &quot;midnightblue&quot; &quot;royalblue&quot;    &quot;midnightblue&quot;
+[3125] &quot;midnightblue&quot; &quot;royalblue&quot;    &quot;darkred&quot;      &quot;darkred&quot;     
+[3129] &quot;lightyellow&quot;  &quot;salmon&quot;       &quot;green&quot;        &quot;lightyellow&quot; 
+[3133] &quot;grey&quot;         &quot;brown&quot;        &quot;green&quot;        &quot;darkred&quot;     
+[3137] &quot;darkred&quot;      &quot;green&quot;        &quot;darkred&quot;      &quot;green&quot;       
+[3141] &quot;darkgreen&quot;    &quot;lightyellow&quot;  &quot;green&quot;        &quot;green&quot;       
+[3145] &quot;salmon&quot;       &quot;green&quot;        &quot;green&quot;        &quot;darkred&quot;     
+[3149] &quot;magenta&quot;      &quot;lightyellow&quot;  &quot;lightgreen&quot;   &quot;midnightblue&quot;
+[3153] &quot;royalblue&quot;    &quot;darkred&quot;      &quot;darkred&quot;      &quot;darkred&quot;     
+[3157] &quot;darkgreen&quot;    &quot;green&quot;        &quot;green&quot;        &quot;royalblue&quot;   
+[3161] &quot;darkgreen&quot;    &quot;green&quot;        &quot;darkred&quot;      &quot;lightyellow&quot; 
+[3165] &quot;green&quot;        &quot;midnightblue&quot; &quot;green&quot;        &quot;darkgreen&quot;   
+[3169] &quot;green&quot;        &quot;darkred&quot;      &quot;lightyellow&quot;  &quot;yellow&quot;      
+[3173] &quot;darkred&quot;      &quot;royalblue&quot;    &quot;darkred&quot;      &quot;darkgreen&quot;   
+[3177] &quot;darkred&quot;      &quot;darkred&quot;      &quot;green&quot;        &quot;royalblue&quot;   
+[3181] &quot;darkgreen&quot;    &quot;darkred&quot;      &quot;royalblue&quot;    &quot;midnightblue&quot;
+[3185] &quot;midnightblue&quot; &quot;green&quot;        &quot;darkred&quot;      &quot;royalblue&quot;   
+[3189] &quot;green&quot;        &quot;brown&quot;        &quot;darkgreen&quot;    &quot;darkred&quot;     
+[3193] &quot;midnightblue&quot; &quot;blue&quot;         &quot;darkred&quot;      &quot;green&quot;       
+[3197] &quot;darkgreen&quot;    &quot;green&quot;        &quot;royalblue&quot;    &quot;royalblue&quot;   
+[3201] &quot;darkred&quot;      &quot;green&quot;        &quot;royalblue&quot;    &quot;lightyellow&quot; 
+[3205] &quot;lightyellow&quot;  &quot;darkred&quot;      &quot;grey&quot;         &quot;darkred&quot;     
+[3209] &quot;lightyellow&quot;  &quot;green&quot;        &quot;darkred&quot;      &quot;green&quot;       
+[3213] &quot;midnightblue&quot; &quot;midnightblue&quot; &quot;yellow&quot;       &quot;darkgreen&quot;   
+[3217] &quot;darkred&quot;      &quot;brown&quot;        &quot;darkgreen&quot;    &quot;grey&quot;        
+[3221] &quot;lightyellow&quot;  &quot;darkred&quot;      &quot;darkgreen&quot;    &quot;lightyellow&quot; 
+[3225] &quot;salmon&quot;       &quot;magenta&quot;      &quot;darkred&quot;      &quot;darkgreen&quot;   
+[3229] &quot;darkgreen&quot;    &quot;lightyellow&quot;  &quot;darkgreen&quot;    &quot;brown&quot;       
+[3233] &quot;royalblue&quot;    &quot;lightgreen&quot;   &quot;midnightblue&quot; &quot;grey&quot;        
+[3237] &quot;lightyellow&quot;  &quot;royalblue&quot;    &quot;salmon&quot;       &quot;lightgreen&quot;  
+[3241] &quot;yellow&quot;       &quot;green&quot;        &quot;lightyellow&quot;  &quot;darkgreen&quot;   
+[3245] &quot;lightyellow&quot;  &quot;darkred&quot;      &quot;lightgreen&quot;   &quot;darkgreen&quot;   
+[3249] &quot;lightyellow&quot;  &quot;royalblue&quot;    &quot;darkgreen&quot;    &quot;lightyellow&quot; 
+[3253] &quot;green&quot;        &quot;darkred&quot;      &quot;darkred&quot;      &quot;lightgreen&quot;  
+[3257] &quot;royalblue&quot;    &quot;lightyellow&quot;  &quot;darkred&quot;      &quot;green&quot;       
+[3261] &quot;darkgreen&quot;    &quot;darkgreen&quot;    &quot;yellow&quot;       &quot;darkgreen&quot;   
+[3265] &quot;royalblue&quot;    &quot;darkred&quot;      &quot;green&quot;        &quot;salmon&quot;      
+[3269] &quot;royalblue&quot;    &quot;salmon&quot;       &quot;lightyellow&quot;  &quot;lightgreen&quot;  
+[3273] &quot;green&quot;        &quot;darkred&quot;      &quot;royalblue&quot;    &quot;royalblue&quot;   
+[3277] &quot;royalblue&quot;    &quot;magenta&quot;      &quot;blue&quot;         &quot;lightyellow&quot; 
+[3281] &quot;magenta&quot;      &quot;darkgreen&quot;    &quot;royalblue&quot;    &quot;green&quot;       
+[3285] &quot;royalblue&quot;    &quot;yellow&quot;       &quot;green&quot;        &quot;green&quot;       
+[3289] &quot;midnightblue&quot; &quot;salmon&quot;       &quot;green&quot;        &quot;lightyellow&quot; 
+[3293] &quot;lightyellow&quot;  &quot;green&quot;        &quot;lightgreen&quot;   &quot;royalblue&quot;   
+[3297] &quot;royalblue&quot;    &quot;royalblue&quot;    &quot;darkred&quot;      &quot;darkred&quot;     
+[3301] &quot;darkred&quot;      &quot;salmon&quot;       &quot;darkgreen&quot;    &quot;royalblue&quot;   
+[3305] &quot;green&quot;        &quot;grey&quot;         &quot;royalblue&quot;    &quot;darkgreen&quot;   
+[3309] &quot;royalblue&quot;    &quot;green&quot;        &quot;salmon&quot;       &quot;darkred&quot;     
+[3313] &quot;royalblue&quot;    &quot;midnightblue&quot; &quot;midnightblue&quot; &quot;royalblue&quot;   
+[3317] &quot;salmon&quot;       &quot;darkred&quot;      &quot;magenta&quot;      &quot;royalblue&quot;   
+[3321] &quot;royalblue&quot;    &quot;salmon&quot;       &quot;royalblue&quot;    &quot;magenta&quot;     
+[3325] &quot;darkgreen&quot;    &quot;darkred&quot;      &quot;yellow&quot;       &quot;darkgreen&quot;   
+[3329] &quot;green&quot;        &quot;green&quot;        &quot;lightyellow&quot;  &quot;darkred&quot;     
+[3333] &quot;darkgreen&quot;    &quot;green&quot;        &quot;blue&quot;         &quot;green&quot;       
+[3337] &quot;lightyellow&quot;  &quot;magenta&quot;      &quot;green&quot;        &quot;grey&quot;        
+[3341] &quot;brown&quot;        &quot;royalblue&quot;    &quot;green&quot;        &quot;darkred&quot;     
+[3345] &quot;green&quot;        &quot;darkgreen&quot;    &quot;lightyellow&quot;  &quot;darkred&quot;     
+[3349] &quot;darkred&quot;      &quot;green&quot;        &quot;magenta&quot;      &quot;lightgreen&quot;  
+[3353] &quot;midnightblue&quot; &quot;magenta&quot;      &quot;royalblue&quot;    &quot;darkred&quot;     
+[3357] &quot;lightyellow&quot;  &quot;green&quot;        &quot;midnightblue&quot; &quot;darkred&quot;     
+[3361] &quot;darkred&quot;      &quot;royalblue&quot;    &quot;green&quot;        &quot;magenta&quot;     
+[3365] &quot;midnightblue&quot; &quot;green&quot;        &quot;salmon&quot;       &quot;salmon&quot;      
+[3369] &quot;darkgreen&quot;    &quot;magenta&quot;      &quot;salmon&quot;       &quot;lightgreen&quot;  
+[3373] &quot;darkred&quot;      &quot;salmon&quot;       &quot;darkgreen&quot;    &quot;lightyellow&quot; 
+[3377] &quot;lightyellow&quot;  &quot;yellow&quot;       &quot;midnightblue&quot; &quot;darkred&quot;     
+[3381] &quot;green&quot;        &quot;lightyellow&quot;  &quot;darkgreen&quot;    &quot;royalblue&quot;   
+[3385] &quot;midnightblue&quot; &quot;green&quot;        &quot;lightyellow&quot;  &quot;lightyellow&quot; 
+[3389] &quot;darkred&quot;      &quot;green&quot;        &quot;royalblue&quot;    &quot;darkred&quot;     
+[3393] &quot;green&quot;        &quot;lightgreen&quot;   &quot;lightyellow&quot;  &quot;lightgreen&quot;  
+[3397] &quot;green&quot;        &quot;royalblue&quot;    &quot;green&quot;        &quot;green&quot;       
+[3401] &quot;lightyellow&quot;  &quot;yellow&quot;       &quot;yellow&quot;       &quot;royalblue&quot;   
+[3405] &quot;blue&quot;         &quot;lightyellow&quot;  &quot;lightyellow&quot;  &quot;darkgreen&quot;   
+[3409] &quot;green&quot;        &quot;darkred&quot;      &quot;green&quot;        &quot;royalblue&quot;   
+[3413] &quot;magenta&quot;      &quot;salmon&quot;       &quot;lightyellow&quot;  &quot;darkred&quot;     
+[3417] &quot;lightyellow&quot;  &quot;royalblue&quot;    &quot;darkred&quot;      &quot;darkred&quot;     
+[3421] &quot;green&quot;        &quot;green&quot;        &quot;green&quot;        &quot;lightgreen&quot;  
+[3425] &quot;green&quot;        &quot;darkred&quot;      &quot;magenta&quot;      &quot;salmon&quot;      
+[3429] &quot;darkred&quot;      &quot;green&quot;        &quot;salmon&quot;       &quot;lightyellow&quot; 
+[3433] &quot;magenta&quot;      &quot;salmon&quot;       &quot;yellow&quot;       &quot;darkgreen&quot;   
+[3437] &quot;green&quot;        &quot;lightgreen&quot;   &quot;darkgreen&quot;    &quot;lightyellow&quot; 
+[3441] &quot;darkgreen&quot;    &quot;royalblue&quot;    &quot;green&quot;        &quot;lightgreen&quot;  
+[3445] &quot;midnightblue&quot; &quot;midnightblue&quot; &quot;lightgreen&quot;   &quot;darkgreen&quot;   
+[3449] &quot;royalblue&quot;    &quot;darkred&quot;      &quot;royalblue&quot;    &quot;midnightblue&quot;
+[3453] &quot;grey&quot;         &quot;royalblue&quot;    &quot;darkred&quot;      &quot;darkred&quot;     
+[3457] &quot;magenta&quot;      &quot;lightyellow&quot;  &quot;green&quot;        &quot;lightyellow&quot; 
+[3461] &quot;royalblue&quot;    &quot;royalblue&quot;    &quot;salmon&quot;       &quot;darkgreen&quot;   
+[3465] &quot;green&quot;        &quot;darkred&quot;      &quot;lightgreen&quot;   &quot;darkred&quot;     
+[3469] &quot;darkgreen&quot;    &quot;grey&quot;         &quot;royalblue&quot;    &quot;royalblue&quot;   
+[3473] &quot;lightyellow&quot;  &quot;darkgreen&quot;    &quot;darkred&quot;      &quot;royalblue&quot;   
+[3477] &quot;lightyellow&quot;  &quot;midnightblue&quot; &quot;salmon&quot;       &quot;darkred&quot;     
+[3481] &quot;salmon&quot;       &quot;darkred&quot;      &quot;darkred&quot;      &quot;darkgreen&quot;   
+[3485] &quot;lightyellow&quot;  &quot;royalblue&quot;    &quot;darkgreen&quot;    &quot;lightyellow&quot; 
+[3489] &quot;lightgreen&quot;   &quot;darkgreen&quot;    &quot;yellow&quot;       &quot;magenta&quot;     
+[3493] &quot;green&quot;        &quot;salmon&quot;       &quot;royalblue&quot;    &quot;darkgreen&quot;   
+[3497] &quot;salmon&quot;       &quot;midnightblue&quot; &quot;darkgreen&quot;    &quot;lightyellow&quot; 
+[3501] &quot;darkred&quot;      &quot;darkred&quot;      &quot;darkred&quot;      &quot;green&quot;       
+[3505] &quot;midnightblue&quot; &quot;darkred&quot;      &quot;darkgreen&quot;    &quot;royalblue&quot;   
+[3509] &quot;midnightblue&quot; &quot;green&quot;        &quot;lightyellow&quot;  &quot;magenta&quot;     
+[3513] &quot;darkred&quot;      &quot;darkred&quot;      &quot;grey&quot;         &quot;midnightblue&quot;
+[3517] &quot;lightgreen&quot;   &quot;darkred&quot;      &quot;darkgreen&quot;    &quot;green&quot;       
+[3521] &quot;darkred&quot;      &quot;darkred&quot;      &quot;royalblue&quot;    &quot;lightgreen&quot;  
+[3525] &quot;green&quot;        &quot;darkgreen&quot;    &quot;salmon&quot;       &quot;darkred&quot;     
+[3529] &quot;darkred&quot;      &quot;green&quot;        &quot;darkgreen&quot;    &quot;darkred&quot;     
+[3533] &quot;darkred&quot;      &quot;darkred&quot;      &quot;darkred&quot;      &quot;darkgreen&quot;   
+[3537] &quot;salmon&quot;       &quot;royalblue&quot;    &quot;green&quot;        &quot;grey&quot;        
+[3541] &quot;lightyellow&quot;  &quot;brown&quot;        &quot;darkgreen&quot;    &quot;darkred&quot;     
+[3545] &quot;grey&quot;         &quot;darkgreen&quot;    &quot;royalblue&quot;    &quot;green&quot;       
+[3549] &quot;green&quot;        &quot;salmon&quot;       &quot;royalblue&quot;    &quot;lightgreen&quot;  
+[3553] &quot;royalblue&quot;    &quot;lightyellow&quot;  &quot;darkgreen&quot;    &quot;salmon&quot;      
+[3557] &quot;darkred&quot;      &quot;lightyellow&quot;  &quot;midnightblue&quot; &quot;green&quot;       
+[3561] &quot;royalblue&quot;    &quot;darkgreen&quot;    &quot;royalblue&quot;    &quot;midnightblue&quot;
+[3565] &quot;royalblue&quot;    &quot;midnightblue&quot; &quot;darkred&quot;      &quot;darkred&quot;     
+[3569] &quot;darkred&quot;      &quot;darkgreen&quot;    &quot;darkred&quot;      &quot;royalblue&quot;   
+[3573] &quot;salmon&quot;       &quot;magenta&quot;      &quot;royalblue&quot;    &quot;royalblue&quot;   
+[3577] &quot;darkred&quot;      &quot;darkred&quot;      &quot;darkred&quot;      &quot;salmon&quot;      
+[3581] &quot;green&quot;        &quot;darkred&quot;      &quot;royalblue&quot;    &quot;lightyellow&quot; 
+[3585] &quot;magenta&quot;      &quot;lightgreen&quot;   &quot;lightyellow&quot;  &quot;green&quot;       
+[3589] &quot;darkred&quot;      &quot;darkgreen&quot;    &quot;green&quot;        &quot;royalblue&quot;   
+[3593] &quot;darkgreen&quot;    &quot;darkred&quot;      &quot;darkred&quot;      &quot;lightgreen&quot;  
+[3597] &quot;midnightblue&quot; &quot;salmon&quot;       &quot;darkgreen&quot;    &quot;midnightblue&quot;
+[3601] &quot;royalblue&quot;    &quot;darkgreen&quot;    &quot;lightyellow&quot;  &quot;darkred&quot;     
+[3605] &quot;darkred&quot;      &quot;green&quot;        &quot;royalblue&quot;    &quot;darkred&quot;     
+[3609] &quot;royalblue&quot;    &quot;green&quot;        &quot;blue&quot;         &quot;midnightblue&quot;
+[3613] &quot;salmon&quot;       &quot;green&quot;        &quot;midnightblue&quot; &quot;green&quot;       
+[3617] &quot;darkgreen&quot;    &quot;salmon&quot;       &quot;darkgreen&quot;    &quot;royalblue&quot;   
+[3621] &quot;yellow&quot;       &quot;royalblue&quot;    &quot;darkgreen&quot;    &quot;grey&quot;        
+[3625] &quot;lightyellow&quot;  &quot;darkgreen&quot;    &quot;green&quot;        &quot;brown&quot;       
+[3629] &quot;royalblue&quot;    &quot;salmon&quot;       &quot;royalblue&quot;    &quot;royalblue&quot;   
+[3633] &quot;magenta&quot;      &quot;lightyellow&quot;  &quot;salmon&quot;       &quot;grey&quot;        
+[3637] &quot;darkgreen&quot;    &quot;royalblue&quot;    &quot;darkred&quot;      &quot;royalblue&quot;   
+[3641] &quot;darkred&quot;      &quot;royalblue&quot;    &quot;lightyellow&quot;  &quot;darkred&quot;     
+[3645] &quot;darkgreen&quot;    &quot;darkred&quot;      &quot;darkred&quot;      &quot;darkred&quot;     
+[3649] &quot;lightyellow&quot;  &quot;royalblue&quot;    &quot;darkgreen&quot;    &quot;royalblue&quot;   
+[3653] &quot;royalblue&quot;    &quot;green&quot;        &quot;royalblue&quot;    &quot;darkred&quot;     
+[3657] &quot;green&quot;        &quot;lightyellow&quot;  &quot;green&quot;        &quot;lightyellow&quot; 
+[3661] &quot;lightgreen&quot;   &quot;darkred&quot;      &quot;lightgreen&quot;   &quot;midnightblue&quot;
+[3665] &quot;darkred&quot;      &quot;darkred&quot;      &quot;darkred&quot;      &quot;royalblue&quot;   
+[3669] &quot;yellow&quot;       &quot;lightyellow&quot;  &quot;midnightblue&quot; &quot;royalblue&quot;   
+[3673] &quot;royalblue&quot;    &quot;darkred&quot;      &quot;green&quot;        &quot;royalblue&quot;   
+[3677] &quot;green&quot;        &quot;midnightblue&quot; &quot;brown&quot;        &quot;grey&quot;        
+[3681] &quot;green&quot;        &quot;green&quot;        &quot;green&quot;        &quot;lightyellow&quot; 
+[3685] &quot;salmon&quot;       &quot;lightyellow&quot;  &quot;darkred&quot;      &quot;green&quot;       
+[3689] &quot;royalblue&quot;    &quot;yellow&quot;       &quot;salmon&quot;       &quot;green&quot;       
+[3693] &quot;darkgreen&quot;    &quot;green&quot;        &quot;lightgreen&quot;   &quot;darkred&quot;     
+[3697] &quot;salmon&quot;       &quot;royalblue&quot;    &quot;darkred&quot;      &quot;darkred&quot;     
+[3701] &quot;lightgreen&quot;   &quot;magenta&quot;      &quot;midnightblue&quot; &quot;royalblue&quot;   
+[3705] &quot;darkred&quot;      &quot;green&quot;        &quot;lightyellow&quot;  &quot;yellow&quot;      
+[3709] &quot;darkred&quot;      &quot;salmon&quot;       &quot;royalblue&quot;    &quot;darkred&quot;     
+[3713] &quot;royalblue&quot;    &quot;royalblue&quot;    &quot;lightgreen&quot;   &quot;royalblue&quot;   
+[3717] &quot;royalblue&quot;    &quot;lightgreen&quot;   &quot;royalblue&quot;    &quot;royalblue&quot;   
+[3721] &quot;green&quot;        &quot;royalblue&quot;    &quot;lightgreen&quot;   &quot;darkgreen&quot;   
+[3725] &quot;darkred&quot;      &quot;green&quot;        &quot;green&quot;        &quot;royalblue&quot;   
+[3729] &quot;darkred&quot;      &quot;magenta&quot;      &quot;darkred&quot;      &quot;darkgreen&quot;   
+[3733] &quot;midnightblue&quot; &quot;darkred&quot;      &quot;green&quot;        &quot;midnightblue&quot;
+[3737] &quot;darkred&quot;      &quot;darkred&quot;      &quot;green&quot;        &quot;lightyellow&quot; 
+[3741] &quot;lightgreen&quot;   &quot;green&quot;        &quot;salmon&quot;       &quot;royalblue&quot;   
+[3745] &quot;grey&quot;         &quot;magenta&quot;      &quot;lightgreen&quot;   &quot;royalblue&quot;   
+[3749] &quot;royalblue&quot;    &quot;salmon&quot;       &quot;darkgreen&quot;    &quot;darkred&quot;     
+[3753] &quot;green&quot;        &quot;royalblue&quot;    &quot;darkgreen&quot;    &quot;yellow&quot;      
+[3757] &quot;midnightblue&quot; &quot;royalblue&quot;    &quot;lightgreen&quot;   &quot;salmon&quot;      
+[3761] &quot;salmon&quot;       &quot;salmon&quot;       &quot;darkred&quot;      &quot;darkred&quot;     
+[3765] &quot;salmon&quot;       &quot;midnightblue&quot; &quot;darkred&quot;      &quot;royalblue&quot;   
+[3769] &quot;royalblue&quot;    &quot;lightyellow&quot;  &quot;lightgreen&quot;   &quot;royalblue&quot;   
+[3773] &quot;grey&quot;         &quot;royalblue&quot;    &quot;midnightblue&quot; &quot;green&quot;       
+[3777] &quot;darkgreen&quot;    &quot;magenta&quot;      &quot;green&quot;        &quot;darkgreen&quot;   
+[3781] &quot;darkgreen&quot;    &quot;magenta&quot;      &quot;darkgreen&quot;    &quot;royalblue&quot;   
+[3785] &quot;midnightblue&quot; &quot;lightyellow&quot;  &quot;salmon&quot;       &quot;green&quot;       
+[3789] &quot;lightyellow&quot;  &quot;darkgreen&quot;    &quot;lightyellow&quot;  &quot;grey&quot;        
+[3793] &quot;royalblue&quot;    &quot;magenta&quot;      &quot;darkgreen&quot;    &quot;royalblue&quot;   
+[3797] &quot;darkgreen&quot;    &quot;midnightblue&quot; &quot;lightyellow&quot;  &quot;lightgreen&quot;  
+[3801] &quot;lightgreen&quot;   &quot;darkred&quot;      &quot;lightyellow&quot;  &quot;darkred&quot;     
+[3805] &quot;blue&quot;         &quot;darkred&quot;      &quot;magenta&quot;      &quot;blue&quot;        
+[3809] &quot;midnightblue&quot; &quot;grey&quot;         &quot;lightyellow&quot;  &quot;lightyellow&quot; 
+[3813] &quot;royalblue&quot;    &quot;royalblue&quot;    &quot;grey&quot;         &quot;darkgreen&quot;   
+[3817] &quot;midnightblue&quot; &quot;lightyellow&quot;  &quot;yellow&quot;       &quot;darkgreen&quot;   
+[3821] &quot;darkred&quot;      &quot;yellow&quot;       &quot;lightgreen&quot;   &quot;lightgreen&quot;  
+[3825] &quot;royalblue&quot;    &quot;darkred&quot;      &quot;royalblue&quot;    &quot;lightyellow&quot; 
+[3829] &quot;lightyellow&quot;  &quot;darkred&quot;      &quot;midnightblue&quot; &quot;green&quot;       
+[3833] &quot;lightyellow&quot;  &quot;darkgreen&quot;    &quot;darkgreen&quot;    &quot;royalblue&quot;   
+[3837] &quot;royalblue&quot;    &quot;lightyellow&quot;  &quot;magenta&quot;      &quot;darkred&quot;     
+[3841] &quot;grey&quot;         &quot;darkred&quot;      &quot;lightgreen&quot;   &quot;royalblue&quot;   
+[3845] &quot;magenta&quot;      &quot;lightyellow&quot;  &quot;royalblue&quot;    &quot;blue&quot;        
+[3849] &quot;lightyellow&quot;  &quot;green&quot;        &quot;royalblue&quot;    &quot;darkgreen&quot;   
+[3853] &quot;darkgreen&quot;    &quot;darkred&quot;      &quot;midnightblue&quot; &quot;darkred&quot;     
+[3857] &quot;royalblue&quot;    &quot;darkred&quot;      &quot;darkgreen&quot;    &quot;midnightblue&quot;
+[3861] &quot;darkgreen&quot;    &quot;royalblue&quot;    &quot;royalblue&quot;    &quot;green&quot;       
+[3865] &quot;darkgreen&quot;    &quot;darkgreen&quot;    &quot;darkred&quot;      &quot;darkred&quot;     
+[3869] &quot;royalblue&quot;    &quot;lightyellow&quot;  &quot;royalblue&quot;    &quot;darkred&quot;     
+[3873] &quot;darkred&quot;      &quot;green&quot;        &quot;darkred&quot;      &quot;salmon&quot;      
+[3877] &quot;lightyellow&quot;  &quot;darkred&quot;      &quot;royalblue&quot;    &quot;royalblue&quot;   
+[3881] &quot;royalblue&quot;    &quot;darkred&quot;      &quot;darkgreen&quot;    &quot;lightgreen&quot;  
+[3885] &quot;darkred&quot;      &quot;green&quot;        &quot;darkgreen&quot;    &quot;midnightblue&quot;
+[3889] &quot;grey&quot;         &quot;darkred&quot;      &quot;darkred&quot;      &quot;grey&quot;        
+[3893] &quot;green&quot;        &quot;lightyellow&quot;  &quot;green&quot;        &quot;green&quot;       
+[3897] &quot;green&quot;        &quot;lightgreen&quot;   &quot;lightyellow&quot;  &quot;lightgreen&quot;  
+[3901] &quot;green&quot;        &quot;midnightblue&quot; &quot;midnightblue&quot; &quot;yellow&quot;      
+[3905] &quot;lightyellow&quot;  &quot;midnightblue&quot; &quot;darkred&quot;      &quot;midnightblue&quot;
+[3909] &quot;royalblue&quot;    &quot;darkgreen&quot;    &quot;green&quot;        &quot;lightyellow&quot; 
+[3913] &quot;magenta&quot;      &quot;darkred&quot;      &quot;yellow&quot;       &quot;royalblue&quot;   
+[3917] &quot;lightgreen&quot;   &quot;royalblue&quot;    &quot;lightgreen&quot;   &quot;lightyellow&quot; 
+[3921] &quot;green&quot;        &quot;yellow&quot;       &quot;green&quot;        &quot;darkred&quot;     
+[3925] &quot;darkgreen&quot;    &quot;magenta&quot;      &quot;darkred&quot;      &quot;lightgreen&quot;  
+[3929] &quot;lightgreen&quot;   &quot;darkgreen&quot;    &quot;salmon&quot;       &quot;magenta&quot;     
+[3933] &quot;green&quot;        &quot;royalblue&quot;    &quot;green&quot;        &quot;darkred&quot;     
+[3937] &quot;lightyellow&quot;  &quot;royalblue&quot;    &quot;royalblue&quot;    &quot;brown&quot;       
+[3941] &quot;royalblue&quot;    &quot;green&quot;        &quot;salmon&quot;       &quot;green&quot;       
+[3945] &quot;darkgreen&quot;    &quot;green&quot;        &quot;darkred&quot;      &quot;darkred&quot;     
+[3949] &quot;brown&quot;        &quot;lightyellow&quot;  &quot;salmon&quot;       &quot;darkgreen&quot;   
+[3953] &quot;darkgreen&quot;    &quot;darkgreen&quot;    &quot;green&quot;        &quot;blue&quot;        
+[3957] &quot;darkred&quot;      &quot;yellow&quot;       &quot;royalblue&quot;    &quot;darkgreen&quot;   
+[3961] &quot;lightgreen&quot;   &quot;darkred&quot;      &quot;lightyellow&quot;  &quot;lightyellow&quot; 
+[3965] &quot;green&quot;        &quot;green&quot;        &quot;blue&quot;         &quot;darkgreen&quot;   
+[3969] &quot;royalblue&quot;    &quot;magenta&quot;      &quot;darkgreen&quot;    &quot;royalblue&quot;   
+[3973] &quot;darkred&quot;      &quot;green&quot;        &quot;brown&quot;        &quot;darkred&quot;     
+[3977] &quot;lightgreen&quot;   &quot;royalblue&quot;    &quot;darkgreen&quot;    &quot;lightyellow&quot; 
+[3981] &quot;salmon&quot;       &quot;yellow&quot;       &quot;salmon&quot;       &quot;lightyellow&quot; 
+[3985] &quot;green&quot;        &quot;royalblue&quot;    &quot;lightgreen&quot;   &quot;lightyellow&quot; 
+[3989] &quot;darkred&quot;      &quot;lightyellow&quot;  &quot;salmon&quot;       &quot;darkred&quot;     
+[3993] &quot;darkgreen&quot;    &quot;lightgreen&quot;   &quot;darkred&quot;      &quot;magenta&quot;     
+[3997] &quot;brown&quot;        &quot;lightyellow&quot;  &quot;lightyellow&quot;  &quot;darkred&quot;     
+[4001] &quot;salmon&quot;       &quot;lightgreen&quot;   &quot;royalblue&quot;    &quot;darkgreen&quot;   
+[4005] &quot;royalblue&quot;    &quot;green&quot;        &quot;darkred&quot;      &quot;royalblue&quot;   
+[4009] &quot;lightyellow&quot;  &quot;green&quot;        &quot;lightyellow&quot;  &quot;darkgreen&quot;   
+[4013] &quot;grey&quot;         &quot;lightgreen&quot;   &quot;royalblue&quot;    &quot;royalblue&quot;   
+[4017] &quot;lightgreen&quot;   &quot;royalblue&quot;    &quot;lightyellow&quot;  &quot;green&quot;       
+[4021] &quot;salmon&quot;       &quot;lightyellow&quot;  &quot;salmon&quot;       &quot;lightgreen&quot;  
+[4025] &quot;darkred&quot;      &quot;darkgreen&quot;    &quot;darkred&quot;      &quot;green&quot;       
+[4029] &quot;green&quot;        &quot;yellow&quot;       &quot;midnightblue&quot; &quot;darkred&quot;     
+[4033] &quot;royalblue&quot;    &quot;royalblue&quot;    &quot;grey&quot;         &quot;darkred&quot;     
+[4037] &quot;midnightblue&quot; &quot;midnightblue&quot; &quot;green&quot;        &quot;darkred&quot;     
+[4041] &quot;royalblue&quot;    &quot;lightyellow&quot;  &quot;lightgreen&quot;   &quot;yellow&quot;      
+[4045] &quot;green&quot;        &quot;royalblue&quot;    &quot;magenta&quot;      &quot;royalblue&quot;   
+[4049] &quot;lightyellow&quot;  &quot;darkred&quot;      &quot;green&quot;        &quot;darkred&quot;     
+[4053] &quot;salmon&quot;       &quot;salmon&quot;       &quot;lightgreen&quot;   &quot;lightgreen&quot;  
+[4057] &quot;lightyellow&quot;  &quot;darkred&quot;      &quot;salmon&quot;       &quot;lightyellow&quot; 
+[4061] &quot;salmon&quot;       &quot;darkred&quot;      &quot;midnightblue&quot; &quot;royalblue&quot;   
+[4065] &quot;lightyellow&quot;  &quot;darkgreen&quot;    &quot;royalblue&quot;    &quot;darkred&quot;     
+[4069] &quot;darkred&quot;      &quot;darkgreen&quot;    &quot;royalblue&quot;    &quot;midnightblue&quot;
+[4073] &quot;green&quot;        &quot;salmon&quot;       &quot;green&quot;        &quot;blue&quot;        
+[4077] &quot;midnightblue&quot; &quot;darkred&quot;      &quot;royalblue&quot;    &quot;green&quot;       
+[4081] &quot;grey&quot;         &quot;royalblue&quot;    &quot;grey&quot;         &quot;royalblue&quot;   
+[4085] &quot;royalblue&quot;    &quot;green&quot;        &quot;darkgreen&quot;    &quot;darkred&quot;     
+[4089] &quot;green&quot;        &quot;royalblue&quot;    &quot;royalblue&quot;    &quot;lightyellow&quot; 
+[4093] &quot;darkgreen&quot;    &quot;green&quot;        &quot;darkgreen&quot;    &quot;darkred&quot;     
+[4097] &quot;green&quot;        &quot;darkgreen&quot;    &quot;darkgreen&quot;    &quot;salmon&quot;      
+[4101] &quot;darkgreen&quot;    &quot;green&quot;        &quot;darkred&quot;      &quot;green&quot;       
+[4105] &quot;royalblue&quot;    &quot;green&quot;        &quot;green&quot;        &quot;green&quot;       
+[4109] &quot;green&quot;        &quot;midnightblue&quot; &quot;darkred&quot;      &quot;green&quot;       
+[4113] &quot;darkred&quot;      &quot;darkred&quot;      &quot;lightgreen&quot;   &quot;grey&quot;        
+[4117] &quot;green&quot;        &quot;green&quot;        &quot;royalblue&quot;    &quot;royalblue&quot;   
+[4121] &quot;royalblue&quot;    &quot;darkgreen&quot;    &quot;darkgreen&quot;    &quot;royalblue&quot;   
+[4125] &quot;darkred&quot;      &quot;darkred&quot;      &quot;salmon&quot;       &quot;darkred&quot;     
+[4129] &quot;darkred&quot;      &quot;royalblue&quot;    &quot;darkred&quot;      &quot;midnightblue&quot;
+[4133] &quot;blue&quot;         &quot;royalblue&quot;    &quot;yellow&quot;       &quot;darkgreen&quot;   
+[4137] &quot;green&quot;        &quot;darkred&quot;      &quot;darkred&quot;      &quot;lightyellow&quot; 
+[4141] &quot;lightyellow&quot;  &quot;darkred&quot;      &quot;midnightblue&quot; &quot;lightyellow&quot; 
+[4145] &quot;darkgreen&quot;    &quot;darkred&quot;      &quot;salmon&quot;       &quot;royalblue&quot;   
+[4149] &quot;royalblue&quot;    &quot;royalblue&quot;    &quot;lightyellow&quot;  &quot;royalblue&quot;   
+[4153] &quot;darkred&quot;      &quot;green&quot;        &quot;darkgreen&quot;   </code></pre>
+<pre class="r"><code>New_RNA_PRO_DF_5$Is_Afib &lt;- ifelse(New_RNA_PRO_DF_5$hgnc_symbol %in% Afib_genes, 1, 0)
+New_RNA_PRO_DF_5$Is_HF &lt;- ifelse(New_RNA_PRO_DF_5$hgnc_symbol %in% HF_genes, 1, 0)
+
+
+# Get all unique module names
+unique_modules &lt;- unique(New_RNA_PRO_DF_5$Modules)
+
+# Loop through each unique module name and create a new column
+for (module in unique_modules) {
+  # Create a new column indicating membership (1 if row belongs to module, 0 otherwise)
+  New_RNA_PRO_DF_5[[paste0(&quot;Is_&quot;, module)]] &lt;- ifelse(New_RNA_PRO_DF_5$Modules == module, 1, 0)
+}
+
+# View the resulting dataframe
+New_RNA_PRO_DF_5 %&gt;% head()</code></pre>
+<pre><code>     Protein X    kTotal    kWithin      kOut      kDiff       logFC  AveExpr
+1 A0A0B4J2A2 1 43.798603 28.7929238 15.005679  13.787244  0.02740191 18.36074
+2     A0AVT1 4 57.970567 40.8513214 17.119246  23.732076  0.28958132 13.44419
+3     A0FGR8 5 47.366817 39.6293431  7.737474  31.891869  0.09891217 20.14964
+4     A0JLT2 6  8.837194  7.1061501  1.731044   5.375106  0.14029123 17.75159
+5     A0PJW6 7 44.393777  6.7803316 37.613445 -30.833113 -0.04745381 19.76917
+6     A1A4S6 8 13.065028  0.9373691 12.127659 -11.190290  0.14066972 16.85673
+           t   P.Value adj.P.Val         B threshold_P    Modules DE_or_Not
+1  0.1652536 0.8740733 0.8740733 -6.909831       FALSE    darkred     FALSE
+2  1.1568528 0.2903888 0.2903888 -6.228915       FALSE    darkred     FALSE
+3  1.1875531 0.2786322 0.2786322 -6.195353       FALSE  royalblue     FALSE
+4  0.6135087 0.5616554 0.5616554 -6.715102       FALSE  royalblue     FALSE
+5 -0.3727514 0.7219144 0.7219144 -6.846368       FALSE lightgreen     FALSE
+6  1.3533815 0.2233311 0.2233311 -6.003703       FALSE lightgreen     FALSE
+     Norm_kIN    Norm_kOut     logFC.y AveExpr.y        t.y P.Value.y
+1 0.036081358 0.0044395501  0.02740191  18.36074  0.1652536 0.8740733
+2 0.051192132 0.0050648656  0.28958132  13.44419  1.1568528 0.2903888
+3 0.055425655 0.0022343269  0.09891217  20.14964  1.1875531 0.2786322
+4 0.009938672 0.0004998683  0.14029123  17.75159  0.6135087 0.5616554
+5 0.025879128 0.0096050677 -0.04745381  19.76917 -0.3727514 0.7219144
+6 0.003577745 0.0030969507  0.14066972  16.85673  1.3533815 0.2233311
+  adj.P.Val.y       B.y threshold_P.y  Modules.y DE_or_Not.y Is_DA
+1   0.8740733 -6.909831         FALSE    darkred       FALSE     0
+2   0.2903888 -6.228915         FALSE    darkred       FALSE     0
+3   0.2786322 -6.195353         FALSE  royalblue       FALSE     0
+4   0.5616554 -6.715102         FALSE  royalblue       FALSE     0
+5   0.7219144 -6.846368         FALSE lightgreen       FALSE     0
+6   0.2233311 -6.003703         FALSE lightgreen       FALSE     0
+  Is_DOXcorrelated Is_Hub Is_Cis_pQTL Is_Trans_pQTL Is_pQTL pLI_assigned
+1                0      0           0             0       0            0
+2                0      0           0             0       0            1
+3                0      0           1             1       1            1
+4                0      0           0             0       0            1
+5                0      0           0             0       0            1
+6                0      0           0             0       0            1
+  pLI_Mut.Intolerant pLI_Mut.Tolerant Is_Druggable Is_CVD_protein
+1                  0                0            0              0
+2                  0                1            0              0
+3                  0                1            0              0
+4                  0                0            0              0
+5                  0                1            0              0
+6                  0                1            0              1
+  Is_CVD_PPI_protein hgnc_symbol  RNA_LogFC     RNA_Pval   Pro_LogFC  Pro_Pval
+1                  0     PPIAL4C  0.8434727 1.713779e-03  0.02740191 0.8740733
+2                  0        UBA6  0.0741531 7.259133e-01  0.28958132 0.2903888
+3                  0       ESYT2  1.3269198 1.313129e-09  0.09891217 0.2786322
+4                  0       MED19  0.3759240 4.391037e-03  0.14029123 0.5616554
+5                  0     TMEM223 -1.4889825 5.703893e-04 -0.04745381 0.7219144
+6                  0    ARHGAP10  0.8139165 9.576317e-05  0.14066972 0.2233311
+  sign_match Is_Afib Is_HF Is_darkred Is_royalblue Is_lightgreen Is_lightyellow
+1       TRUE       0     0          1            0             0              0
+2       TRUE       0     0          1            0             0              0
+3       TRUE       0     0          0            1             0              0
+4       TRUE       0     0          0            1             0              0
+5       TRUE       0     0          0            0             1              0
+6       TRUE       1     0          0            0             1              0
+  Is_magenta Is_grey Is_salmon Is_green Is_darkgreen Is_midnightblue Is_blue
+1          0       0         0        0            0               0       0
+2          0       0         0        0            0               0       0
+3          0       0         0        0            0               0       0
+4          0       0         0        0            0               0       0
+5          0       0         0        0            0               0       0
+6          0       0         0        0            0               0       0
+  Is_brown Is_yellow
+1        0         0
+2        0         0
+3        0         0
+4        0         0
+5        0         0
+6        0         0</code></pre>
+<pre class="r"><code># The afib tests 
+Afib_green &lt;- perform_fisher_test_FP(vec1 = New_RNA_PRO_DF_5$Is_green, vec2 =New_RNA_PRO_DF_5$Is_Afib, vec1_name = &quot;&quot;, vec2_name = &quot;&quot;,  plot = FALSE)
+
+Afib_darkgreen &lt;- perform_fisher_test_FP(vec1 = New_RNA_PRO_DF_5$Is_darkgreen, vec2 =New_RNA_PRO_DF_5$Is_Afib, vec1_name = &quot;&quot;, vec2_name = &quot;&quot;,  plot = FALSE)
+
+Afib_midnightblue &lt;- perform_fisher_test_FP(vec1 = New_RNA_PRO_DF_5$Is_midnightblue, vec2 =New_RNA_PRO_DF_5$Is_Afib, vec1_name = &quot;&quot;, vec2_name = &quot;&quot;,  plot = FALSE)
+
+Afib_salmon &lt;- perform_fisher_test_FP(vec1 = New_RNA_PRO_DF_5$Is_salmon, vec2 =New_RNA_PRO_DF_5$Is_Afib, vec1_name = &quot;&quot;, vec2_name = &quot;&quot;,  plot = FALSE)
+
+Afib_lightyellow &lt;- perform_fisher_test_FP(vec1 = New_RNA_PRO_DF_5$Is_lightyellow, vec2 =New_RNA_PRO_DF_5$Is_Afib, vec1_name = &quot;&quot;, vec2_name = &quot;&quot;,  plot = FALSE)
+
+Afib_lightgreen &lt;- perform_fisher_test_FP(vec1 = New_RNA_PRO_DF_5$Is_lightgreen, vec2 =New_RNA_PRO_DF_5$Is_Afib, vec1_name = &quot;&quot;, vec2_name = &quot;&quot;,  plot = FALSE)
+
+Afib_blue &lt;- perform_fisher_test_FP(vec1 = New_RNA_PRO_DF_5$Is_blue, vec2 =New_RNA_PRO_DF_5$Is_Afib, vec1_name = &quot;&quot;, vec2_name = &quot;&quot;,  plot = FALSE)
+
+Afib_magenta &lt;- perform_fisher_test_FP(vec1 = New_RNA_PRO_DF_5$Is_magenta, vec2 =New_RNA_PRO_DF_5$Is_Afib, vec1_name = &quot;&quot;, vec2_name = &quot;&quot;,  plot = FALSE)
+
+Afib_brown &lt;- perform_fisher_test_FP(vec1 = New_RNA_PRO_DF_5$Is_brown, vec2 =New_RNA_PRO_DF_5$Is_Afib, vec1_name = &quot;&quot;, vec2_name = &quot;&quot;,  plot = FALSE)
+
+Afib_darkred &lt;- perform_fisher_test_FP(vec1 = New_RNA_PRO_DF_5$Is_darkred, vec2 =New_RNA_PRO_DF_5$Is_Afib, vec1_name = &quot;&quot;, vec2_name = &quot;&quot;,  plot = FALSE)
+
+Afib_yellow &lt;- perform_fisher_test_FP(vec1 = New_RNA_PRO_DF_5$Is_yellow, vec2 =New_RNA_PRO_DF_5$Is_Afib, vec1_name = &quot;&quot;, vec2_name = &quot;&quot;,  plot = FALSE)
+
+Afib_royalblue &lt;- perform_fisher_test_FP(vec1 = New_RNA_PRO_DF_5$Is_royalblue, vec2 =New_RNA_PRO_DF_5$Is_Afib, vec1_name = &quot;&quot;, vec2_name = &quot;&quot;,  plot = FALSE)
+
+Afib_grey &lt;- perform_fisher_test_FP(vec1 = New_RNA_PRO_DF_5$Is_grey, vec2 =New_RNA_PRO_DF_5$Is_Afib, vec1_name = &quot;&quot;, vec2_name = &quot;&quot;,  plot = FALSE)
+Afib_green</code></pre>
+<pre><code>$ContingencyTable
+          vec2_label
+vec1_label  Not   Is
+       Not 3532   54
+       Is   553   16
+
+$PValue
+[1] 0.03368627
+
+$Odds_ratio
+odds ratio 
+  1.891988 
+
+$Confidence_Interval
+[1] 1.003351 3.384489
+attr(,&quot;conf.level&quot;)
+[1] 0.95</code></pre>
+<pre class="r"><code>Afib_darkgreen</code></pre>
+<pre><code>$ContingencyTable
+          vec2_label
+vec1_label  Not   Is
+       Not 3538   67
+       Is   547    3
+
+$PValue
+[1] 0.02033671
+
+$Odds_ratio
+odds ratio 
+ 0.2896672 
+
+$Confidence_Interval
+[1] 0.05807482 0.88869008
+attr(,&quot;conf.level&quot;)
+[1] 0.95</code></pre>
+<pre class="r"><code>Afib_midnightblue</code></pre>
+<pre><code>$ContingencyTable
+          vec2_label
+vec1_label  Not   Is
+       Not 3864   66
+       Is   221    4
+
+$PValue
+[1] 0.7903522
+
+$Odds_ratio
+odds ratio 
+  1.059657 
+
+$Confidence_Interval
+[1] 0.2779243 2.8829652
+attr(,&quot;conf.level&quot;)
+[1] 0.95</code></pre>
+<pre class="r"><code>Afib_salmon</code></pre>
+<pre><code>$ContingencyTable
+          vec2_label
+vec1_label  Not   Is
+       Not 3882   68
+       Is   203    2
+
+$PValue
+[1] 0.5824615
+
+$Odds_ratio
+odds ratio 
+ 0.5624916 
+
+$Confidence_Interval
+[1] 0.06630406 2.13863841
+attr(,&quot;conf.level&quot;)
+[1] 0.95</code></pre>
+<pre class="r"><code>Afib_lightyellow</code></pre>
+<pre><code>$ContingencyTable
+          vec2_label
+vec1_label  Not   Is
+       Not 3606   64
+       Is   479    6
+
+$PValue
+[1] 0.5718646
+
+$Odds_ratio
+odds ratio 
+ 0.7058196 
+
+$Confidence_Interval
+[1] 0.2483911 1.6346897
+attr(,&quot;conf.level&quot;)
+[1] 0.95</code></pre>
+<pre class="r"><code>Afib_lightgreen</code></pre>
+<pre><code>$ContingencyTable
+          vec2_label
+vec1_label  Not   Is
+       Not 3822   66
+       Is   263    4
+
+$PValue
+[1] 1
+
+$Odds_ratio
+odds ratio 
+ 0.8807673 
+
+$Confidence_Interval
+[1] 0.2313271 2.3915232
+attr(,&quot;conf.level&quot;)
+[1] 0.95</code></pre>
+<pre class="r"><code>Afib_blue</code></pre>
+<pre><code>$ContingencyTable
+          vec2_label
+vec1_label  Not   Is
+       Not 4042   69
+       Is    43    1
+
+$PValue
+[1] 0.5283509
+
+$Odds_ratio
+odds ratio 
+  1.362199 
+
+$Confidence_Interval
+[1] 0.03324103 8.26054476
+attr(,&quot;conf.level&quot;)
+[1] 0.95</code></pre>
+<pre class="r"><code>Afib_magenta</code></pre>
+<pre><code>$ContingencyTable
+          vec2_label
+vec1_label  Not   Is
+       Not 3961   67
+       Is   124    3
+
+$PValue
+[1] 0.4736125
+
+$Odds_ratio
+odds ratio 
+  1.430142 
+
+$Confidence_Interval
+[1] 0.2837917 4.4615596
+attr(,&quot;conf.level&quot;)
+[1] 0.95</code></pre>
+<pre class="r"><code>Afib_brown</code></pre>
+<pre><code>$ContingencyTable
+          vec2_label
+vec1_label  Not   Is
+       Not 4039   69
+       Is    46    1
+
+$PValue
+[1] 0.5520416
+
+$Odds_ratio
+odds ratio 
+  1.272442 
+
+$Confidence_Interval
+[1] 0.0310956 7.6895099
+attr(,&quot;conf.level&quot;)
+[1] 0.95</code></pre>
+<pre class="r"><code>Afib_darkred</code></pre>
+<pre><code>$ContingencyTable
+          vec2_label
+vec1_label  Not   Is
+       Not 3316   55
+       Is   769   15
+
+$PValue
+[1] 0.540617
+
+$Odds_ratio
+odds ratio 
+  1.175936 
+
+$Confidence_Interval
+[1] 0.6136034 2.1248268
+attr(,&quot;conf.level&quot;)
+[1] 0.95</code></pre>
+<pre class="r"><code>Afib_yellow</code></pre>
+<pre><code>$ContingencyTable
+          vec2_label
+vec1_label  Not   Is
+       Not 4031   67
+       Is    54    3
+
+$PValue
+[1] 0.07029406
+
+$Odds_ratio
+odds ratio 
+  3.340671 
+
+$Confidence_Interval
+[1]  0.6519133 10.7176943
+attr(,&quot;conf.level&quot;)
+[1] 0.95</code></pre>
+<pre class="r"><code>Afib_royalblue</code></pre>
+<pre><code>$ContingencyTable
+          vec2_label
+vec1_label  Not   Is
+       Not 3401   59
+       Is   684   11
+
+$PValue
+[1] 1
+
+$Odds_ratio
+odds ratio 
+  0.927015 
+
+$Confidence_Interval
+[1] 0.4367719 1.7934339
+attr(,&quot;conf.level&quot;)
+[1] 0.95</code></pre>
+<pre class="r"><code>Afib_grey</code></pre>
+<pre><code>$ContingencyTable
+          vec2_label
+vec1_label  Not   Is
+       Not 3986   69
+       Is    99    1
+
+$PValue
+[1] 1
+
+$Odds_ratio
+odds ratio 
+ 0.5835727 
+
+$Confidence_Interval
+[1] 0.01442382 3.43794961
+attr(,&quot;conf.level&quot;)
+[1] 0.95</code></pre>
+<pre class="r"><code># The HF tests 
+HF_green &lt;- perform_fisher_test_FP(vec1 = New_RNA_PRO_DF_5$Is_green, vec2 =New_RNA_PRO_DF_5$Is_HF, vec1_name = &quot;&quot;, vec2_name = &quot;&quot;,  plot = FALSE)
+
+HF_darkgreen &lt;- perform_fisher_test_FP(vec1 = New_RNA_PRO_DF_5$Is_darkgreen, vec2 =New_RNA_PRO_DF_5$Is_HF, vec1_name = &quot;&quot;, vec2_name = &quot;&quot;,  plot = FALSE)
+
+HF_midnightblue &lt;- perform_fisher_test_FP(vec1 = New_RNA_PRO_DF_5$Is_midnightblue, vec2 =New_RNA_PRO_DF_5$Is_HF, vec1_name = &quot;&quot;, vec2_name = &quot;&quot;,  plot = FALSE)
+
+HF_salmon &lt;- perform_fisher_test_FP(vec1 = New_RNA_PRO_DF_5$Is_salmon, vec2 =New_RNA_PRO_DF_5$Is_HF, vec1_name = &quot;&quot;, vec2_name = &quot;&quot;,  plot = FALSE)
+
+HF_lightyellow &lt;- perform_fisher_test_FP(vec1 = New_RNA_PRO_DF_5$Is_lightyellow, vec2 =New_RNA_PRO_DF_5$Is_HF, vec1_name = &quot;&quot;, vec2_name = &quot;&quot;,  plot = FALSE)
+
+HF_lightgreen &lt;- perform_fisher_test_FP(vec1 = New_RNA_PRO_DF_5$Is_lightgreen, vec2 =New_RNA_PRO_DF_5$Is_HF, vec1_name = &quot;&quot;, vec2_name = &quot;&quot;,  plot = FALSE)
+
+HF_blue &lt;- perform_fisher_test_FP(vec1 = New_RNA_PRO_DF_5$Is_blue, vec2 =New_RNA_PRO_DF_5$Is_HF, vec1_name = &quot;&quot;, vec2_name = &quot;&quot;,  plot = FALSE)
+
+HF_magenta &lt;- perform_fisher_test_FP(vec1 = New_RNA_PRO_DF_5$Is_magenta, vec2 =New_RNA_PRO_DF_5$Is_HF, vec1_name = &quot;&quot;, vec2_name = &quot;&quot;,  plot = FALSE)
+
+HF_brown &lt;- perform_fisher_test_FP(vec1 = New_RNA_PRO_DF_5$Is_brown, vec2 =New_RNA_PRO_DF_5$Is_HF, vec1_name = &quot;&quot;, vec2_name = &quot;&quot;,  plot = FALSE)
+
+HF_darkred &lt;- perform_fisher_test_FP(vec1 = New_RNA_PRO_DF_5$Is_darkred, vec2 =New_RNA_PRO_DF_5$Is_HF, vec1_name = &quot;&quot;, vec2_name = &quot;&quot;,  plot = FALSE)
+
+HF_yellow &lt;- perform_fisher_test_FP(vec1 = New_RNA_PRO_DF_5$Is_yellow, vec2 =New_RNA_PRO_DF_5$Is_HF, vec1_name = &quot;&quot;, vec2_name = &quot;&quot;,  plot = FALSE)
+
+HF_royalblue &lt;- perform_fisher_test_FP(vec1 = New_RNA_PRO_DF_5$Is_royalblue, vec2 =New_RNA_PRO_DF_5$Is_HF, vec1_name = &quot;&quot;, vec2_name = &quot;&quot;,  plot = FALSE)
+
+HF_grey &lt;- perform_fisher_test_FP(vec1 = New_RNA_PRO_DF_5$Is_grey, vec2 =New_RNA_PRO_DF_5$Is_HF, vec1_name = &quot;&quot;, vec2_name = &quot;&quot;,  plot = FALSE)
+HF_green</code></pre>
+<pre><code>$ContingencyTable
+          vec2_label
+vec1_label  Not   Is
+       Not 3569   17
+       Is   566    3
+
+$PValue
+[1] 0.7481688
+
+$Odds_ratio
+odds ratio 
+  1.112696 
+
+$Confidence_Interval
+[1] 0.2082632 3.8649426
+attr(,&quot;conf.level&quot;)
+[1] 0.95</code></pre>
+<pre class="r"><code>HF_darkgreen</code></pre>
+<pre><code>$ContingencyTable
+          vec2_label
+vec1_label  Not   Is
+       Not 3585   20
+       Is   550    0
+
+$PValue
+[1] 0.09760628
+
+$Odds_ratio
+odds ratio 
+         0 
+
+$Confidence_Interval
+[1] 0.000000 1.325074
+attr(,&quot;conf.level&quot;)
+[1] 0.95</code></pre>
+<pre class="r"><code>HF_midnightblue</code></pre>
+<pre><code>$ContingencyTable
+          vec2_label
+vec1_label  Not   Is
+       Not 3910   20
+       Is   225    0
+
+$PValue
+[1] 0.6231101
+
+$Odds_ratio
+odds ratio 
+         0 
+
+$Confidence_Interval
+[1] 0.000000 3.547529
+attr(,&quot;conf.level&quot;)
+[1] 0.95</code></pre>
+<pre class="r"><code>HF_salmon</code></pre>
+<pre><code>$ContingencyTable
+          vec2_label
+vec1_label  Not   Is
+       Not 3931   19
+       Is   204    1
+
+$PValue
+[1] 1
+
+$Odds_ratio
+odds ratio 
+  1.014188 
+
+$Confidence_Interval
+[1] 0.02429106 6.44320538
+attr(,&quot;conf.level&quot;)
+[1] 0.95</code></pre>
+<pre class="r"><code>HF_lightyellow</code></pre>
+<pre><code>$ContingencyTable
+          vec2_label
+vec1_label  Not   Is
+       Not 3652   18
+       Is   483    2
+
+$PValue
+[1] 1
+
+$Odds_ratio
+odds ratio 
+ 0.8401811 
+
+$Confidence_Interval
+[1] 0.09425495 3.52653007
+attr(,&quot;conf.level&quot;)
+[1] 0.95</code></pre>
+<pre class="r"><code>HF_lightgreen</code></pre>
+<pre><code>$ContingencyTable
+          vec2_label
+vec1_label  Not   Is
+       Not 3869   19
+       Is   266    1
+
+$PValue
+[1] 1
+
+$Odds_ratio
+odds ratio 
+ 0.7655659 
+
+$Confidence_Interval
+[1] 0.01835602 4.85308510
+attr(,&quot;conf.level&quot;)
+[1] 0.95</code></pre>
+<pre class="r"><code>HF_blue</code></pre>
+<pre><code>$ContingencyTable
+          vec2_label
+vec1_label  Not   Is
+       Not 4091   20
+       Is    44    0
+
+$PValue
+[1] 1
+
+$Odds_ratio
+odds ratio 
+         0 
+
+$Confidence_Interval
+[1]  0.00000 19.55207
+attr(,&quot;conf.level&quot;)
+[1] 0.95</code></pre>
+<pre class="r"><code>HF_magenta</code></pre>
+<pre><code>$ContingencyTable
+          vec2_label
+vec1_label  Not   Is
+       Not 4008   20
+       Is   127    0
+
+$PValue
+[1] 1
+
+$Odds_ratio
+odds ratio 
+         0 
+
+$Confidence_Interval
+[1] 0.000000 6.476755
+attr(,&quot;conf.level&quot;)
+[1] 0.95</code></pre>
+<pre class="r"><code>HF_brown</code></pre>
+<pre><code>$ContingencyTable
+          vec2_label
+vec1_label  Not   Is
+       Not 4088   20
+       Is    47    0
+
+$PValue
+[1] 1
+
+$Odds_ratio
+odds ratio 
+         0 
+
+$Confidence_Interval
+[1]  0.000 18.247
+attr(,&quot;conf.level&quot;)
+[1] 0.95</code></pre>
+<pre class="r"><code>HF_darkred</code></pre>
+<pre><code>$ContingencyTable
+          vec2_label
+vec1_label  Not   Is
+       Not 3355   16
+       Is   780    4
+
+$PValue
+[1] 0.7807153
+
+$Odds_ratio
+odds ratio 
+  1.075315 
+
+$Confidence_Interval
+[1] 0.2608724 3.3460228
+attr(,&quot;conf.level&quot;)
+[1] 0.95</code></pre>
+<pre class="r"><code>HF_yellow</code></pre>
+<pre><code>$ContingencyTable
+          vec2_label
+vec1_label  Not   Is
+       Not 4080   18
+       Is    55    2
+
+$PValue
+[1] 0.02999269
+
+$Odds_ratio
+odds ratio 
+  8.229727 
+
+$Confidence_Interval
+[1]  0.9047042 35.7812549
+attr(,&quot;conf.level&quot;)
+[1] 0.95</code></pre>
+<pre class="r"><code>HF_royalblue</code></pre>
+<pre><code>$ContingencyTable
+          vec2_label
+vec1_label  Not   Is
+       Not 3447   13
+       Is   688    7
+
+$PValue
+[1] 0.06289357
+
+$Odds_ratio
+odds ratio 
+  2.696894 
+
+$Confidence_Interval
+[1] 0.9076311 7.3045556
+attr(,&quot;conf.level&quot;)
+[1] 0.95</code></pre>
+<pre class="r"><code>HF_grey</code></pre>
+<pre><code>$ContingencyTable
+          vec2_label
+vec1_label  Not   Is
+       Not 4035   20
+       Is   100    0
+
+$PValue
+[1] 1
+
+$Odds_ratio
+odds ratio 
+         0 
+
+$Confidence_Interval
+[1] 0.000000 8.308859
+attr(,&quot;conf.level&quot;)
+[1] 0.95</code></pre>
+<pre class="r"><code># Afib workflow for forest plot 
+
+FP_List &lt;- list(Afib_green,
+Afib_darkgreen,
+Afib_midnightblue,
+Afib_salmon,
+Afib_lightyellow,
+Afib_lightgreen,
+Afib_blue,
+Afib_magenta,
+Afib_darkred,
+Afib_brown,
+Afib_yellow,
+Afib_royalblue,
+Afib_grey)
+
+FP_DF &lt;- data.frame(
+  Odds_ratio = numeric(length(FP_List)),
+  Lower_CI = numeric(length(FP_List)),
+  Upper_CI = numeric(length(FP_List)), 
+  Pval = numeric(length(FP_List))
+)
+
+for (i in 1:length(FP_List)) {
+  FP_DF$Odds_ratio[i] &lt;- FP_List[[i]]$Odds_ratio
+  FP_DF$Lower_CI[i] &lt;- FP_List[[i]]$Confidence_Interval[1]
+  FP_DF$Upper_CI[i] &lt;- FP_List[[i]]$Confidence_Interval[2]
+  FP_DF$Pval[i] &lt;- FP_List[[i]]$PValue
+}
+
+# Add row names for the labels in the forest plot
+FP_DF$Label &lt;- c(&quot;Afib_green&quot;,
+&quot;Afib_darkgreen&quot;,
+&quot;Afib_midnightblue&quot;,
+&quot;Afib_salmon&quot;,
+&quot;Afib_lightyellow&quot;,
+&quot;Afib_lightgreen&quot;,
+&quot;Afib_blue&quot;,
+&quot;Afib_magenta&quot;,
+&quot;Afib_darkred&quot;,
+&quot;Afib_brown&quot;,
+&quot;Afib_yellow&quot;,
+&quot;Afib_royalblue&quot;,
+&quot;Afib_grey&quot;)
+
+
+FP_DF$Label &lt;- factor(FP_DF$Label, levels = rev(c(c(&quot;Afib_green&quot;,
+&quot;Afib_darkgreen&quot;,
+&quot;Afib_midnightblue&quot;,
+&quot;Afib_salmon&quot;,
+&quot;Afib_lightyellow&quot;,
+&quot;Afib_lightgreen&quot;,
+&quot;Afib_blue&quot;,
+&quot;Afib_magenta&quot;,
+&quot;Afib_darkred&quot;,
+&quot;Afib_brown&quot;,
+&quot;Afib_yellow&quot;,
+&quot;Afib_royalblue&quot;,
+&quot;Afib_grey&quot;))))
+
+
+# Add a new column 
+FP_DF$Type &lt;- c(&quot;green&quot;, &quot;darkgreen&quot;, &quot;midnightblue&quot;, &quot;salmon&quot;,&quot;lightyellow&quot;,&quot;lightgreen&quot;,&quot;blue&quot;,&quot;magenta&quot;,&quot;darkred&quot;,&quot;brown&quot;, &quot;yellow&quot;, &quot;royalblue&quot;, &quot;grey&quot; )
+
+FP_DF$Type</code></pre>
+<pre><code> [1] &quot;green&quot;        &quot;darkgreen&quot;    &quot;midnightblue&quot; &quot;salmon&quot;       &quot;lightyellow&quot; 
+ [6] &quot;lightgreen&quot;   &quot;blue&quot;         &quot;magenta&quot;      &quot;darkred&quot;      &quot;brown&quot;       
+[11] &quot;yellow&quot;       &quot;royalblue&quot;    &quot;grey&quot;        </code></pre>
+<pre class="r"><code>ggplot(FP_DF, aes(x = Label, y = Odds_ratio, fill = Type)) +
+  geom_pointrange(aes(ymin = Lower_CI, ymax = Upper_CI), position = position_dodge(width = 0.5)) +  # Add error bars with color
+  geom_point(aes(fill = Type), size = 3, shape = 21, position = position_dodge(width = 0.5)) +  # Add filled points
+  geom_hline(yintercept = 1, linetype = &quot;dashed&quot;, color = &quot;black&quot;) +
+  coord_flip() +
+  labs(
+    title = &quot;Odds of being afib risk protein&quot;,
+    x = &quot;&quot;,
+    y = &quot;Odds Ratio (95% CI)&quot;
+  ) +
+  theme_classic() +
+  scale_fill_identity()</code></pre>
+<p><img src="figure/DOX_prot_Fig5_AFHF.Rmd/unnamed-chunk-2-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>ggplot(FP_DF, aes(x = Label, y = Odds_ratio, color = Type)) +
+  geom_pointrange(aes(ymin = Lower_CI, ymax = Upper_CI), position = position_dodge(width = 0.5)) +  # Add error bars with color
+  geom_point(aes(fill = Type), size = 3, shape = 21, position = position_dodge(width = 0.5)) +  # Add filled points
+  geom_hline(yintercept = 1, linetype = &quot;dashed&quot;, color = &quot;red&quot;) +
+  coord_flip() +
+  labs(
+    title = &quot;Odds of being afib risk protein&quot;,
+    x = &quot;&quot;,
+    y = &quot;Odds Ratio (95% CI)&quot;
+  ) +
+  theme_classic() </code></pre>
+<p><img src="figure/DOX_prot_Fig5_AFHF.Rmd/unnamed-chunk-2-2.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>HF_green</code></pre>
+<pre><code>$ContingencyTable
+          vec2_label
+vec1_label  Not   Is
+       Not 3569   17
+       Is   566    3
+
+$PValue
+[1] 0.7481688
+
+$Odds_ratio
+odds ratio 
+  1.112696 
+
+$Confidence_Interval
+[1] 0.2082632 3.8649426
+attr(,&quot;conf.level&quot;)
+[1] 0.95</code></pre>
+<pre class="r"><code>HF_darkgreen</code></pre>
+<pre><code>$ContingencyTable
+          vec2_label
+vec1_label  Not   Is
+       Not 3585   20
+       Is   550    0
+
+$PValue
+[1] 0.09760628
+
+$Odds_ratio
+odds ratio 
+         0 
+
+$Confidence_Interval
+[1] 0.000000 1.325074
+attr(,&quot;conf.level&quot;)
+[1] 0.95</code></pre>
+<pre class="r"><code>HF_midnightblue</code></pre>
+<pre><code>$ContingencyTable
+          vec2_label
+vec1_label  Not   Is
+       Not 3910   20
+       Is   225    0
+
+$PValue
+[1] 0.6231101
+
+$Odds_ratio
+odds ratio 
+         0 
+
+$Confidence_Interval
+[1] 0.000000 3.547529
+attr(,&quot;conf.level&quot;)
+[1] 0.95</code></pre>
+<pre class="r"><code>HF_salmon</code></pre>
+<pre><code>$ContingencyTable
+          vec2_label
+vec1_label  Not   Is
+       Not 3931   19
+       Is   204    1
+
+$PValue
+[1] 1
+
+$Odds_ratio
+odds ratio 
+  1.014188 
+
+$Confidence_Interval
+[1] 0.02429106 6.44320538
+attr(,&quot;conf.level&quot;)
+[1] 0.95</code></pre>
+<pre class="r"><code>HF_lightyellow</code></pre>
+<pre><code>$ContingencyTable
+          vec2_label
+vec1_label  Not   Is
+       Not 3652   18
+       Is   483    2
+
+$PValue
+[1] 1
+
+$Odds_ratio
+odds ratio 
+ 0.8401811 
+
+$Confidence_Interval
+[1] 0.09425495 3.52653007
+attr(,&quot;conf.level&quot;)
+[1] 0.95</code></pre>
+<pre class="r"><code>HF_lightgreen</code></pre>
+<pre><code>$ContingencyTable
+          vec2_label
+vec1_label  Not   Is
+       Not 3869   19
+       Is   266    1
+
+$PValue
+[1] 1
+
+$Odds_ratio
+odds ratio 
+ 0.7655659 
+
+$Confidence_Interval
+[1] 0.01835602 4.85308510
+attr(,&quot;conf.level&quot;)
+[1] 0.95</code></pre>
+<pre class="r"><code>HF_blue</code></pre>
+<pre><code>$ContingencyTable
+          vec2_label
+vec1_label  Not   Is
+       Not 4091   20
+       Is    44    0
+
+$PValue
+[1] 1
+
+$Odds_ratio
+odds ratio 
+         0 
+
+$Confidence_Interval
+[1]  0.00000 19.55207
+attr(,&quot;conf.level&quot;)
+[1] 0.95</code></pre>
+<pre class="r"><code>HF_magenta</code></pre>
+<pre><code>$ContingencyTable
+          vec2_label
+vec1_label  Not   Is
+       Not 4008   20
+       Is   127    0
+
+$PValue
+[1] 1
+
+$Odds_ratio
+odds ratio 
+         0 
+
+$Confidence_Interval
+[1] 0.000000 6.476755
+attr(,&quot;conf.level&quot;)
+[1] 0.95</code></pre>
+<pre class="r"><code>HF_darkred</code></pre>
+<pre><code>$ContingencyTable
+          vec2_label
+vec1_label  Not   Is
+       Not 3355   16
+       Is   780    4
+
+$PValue
+[1] 0.7807153
+
+$Odds_ratio
+odds ratio 
+  1.075315 
+
+$Confidence_Interval
+[1] 0.2608724 3.3460228
+attr(,&quot;conf.level&quot;)
+[1] 0.95</code></pre>
+<pre class="r"><code>HF_brown</code></pre>
+<pre><code>$ContingencyTable
+          vec2_label
+vec1_label  Not   Is
+       Not 4088   20
+       Is    47    0
+
+$PValue
+[1] 1
+
+$Odds_ratio
+odds ratio 
+         0 
+
+$Confidence_Interval
+[1]  0.000 18.247
+attr(,&quot;conf.level&quot;)
+[1] 0.95</code></pre>
+<pre class="r"><code>HF_yellow</code></pre>
+<pre><code>$ContingencyTable
+          vec2_label
+vec1_label  Not   Is
+       Not 4080   18
+       Is    55    2
+
+$PValue
+[1] 0.02999269
+
+$Odds_ratio
+odds ratio 
+  8.229727 
+
+$Confidence_Interval
+[1]  0.9047042 35.7812549
+attr(,&quot;conf.level&quot;)
+[1] 0.95</code></pre>
+<pre class="r"><code>HF_royalblue</code></pre>
+<pre><code>$ContingencyTable
+          vec2_label
+vec1_label  Not   Is
+       Not 3447   13
+       Is   688    7
+
+$PValue
+[1] 0.06289357
+
+$Odds_ratio
+odds ratio 
+  2.696894 
+
+$Confidence_Interval
+[1] 0.9076311 7.3045556
+attr(,&quot;conf.level&quot;)
+[1] 0.95</code></pre>
+<pre class="r"><code>HF_grey</code></pre>
+<pre><code>$ContingencyTable
+          vec2_label
+vec1_label  Not   Is
+       Not 4035   20
+       Is   100    0
+
+$PValue
+[1] 1
+
+$Odds_ratio
+odds ratio 
+         0 
+
+$Confidence_Interval
+[1] 0.000000 8.308859
+attr(,&quot;conf.level&quot;)
+[1] 0.95</code></pre>
+<pre class="r"><code># Afib workflow for forest plot 
+
+FP_List &lt;- list(HF_green,
+HF_darkgreen,
+HF_midnightblue,
+HF_salmon,
+HF_lightyellow,
+HF_lightgreen,
+HF_blue,
+HF_magenta,
+HF_darkred,
+HF_brown,
+HF_yellow,
+HF_royalblue,
+HF_grey)
+
+FP_DF &lt;- data.frame(
+  Odds_ratio = numeric(length(FP_List)),
+  Lower_CI = numeric(length(FP_List)),
+  Upper_CI = numeric(length(FP_List)), 
+  Pval = numeric(length(FP_List))
+)
+
+for (i in 1:length(FP_List)) {
+  FP_DF$Odds_ratio[i] &lt;- FP_List[[i]]$Odds_ratio
+  FP_DF$Lower_CI[i] &lt;- FP_List[[i]]$Confidence_Interval[1]
+  FP_DF$Upper_CI[i] &lt;- FP_List[[i]]$Confidence_Interval[2]
+  FP_DF$Pval[i] &lt;- FP_List[[i]]$PValue
+}
+
+# Add row names for the labels in the forest plot
+FP_DF$Label &lt;- c(&quot;HF_green&quot;,
+&quot;HF_darkgreen&quot;,
+&quot;HF_midnightblue&quot;,
+&quot;HF_salmon&quot;,
+&quot;HF_lightyellow&quot;,
+&quot;HF_lightgreen&quot;,
+&quot;HF_blue&quot;,
+&quot;HF_magenta&quot;,
+&quot;HF_darkred&quot;,
+&quot;HF_brown&quot;,
+&quot;HF_yellow&quot;,
+&quot;HF_royalblue&quot;,
+&quot;HF_grey&quot;)
+
+
+FP_DF$Label &lt;- factor(FP_DF$Label, levels = rev(c(c(&quot;HF_green&quot;,
+&quot;HF_darkgreen&quot;,
+&quot;HF_midnightblue&quot;,
+&quot;HF_salmon&quot;,
+&quot;HF_lightyellow&quot;,
+&quot;HF_lightgreen&quot;,
+&quot;HF_blue&quot;,
+&quot;HF_magenta&quot;,
+&quot;HF_darkred&quot;,
+&quot;HF_brown&quot;,
+&quot;HF_yellow&quot;,
+&quot;HF_royalblue&quot;,
+&quot;HF_grey&quot;))))
+
+
+# Add a new column 
+FP_DF$Type &lt;- c(&quot;green&quot;, &quot;darkgreen&quot;, &quot;midnightblue&quot;, &quot;salmon&quot;,&quot;lightyellow&quot;,&quot;lightgreen&quot;,&quot;blue&quot;,&quot;magenta&quot;,&quot;darkred&quot;,&quot;brown&quot;, &quot;yellow&quot;, &quot;royalblue&quot;, &quot;grey&quot; )
+
+FP_DF</code></pre>
+<pre><code>   Odds_ratio   Lower_CI  Upper_CI       Pval           Label         Type
+1   1.1126963 0.20826323  3.864943 0.74816879        HF_green        green
+2   0.0000000 0.00000000  1.325074 0.09760628    HF_darkgreen    darkgreen
+3   0.0000000 0.00000000  3.547529 0.62311012 HF_midnightblue midnightblue
+4   1.0141884 0.02429106  6.443205 1.00000000       HF_salmon       salmon
+5   0.8401811 0.09425495  3.526530 1.00000000  HF_lightyellow  lightyellow
+6   0.7655659 0.01835602  4.853085 1.00000000   HF_lightgreen   lightgreen
+7   0.0000000 0.00000000 19.552070 1.00000000         HF_blue         blue
+8   0.0000000 0.00000000  6.476755 1.00000000      HF_magenta      magenta
+9   1.0753152 0.26087238  3.346023 0.78071529      HF_darkred      darkred
+10  0.0000000 0.00000000 18.246996 1.00000000        HF_brown        brown
+11  8.2297270 0.90470423 35.781255 0.02999269       HF_yellow       yellow
+12  2.6968940 0.90763110  7.304556 0.06289357    HF_royalblue    royalblue
+13  0.0000000 0.00000000  8.308859 1.00000000         HF_grey         grey</code></pre>
+<pre class="r"><code>ggplot(FP_DF, aes(x = Label, y = Odds_ratio, fill = Type)) +
+  geom_pointrange(aes(ymin = Lower_CI, ymax = Upper_CI), position = position_dodge(width = 0.5)) +  # Add error bars with color
+  geom_point(aes(fill = Type), size = 3, shape = 21, position = position_dodge(width = 0.5)) +  # Add filled points
+  geom_hline(yintercept = 1, linetype = &quot;dashed&quot;, color = &quot;black&quot;) +
+  coord_flip() +
+  labs(
+    title = &quot;Odds of being HF risk protein&quot;,
+    x = &quot;&quot;,
+    y = &quot;Odds Ratio (95% CI)&quot;
+  ) +
+  theme_classic() +
+  scale_fill_identity()</code></pre>
+<p><img src="figure/DOX_prot_Fig5_AFHF.Rmd/unnamed-chunk-2-3.png" width="672" style="display: block; margin: auto;" /></p>
+<br>
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
+<span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>
+Session information
+</button>
+</p>
+<div id="workflowr-sessioninfo" class="collapse">
+<pre class="r"><code>sessionInfo()</code></pre>
+<pre><code>R version 4.4.1 (2024-06-14)
+Platform: x86_64-apple-darwin20
+Running under: macOS Sonoma 14.6.1
+
+Matrix products: default
+BLAS:   /Library/Frameworks/R.framework/Versions/4.4-x86_64/Resources/lib/libRblas.0.dylib 
+LAPACK: /Library/Frameworks/R.framework/Versions/4.4-x86_64/Resources/lib/libRlapack.dylib;  LAPACK version 3.12.0
+
+locale:
+[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
+
+time zone: America/Chicago
+tzcode source: internal
+
+attached base packages:
+[1] stats4    stats     graphics  grDevices utils     datasets  methods  
+[8] base     
+
+other attached packages:
+ [1] scales_1.3.0                impute_1.78.0              
+ [3] WGCNA_1.72-5                fastcluster_1.2.6          
+ [5] dynamicTreeCut_1.63-1       BioNERO_1.12.0             
+ [7] reshape2_1.4.4              ggridges_0.5.6             
+ [9] biomaRt_2.60.1              UpSetR_1.4.0               
+[11] DOSE_3.30.4                 org.Hs.eg.db_3.19.1        
+[13] AnnotationDbi_1.66.0        clusterProfiler_4.12.6     
+[15] pheatmap_1.0.12             qvalue_2.36.0              
+[17] cluster_2.1.6               ggfortify_0.4.17           
+[19] lubridate_1.9.3             forcats_1.0.0              
+[21] stringr_1.5.1               dplyr_1.1.4                
+[23] purrr_1.0.2                 readr_2.1.5                
+[25] tidyr_1.3.1                 tibble_3.2.1               
+[27] ggplot2_3.5.1               tidyverse_2.0.0            
+[29] RColorBrewer_1.1-3          RUVSeq_1.38.0              
+[31] edgeR_4.2.1                 limma_3.60.4               
+[33] EDASeq_2.38.0               ShortRead_1.62.0           
+[35] GenomicAlignments_1.40.0    SummarizedExperiment_1.34.0
+[37] MatrixGenerics_1.16.0       matrixStats_1.4.1          
+[39] Rsamtools_2.20.0            GenomicRanges_1.56.2       
+[41] Biostrings_2.72.1           GenomeInfoDb_1.40.1        
+[43] XVector_0.44.0              IRanges_2.38.1             
+[45] S4Vectors_0.42.1            BiocParallel_1.38.0        
+[47] Biobase_2.64.0              BiocGenerics_0.50.0        
+[49] workflowr_1.7.1            
+
+loaded via a namespace (and not attached):
+  [1] fs_1.6.4                bitops_1.0-8            enrichplot_1.24.2      
+  [4] httr_1.4.7              doParallel_1.0.17       backports_1.5.0        
+  [7] tools_4.4.1             utf8_1.2.4              R6_2.5.1               
+ [10] mgcv_1.9-1              lazyeval_0.2.2          GetoptLong_1.0.5       
+ [13] withr_3.0.1             prettyunits_1.2.0       gridExtra_2.3          
+ [16] preprocessCore_1.66.0   cli_3.6.3               network_1.18.2         
+ [19] scatterpie_0.2.4        labeling_0.4.3          sass_0.4.9             
+ [22] genefilter_1.86.0       yulab.utils_0.1.7       foreign_0.8-87         
+ [25] gson_0.1.0              R.utils_2.12.3          rstudioapi_0.16.0      
+ [28] RSQLite_2.3.7           generics_0.1.3          gridGraphics_0.5-1     
+ [31] shape_1.4.6.1           BiocIO_1.14.0           hwriter_1.3.2.1        
+ [34] GO.db_3.19.1            Matrix_1.7-0            interp_1.1-6           
+ [37] fansi_1.0.6             abind_1.4-8             R.methodsS3_1.8.2      
+ [40] lifecycle_1.0.4         whisker_0.4.1           yaml_2.3.10            
+ [43] SparseArray_1.4.8       BiocFileCache_2.12.0    grid_4.4.1             
+ [46] blob_1.2.4              promises_1.3.0          crayon_1.5.3           
+ [49] pwalign_1.0.0           lattice_0.22-6          cowplot_1.1.3          
+ [52] annotate_1.82.0         GenomicFeatures_1.56.0  KEGGREST_1.44.1        
+ [55] pillar_1.9.0            knitr_1.48              ComplexHeatmap_2.20.0  
+ [58] fgsea_1.30.0            rjson_0.2.22            codetools_0.2-20       
+ [61] fastmatch_1.1-4         glue_1.7.0              getPass_0.2-4          
+ [64] ggfun_0.1.6             data.table_1.16.0       vctrs_0.6.5            
+ [67] png_0.1-8               treeio_1.28.0           gtable_0.3.5           
+ [70] cachem_1.1.0            aroma.light_3.34.0      xfun_0.47              
+ [73] S4Arrays_1.4.1          tidygraph_1.3.1         coda_0.19-4.1          
+ [76] survival_3.7-0          iterators_1.0.14        statmod_1.5.0          
+ [79] nlme_3.1-166            ggtree_3.12.0           bit64_4.0.5            
+ [82] progress_1.2.3          filelock_1.0.3          GENIE3_1.26.0          
+ [85] rprojroot_2.0.4         bslib_0.8.0             rpart_4.1.23           
+ [88] Hmisc_5.1-3             colorspace_2.1-1        DBI_1.2.3              
+ [91] nnet_7.3-19             tidyselect_1.2.1        processx_3.8.4         
+ [94] bit_4.0.5               compiler_4.4.1          curl_5.2.2             
+ [97] git2r_0.35.0            httr2_1.0.4             htmlTable_2.4.3        
+[100] intergraph_2.0-4        xml2_1.3.6              ggdendro_0.2.0         
+[103] DelayedArray_0.30.1     shadowtext_0.1.4        rtracklayer_1.64.0     
+[106] checkmate_2.3.2         callr_3.7.6             rappdirs_0.3.3         
+[109] digest_0.6.37           rmarkdown_2.28          RhpcBLASctl_0.23-42    
+[112] base64enc_0.1-3         htmltools_0.5.8.1       pkgconfig_2.0.3        
+[115] jpeg_0.1-10             highr_0.11              dbplyr_2.5.0           
+[118] fastmap_1.2.0           htmlwidgets_1.6.4       rlang_1.1.4            
+[121] GlobalOptions_0.1.2     UCSC.utils_1.0.0        farver_2.1.2           
+[124] jquerylib_0.1.4         jsonlite_1.8.8          statnet.common_4.9.0   
+[127] GOSemSim_2.30.2         R.oo_1.26.0             RCurl_1.98-1.16        
+[130] magrittr_2.0.3          ggnetwork_0.5.13        Formula_1.2-5          
+[133] GenomeInfoDbData_1.2.12 ggplotify_0.1.2         patchwork_1.2.0        
+[136] munsell_0.5.1           Rcpp_1.0.13             ape_5.8                
+[139] viridis_0.6.5           minet_3.62.0            stringi_1.8.4          
+[142] ggraph_2.2.1            zlibbioc_1.50.0         MASS_7.3-61            
+[145] plyr_1.8.9              parallel_4.4.1          ggrepel_0.9.6          
+[148] deldir_2.0-4            graphlayouts_1.1.1      splines_4.4.1          
+[151] hms_1.1.3               circlize_0.4.16         locfit_1.5-9.10        
+[154] ps_1.8.0                igraph_2.0.3            XML_3.99-0.17          
+[157] evaluate_0.24.0         latticeExtra_0.6-30     tzdb_0.4.0             
+[160] foreach_1.5.2           tweenr_2.0.3            httpuv_1.6.15          
+[163] polyclip_1.10-7         clue_0.3-65             ggforce_0.4.2          
+[166] xtable_1.8-4            restfulr_0.0.15         NetRep_1.2.7           
+[169] tidytree_0.4.6          later_1.3.2             viridisLite_0.4.2      
+[172] aplot_0.2.3             memoise_2.0.1           sva_3.52.0             
+[175] timechange_0.3.0       </code></pre>
+</div>
+</div>
+
+
+<!-- Adjust MathJax settings so that all math formulae are shown using
+TeX fonts only; see
+https://docs.mathjax.org/en/latest/web/configuration.html. This will make
+the presentation more consistent at the cost of the webpage sometimes
+taking slightly longer to load. Note that this only works because the
+footer is added to webpages before the MathJax javascript. -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    "HTML-CSS": { availableFonts: ["TeX"] }
+  });
+</script>
+
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

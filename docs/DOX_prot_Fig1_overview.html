@@ -1,0 +1,1121 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Omar Johnson" />
+
+<meta name="date" content="2024-12-08" />
+
+<title>DOX_prot_Fig1_overview</title>
+
+<script src="site_libs/header-attrs-2.28/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.13.2/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-6.4.2/css/all.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet" />
+
+<link rel="icon" href="https://github.com/workflowr/workflowr-assets/raw/main/img/reproducible.png">
+<!-- Add a small amount of space between sections. -->
+<style type="text/css">
+div.section {
+  padding-top: 12px;
+}
+</style>
+
+
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">DNA_damage_DOX_project</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="about.html">About</a>
+</li>
+<li>
+  <a href="license.html">License</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/Omar-Johnson/DNA_damage_DOX">
+    <span class="fab fa-github"></span>
+     
+    Source code
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">DOX_prot_Fig1_overview</h1>
+<h4 class="author">Omar Johnson</h4>
+<h4 class="date">2024-12-08</h4>
+
+</div>
+
+
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
+<span class="glyphicon glyphicon-list" aria-hidden="true"></span>
+workflowr <span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span>
+</button>
+</p>
+<div id="workflowr-report" class="collapse">
+<ul class="nav nav-tabs">
+<li class="active">
+<a data-toggle="tab" href="#summary">Summary</a>
+</li>
+<li>
+<a data-toggle="tab" href="#checks"> Checks <span
+class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
+</a>
+</li>
+<li>
+<a data-toggle="tab" href="#versions">Past versions</a>
+</li>
+</ul>
+<div class="tab-content">
+<div id="summary" class="tab-pane fade in active">
+<p>
+<strong>Last updated:</strong> 2024-12-08
+</p>
+<p>
+<strong>Checks:</strong> <span
+class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7
+<span class="glyphicon glyphicon-exclamation-sign text-danger"
+aria-hidden="true"></span> 0
+</p>
+<p>
+<strong>Knit directory:</strong> <code>DNA_damage_DOX/</code> <span
+class="glyphicon glyphicon-question-sign" aria-hidden="true"
+title="This is the local directory in which the code in this file was executed.">
+</span>
+</p>
+<p>
+This reproducible <a href="https://rmarkdown.rstudio.com">R Markdown</a>
+analysis was created with <a
+  href="https://github.com/workflowr/workflowr">workflowr</a> (version
+1.7.1). The <em>Checks</em> tab describes the reproducibility checks
+that were applied when the results were created. The <em>Past
+versions</em> tab lists the development history.
+</p>
+<hr>
+</div>
+<div id="checks" class="tab-pane fade">
+<div id="workflowr-checks" class="panel-group">
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date
+</a>
+</p>
+</div>
+<div id="strongRMarkdownfilestronguptodate"
+class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great! Since the R Markdown file has been committed to the Git
+repository, you know the exact version of the code that produced these
+results.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongEnvironmentstrongempty">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Environment:</strong> empty </a>
+</p>
+</div>
+<div id="strongEnvironmentstrongempty" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! The global environment was empty. Objects defined in the
+global environment can affect the analysis in your R Markdown file in
+unknown ways. For reproduciblity it’s best to always run the code in an
+empty environment.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSeedstrongcodesetseed20241207code">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Seed:</strong>
+<code>set.seed(20241207)</code> </a>
+</p>
+</div>
+<div id="strongSeedstrongcodesetseed20241207code"
+class="panel-collapse collapse">
+<div class="panel-body">
+<p>The command <code>set.seed(20241207)</code> was run prior to running
+the code in the R Markdown file. Setting a seed ensures that any results
+that rely on randomness, e.g. subsampling or permutations, are
+reproducible.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSessioninformationstrongrecorded">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Session information:</strong>
+recorded </a>
+</p>
+</div>
+<div id="strongSessioninformationstrongrecorded"
+class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Recording the operating system, R version, and package
+versions is critical for reproducibility.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongCachestrongnone">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Cache:</strong> none </a>
+</p>
+</div>
+<div id="strongCachestrongnone" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Nice! There were no cached chunks for this analysis, so you can be
+confident that you successfully produced the results during this
+run.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongFilepathsstrongrelative">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>File paths:</strong> relative </a>
+</p>
+</div>
+<div id="strongFilepathsstrongrelative" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Using relative paths to the files within your workflowr
+project makes it easier to run your code on other machines.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomOmarJohnsonDNAdamageDOXtree5596b631fe8b06c02d2699da3c9259c7ead56e76targetblank5596b63a">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Repository version:</strong>
+<a href="https://github.com/Omar-Johnson/DNA_damage_DOX/tree/5596b631fe8b06c02d2699da3c9259c7ead56e76" target="_blank">5596b63</a>
+</a>
+</p>
+</div>
+<div
+id="strongRepositoryversionstrongahrefhttpsgithubcomOmarJohnsonDNAdamageDOXtree5596b631fe8b06c02d2699da3c9259c7ead56e76targetblank5596b63a"
+class="panel-collapse collapse">
+<div class="panel-body">
+<p>
+Great! You are using Git for version control. Tracking code development
+and connecting the code version to the results is critical for
+reproducibility.
+</p>
+<p>
+The results in this page were generated with repository version
+<a href="https://github.com/Omar-Johnson/DNA_damage_DOX/tree/5596b631fe8b06c02d2699da3c9259c7ead56e76" target="_blank">5596b63</a>.
+See the <em>Past versions</em> tab to see a history of the changes made
+to the R Markdown and HTML files.
+</p>
+<p>
+Note that you need to be careful to ensure that all relevant files for
+the analysis have been committed to Git prior to generating the results
+(you can use <code>wflow_publish</code> or
+<code>wflow_git_commit</code>). workflowr only checks the R Markdown
+file, but you know if there are other scripts or data files that it
+depends on. Below is the status of the Git repository when the results
+were generated:
+</p>
+<pre><code>
+Ignored files:
+    Ignored:    .DS_Store
+
+</code></pre>
+<p>
+Note that any generated files, e.g. HTML, png, CSS, etc., are not
+included in this status report because it is ok for generated content to
+have uncommitted changes.
+</p>
+</div>
+</div>
+</div>
+</div>
+<hr>
+</div>
+<div id="versions" class="tab-pane fade">
+
+<p>
+These are the previous versions of the repository in which changes were
+made to the R Markdown
+(<code>analysis/DOX_prot_Fig1_overview.Rmd</code>) and HTML
+(<code>docs/DOX_prot_Fig1_overview.html</code>) files. If you’ve
+configured a remote Git repository (see <code>?wflow_git_remote</code>),
+click on the hyperlinks in the table below to view the files as they
+were in that past version.
+</p>
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+File
+</th>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+<th>
+Message
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/Omar-Johnson/DNA_damage_DOX/blob/5596b631fe8b06c02d2699da3c9259c7ead56e76/analysis/DOX_prot_Fig1_overview.Rmd" target="_blank">5596b63</a>
+</td>
+<td>
+Omar-Johnson
+</td>
+<td>
+2024-12-08
+</td>
+<td>
+Publish
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr>
+</div>
+</div>
+</div>
+<div id="load-libraries" class="section level1">
+<h1>Load Libraries</h1>
+</div>
+<div id="load-data" class="section level1">
+<h1>Load data</h1>
+</div>
+<div id="fig-1-d--correlation-heatmap" class="section level1">
+<h1>Fig-1-D- Correlation heatmap</h1>
+<pre class="r"><code># correlation matrix 
+Prot_cor_matrix &lt;- cor(RUVg_Log2_quantnormalized_all10samples %&gt;% as.matrix())
+
+# Heatmap 1. 
+pheatmap(Prot_cor_matrix, 
+         color = colorRampPalette(c(&quot;blue&quot;, &quot;white&quot;, &quot;red&quot;))(200),
+         display_numbers = TRUE)</code></pre>
+<p><img src="figure/DOX_prot_Fig1_overview.Rmd/Correlation%20heatmap-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code># Adjust column names 
+rownames(Prot_cor_matrix) &lt;- Meta$Cond_Ind
+colnames(Prot_cor_matrix) &lt;- Meta$Cond_Ind
+
+# Heatmap 2. 
+pheatmap(mat = Prot_cor_matrix, 
+         color = colorRampPalette(c(&quot;blue&quot;, &quot;white&quot;, &quot;red&quot;))(200),
+         display_numbers = TRUE
+            )</code></pre>
+<p><img src="figure/DOX_prot_Fig1_overview.Rmd/Correlation%20heatmap-2.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="fig-1-e-ipsc-cm-proteome-compared-to-other-tissue-gtex"
+class="section level1">
+<h1>Fig-1-E iPSC-CM proteome compared to other tissue (GTEx)</h1>
+<pre class="r"><code>Proteomics  %&gt;% head()</code></pre>
+<pre><code>  Accession Entrez.Gene.ID Ensembl.Gene.ID Gene.Symbol
+1    P53396             47 ENSG00000131473        ACLY
+2    Q9H2P0          23394 ENSG00000101126        ADNP
+3    Q96L96          57538 ENSG00000136383       ALPK3
+4    Q15327          27063 ENSG00000148677      ANKRD1
+5    Q92747          10552 ENSG00000241685      ARPC1A
+6    O75787          10159 ENSG00000182220     ATP6AP2
+                                                                                    Gene.ID
+1                                            B4DIM0; B4E3P0; hsa:47; P53396; Q13037; Q9BRL0
+2                                         E1P5Y2; hsa:23394; O94881; Q5BKU2; Q9H2P0; Q9UG34
+3                                                                 hsa:57538; Q96L96; Q9P2L6
+4                                                                 hsa:27063; Q15327; Q96LE7
+5                         A4D276; B4DLQ7; D6W5S1; hsa:10552; Q7Z5U8; Q86WU5; Q8IXQ0; Q92747
+6 B7Z9I3; hsa:10159; O75787; Q5QTQ7; Q6T7F5; Q8NBP3; Q8NG15; Q96FV6; Q96LB5; Q9H2P8; Q9UG89
+  Abundance.Ratio...Veh.....Dox. Abundance.Ratio.Adj..P.Value...Veh.....Dox.
+1                          0.653                                 0.396029664
+2                          2.055                                 0.098818689
+3                          2.498                                 0.051655904
+4                          9.744                                 0.016363333
+5                          0.708                                   0.0960285
+6                          0.353                                 0.187490328
+  Abundances..Grouped...Dox Abundances..Grouped...Veh
+1               19417357.35               12676982.35
+2               3516801.084               7228452.172
+3               1811200.791               4524233.176
+4               6423990.119               62596866.19
+5               53145253.16               37630913.11
+6               8575431.426               3024303.718
+  Abundances..Grouped..CV......Dox Abundances..Grouped..CV......Veh
+1                            40.69                            30.77
+2                             28.2                             9.93
+3                            26.07                            25.06
+4                             15.7                            27.25
+5                             7.36                               14
+6                            13.99                            59.44
+  Abundance..F1..Sample..Dox..n.a Abundance..F3..Sample..Dox..n.a
+1                     14402176.63                     9366275.609
+2                     4618733.906                     3370283.281
+3                     863022.1563                     1999058.094
+4                     3826071.625                     6398937.516
+5                     48717851.41                     41945664.09
+6                     6576761.375                      7016359.25
+  Abundance..F5..Sample..Dox..Dox Abundance..F7..Sample..Dox..Dox
+1                     29436543.88                     22451050.16
+2                     2997374.313                       2408716.5
+3                     545111.9688                     1405675.656
+4                     4398013.953                     5165224.781
+5                     50559977.91                     50742792.91
+6                     9019724.875                         9206177
+  Abundance..F9..Sample..Dox..Dox Abundance..F2..Control..Veh..n.a
+1                     17300954.38                      6913680.227
+2                     1941331.219                      7074523.469
+3                     1021132.875                      2214027.172
+4                     4080027.609                      52421690.72
+5                     48816880.66                      39477613.69
+6                     7912307.188                       2709389.25
+  Abundance..F4..Control..Veh..n.a Abundance..F6..Control..Veh..Veh
+1                      5406406.719                      10494270.92
+2                      5397867.813                      6444366.813
+3                      5356827.313                      4077320.656
+4                      38865174.44                      62303686.18
+5                      36143313.94                      27690129.17
+6                      5919575.719                        2184336.5
+  Abundance..F8..Control..Veh..Veh Abundance..F10..Control..Veh..Veh
+1                      14124540.34                       12160232.45
+2                      7831825.969                       6710694.406
+3                      4393884.313                       3877961.406
+4                         81896769                       69853076.38
+5                      36418791.34                       30344995.19
+6                      1238241.469                        2856388.75</code></pre>
+<pre class="r"><code>Gtex %&gt;% head()</code></pre>
+<pre><code>          gene.id Adrenal.Gland Artery Brain.Cerebellum Breast Colon
+1 ENSG00000000003         -0.71  -0.95            -2.28  -0.37 -0.46
+2 ENSG00000000419          0.32  -0.60            -1.22  -0.05 -0.60
+3 ENSG00000000457         -0.69     NA               NA     NA  0.33
+4 ENSG00000000938         -1.23  -0.07            -1.40  -1.13 -1.49
+5 ENSG00000000971         -1.03   2.09            -3.35   0.89 -1.46
+6 ENSG00000001036          0.74  -1.14            -2.59  -0.41  0.42
+  GE.junction Esophagus.Muscle Heart.Atrial Heart.Ventricle Liver  Lung
+1       -1.17            -1.94        -1.45           -1.44  0.15 -0.30
+2       -0.27            -0.54        -0.43           -0.19  0.49 -0.04
+3        0.10            -0.40         0.19            0.48 -0.37 -0.53
+4       -0.84            -0.97        -0.52           -1.39 -0.16  1.25
+5        0.14            -0.14         0.61           -1.02 -0.57  0.02
+6       -0.98            -1.23        -0.12           -0.29  0.31 -0.34
+  Minor.Salivary Muscle.Skeletal Nerve.Tibial Ovary Pancreas Pituitary Prostate
+1          -1.35           -1.15         0.75  0.28     1.09     -0.45    -1.04
+2           0.29           -0.52        -0.70  0.07     1.74     -0.35    -0.16
+3             NA            0.71        -0.69 -1.07    -0.13     -0.63     0.90
+4          -0.90           -2.39        -1.67 -3.17    -1.23     -2.27    -1.57
+5          -1.54           -1.46         1.62  0.32    -2.73     -0.82    -1.56
+6          -0.46           -1.65        -0.62 -0.48    -0.42      0.57    -0.60
+   Skin Small.Intestine Spleen Stomach Testis Thyroid Uterus Vagina
+1 -0.45           -0.74  -1.74    0.20  -0.32   -1.00  -1.06  -1.25
+2 -0.33           -0.49  -0.26    0.40   0.25    0.42  -0.18  -0.23
+3 -0.65            0.18  -0.12    0.66  -1.09   -0.69     NA   0.21
+4 -1.55           -0.52   2.20   -1.71  -2.30   -1.76  -1.99  -0.43
+5  0.49           -2.21  -1.99   -1.31  -0.82   -1.71  -1.16  -0.50
+6 -0.67            0.84  -0.08    0.20  -0.37    2.13  -0.58  -0.55</code></pre>
+<pre class="r"><code>Gtex_genelist %&gt;% head()</code></pre>
+<pre><code>  X entrezgene_id ensembl_gene_id hgnc_symbol
+1 1          7105 ENSG00000000003      TSPAN6
+2 2          8813 ENSG00000000419        DPM1
+3 3         57147 ENSG00000000457       SCYL3
+4 4          2268 ENSG00000000938         FGR
+5 5          3075 ENSG00000000971         CFH
+6 6          2519 ENSG00000001036       FUCA2</code></pre>
+<pre class="r"><code>Protein_list &lt;- Proteomics %&gt;% 
+  dplyr::select(Entrez.Gene.ID,Abundance..F1..Sample..Dox..n.a, Abundance..F3..Sample..Dox..n.a,Abundance..F5..Sample..Dox..Dox,Abundance..F7..Sample..Dox..Dox,Abundance..F9..Sample..Dox..Dox,Abundance..F2..Control..Veh..n.a,Abundance..F4..Control..Veh..n.a,Abundance..F6..Control..Veh..Veh,Abundance..F8..Control..Veh..Veh,Abundance..F10..Control..Veh..Veh) %&gt;% 
+  mutate(Abundance..F1..Sample..Dox..n.a=as.numeric(Abundance..F1..Sample..Dox..n.a)) %&gt;% 
+  mutate(Abundance..F3..Sample..Dox..n.a=as.numeric(Abundance..F3..Sample..Dox..n.a)) %&gt;% 
+  mutate(Abundance..F5..Sample..Dox..Dox=as.numeric(Abundance..F5..Sample..Dox..Dox)) %&gt;% 
+  mutate(Abundance..F7..Sample..Dox..Dox=as.numeric(Abundance..F7..Sample..Dox..Dox)) %&gt;% 
+  mutate(Abundance..F9..Sample..Dox..Dox=as.numeric(Abundance..F9..Sample..Dox..Dox)) %&gt;%
+  mutate(Abundance..F2..Control..Veh..n.a=as.numeric(Abundance..F2..Control..Veh..n.a)) %&gt;% 
+  mutate(Abundance..F4..Control..Veh..n.a=as.numeric(Abundance..F4..Control..Veh..n.a)) %&gt;% 
+  mutate(Abundance..F6..Control..Veh..Veh=as.numeric(Abundance..F6..Control..Veh..Veh)) %&gt;% 
+  mutate(Abundance..F8..Control..Veh..Veh=as.numeric(Abundance..F8..Control..Veh..Veh)) %&gt;% 
+  mutate(Abundance..F10..Control..Veh..Veh=as.numeric(Abundance..F10..Control..Veh..Veh)) %&gt;% 
+  mutate(&quot;log2_abundance_77-1_Dox&quot;= log2(Abundance..F1..Sample..Dox..n.a)) %&gt;%
+  mutate(&quot;log2_abundance_87-1_Dox&quot;= log2(Abundance..F3..Sample..Dox..n.a)) %&gt;%
+  mutate(&quot;log2_abundance_048-A_1_Dox&quot;= log2(Abundance..F5..Sample..Dox..Dox)) %&gt;%
+  mutate(&quot;log2_abundance_048-A_2_Dox&quot;= log2(Abundance..F7..Sample..Dox..Dox)) %&gt;%
+  mutate(&quot;log2_abundance_048-A_3_Dox&quot;= log2(Abundance..F9..Sample..Dox..Dox)) %&gt;%
+  mutate(&quot;log2_abundance_77-1_Veh&quot;= log2(Abundance..F2..Control..Veh..n.a)) %&gt;%
+  mutate(&quot;log2_abundance_87-1_Veh&quot;= log2(Abundance..F4..Control..Veh..n.a)) %&gt;%
+  mutate(&quot;log2_abundance_048-A_1_Veh&quot;= log2(Abundance..F6..Control..Veh..Veh)) %&gt;%
+  mutate(&quot;log2_abundance_048-A_2_Veh&quot;= log2(Abundance..F8..Control..Veh..Veh)) %&gt;%
+  mutate(&quot;log2_abundance_048-A_3_Veh&quot;= log2(Abundance..F10..Control..Veh..Veh)) %&gt;%
+  mutate(Entrez.Gene.ID=as.numeric(Entrez.Gene.ID)) %&gt;% 
+  na.omit(.)</code></pre>
+<pre><code>Warning: There was 1 warning in `mutate()`.
+ℹ In argument: `Abundance..F1..Sample..Dox..n.a =
+  as.numeric(Abundance..F1..Sample..Dox..n.a)`.
+Caused by warning:
+! NAs introduced by coercion</code></pre>
+<pre><code>Warning: There was 1 warning in `mutate()`.
+ℹ In argument: `Abundance..F3..Sample..Dox..n.a =
+  as.numeric(Abundance..F3..Sample..Dox..n.a)`.
+Caused by warning:
+! NAs introduced by coercion</code></pre>
+<pre><code>Warning: There was 1 warning in `mutate()`.
+ℹ In argument: `Abundance..F5..Sample..Dox..Dox =
+  as.numeric(Abundance..F5..Sample..Dox..Dox)`.
+Caused by warning:
+! NAs introduced by coercion</code></pre>
+<pre><code>Warning: There was 1 warning in `mutate()`.
+ℹ In argument: `Abundance..F7..Sample..Dox..Dox =
+  as.numeric(Abundance..F7..Sample..Dox..Dox)`.
+Caused by warning:
+! NAs introduced by coercion</code></pre>
+<pre><code>Warning: There was 1 warning in `mutate()`.
+ℹ In argument: `Abundance..F9..Sample..Dox..Dox =
+  as.numeric(Abundance..F9..Sample..Dox..Dox)`.
+Caused by warning:
+! NAs introduced by coercion</code></pre>
+<pre><code>Warning: There was 1 warning in `mutate()`.
+ℹ In argument: `Abundance..F2..Control..Veh..n.a =
+  as.numeric(Abundance..F2..Control..Veh..n.a)`.
+Caused by warning:
+! NAs introduced by coercion</code></pre>
+<pre><code>Warning: There was 1 warning in `mutate()`.
+ℹ In argument: `Abundance..F4..Control..Veh..n.a =
+  as.numeric(Abundance..F4..Control..Veh..n.a)`.
+Caused by warning:
+! NAs introduced by coercion</code></pre>
+<pre><code>Warning: There was 1 warning in `mutate()`.
+ℹ In argument: `Abundance..F6..Control..Veh..Veh =
+  as.numeric(Abundance..F6..Control..Veh..Veh)`.
+Caused by warning:
+! NAs introduced by coercion</code></pre>
+<pre><code>Warning: There was 1 warning in `mutate()`.
+ℹ In argument: `Abundance..F8..Control..Veh..Veh =
+  as.numeric(Abundance..F8..Control..Veh..Veh)`.
+Caused by warning:
+! NAs introduced by coercion</code></pre>
+<pre><code>Warning: There was 1 warning in `mutate()`.
+ℹ In argument: `Abundance..F10..Control..Veh..Veh =
+  as.numeric(Abundance..F10..Control..Veh..Veh)`.
+Caused by warning:
+! NAs introduced by coercion</code></pre>
+<pre><code>Warning: There was 1 warning in `mutate()`.
+ℹ In argument: `Entrez.Gene.ID = as.numeric(Entrez.Gene.ID)`.
+Caused by warning:
+! NAs introduced by coercion</code></pre>
+<pre class="r"><code># Gtex Dataframe ----------------------------------------------------------
+Convert &lt;- Gtex %&gt;% full_join(., Gtex_genelist, by=c(&quot;gene.id&quot;=&quot;ensembl_gene_id&quot;))
+
+
+
+Convert_List&lt;- Protein_list %&gt;% left_join (., Convert, by=c(&quot;Entrez.Gene.ID&quot;=&quot;entrezgene_id&quot;), relationship = &quot;many-to-many&quot;) %&gt;% 
+    distinct(Entrez.Gene.ID,.keep_all = TRUE) %&gt;% 
+  column_to_rownames(&quot;Entrez.Gene.ID&quot;) %&gt;% 
+  dplyr::select(!c(&quot;Abundance..F1..Sample..Dox..n.a&quot;, &quot;Abundance..F3..Sample..Dox..n.a&quot;,&quot;Abundance..F5..Sample..Dox..Dox&quot;,&quot;Abundance..F7..Sample..Dox..Dox&quot;,&quot;Abundance..F9..Sample..Dox..Dox&quot;,&quot;Abundance..F2..Control..Veh..n.a&quot;,&quot;Abundance..F4..Control..Veh..n.a&quot;,&quot;Abundance..F6..Control..Veh..Veh&quot;,&quot;Abundance..F8..Control..Veh..Veh&quot;,&quot;Abundance..F10..Control..Veh..Veh&quot;,&quot;hgnc_symbol&quot;, &quot;gene.id&quot;))
+  
+
+
+
+Test &lt;- rcorr
+Test&lt;- rcorr(as.matrix(Convert_List), type = &quot;spearman&quot;)
+Test&lt;- rcorr(as.matrix(Convert_List), type = &quot;pearson&quot;)
+pheatmap(Test$r, display_numbers = TRUE)</code></pre>
+<p><img src="figure/DOX_prot_Fig1_overview.Rmd/iPSC-CM%20proteome%20compared%20to%20other%20tissue%20(GTEx)-1.png" width="1440" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>pheatmap(Test$r, display_numbers = FALSE)</code></pre>
+<p><img src="figure/DOX_prot_Fig1_overview.Rmd/iPSC-CM%20proteome%20compared%20to%20other%20tissue%20(GTEx)-2.png" width="1440" style="display: block; margin: auto;" /></p>
+</div>
+<div id="fig-1-f-median-abundance-of-cardiac-proteins"
+class="section level1">
+<h1>Fig-1-F Median abundance of cardiac proteins</h1>
+<pre class="r"><code>RUVg_Log2_quantnormalized_all10samples_unlogged &lt;- RUVg_Log2_quantnormalized_all10samples^2
+
+RUVg_Log2_quantnormalized_all10samples_unlogged %&gt;% head()</code></pre>
+<pre><code>                 S1       S3       S5       S7       S9       S2       S4
+A0A0B4J2A2 328.5554 326.9973 344.8820 349.3119 352.7209 333.5604 343.2972
+A0A0B4J2D5 575.3541 580.4938 574.6771 568.2429 573.3663 571.9707 564.5982
+A0A494C071 319.5122 317.2598 303.3583 322.1064 317.5238 328.8213 328.9263
+A0AVT1     174.4011 178.2046 205.8086 196.3262 195.1595 173.2376 180.2296
+A0FGR8     411.5794 406.2913 397.4114 401.4574 400.3695 405.4398 406.3051
+A0JLT2     324.3169 318.3035 315.9126 304.1986 322.8292 324.8402 324.0475
+                 S6       S8      S10
+A0A0B4J2A2 343.7512 340.3927 346.0124
+A0A0B4J2D5 564.3974 562.3821 559.3047
+A0A494C071 316.6769 326.8686 312.6095
+A0AVT1     195.4427 178.4695 182.9383
+A0FGR8     403.6977 405.8293 402.7064
+A0JLT2     309.3706 297.4752 323.7055</code></pre>
+<pre class="r"><code>Heartspecpro &lt;- RUVg_Log2_quantnormalized_all10samples_unlogged[c(&quot;P12883&quot;, &quot;Q8WZ42&quot;, &quot;Q14896&quot;,&quot;P13533&quot;, &quot;P35609&quot;, &quot;P45379&quot;, &quot;P10916&quot;, &quot;P27797&quot;, &quot;P19429&quot;, &quot;Q92736&quot;, &quot;Q14524&quot;), ] 
+
+Heartspecpro_matrix &lt;- Heartspecpro %&gt;% as.matrix()
+Median_abundances &lt;- Heartspecpro_matrix %&gt;% rowMedians()
+
+Heartspecpro$Median_abundances &lt;- Median_abundances
+
+Heartspecpro$names &lt;- c(&quot;P12883&quot;, &quot;Q8WZ42&quot;, &quot;Q14896&quot;,&quot;P13533&quot;, &quot;P35609&quot;, &quot;P45379&quot;, &quot;P10916&quot;, &quot;P27797&quot;, &quot;P19429&quot;, &quot;Q92736&quot;, &quot;Q14524&quot;)
+
+Heartspecpro$genes &lt;- c(&quot;MYH7&quot;, &quot;TTN&quot;, &quot;MYBPC3&quot;, &quot;MYH6&quot;, &quot;ACTN2&quot;, &quot;TNNT2&quot;, &quot;MYL2&quot;, &quot;CALR&quot;, &quot;TNNI3&quot;, &quot;RYR2&quot;, &quot;SCN5A&quot;)
+
+Heartspecpro$genes &lt;- factor(x = Heartspecpro$genes, levels = rev(c(&quot;ACTN2&quot;,&quot;CALR&quot;,&quot;MYBPC3&quot;, &quot;MYH6&quot;,&quot;MYH7&quot;,&quot;MYL2&quot;,&quot;RYR2&quot;,&quot;SCN5A&quot;, &quot;TNNI3&quot;, &quot;TNNT2&quot;,&quot;TTN&quot;)))
+ 
+ ggplot(Heartspecpro, aes(x = 1, y = genes, fill = Median_abundances)) + 
+  geom_tile(color = &quot;black&quot;, size = 0.5) +  # Tiles with borders
+  scale_fill_gradient(low = &quot;white&quot;, high = &quot;red&quot;, limits = c(300, 750)) + # Gradient fill
+  geom_text(aes(label = paste(genes, Median_abundances, sep = &quot;\n&quot;)), color = &quot;black&quot;, size = 3) + 
+  theme_minimal() + 
+  theme(
+    axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1),
+    axis.text.y = element_blank(),  
+    axis.ticks.y = element_blank())</code></pre>
+<pre><code>Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
+ℹ Please use `linewidth` instead.
+This warning is displayed once every 8 hours.
+Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
+generated.</code></pre>
+<p><img src="figure/DOX_prot_Fig1_overview.Rmd/Median%20abundance%20of%20cardiac%20proteins-1.png" width="480" style="display: block; margin: auto;" /></p>
+<br>
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
+<span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>
+Session information
+</button>
+</p>
+<div id="workflowr-sessioninfo" class="collapse">
+<pre class="r"><code>sessionInfo()</code></pre>
+<pre><code>R version 4.4.1 (2024-06-14)
+Platform: x86_64-apple-darwin20
+Running under: macOS Sonoma 14.6.1
+
+Matrix products: default
+BLAS:   /Library/Frameworks/R.framework/Versions/4.4-x86_64/Resources/lib/libRblas.0.dylib 
+LAPACK: /Library/Frameworks/R.framework/Versions/4.4-x86_64/Resources/lib/libRlapack.dylib;  LAPACK version 3.12.0
+
+locale:
+[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
+
+time zone: America/Chicago
+tzcode source: internal
+
+attached base packages:
+[1] stats4    stats     graphics  grDevices utils     datasets  methods  
+[8] base     
+
+other attached packages:
+ [1] Hmisc_5.1-3                 ggraph_2.2.1               
+ [3] igraph_2.0.3                impute_1.78.0              
+ [5] WGCNA_1.72-5                fastcluster_1.2.6          
+ [7] dynamicTreeCut_1.63-1       BioNERO_1.12.0             
+ [9] reshape2_1.4.4              ggridges_0.5.6             
+[11] biomaRt_2.60.1              UpSetR_1.4.0               
+[13] DOSE_3.30.4                 org.Hs.eg.db_3.19.1        
+[15] AnnotationDbi_1.66.0        clusterProfiler_4.12.6     
+[17] pheatmap_1.0.12             qvalue_2.36.0              
+[19] cluster_2.1.6               ggfortify_0.4.17           
+[21] lubridate_1.9.3             forcats_1.0.0              
+[23] stringr_1.5.1               dplyr_1.1.4                
+[25] purrr_1.0.2                 readr_2.1.5                
+[27] tidyr_1.3.1                 tibble_3.2.1               
+[29] ggplot2_3.5.1               tidyverse_2.0.0            
+[31] RColorBrewer_1.1-3          RUVSeq_1.38.0              
+[33] edgeR_4.2.1                 limma_3.60.4               
+[35] EDASeq_2.38.0               ShortRead_1.62.0           
+[37] GenomicAlignments_1.40.0    SummarizedExperiment_1.34.0
+[39] MatrixGenerics_1.16.0       matrixStats_1.4.1          
+[41] Rsamtools_2.20.0            GenomicRanges_1.56.2       
+[43] Biostrings_2.72.1           GenomeInfoDb_1.40.1        
+[45] XVector_0.44.0              IRanges_2.38.1             
+[47] S4Vectors_0.42.1            BiocParallel_1.38.0        
+[49] Biobase_2.64.0              BiocGenerics_0.50.0        
+[51] workflowr_1.7.1            
+
+loaded via a namespace (and not attached):
+  [1] fs_1.6.4                bitops_1.0-8            enrichplot_1.24.2      
+  [4] httr_1.4.7              doParallel_1.0.17       backports_1.5.0        
+  [7] tools_4.4.1             utf8_1.2.4              R6_2.5.1               
+ [10] mgcv_1.9-1              lazyeval_0.2.2          GetoptLong_1.0.5       
+ [13] withr_3.0.1             prettyunits_1.2.0       gridExtra_2.3          
+ [16] preprocessCore_1.66.0   cli_3.6.3               network_1.18.2         
+ [19] scatterpie_0.2.4        labeling_0.4.3          sass_0.4.9             
+ [22] genefilter_1.86.0       yulab.utils_0.1.7       foreign_0.8-87         
+ [25] gson_0.1.0              R.utils_2.12.3          rstudioapi_0.16.0      
+ [28] RSQLite_2.3.7           generics_0.1.3          gridGraphics_0.5-1     
+ [31] shape_1.4.6.1           BiocIO_1.14.0           hwriter_1.3.2.1        
+ [34] GO.db_3.19.1            Matrix_1.7-0            interp_1.1-6           
+ [37] fansi_1.0.6             abind_1.4-8             R.methodsS3_1.8.2      
+ [40] lifecycle_1.0.4         whisker_0.4.1           yaml_2.3.10            
+ [43] SparseArray_1.4.8       BiocFileCache_2.12.0    grid_4.4.1             
+ [46] blob_1.2.4              promises_1.3.0          crayon_1.5.3           
+ [49] pwalign_1.0.0           lattice_0.22-6          cowplot_1.1.3          
+ [52] annotate_1.82.0         GenomicFeatures_1.56.0  KEGGREST_1.44.1        
+ [55] pillar_1.9.0            knitr_1.48              ComplexHeatmap_2.20.0  
+ [58] fgsea_1.30.0            rjson_0.2.22            codetools_0.2-20       
+ [61] fastmatch_1.1-4         glue_1.7.0              getPass_0.2-4          
+ [64] ggfun_0.1.6             data.table_1.16.0       vctrs_0.6.5            
+ [67] png_0.1-8               treeio_1.28.0           gtable_0.3.5           
+ [70] cachem_1.1.0            aroma.light_3.34.0      xfun_0.47              
+ [73] S4Arrays_1.4.1          tidygraph_1.3.1         coda_0.19-4.1          
+ [76] survival_3.7-0          iterators_1.0.14        statmod_1.5.0          
+ [79] nlme_3.1-166            ggtree_3.12.0           bit64_4.0.5            
+ [82] progress_1.2.3          filelock_1.0.3          GENIE3_1.26.0          
+ [85] rprojroot_2.0.4         bslib_0.8.0             rpart_4.1.23           
+ [88] colorspace_2.1-1        DBI_1.2.3               nnet_7.3-19            
+ [91] tidyselect_1.2.1        processx_3.8.4          bit_4.0.5              
+ [94] compiler_4.4.1          curl_5.2.2              git2r_0.35.0           
+ [97] httr2_1.0.4             htmlTable_2.4.3         intergraph_2.0-4       
+[100] xml2_1.3.6              ggdendro_0.2.0          DelayedArray_0.30.1    
+[103] shadowtext_0.1.4        rtracklayer_1.64.0      checkmate_2.3.2        
+[106] scales_1.3.0            callr_3.7.6             rappdirs_0.3.3         
+[109] digest_0.6.37           rmarkdown_2.28          RhpcBLASctl_0.23-42    
+[112] base64enc_0.1-3         htmltools_0.5.8.1       pkgconfig_2.0.3        
+[115] jpeg_0.1-10             highr_0.11              dbplyr_2.5.0           
+[118] fastmap_1.2.0           htmlwidgets_1.6.4       rlang_1.1.4            
+[121] GlobalOptions_0.1.2     UCSC.utils_1.0.0        farver_2.1.2           
+[124] jquerylib_0.1.4         jsonlite_1.8.8          statnet.common_4.9.0   
+[127] GOSemSim_2.30.2         R.oo_1.26.0             RCurl_1.98-1.16        
+[130] magrittr_2.0.3          ggnetwork_0.5.13        Formula_1.2-5          
+[133] GenomeInfoDbData_1.2.12 ggplotify_0.1.2         patchwork_1.2.0        
+[136] munsell_0.5.1           Rcpp_1.0.13             ape_5.8                
+[139] viridis_0.6.5           minet_3.62.0            stringi_1.8.4          
+[142] zlibbioc_1.50.0         MASS_7.3-61             plyr_1.8.9             
+[145] parallel_4.4.1          ggrepel_0.9.6           deldir_2.0-4           
+[148] graphlayouts_1.1.1      splines_4.4.1           hms_1.1.3              
+[151] circlize_0.4.16         locfit_1.5-9.10         ps_1.8.0               
+[154] XML_3.99-0.17           evaluate_0.24.0         latticeExtra_0.6-30    
+[157] tzdb_0.4.0              foreach_1.5.2           tweenr_2.0.3           
+[160] httpuv_1.6.15           polyclip_1.10-7         clue_0.3-65            
+[163] ggforce_0.4.2           xtable_1.8-4            restfulr_0.0.15        
+[166] NetRep_1.2.7            tidytree_0.4.6          later_1.3.2            
+[169] viridisLite_0.4.2       aplot_0.2.3             memoise_2.0.1          
+[172] sva_3.52.0              timechange_0.3.0       </code></pre>
+</div>
+</div>
+
+
+<!-- Adjust MathJax settings so that all math formulae are shown using
+TeX fonts only; see
+https://docs.mathjax.org/en/latest/web/configuration.html. This will make
+the presentation more consistent at the cost of the webpage sometimes
+taking slightly longer to load. Note that this only works because the
+footer is added to webpages before the MathJax javascript. -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    "HTML-CSS": { availableFonts: ["TeX"] }
+  });
+</script>
+
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
