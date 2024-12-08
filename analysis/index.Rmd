@@ -15,3 +15,6 @@ Research website for the project "DNA damage-associated protein co-expression ne
 [Unwanted tehnical variation removal and differential abundance testing  ](https://omar-johnson.github.io/DNA_damage_DOX/DOX_prot_DAP_tests_ruv.html)
 
 
+
+# Main Figures & additional analyses
+[Figure 3: Hub proteins in DOX-correlated modules are depleted for pQTLs. ](https://omar-johnson.github.io/DNA_damage_DOX/DOX_prot_pQTL_Fig3.html)

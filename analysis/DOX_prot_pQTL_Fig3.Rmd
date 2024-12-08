@@ -1,0 +1,971 @@
+---
+title: "DNA_damage_pQTLs"
+author: "Omar Johnson"
+date: "2024-12-08"
+output: html_document
+---
+
+# Load Libraries 
+```{r Libraries, include=FALSE}
+library(EDASeq)
+library(RUVSeq)
+library(RColorBrewer)
+library(edgeR)
+library(limma)
+library(Biobase)
+library(SummarizedExperiment)
+library(tidyverse) 
+library(ggfortify)
+library(cluster)
+library(edgeR)
+library(limma)
+library(BiocParallel)
+library(qvalue)
+library(pheatmap)
+library(clusterProfiler)
+library(AnnotationDbi)
+library(org.Hs.eg.db)
+library(RColorBrewer)
+library(DOSE)
+library(UpSetR)
+library(biomaRt)
+library(ggridges)
+library(reshape2)
+library(BioNERO)
+library(WGCNA)
+library(impute)
+library(dynamicTreeCut)
+library(scales)
+
+```
+
+
+# Read in Data 
+```{r Read in data, include=FALSE}
+
+# 1. RUVg Corrected data across all 10 samples that has been log2 transformed. It has not yet been quantile normalized. 
+ RUVg_Log2_quantnormalized_all10samples <- read.csv(file = "/Users/omarjohnson/Documents/Projects/Dox_Proteomics/Data/Data_Frames/DIA_proteins/RUVIII_Imputed/RUVIII_10samples_log2_notquantilenormalized.csv", header = TRUE, row.names = 1)
+RUVg_Log2_quantnormalized_all10samples <- RUVg_Log2_quantnormalized_all10samples^2
+ 
+
+# 2. Toptable correspondding to the Diff.Abundance test from #1 
+toptable_summary <- read.csv(file = "/Users/omarjohnson/Documents/Projects/Dox_Proteomics/Data/Data_Frames/DIA_proteins/RUVIII_Imputed/Toptable_summary_RUVIII.csv", header = TRUE, row.names = 1)
+
+
+# 3. Meta data for all 10 samples in our study. 
+Meta <- read.csv(file = "/Users/omarjohnson/Documents/Projects/Dox_Proteomics/Data/Data_Frames/DIA_proteins/RUVIII_Imputed/Meta.csv", header = TRUE, row.names = 1)
+
+
+Toptable_Modules <- read.csv(file = "/Users/omarjohnson/Documents/Projects/Dox_Proteomics/Data/Proteomics/Data_sets/Supplement/SUPP_Table_2.csv", header = TRUE)
+
+colnames(Toptable_Modules) <- c("X", "Protein","kTotal", "kWithin",        "kOut", "kDiff", "logFC", "AveExpr", "t", "P.Value","adj.P.Val" ,"B" , "threshold_P", "Modules", "DE_or_Not", "Norm_kIN", "Norm_kOut", "logFC.y",     "AveExpr.y", "t.y", "P.Value.y", "adj.P.Val.y", "B.y" , "threshold_P.y",    "Modules.y", "DE_or_Not.y", "Is_DA", "Is_DOXcorrelated", "Is_Hub", "Is_Cis_pQTL", "Is_Trans_pQTL", "Is_pQTL", "pLI_assigned", "pLI_Mut.Intolerant", "pLI_Mut.Tolerant", "Is_Druggable", "Is_CVD_protein",    "Is_CVD_PPI_protein")
+
+New_RNA_PRO_DF_2 <- read.csv(file = "/Users/omarjohnson/Documents/Projects/Dox_Proteomics/Data/Data_Frames/DIA_proteins/RUVIII_Imputed/New_RNA_PRO_DF.csv", header = TRUE, row.names = 1)
+
+
+New_RNA_PRO_DF_3 <- merge(Toptable_Modules, New_RNA_PRO_DF_2, by.x = "Protein", by.y = "uniprotswissprot")
+
+
+hubs <- read.csv( file = "/Users/omarjohnson/Documents/Projects/Dox_Proteomics/Data/Proteomics/Data_sets/Supplement/hubs.csv", header = TRUE)
+
+
+GO_results_DOX <- read.csv(file = "/Users/omarjohnson/Documents/Projects/Dox_Proteomics/Data/Proteomics/Data_sets/Supplement/GO_results.csv", header = TRUE)
+
+
+HPA_General3 <- readRDS("/Users/omarjohnson/Documents/Projects/Dox_Proteomics/Data/Proteomics/Data_sets/Supplement/HPA_General3_test.RData")
+
+HPA_General4_test <- readRDS("/Users/omarjohnson/Documents/Projects/Dox_Proteomics/Data/Proteomics/Data_sets/Supplement/HPA_General4.RData")
+
+HPA_General2_test <- readRDS("/Users/omarjohnson/Documents/Projects/Dox_Proteomics/Data/Proteomics/Data_sets/Supplement/HPA_General2.RData")
+
+
+dbd_uniprot_list_test<- readRDS("/Users/omarjohnson/Documents/Projects/Dox_Proteomics/Data/Proteomics/Data_sets/Supplement/dbd_uniprot_list.RData")
+
+
+RBP_pros_uniprot_3 <- read.csv(file = "/Users/omarjohnson/Documents/Projects/Dox_Proteomics/Data/Proteomics/Data_sets/Supplement/RBP_pros_uniprot_3.csv", header = TRUE)
+
+# Set the path to the folder containing the .tsv files
+folder_path <- "/Users/omarjohnson/Documents/Projects/Dox_Proteomics/Data/Proteomics/Data_sets/HPA_Metabolism" 
+
+EnzymeTable <- read.csv(file ="/Users/omarjohnson/Documents/Projects/Dox_Proteomics/Data/Proteomics/Data_sets/HPA_Metabolism_Labels/HPA_Metabo_labels.csv" , header = TRUE)
+
+TF_UNIPROT_ENSEMBL_2_2 <- read.csv(file ="/Users/omarjohnson/Documents/Projects/Dox_Proteomics/Data/Proteomics/Data_sets/Supplement/TF_UNIPROT_ENSEMBL_2.csv" , header = TRUE)
+
+```
+
+
+# Functions 
+```{r Functions}
+perform_fisher_test_FP <- function(vec1, vec2, vec1_name, vec2_name, plot = FALSE) {
+  # Create labeled factors for vec1 and vec2
+  vec1_label <- factor(vec1, labels = c(paste0("Not", vec1_name), paste0("Is", vec1_name)))
+  vec2_label <- factor(vec2, labels = c(paste0("Not", vec2_name), paste0("Is", vec2_name)))
+
+  # Create contingency table with labeled factors
+  table <- table(vec1_label, vec2_label)
+
+  # Perform Fisher's exact test
+  test_result <- fisher.test(table)
+  p_value <- test_result$p.value
+OR <- test_result$estimate
+CI <- test_result$conf.int
+
+  # Prepare result
+  result <- list(
+    ContingencyTable = table,
+    PValue = p_value, 
+    Odds_ratio = test_result$estimate,
+    Confidence_Interval = test_result$conf.int
+  )
+
+  # Generate plot if required
+  if (plot) {
+    # Convert table to data frame for ggplot
+    table_df <- as.data.frame(as.table(table))
+    colnames(table_df) <- c("vec1_label", "vec2_label", "Freq")
+
+    # Calculate totals for each vec1_label
+    totals <- aggregate(Freq ~ vec1_label, data = table_df, sum)
+
+    # Merge totals with table_df and calculate percentages
+    table_df <- merge(table_df, totals, by = "vec1_label", all.x = TRUE)
+    table_df$Percentage <- with(table_df, Freq.x / Freq.y * 100)
+    table_df$Group <- table_df$vec2_label
+
+    # Stacked bar chart
+    p <- ggplot(table_df, aes(x = vec1_label, y = Percentage, fill = Group)) +
+      geom_bar(stat = "identity", position = "stack") +  # Adjust position to "stack"
+      facet_wrap(~ vec1_label) +
+      theme_minimal() +
+      labs(x = vec1_name, y = "Percentage", fill = vec2_name, title = paste("")) +
+      theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+    result$Plot <- p
+  }
+
+  return(result)
+}
+
+
+group_by_deciles <- function(x) {
+  deciles <- cut(x, 
+                 breaks = quantile(x, probs = seq(0, 1, by = 0.1), na.rm = TRUE), 
+                 include.lowest = TRUE, 
+                 labels = paste0("D", 1:10))
+  return(deciles)
+}
+```
+
+
+# Fig-3B pQTL enrichment test
+```{r pqtl enrichment across network proteins}
+#### Forest plots #### 
+
+pQTL_data <- read.csv(file = "/Users/omarjohnson/Documents/Projects/Dox_Proteomics/Data/Proteomics/Data_sets/GWAS/pQTL_Genetic_reg_plasmaproteome.csv", header = TRUE)
+
+# Get the data frame with expressed proteins in the set 
+pQTL_data_exp <- pQTL_data[pQTL_data$Target.UniProt %in% Toptable_Modules$Protein, ]
+
+# Get All proteins mapped to at least one cis and one trans  
+pQTL_data_Trans <- pQTL_data_exp[pQTL_data_exp$cis.trans == "trans", ]
+pQTL_data_Cis <- pQTL_data_exp[pQTL_data_exp$cis.trans == "cis", ]
+
+# Count them 
+All_pQTL <- pQTL_data$Target.UniProt %>% unique()
+Trans_pQTL <- pQTL_data_Trans$Target.UniProt %>% unique()
+Cis_pQTL <- pQTL_data_Cis$Target.UniProt %>% unique()
+
+
+# Get Sets 
+pQTL_data_summary_merged <- Toptable_Modules
+
+
+# Append data frame to contain pQTL info 
+pQTL_data_summary_merged <- pQTL_data_summary_merged %>%
+  mutate(All_pQTL = if_else(pQTL_data_summary_merged$Protein %in% All_pQTL, 1, 0))
+
+pQTL_data_summary_merged <- pQTL_data_summary_merged %>%
+  mutate(Trans_pQTL = if_else(pQTL_data_summary_merged$Protein %in% Trans_pQTL, 1, 0))
+
+pQTL_data_summary_merged <- pQTL_data_summary_merged %>%
+  mutate(Cis_pQTL = if_else(pQTL_data_summary_merged$Protein %in% Cis_pQTL, 1, 0))
+
+
+
+
+# Annotate if protein is hub
+pQTL_data_summary_merged <- pQTL_data_summary_merged %>%
+  mutate(Is_hub = if_else(pQTL_data_summary_merged$Protein %in% hubs$Gene, 1, 0))
+
+# Annotate if protein is DA
+pQTL_data_summary_merged <- pQTL_data_summary_merged %>%
+  mutate(Is_DA = if_else(P.Value < 0.05, 1, 0))
+
+# Annotate if protein is DOX corr. 
+pQTL_data_summary_merged <- pQTL_data_summary_merged %>%
+  mutate(Is_DOXcorr = if_else( Modules %in% c("green","darkgreen","midnightblue","salmon","lightyellow"), 1, 0))
+
+
+# Get data frame of just the hub proteins 
+pQTL_data_summary_merged_hub <- pQTL_data_summary_merged[pQTL_data_summary_merged$Protein %in% hubs$Gene, ]
+
+
+# Cis
+FP_Cis_DOXcor <- perform_fisher_test_FP(vec1 = pQTL_data_summary_merged$Is_DOXcorr, vec2 = pQTL_data_summary_merged$Cis_pQTL, vec1_name = "", vec2_name = "",  plot = FALSE)
+
+
+FP_Cis_Hub <- perform_fisher_test_FP(vec1 = pQTL_data_summary_merged$Is_hub, vec2 = pQTL_data_summary_merged$Cis_pQTL, vec1_name = "", vec2_name = "",  plot = FALSE)
+
+
+
+FP_Cis_DOXcorhub <- perform_fisher_test_FP(vec1 = pQTL_data_summary_merged_hub$Is_DOXcorr, vec2 = pQTL_data_summary_merged_hub$Cis_pQTL, vec1_name = "", vec2_name = "",  plot = FALSE)
+
+
+
+
+# Trans
+FP_Trans_DOXcor <- perform_fisher_test_FP(vec1 = pQTL_data_summary_merged$Is_DOXcorr, vec2 = pQTL_data_summary_merged$Trans_pQTL, vec1_name = "", vec2_name = "",  plot = FALSE)
+
+
+FP_Trans_Hub <- perform_fisher_test_FP(vec1 = pQTL_data_summary_merged$Is_hub, vec2 = pQTL_data_summary_merged$Trans_pQTL, vec1_name = "", vec2_name = "",  plot = FALSE)
+
+FP_Trans_DOXcorhub <- perform_fisher_test_FP(vec1 = pQTL_data_summary_merged_hub$Is_DOXcorr, vec2 = pQTL_data_summary_merged_hub$Trans_pQTL, vec1_name = "", vec2_name = "",  plot = FALSE)
+
+
+FP_List <- list(FP_Cis_DOXcor, FP_Cis_Hub, FP_Cis_DOXcorhub, FP_Trans_DOXcor, FP_Trans_Hub, FP_Trans_DOXcorhub)
+
+FP_DF <- data.frame(
+  Odds_ratio = numeric(length(FP_List)),
+  Lower_CI = numeric(length(FP_List)),
+  Upper_CI = numeric(length(FP_List)), 
+  Pval = numeric(length(FP_List))
+)
+
+for (i in 1:length(FP_List)) {
+  FP_DF$Odds_ratio[i] <- FP_List[[i]]$Odds_ratio
+  FP_DF$Lower_CI[i] <- FP_List[[i]]$Confidence_Interval[1]
+  FP_DF$Upper_CI[i] <- FP_List[[i]]$Confidence_Interval[2]
+  FP_DF$Pval[i] <- FP_List[[i]]$PValue
+}
+
+FP_DF
+
+# Add row names for the labels in the forest plot
+FP_DF$Label <- c("FP_Cis_DOXcor", "FP_Cis_Hub", "FP_Cis_DOXcorhub", "FP_Trans_DOXcor", "FP_Trans_Hub", "FP_Trans_DOXcorhub")
+
+
+
+FP_DF$Label <- factor(FP_DF$Label, levels = rev(c("FP_Cis_Hub", "FP_Trans_Hub","FP_Cis_DOXcor", "FP_Trans_DOXcor", "FP_Cis_DOXcorhub", "FP_Trans_DOXcorhub")))
+
+FP_DF
+
+ggplot(FP_DF, aes(x = Label, y = Odds_ratio, ymin = Lower_CI, ymax = Upper_CI)) +
+  geom_pointrange() +
+  geom_hline(yintercept = 1, linetype = "dashed", color = "red") +
+  coord_flip() +
+  labs(
+    title = "Forest Plot of Odds Ratios",
+    x = "",
+    y = "Odds Ratio (95% CI)"
+  ) +
+  theme_minimal()
+
+FP_DF
+
+# Add a new column to indicate "cis" or "trans"
+FP_DF$Type <- ifelse(grepl("Cis", FP_DF$Label), "Cis-pQTL", "Trans-pQTL")
+
+# Reorder the levels
+FP_DF$Label <- factor(FP_DF$Label, levels = rev(c("FP_Cis_Hub", "FP_Trans_Hub", "FP_Cis_DOXcor", "FP_Trans_DOXcor", "FP_Cis_DOXcorhub", "FP_Trans_DOXcorhub")))
+
+# Plot with color based on "Type"
+ggplot(FP_DF, aes(x = Label, y = Odds_ratio, ymin = Lower_CI, ymax = Upper_CI, color = Type)) +
+  geom_pointrange() +
+  geom_hline(yintercept = 1, linetype = "dashed", color = "red") +
+  coord_flip() +
+  labs(
+    title = "pQTL enrichment among network proteins",
+    x = "",
+    y = "Odds of being pQTL (95% CI)"
+  ) +
+  theme_classic() +
+  scale_color_manual(values = c("Cis-pQTL" = "dodgerblue4", "Trans-pQTL" = "orange3"))
+
+
+```
+
+
+# Fig-3C cis/tran pQTL SNP beta
+```{r cis/tran pQTL SNP beta}
+#### Cis or trans SNP-Effect size #### 
+
+# Read in data from UK biobank paper: https://doi.org/10.1038/s41586-023-06592-6 
+pQTL_data <- read.csv(file = "/Users/omarjohnson/Documents/Projects/Dox_Proteomics/Data/Proteomics/Data_sets/GWAS/pQTL_Genetic_reg_plasmaproteome.csv", header = TRUE)
+
+# Get the data frame with expressed proteins in the set 
+pQTL_data_exp <- pQTL_data[pQTL_data$Target.UniProt %in% Toptable_Modules$Protein, ]
+
+# Get All proteins mapped to at least one cis and one trans  
+pQTL_data_Trans <- pQTL_data_exp[pQTL_data_exp$cis.trans == "trans", ]
+pQTL_data_Cis <- pQTL_data_exp[pQTL_data_exp$cis.trans == "cis", ]
+
+# Summarize All pQTL effect sizes 
+pQTL_data_summary <- pQTL_data_exp %>%
+  group_by(Target.UniProt) %>%
+  arrange(BETA) %>%
+  summarise(
+    Mean_BETA = mean(abs(BETA), na.rm = TRUE),
+    Median_BETA = median(abs(BETA), na.rm = TRUE),
+    Max_BETA = max(abs(BETA), na.rm = TRUE)
+  )
+pQTL_data_summary$Max_BETA %>% hist()
+
+
+
+# Summarize Trans pQTL effect sizes
+Trans_pQTL_data_summary <- pQTL_data_Trans %>%
+  group_by(Target.UniProt) %>%
+  arrange(BETA) %>%
+  summarise(
+    Mean_BETA = mean(abs(BETA), na.rm = TRUE),
+    Median_BETA = median(abs(BETA), na.rm = TRUE),
+    Max_BETA = max(abs(BETA), na.rm = TRUE)
+  )
+Trans_pQTL_data_summary$Max_BETA %>% hist()
+Trans_pQTL_data_summary$Max_BETA %>% median()
+
+
+# Summarize Cis pQTL effect sizes
+Cis_pQTL_data_summary <- pQTL_data_Cis %>%
+  group_by(Target.UniProt) %>%
+  arrange(BETA) %>%
+  summarise(
+    Mean_BETA = mean(abs(BETA), na.rm = TRUE),
+    Median_BETA = median(abs(BETA), na.rm = TRUE),
+    Max_BETA = max(abs(BETA), na.rm = TRUE)
+  )
+Cis_pQTL_data_summary$Max_BETA %>% hist()
+Cis_pQTL_data_summary$Max_BETA %>% median()
+
+
+
+
+# Merge pQTL SNP Data with Toptable_Modules- Cis or Trans
+pQTL_data_merged <- merge(Toptable_Modules, pQTL_data_summary, by.x ="Protein" , by.y ="Target.UniProt" )
+
+Cis_pQTL_data_merged <- merge(Toptable_Modules, Cis_pQTL_data_summary, by.x ="Protein" , by.y ="Target.UniProt" )
+
+Trans_pQTL_data_merged <- merge(Toptable_Modules, Trans_pQTL_data_summary, by.x ="Protein" , by.y ="Target.UniProt" )
+
+
+
+
+
+
+# Hub vs not hub 
+# Network differences in effect size 
+All_pQTL_DAPs <- pQTL_data_merged[pQTL_data_merged$Protein %in% hubs$Gene,  ]
+All_pQTL_NonDAPs <- pQTL_data_merged[!pQTL_data_merged$Protein %in% hubs$Gene,  ]
+
+Cis_pQTL_DAPs <- Cis_pQTL_data_merged[Cis_pQTL_data_merged$Protein %in% hubs$Gene,  ]
+Cis_pQTL_NonDAPs <- Cis_pQTL_data_merged[!Cis_pQTL_data_merged$Protein %in% hubs$Gene,  ]
+
+Trans_pQTL_DAPs <- Trans_pQTL_data_merged[Trans_pQTL_data_merged$Protein %in% hubs$Gene,  ]
+Trans_pQTL_NonDAPs <- Trans_pQTL_data_merged[!Trans_pQTL_data_merged$Protein %in% hubs$Gene,  ]
+
+
+# Test 
+# 1. 
+wilcox.test(All_pQTL_DAPs$Max_BETA , All_pQTL_NonDAPs$Max_BETA)
+ 
+
+# 2. 
+wilcox.test(Cis_pQTL_DAPs$Max_BETA , Cis_pQTL_NonDAPs$Max_BETA)
+
+# 3. 
+wilcox.test(Trans_pQTL_DAPs$Max_BETA , Trans_pQTL_NonDAPs$Max_BETA)
+
+
+
+
+# DOX corr. vs not DOX corr.  
+# Network differences in effect size 
+
+All_pQTL_DAPs <- pQTL_data_merged[pQTL_data_merged$Modules %in% c("green", "darkgreen","midnightblue","salmon","lightyellow"),  ]
+All_pQTL_NonDAPs <- pQTL_data_merged[!pQTL_data_merged$Modules %in% c("green", "darkgreen","midnightblue","salmon","lightyellow"),  ]
+
+
+Cis_pQTL_DAPs <- Cis_pQTL_data_merged[Cis_pQTL_data_merged$Modules %in% c("green", "darkgreen","midnightblue","salmon","lightyellow"),  ]
+Cis_pQTL_NonDAPs <- Cis_pQTL_data_merged[!Cis_pQTL_data_merged$Modules %in% c("green", "darkgreen","midnightblue","salmon","lightyellow"),  ]
+
+
+
+Trans_pQTL_DAPs <- Trans_pQTL_data_merged[Trans_pQTL_data_merged$Modules %in% c("green", "darkgreen","midnightblue","salmon","lightyellow"),  ]
+Trans_pQTL_NonDAPs <- Trans_pQTL_data_merged[!Trans_pQTL_data_merged$Modules %in% c("green", "darkgreen","midnightblue","salmon","lightyellow"),  ]
+
+
+
+
+
+# Test 
+# 1. 
+wilcox.test(All_pQTL_DAPs$Max_BETA , All_pQTL_NonDAPs$Max_BETA)
+ 
+# 2. 
+wilcox.test(Cis_pQTL_DAPs$Max_BETA , Cis_pQTL_NonDAPs$Max_BETA)
+
+# 3. 
+wilcox.test(Trans_pQTL_DAPs$Max_BETA , Trans_pQTL_NonDAPs$Max_BETA)
+
+
+
+# Now showing only the ones that you want
+# Create a data frame
+pLI_Hubs_DF_Boxplot <- data.frame(
+  # 1. Generate values to compare 
+  values = c( 
+             Cis_pQTL_DAPs$Max_BETA, 
+             Cis_pQTL_NonDAPs$Max_BETA, 
+             Trans_pQTL_DAPs$Max_BETA, 
+             Trans_pQTL_NonDAPs$Max_BETA),
+  
+  # 2. Factor values to compare 
+  group = factor(
+                c(rep("Cis_DOXcor.", length(Cis_pQTL_DAPs$Max_BETA)),
+                c(rep("Cis_Not_DOXcor.", length(Cis_pQTL_NonDAPs$Max_BETA)),
+                c(rep("Trans_DOXcor.", length(Trans_pQTL_DAPs$Max_BETA)),
+                c(rep("Trans_Not_DOXcor.",length(Trans_pQTL_NonDAPs$Max_BETA))
+                  
+                             
+                             ))))))
+
+
+
+
+# Create boxplot
+ggplot(pLI_Hubs_DF_Boxplot, aes(x = group, y = values)) +
+  geom_boxplot() +
+  labs(x = "Group", y = "pQTL-Max-BETA") +
+  ggtitle("pQTL max SNP effect size: DOXcor. vs Not DOXcor.")+
+  theme_classic()+
+  coord_cartesian(ylim = c(0, 1.0))+
+  theme(axis.text.x = element_text(color = "grey20", size = 10, angle = 90, hjust = .5, vjust = .5, face = "plain"))
+
+
+
+
+
+# DOX corr. vs not DOX corr.  hubs
+All_pQTL_DAPs <- pQTL_data_merged[(pQTL_data_merged$Modules %in% c("green", "darkgreen","midnightblue","salmon","lightyellow")) & (pQTL_data_merged$Protein %in% hubs$Gene),  ]
+
+All_pQTL_NonDAPs <- pQTL_data_merged[(!pQTL_data_merged$Modules %in% c("green", "darkgreen","midnightblue","salmon","lightyellow")) & (pQTL_data_merged$Protein %in% hubs$Gene) ,  ]
+
+
+Cis_pQTL_DAPs <- Cis_pQTL_data_merged[(Cis_pQTL_data_merged$Modules %in% c("green", "darkgreen","midnightblue","salmon","lightyellow")) & (Cis_pQTL_data_merged$Protein %in% hubs$Gene) ,  ]
+
+Cis_pQTL_NonDAPs <- Cis_pQTL_data_merged[(!Cis_pQTL_data_merged$Modules %in% c("green", "darkgreen","midnightblue","salmon","lightyellow")) & (Cis_pQTL_data_merged$Protein %in% hubs$Gene) ,  ]
+
+
+Trans_pQTL_DAPs <- Trans_pQTL_data_merged[(Trans_pQTL_data_merged$Modules %in% c("green", "darkgreen","midnightblue","salmon","lightyellow")) & (Trans_pQTL_data_merged$Protein %in% hubs$Gene) ,  ]
+
+Trans_pQTL_NonDAPs <- Trans_pQTL_data_merged[(!Trans_pQTL_data_merged$Modules %in% c("green", "darkgreen","midnightblue","salmon","lightyellow")) & (Trans_pQTL_data_merged$Protein %in% hubs$Gene),  ]
+
+
+
+# Test 
+# 1. 
+wilcox.test(All_pQTL_DAPs$Max_BETA , All_pQTL_NonDAPs$Max_BETA)
+ 
+# 2. 
+wilcox.test(Cis_pQTL_DAPs$Max_BETA , Cis_pQTL_NonDAPs$Max_BETA)
+
+# 3. 
+wilcox.test(Trans_pQTL_DAPs$Max_BETA , Trans_pQTL_NonDAPs$Max_BETA)
+
+
+
+# Now showing only the ones that you want: 
+# Create a data frame
+pLI_Hubs_DF_Boxplot <- data.frame(
+  # 1. Generate values to compare 
+  values = c( 
+             Cis_pQTL_DAPs$Max_BETA, 
+             Cis_pQTL_NonDAPs$Max_BETA, 
+             Trans_pQTL_DAPs$Max_BETA, 
+             Trans_pQTL_NonDAPs$Max_BETA
+             ),
+  
+  # 2. Factor values to compare 
+  group = factor(
+                c(rep("Cis_DOXcor.Hub", length(Cis_pQTL_DAPs$Max_BETA)),
+                c(rep("Cis_Not_DOXcor. Hub", length(Cis_pQTL_NonDAPs$Max_BETA)),
+                c(rep("Trans_DOXcor. Hub", length(Trans_pQTL_DAPs$Max_BETA)),
+                c(rep("Trans_Not_DOXcor. Hub",length(Trans_pQTL_NonDAPs$Max_BETA))
+                             ))))))
+
+
+
+# Create boxplot
+ggplot(pLI_Hubs_DF_Boxplot, aes(x = group, y = values)) +
+  geom_boxplot() +
+  labs(x = "", y = "Max-BETA") +
+  ggtitle("pQTL max SNP effects Hub-DOXcor. vs Hub-Not DOXcor.")+
+  theme_classic()+
+  coord_cartesian(ylim = c(0, 1.0))+
+  theme(axis.text.x = element_text(color = "grey20", size = 10, angle = 90, hjust = .5, vjust = .5, face = "plain"))
+```
+
+
+# Fig-3D pQTLs across connectivities 
+```{r pQTLs across connectivities}
+#### pQTL connectivity #### 
+# Function to generate decile labels
+
+pQTL_pro_unique <- pQTL_data$Target.UniProt %>% unique()
+kIN_DF_TT <- Toptable_Modules
+kIN_DF_TT2 <- kIN_DF_TT
+
+# Generate deciles
+kIN_DF_TT2$Decile <- group_by_deciles(kIN_DF_TT2$Norm_kOut)
+pQTL_pro_unique_exp <- intersect(pQTL_pro_unique, Toptable_Modules$Protein)
+
+
+
+
+# Check if a protein is a cis or trans pQTL protein
+kIN_DF_TT2$is_cis_pQTL <- kIN_DF_TT2$Protein %in% Cis_pQTL_data_summary$Target.UniProt
+kIN_DF_TT2$is_trans_pQTL <- kIN_DF_TT2$Protein %in% Trans_pQTL_data_summary$Target.UniProt
+
+# Calculate the total number of proteins in each decile
+total_proteins_per_decile <- kIN_DF_TT2 %>%
+  group_by(Decile) %>%
+  summarise(total_proteins = n())
+total_proteins_per_decile
+
+# Calculate the number of cis pQTL proteins in each decile
+cis_pQTL_proteins_per_decile <- kIN_DF_TT2 %>%
+  filter(is_cis_pQTL) %>%
+  group_by(Decile) %>%
+  summarise(cis_pQTL_proteins = n())
+
+
+# Calculate the number of trans pQTL proteins in each decile
+trans_pQTL_proteins_per_decile <- kIN_DF_TT2 %>%
+  filter(is_trans_pQTL) %>%
+  group_by(Decile) %>%
+  summarise(trans_pQTL_proteins = n())
+
+
+# Merge the data frames
+decile_summary <- total_proteins_per_decile %>%
+  left_join(cis_pQTL_proteins_per_decile, by = "Decile") %>%
+  left_join(trans_pQTL_proteins_per_decile, by = "Decile")
+
+# Replace NA values with 0 (for deciles with no pQTL proteins)
+decile_summary$cis_pQTL_proteins[is.na(decile_summary$cis_pQTL_proteins)] <- 0
+
+decile_summary$trans_pQTL_proteins[is.na(decile_summary$trans_pQTL_proteins)] <- 0
+
+# Calculate the percentage of cis and trans pQTL proteins in each decile
+decile_summary <- decile_summary %>%
+  mutate(percentage_cis_pQTL = (cis_pQTL_proteins / total_proteins) * 100,
+         percentage_trans_pQTL = (trans_pQTL_proteins / total_proteins) * 100)
+
+# Reshape the data for plotting
+decile_summary_long <- decile_summary %>%
+  pivot_longer(cols = starts_with("percentage_"), names_to = "Type", values_to = "Percentage")
+
+
+# Replace "percentage_" with an empty string for better labels
+decile_summary_long$Type <- gsub("percentage_", "", decile_summary_long$Type)
+
+# Plot the data
+ggplot(decile_summary_long, aes(x = Decile, y = Percentage, color = Type, group = Type)) +
+  geom_line() +
+  geom_point(size = 2) +
+  labs(
+    title = "pQTL proportion across kIN deciles",
+    x = "Decile",
+    y = "% pQTL"
+  ) +
+  theme_minimal() +
+  scale_color_manual(values = c("cis_pQTL" = "darkblue", "trans_pQTL" = "tan3")) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))+
+  coord_cartesian(ylim = c(0,25))
+
+
+
+
+
+
+kIN_DF_TT2_DOX <- kIN_DF_TT2[kIN_DF_TT2$Modules %in% c("green", "darkgreen","midnightblue","salmon","lightyellow"), ]
+
+kIN_DF_TT2_DOX$Decile <- group_by_deciles(kIN_DF_TT2_DOX$Norm_kIN)
+
+
+
+
+# Check if a protein is a cis or trans pQTL protein
+kIN_DF_TT2_DOX$is_cis_pQTL <- kIN_DF_TT2_DOX$Protein %in% Cis_pQTL_data_summary$Target.UniProt
+kIN_DF_TT2_DOX$is_trans_pQTL <- kIN_DF_TT2_DOX$Protein %in% Trans_pQTL_data_summary$Target.UniProt
+
+# Calculate the total number of proteins in each decile
+total_proteins_per_decile <- kIN_DF_TT2_DOX %>%
+  group_by(Decile) %>%
+  summarise(total_proteins = n())
+
+# Calculate the number of cis pQTL proteins in each decile
+cis_pQTL_proteins_per_decile <- kIN_DF_TT2_DOX %>%
+  filter(is_cis_pQTL) %>%
+  group_by(Decile) %>%
+  summarise(cis_pQTL_proteins = n())
+
+# Calculate the number of trans pQTL proteins in each decile
+trans_pQTL_proteins_per_decile <- kIN_DF_TT2_DOX %>%
+  filter(is_trans_pQTL) %>%
+  group_by(Decile) %>%
+  summarise(trans_pQTL_proteins = n())
+
+# Merge the data frames
+decile_summary <- total_proteins_per_decile %>%
+  left_join(cis_pQTL_proteins_per_decile, by = "Decile") %>%
+  left_join(trans_pQTL_proteins_per_decile, by = "Decile")
+
+# Replace NA values with 0 (for deciles with no pQTL proteins)
+decile_summary$cis_pQTL_proteins[is.na(decile_summary$cis_pQTL_proteins)] <- 0
+decile_summary$trans_pQTL_proteins[is.na(decile_summary$trans_pQTL_proteins)] <- 0
+
+# Calculate the percentage of cis and trans pQTL proteins in each decile
+decile_summary <- decile_summary %>%
+  mutate(percentage_cis_pQTL = (cis_pQTL_proteins / total_proteins) * 100,
+         percentage_trans_pQTL = (trans_pQTL_proteins / total_proteins) * 100)
+
+# Reshape the data for plotting
+decile_summary_long <- decile_summary %>%
+  pivot_longer(cols = starts_with("percentage_"), names_to = "Type", values_to = "Percentage")
+
+
+# Replace "percentage_" with an empty string for better labels
+decile_summary_long$Type <- gsub("percentage_", "", decile_summary_long$Type)
+
+# Plot the data
+Plot1 <- ggplot(decile_summary_long, aes(x = Decile, y = Percentage, color = Type, group = Type)) +
+  geom_line() +
+  geom_point(size = 2) +
+  labs(
+    title = "DOXcorr pQTL proportion across kIN deciles",
+    x = "Decile",
+    y = "% pQTL"
+  ) +
+  theme_minimal() +
+  scale_color_manual(values = c("cis_pQTL" = "darkblue", "trans_pQTL" = "tan3")) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))+
+  coord_cartesian(ylim = c(2.5,25))
+
+
+
+
+kIN_DF_TT2_NOT_DOX <- kIN_DF_TT2[!kIN_DF_TT2$Modules %in% c("green", "darkgreen","midnightblue","salmon","lightyellow"), ]
+kIN_DF_TT2_NOT_DOX$Decile <- group_by_deciles(kIN_DF_TT2_NOT_DOX$Norm_kIN)
+
+
+
+# Check if a protein is a cis or trans pQTL protein
+kIN_DF_TT2_NOT_DOX$is_cis_pQTL <- kIN_DF_TT2_NOT_DOX$Protein %in% Cis_pQTL_data_summary$Target.UniProt
+kIN_DF_TT2_NOT_DOX$is_trans_pQTL <- kIN_DF_TT2_NOT_DOX$Protein %in% Trans_pQTL_data_summary$Target.UniProt
+
+# Calculate the total number of proteins in each decile
+total_proteins_per_decile <- kIN_DF_TT2_NOT_DOX %>%
+  group_by(Decile) %>%
+  summarise(total_proteins = n())
+
+# Calculate the number of cis pQTL proteins in each decile
+cis_pQTL_proteins_per_decile <- kIN_DF_TT2_NOT_DOX %>%
+  filter(is_cis_pQTL) %>%
+  group_by(Decile) %>%
+  summarise(cis_pQTL_proteins = n())
+
+# Calculate the number of trans pQTL proteins in each decile
+trans_pQTL_proteins_per_decile <- kIN_DF_TT2_NOT_DOX %>%
+  filter(is_trans_pQTL) %>%
+  group_by(Decile) %>%
+  summarise(trans_pQTL_proteins = n())
+
+# Merge the data frames
+decile_summary <- total_proteins_per_decile %>%
+  left_join(cis_pQTL_proteins_per_decile, by = "Decile") %>%
+  left_join(trans_pQTL_proteins_per_decile, by = "Decile")
+
+# Replace NA values with 0 (for deciles with no pQTL proteins)
+decile_summary$cis_pQTL_proteins[is.na(decile_summary$cis_pQTL_proteins)] <- 0
+decile_summary$trans_pQTL_proteins[is.na(decile_summary$trans_pQTL_proteins)] <- 0
+
+# Calculate the percentage of cis and trans pQTL proteins in each decile
+decile_summary <- decile_summary %>%
+  mutate(percentage_cis_pQTL = (cis_pQTL_proteins / total_proteins) * 100,
+         percentage_trans_pQTL = (trans_pQTL_proteins / total_proteins) * 100)
+
+# Reshape the data for plotting
+decile_summary_long <- decile_summary %>%
+  pivot_longer(cols = starts_with("percentage_"), names_to = "Type", values_to = "Percentage")
+
+# Replace "percentage_" with an empty string for better labels
+decile_summary_long$Type <- gsub("percentage_", "", decile_summary_long$Type)
+
+# Plot the data
+Plot2 <- ggplot(decile_summary_long, aes(x = Decile, y = Percentage, color = Type, group = Type)) +
+  geom_line() +
+  geom_point(size = 2) +
+  labs(
+    title = "Non-DOXcorr pQTL proportion across kIN deciles",
+    x = "Decile",
+    y = "% pQTL"
+  ) +
+  theme_minimal() +
+  scale_color_manual(values = c("cis_pQTL" = "darkblue", "trans_pQTL" = "tan3")) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))+
+  coord_cartesian(ylim = c(2.5,25))
+
+Plot1 + Plot2
+
+
+
+
+### ALL PQTLs 
+# 
+kIN_DF_TT2_DOX <- kIN_DF_TT2[kIN_DF_TT2$Modules %in% c("green", "darkgreen","midnightblue","salmon","lightyellow"), ]
+
+kIN_DF_TT2_DOX$Decile <- group_by_deciles(kIN_DF_TT2_DOX$Norm_kIN)
+
+
+# Check if a protein is a pQTL protein
+kIN_DF_TT2_DOX$is_pQTL <- kIN_DF_TT2_DOX$Protein %in% pQTL_pro_unique_exp
+
+# Calculate the total number of proteins in each decile
+total_proteins_per_decile <- kIN_DF_TT2_DOX %>%
+  group_by(Decile) %>%
+  summarise(total_proteins = n())
+
+# Calculate the number of pQTL proteins in each decile
+pQTL_proteins_per_decile <- kIN_DF_TT2_DOX %>%
+  filter(is_pQTL) %>%
+  group_by(Decile) %>%
+  summarise(pQTL_proteins = n())
+
+# Merge the two data frames
+decile_summary <- merge(total_proteins_per_decile, pQTL_proteins_per_decile, by = "Decile", all.x = TRUE)
+
+# Replace NA values with 0 (for deciles with no pQTL proteins)
+decile_summary$pQTL_proteins[is.na(decile_summary$pQTL_proteins)] <- 0
+
+
+# Calculate the percentage of pQTL proteins in each decile
+decile_summary <- decile_summary %>%
+  mutate(percentage_pQTL = (pQTL_proteins / total_proteins) * 100)
+
+
+
+
+decile_summary_DOXcorr <- decile_summary
+kIN_DF_TT2_NOT_DOX <- kIN_DF_TT2[!kIN_DF_TT2$Modules %in% c("green", "darkgreen","midnightblue","salmon","lightyellow"), ]
+
+
+kIN_DF_TT2_NOT_DOX$Decile <- group_by_deciles(kIN_DF_TT2_NOT_DOX$Norm_kIN)
+
+
+# Check if a protein is a pQTL protein
+kIN_DF_TT2_NOT_DOX$is_pQTL <- kIN_DF_TT2_NOT_DOX$Protein %in% pQTL_pro_unique_exp
+
+# Calculate the total number of proteins in each decile
+total_proteins_per_decile <- kIN_DF_TT2_NOT_DOX %>%
+  group_by(Decile) %>%
+  summarise(total_proteins = n())
+
+# Calculate the number of pQTL proteins in each decile
+pQTL_proteins_per_decile <- kIN_DF_TT2_NOT_DOX %>%
+  filter(is_pQTL) %>%
+  group_by(Decile) %>%
+  summarise(pQTL_proteins = n())
+
+# Merge the two data frames
+decile_summary <- merge(total_proteins_per_decile, pQTL_proteins_per_decile, by = "Decile", all.x = TRUE)
+
+# Replace NA values with 0 (for deciles with no pQTL proteins)
+decile_summary$pQTL_proteins[is.na(decile_summary$pQTL_proteins)] <- 0
+
+# Calculate the percentage of pQTL proteins in each decile
+decile_summary <- decile_summary %>%
+  mutate(percentage_pQTL = (pQTL_proteins / total_proteins) * 100)
+ decile_summary_NOTDOX <- decile_summary
+ decile_summary_DOXcorr$Type <- c("DOX-corr.")
+ decile_summary_NOTDOX$Type <- c("Not-DOX-corr.")
+ decile_summary_ALL <- rbind(decile_summary_DOXcorr,decile_summary_NOTDOX )
+  
+ 
+ 
+ 
+# Define the colors for each type
+type_colors <- c("DOX-corr." = "red", "Not-DOX-corr." = "blue")
+# Plot the data
+ggplot(decile_summary_ALL, aes(x = Decile, y = percentage_pQTL, color = Type, group = Type)) +
+  geom_line() +
+  geom_point(size = 2) +
+  labs(
+    title = "Percentage of pQTL Proteins Across Deciles",
+    x = "Decile",
+    y = "Percentage of pQTL Proteins"
+  ) +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  scale_color_manual(values = type_colors)
+decile_summary_ALL
+
+```
+
+
+# Supp. analyses
+```{r , include = FALSE}
+pQTL_data <- read.csv(file = "/Users/omarjohnson/Documents/Projects/Dox_Proteomics/Data/Proteomics/Data_sets/GWAS/pQTL_Genetic_reg_plasmaproteome.csv", header = TRUE)
+
+Toptable_Modules <- read.csv(file = "/Users/omarjohnson/Documents/Projects/Dox_Proteomics/Data/Proteomics/Data_sets/Supplement/SUPP_Table_2.csv", header = TRUE)
+
+perform_module_disease_analysis_genes_3 <- function(toptable, diseaseGenes, module_col, gene_col) {
+  # Prepare an empty list to collect results
+  results <- list()
+  
+  # Ensure 'module_col' and 'gene_col' columns exist in 'toptable'
+  if (!module_col %in% names(toptable)) {
+    stop(paste("Column", module_col, "not found in the 'toptable'."))
+  }
+  if (!gene_col %in% names(toptable)) {
+    stop(paste("Column", gene_col, "not found in the 'toptable'."))
+  }
+  
+  # Filter disease genes to include only those that are expressed in toptable
+  expressedDiseaseGenes <- lapply(diseaseGenes, function(genes) {
+    intersect(genes, toptable[[gene_col]])
+  })
+  
+  # Loop through each module
+  modules <- unique(toptable[[module_col]])
+  for (module in modules) {
+    # Get the genes in the module
+    moduleGenes <- toptable[[gene_col]][toptable[[module_col]] == module]
+    
+    # Loop through each disease gene set
+    for (diseaseName in names(expressedDiseaseGenes)) {
+      # Find the intersecting genes between the module and the expressed disease genes
+      diseaseModuleIntersect <- intersect(moduleGenes, expressedDiseaseGenes[[diseaseName]])
+      
+      # Calculate elements for the contingency table
+      numIntersect = length(diseaseModuleIntersect)
+      numInModuleNotDisease = length(moduleGenes) - numIntersect
+      numInDiseaseNotModule = length(expressedDiseaseGenes[[diseaseName]]) - numIntersect
+      numInNeither = nrow(toptable) - (numIntersect + numInModuleNotDisease + numInDiseaseNotModule)
+      
+      # Build the contingency table
+      table <- matrix(c(
+        numIntersect, # Both in disease list and module
+        numInModuleNotDisease, # In module but not disease list
+        numInDiseaseNotModule, # In disease list but not module
+        numInNeither # In neither list
+      ), nrow = 2, byrow = TRUE)
+      
+      # Perform chi-squared test and Fisher's exact test with error handling
+      chiSqTestResult <- tryCatch({
+        chisq.test(table, correct = TRUE)
+      }, error = function(e) {
+        list(p.value = NA)
+      }, warning = function(w) {
+        list(p.value = NA)
+      })
+      
+      fisherTestResult <- tryCatch({
+        fisher.test(table )
+      }, error = function(e) {
+        list(p.value = NA)
+      }, warning = function(w) {
+        list(p.value = NA)
+      })
+      
+      # Calculate percent overlap, handle division by zero
+      percentOverlap <- if (length(moduleGenes) > 0) {
+        (numIntersect / length(expressedDiseaseGenes[[diseaseName]])) * 100
+      } else {
+        0
+      }
+      
+      # Convert intersecting genes to a single character string
+      intersectingGenesStr <- if (numIntersect > 0) {
+        paste(diseaseModuleIntersect, collapse = ";")
+      } else {
+        ""  # Use an empty string to indicate no intersection
+      }
+      
+      # Append to results list
+      results[[paste(module, diseaseName, sep = "_")]] <- data.frame(
+        Modules = module,
+        Disease = diseaseName,
+        ChiSqPValue = chiSqTestResult$p.value,
+        FisherPValue = fisherTestResult$p.value,
+        PercentOverlap = percentOverlap,
+        OddsRatio = fisherTestResult$estimate,
+        ConfIntLower = fisherTestResult$conf.int[1],
+        ConfIntUpper = fisherTestResult$conf.int[2],
+        IntersectingGenes = intersectingGenesStr 
+        
+      )
+    }
+  }
+  
+  # Combine results into a single data frame
+  results_df <- do.call(rbind, results)
+  return(results_df)
+}
+```
+
+
+# Fig. S13 pQTL enrichment for different modules  
+```{r }
+pQTL_vec <- pQTL_data$Target.UniProt %>% unique()
+
+
+intersect(pQTL_vec, Toptable_Modules$Proteins) %>% length()
+
+pQTL_list <- 
+  list(
+    pQtLs = intersect(pQTL_vec, Toptable_Modules$Proteins)
+  )
+
+DF_mod_pQTL <- perform_module_disease_analysis_genes_3(toptable = Toptable_Modules, diseaseGenes = pQTL_list, module_col = "Modules.x", gene_col = "Proteins" )
+
+
+DF_mod_pQTL[DF_mod_pQTL$FisherPValue < 0.05, !colnames(DF_mod_pQTL) %in% c("IntersectingGenes")]
+DF_mod_pQTL$FisherPValue_adj <- p.adjust(DF_mod_pQTL$FisherPValue, "BH")
+DF_mod_pQTL[DF_mod_pQTL$FisherPValue_adj < 0.05, ]$Modules
+DF_mod_pQTL[DF_mod_pQTL$FisherPValue_adj < 0.05, !colnames(DF_mod_pQTL) %in% c("IntersectingGenes") ]
+
+Module_order_DOX <- c("green", "darkgreen", "midnightblue", "salmon","lightyellow","lightgreen","blue","magenta","darkred","brown", "yellow", "royalblue", "grey" )
+
+DF_mod_pQTL$Modules <- factor(x = DF_mod_pQTL$Modules, levels = c("green", "darkgreen", "midnightblue", "salmon","lightyellow","lightgreen","blue","magenta","darkred","brown", "yellow", "royalblue", "grey"))
+
+
+ggplot(DF_mod_pQTL, aes(x = Modules, y = Disease, fill = OddsRatio)) +
+  geom_tile(color = "white") + 
+  # Add stars to cells where FisherPValue_adj < 0.05
+  geom_text(
+    data = filter(DF_mod_pQTL, FisherPValue_adj < 0.05),
+    aes(x = Modules, y = Disease),
+    label = "*",
+    color = "black",
+    size = 6,          # adjust star size
+    vjust = 0.5,       # vertical justification
+    hjust = 0.5        # horizontal justification
+  ) +
+  scale_fill_gradient2(low = "blue", mid = "white", high = "red", midpoint = 1) +
+  labs(x = "Modules", y = "", fill = "Odds Ratio") +
+  theme_classic() +
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1)
+  )
+```
