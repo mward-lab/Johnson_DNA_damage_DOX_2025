@@ -1,0 +1,1702 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Omar Johnson" />
+
+<meta name="date" content="2024-12-08" />
+
+<title>DNA_damage_pQTLs</title>
+
+<script src="site_libs/header-attrs-2.28/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.13.2/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-6.4.2/css/all.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet" />
+
+<link rel="icon" href="https://github.com/workflowr/workflowr-assets/raw/main/img/reproducible.png">
+<!-- Add a small amount of space between sections. -->
+<style type="text/css">
+div.section {
+  padding-top: 12px;
+}
+</style>
+
+
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">DNA_damage_DOX_project</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="about.html">About</a>
+</li>
+<li>
+  <a href="license.html">License</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/Omar-Johnson/DNA_damage_DOX">
+    <span class="fab fa-github"></span>
+     
+    Source code
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">DNA_damage_pQTLs</h1>
+<h4 class="author">Omar Johnson</h4>
+<h4 class="date">2024-12-08</h4>
+
+</div>
+
+
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
+<span class="glyphicon glyphicon-list" aria-hidden="true"></span>
+workflowr <span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span>
+</button>
+</p>
+<div id="workflowr-report" class="collapse">
+<ul class="nav nav-tabs">
+<li class="active">
+<a data-toggle="tab" href="#summary">Summary</a>
+</li>
+<li>
+<a data-toggle="tab" href="#checks"> Checks <span
+class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
+</a>
+</li>
+<li>
+<a data-toggle="tab" href="#versions">Past versions</a>
+</li>
+</ul>
+<div class="tab-content">
+<div id="summary" class="tab-pane fade in active">
+<p>
+<strong>Last updated:</strong> 2024-12-07
+</p>
+<p>
+<strong>Checks:</strong> <span
+class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7
+<span class="glyphicon glyphicon-exclamation-sign text-danger"
+aria-hidden="true"></span> 0
+</p>
+<p>
+<strong>Knit directory:</strong> <code>DNA_damage_DOX/</code> <span
+class="glyphicon glyphicon-question-sign" aria-hidden="true"
+title="This is the local directory in which the code in this file was executed.">
+</span>
+</p>
+<p>
+This reproducible <a href="https://rmarkdown.rstudio.com">R Markdown</a>
+analysis was created with <a
+  href="https://github.com/workflowr/workflowr">workflowr</a> (version
+1.7.1). The <em>Checks</em> tab describes the reproducibility checks
+that were applied when the results were created. The <em>Past
+versions</em> tab lists the development history.
+</p>
+<hr>
+</div>
+<div id="checks" class="tab-pane fade">
+<div id="workflowr-checks" class="panel-group">
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date
+</a>
+</p>
+</div>
+<div id="strongRMarkdownfilestronguptodate"
+class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great! Since the R Markdown file has been committed to the Git
+repository, you know the exact version of the code that produced these
+results.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongEnvironmentstrongempty">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Environment:</strong> empty </a>
+</p>
+</div>
+<div id="strongEnvironmentstrongempty" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! The global environment was empty. Objects defined in the
+global environment can affect the analysis in your R Markdown file in
+unknown ways. For reproduciblity it’s best to always run the code in an
+empty environment.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSeedstrongcodesetseed20241207code">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Seed:</strong>
+<code>set.seed(20241207)</code> </a>
+</p>
+</div>
+<div id="strongSeedstrongcodesetseed20241207code"
+class="panel-collapse collapse">
+<div class="panel-body">
+<p>The command <code>set.seed(20241207)</code> was run prior to running
+the code in the R Markdown file. Setting a seed ensures that any results
+that rely on randomness, e.g. subsampling or permutations, are
+reproducible.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSessioninformationstrongrecorded">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Session information:</strong>
+recorded </a>
+</p>
+</div>
+<div id="strongSessioninformationstrongrecorded"
+class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Recording the operating system, R version, and package
+versions is critical for reproducibility.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongCachestrongnone">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Cache:</strong> none </a>
+</p>
+</div>
+<div id="strongCachestrongnone" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Nice! There were no cached chunks for this analysis, so you can be
+confident that you successfully produced the results during this
+run.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongFilepathsstrongrelative">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>File paths:</strong> relative </a>
+</p>
+</div>
+<div id="strongFilepathsstrongrelative" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Using relative paths to the files within your workflowr
+project makes it easier to run your code on other machines.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomOmarJohnsonDNAdamageDOXtreeffc97d7b12ae0f7b1e60b7427621b13e3138bcectargetblankffc97d7a">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Repository version:</strong>
+<a href="https://github.com/Omar-Johnson/DNA_damage_DOX/tree/ffc97d7b12ae0f7b1e60b7427621b13e3138bcec" target="_blank">ffc97d7</a>
+</a>
+</p>
+</div>
+<div
+id="strongRepositoryversionstrongahrefhttpsgithubcomOmarJohnsonDNAdamageDOXtreeffc97d7b12ae0f7b1e60b7427621b13e3138bcectargetblankffc97d7a"
+class="panel-collapse collapse">
+<div class="panel-body">
+<p>
+Great! You are using Git for version control. Tracking code development
+and connecting the code version to the results is critical for
+reproducibility.
+</p>
+<p>
+The results in this page were generated with repository version
+<a href="https://github.com/Omar-Johnson/DNA_damage_DOX/tree/ffc97d7b12ae0f7b1e60b7427621b13e3138bcec" target="_blank">ffc97d7</a>.
+See the <em>Past versions</em> tab to see a history of the changes made
+to the R Markdown and HTML files.
+</p>
+<p>
+Note that you need to be careful to ensure that all relevant files for
+the analysis have been committed to Git prior to generating the results
+(you can use <code>wflow_publish</code> or
+<code>wflow_git_commit</code>). workflowr only checks the R Markdown
+file, but you know if there are other scripts or data files that it
+depends on. Below is the status of the Git repository when the results
+were generated:
+</p>
+<pre><code>
+Ignored files:
+    Ignored:    .DS_Store
+
+</code></pre>
+<p>
+Note that any generated files, e.g. HTML, png, CSS, etc., are not
+included in this status report because it is ok for generated content to
+have uncommitted changes.
+</p>
+</div>
+</div>
+</div>
+</div>
+<hr>
+</div>
+<div id="versions" class="tab-pane fade">
+
+<p>
+These are the previous versions of the repository in which changes were
+made to the R Markdown (<code>analysis/DOX_prot_pQTL_Fig3.Rmd</code>)
+and HTML (<code>docs/DOX_prot_pQTL_Fig3.html</code>) files. If you’ve
+configured a remote Git repository (see <code>?wflow_git_remote</code>),
+click on the hyperlinks in the table below to view the files as they
+were in that past version.
+</p>
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+File
+</th>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+<th>
+Message
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/Omar-Johnson/DNA_damage_DOX/blob/ffc97d7b12ae0f7b1e60b7427621b13e3138bcec/analysis/DOX_prot_pQTL_Fig3.Rmd" target="_blank">ffc97d7</a>
+</td>
+<td>
+Omar-Johnson
+</td>
+<td>
+2024-12-07
+</td>
+<td>
+Publish Fig. 3
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr>
+</div>
+</div>
+</div>
+<div id="load-libraries" class="section level1">
+<h1>Load Libraries</h1>
+</div>
+<div id="read-in-data" class="section level1">
+<h1>Read in Data</h1>
+</div>
+<div id="functions" class="section level1">
+<h1>Functions</h1>
+<pre class="r"><code>perform_fisher_test_FP &lt;- function(vec1, vec2, vec1_name, vec2_name, plot = FALSE) {
+  # Create labeled factors for vec1 and vec2
+  vec1_label &lt;- factor(vec1, labels = c(paste0(&quot;Not&quot;, vec1_name), paste0(&quot;Is&quot;, vec1_name)))
+  vec2_label &lt;- factor(vec2, labels = c(paste0(&quot;Not&quot;, vec2_name), paste0(&quot;Is&quot;, vec2_name)))
+
+  # Create contingency table with labeled factors
+  table &lt;- table(vec1_label, vec2_label)
+
+  # Perform Fisher&#39;s exact test
+  test_result &lt;- fisher.test(table)
+  p_value &lt;- test_result$p.value
+OR &lt;- test_result$estimate
+CI &lt;- test_result$conf.int
+
+  # Prepare result
+  result &lt;- list(
+    ContingencyTable = table,
+    PValue = p_value, 
+    Odds_ratio = test_result$estimate,
+    Confidence_Interval = test_result$conf.int
+  )
+
+  # Generate plot if required
+  if (plot) {
+    # Convert table to data frame for ggplot
+    table_df &lt;- as.data.frame(as.table(table))
+    colnames(table_df) &lt;- c(&quot;vec1_label&quot;, &quot;vec2_label&quot;, &quot;Freq&quot;)
+
+    # Calculate totals for each vec1_label
+    totals &lt;- aggregate(Freq ~ vec1_label, data = table_df, sum)
+
+    # Merge totals with table_df and calculate percentages
+    table_df &lt;- merge(table_df, totals, by = &quot;vec1_label&quot;, all.x = TRUE)
+    table_df$Percentage &lt;- with(table_df, Freq.x / Freq.y * 100)
+    table_df$Group &lt;- table_df$vec2_label
+
+    # Stacked bar chart
+    p &lt;- ggplot(table_df, aes(x = vec1_label, y = Percentage, fill = Group)) +
+      geom_bar(stat = &quot;identity&quot;, position = &quot;stack&quot;) +  # Adjust position to &quot;stack&quot;
+      facet_wrap(~ vec1_label) +
+      theme_minimal() +
+      labs(x = vec1_name, y = &quot;Percentage&quot;, fill = vec2_name, title = paste(&quot;&quot;)) +
+      theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+    result$Plot &lt;- p
+  }
+
+  return(result)
+}
+
+
+group_by_deciles &lt;- function(x) {
+  deciles &lt;- cut(x, 
+                 breaks = quantile(x, probs = seq(0, 1, by = 0.1), na.rm = TRUE), 
+                 include.lowest = TRUE, 
+                 labels = paste0(&quot;D&quot;, 1:10))
+  return(deciles)
+}</code></pre>
+</div>
+<div id="fig-3b-pqtl-enrichment-test" class="section level1">
+<h1>Fig-3B pQTL enrichment test</h1>
+<pre class="r"><code>#### Forest plots #### 
+
+pQTL_data &lt;- read.csv(file = &quot;/Users/omarjohnson/Documents/Projects/Dox_Proteomics/Data/Proteomics/Data_sets/GWAS/pQTL_Genetic_reg_plasmaproteome.csv&quot;, header = TRUE)
+
+# Get the data frame with expressed proteins in the set 
+pQTL_data_exp &lt;- pQTL_data[pQTL_data$Target.UniProt %in% Toptable_Modules$Protein, ]
+
+# Get All proteins mapped to at least one cis and one trans  
+pQTL_data_Trans &lt;- pQTL_data_exp[pQTL_data_exp$cis.trans == &quot;trans&quot;, ]
+pQTL_data_Cis &lt;- pQTL_data_exp[pQTL_data_exp$cis.trans == &quot;cis&quot;, ]
+
+# Count them 
+All_pQTL &lt;- pQTL_data$Target.UniProt %&gt;% unique()
+Trans_pQTL &lt;- pQTL_data_Trans$Target.UniProt %&gt;% unique()
+Cis_pQTL &lt;- pQTL_data_Cis$Target.UniProt %&gt;% unique()
+
+
+# Get Sets 
+pQTL_data_summary_merged &lt;- Toptable_Modules
+
+
+# Append data frame to contain pQTL info 
+pQTL_data_summary_merged &lt;- pQTL_data_summary_merged %&gt;%
+  mutate(All_pQTL = if_else(pQTL_data_summary_merged$Protein %in% All_pQTL, 1, 0))
+
+pQTL_data_summary_merged &lt;- pQTL_data_summary_merged %&gt;%
+  mutate(Trans_pQTL = if_else(pQTL_data_summary_merged$Protein %in% Trans_pQTL, 1, 0))
+
+pQTL_data_summary_merged &lt;- pQTL_data_summary_merged %&gt;%
+  mutate(Cis_pQTL = if_else(pQTL_data_summary_merged$Protein %in% Cis_pQTL, 1, 0))
+
+
+
+
+# Annotate if protein is hub
+pQTL_data_summary_merged &lt;- pQTL_data_summary_merged %&gt;%
+  mutate(Is_hub = if_else(pQTL_data_summary_merged$Protein %in% hubs$Gene, 1, 0))
+
+# Annotate if protein is DA
+pQTL_data_summary_merged &lt;- pQTL_data_summary_merged %&gt;%
+  mutate(Is_DA = if_else(P.Value &lt; 0.05, 1, 0))
+
+# Annotate if protein is DOX corr. 
+pQTL_data_summary_merged &lt;- pQTL_data_summary_merged %&gt;%
+  mutate(Is_DOXcorr = if_else( Modules %in% c(&quot;green&quot;,&quot;darkgreen&quot;,&quot;midnightblue&quot;,&quot;salmon&quot;,&quot;lightyellow&quot;), 1, 0))
+
+
+# Get data frame of just the hub proteins 
+pQTL_data_summary_merged_hub &lt;- pQTL_data_summary_merged[pQTL_data_summary_merged$Protein %in% hubs$Gene, ]
+
+
+# Cis
+FP_Cis_DOXcor &lt;- perform_fisher_test_FP(vec1 = pQTL_data_summary_merged$Is_DOXcorr, vec2 = pQTL_data_summary_merged$Cis_pQTL, vec1_name = &quot;&quot;, vec2_name = &quot;&quot;,  plot = FALSE)
+
+
+FP_Cis_Hub &lt;- perform_fisher_test_FP(vec1 = pQTL_data_summary_merged$Is_hub, vec2 = pQTL_data_summary_merged$Cis_pQTL, vec1_name = &quot;&quot;, vec2_name = &quot;&quot;,  plot = FALSE)
+
+
+
+FP_Cis_DOXcorhub &lt;- perform_fisher_test_FP(vec1 = pQTL_data_summary_merged_hub$Is_DOXcorr, vec2 = pQTL_data_summary_merged_hub$Cis_pQTL, vec1_name = &quot;&quot;, vec2_name = &quot;&quot;,  plot = FALSE)
+
+
+
+
+# Trans
+FP_Trans_DOXcor &lt;- perform_fisher_test_FP(vec1 = pQTL_data_summary_merged$Is_DOXcorr, vec2 = pQTL_data_summary_merged$Trans_pQTL, vec1_name = &quot;&quot;, vec2_name = &quot;&quot;,  plot = FALSE)
+
+
+FP_Trans_Hub &lt;- perform_fisher_test_FP(vec1 = pQTL_data_summary_merged$Is_hub, vec2 = pQTL_data_summary_merged$Trans_pQTL, vec1_name = &quot;&quot;, vec2_name = &quot;&quot;,  plot = FALSE)
+
+FP_Trans_DOXcorhub &lt;- perform_fisher_test_FP(vec1 = pQTL_data_summary_merged_hub$Is_DOXcorr, vec2 = pQTL_data_summary_merged_hub$Trans_pQTL, vec1_name = &quot;&quot;, vec2_name = &quot;&quot;,  plot = FALSE)
+
+
+FP_List &lt;- list(FP_Cis_DOXcor, FP_Cis_Hub, FP_Cis_DOXcorhub, FP_Trans_DOXcor, FP_Trans_Hub, FP_Trans_DOXcorhub)
+
+FP_DF &lt;- data.frame(
+  Odds_ratio = numeric(length(FP_List)),
+  Lower_CI = numeric(length(FP_List)),
+  Upper_CI = numeric(length(FP_List)), 
+  Pval = numeric(length(FP_List))
+)
+
+for (i in 1:length(FP_List)) {
+  FP_DF$Odds_ratio[i] &lt;- FP_List[[i]]$Odds_ratio
+  FP_DF$Lower_CI[i] &lt;- FP_List[[i]]$Confidence_Interval[1]
+  FP_DF$Upper_CI[i] &lt;- FP_List[[i]]$Confidence_Interval[2]
+  FP_DF$Pval[i] &lt;- FP_List[[i]]$PValue
+}
+
+FP_DF</code></pre>
+<pre><code>  Odds_ratio  Lower_CI  Upper_CI         Pval
+1  0.7002624 0.5768312 0.8488705 2.156762e-04
+2  1.0782950 0.7770841 1.4725084 6.304725e-01
+3  0.2255299 0.1010994 0.4648597 5.834571e-06
+4  0.8169640 0.6879394 0.9695398 1.910247e-02
+5  1.0402191 0.7737982 1.3815625 7.731600e-01
+6  0.3507411 0.1857923 0.6404221 2.373421e-04</code></pre>
+<pre class="r"><code># Add row names for the labels in the forest plot
+FP_DF$Label &lt;- c(&quot;FP_Cis_DOXcor&quot;, &quot;FP_Cis_Hub&quot;, &quot;FP_Cis_DOXcorhub&quot;, &quot;FP_Trans_DOXcor&quot;, &quot;FP_Trans_Hub&quot;, &quot;FP_Trans_DOXcorhub&quot;)
+
+
+
+FP_DF$Label &lt;- factor(FP_DF$Label, levels = rev(c(&quot;FP_Cis_Hub&quot;, &quot;FP_Trans_Hub&quot;,&quot;FP_Cis_DOXcor&quot;, &quot;FP_Trans_DOXcor&quot;, &quot;FP_Cis_DOXcorhub&quot;, &quot;FP_Trans_DOXcorhub&quot;)))
+
+FP_DF</code></pre>
+<pre><code>  Odds_ratio  Lower_CI  Upper_CI         Pval              Label
+1  0.7002624 0.5768312 0.8488705 2.156762e-04      FP_Cis_DOXcor
+2  1.0782950 0.7770841 1.4725084 6.304725e-01         FP_Cis_Hub
+3  0.2255299 0.1010994 0.4648597 5.834571e-06   FP_Cis_DOXcorhub
+4  0.8169640 0.6879394 0.9695398 1.910247e-02    FP_Trans_DOXcor
+5  1.0402191 0.7737982 1.3815625 7.731600e-01       FP_Trans_Hub
+6  0.3507411 0.1857923 0.6404221 2.373421e-04 FP_Trans_DOXcorhub</code></pre>
+<pre class="r"><code>ggplot(FP_DF, aes(x = Label, y = Odds_ratio, ymin = Lower_CI, ymax = Upper_CI)) +
+  geom_pointrange() +
+  geom_hline(yintercept = 1, linetype = &quot;dashed&quot;, color = &quot;red&quot;) +
+  coord_flip() +
+  labs(
+    title = &quot;Forest Plot of Odds Ratios&quot;,
+    x = &quot;&quot;,
+    y = &quot;Odds Ratio (95% CI)&quot;
+  ) +
+  theme_minimal()</code></pre>
+<p><img src="figure/DOX_prot_pQTL_Fig3.Rmd/pqtl%20enrichment%20across%20network%20proteins-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>FP_DF</code></pre>
+<pre><code>  Odds_ratio  Lower_CI  Upper_CI         Pval              Label
+1  0.7002624 0.5768312 0.8488705 2.156762e-04      FP_Cis_DOXcor
+2  1.0782950 0.7770841 1.4725084 6.304725e-01         FP_Cis_Hub
+3  0.2255299 0.1010994 0.4648597 5.834571e-06   FP_Cis_DOXcorhub
+4  0.8169640 0.6879394 0.9695398 1.910247e-02    FP_Trans_DOXcor
+5  1.0402191 0.7737982 1.3815625 7.731600e-01       FP_Trans_Hub
+6  0.3507411 0.1857923 0.6404221 2.373421e-04 FP_Trans_DOXcorhub</code></pre>
+<pre class="r"><code># Add a new column to indicate &quot;cis&quot; or &quot;trans&quot;
+FP_DF$Type &lt;- ifelse(grepl(&quot;Cis&quot;, FP_DF$Label), &quot;Cis-pQTL&quot;, &quot;Trans-pQTL&quot;)
+
+# Reorder the levels
+FP_DF$Label &lt;- factor(FP_DF$Label, levels = rev(c(&quot;FP_Cis_Hub&quot;, &quot;FP_Trans_Hub&quot;, &quot;FP_Cis_DOXcor&quot;, &quot;FP_Trans_DOXcor&quot;, &quot;FP_Cis_DOXcorhub&quot;, &quot;FP_Trans_DOXcorhub&quot;)))
+
+# Plot with color based on &quot;Type&quot;
+ggplot(FP_DF, aes(x = Label, y = Odds_ratio, ymin = Lower_CI, ymax = Upper_CI, color = Type)) +
+  geom_pointrange() +
+  geom_hline(yintercept = 1, linetype = &quot;dashed&quot;, color = &quot;red&quot;) +
+  coord_flip() +
+  labs(
+    title = &quot;pQTL enrichment among network proteins&quot;,
+    x = &quot;&quot;,
+    y = &quot;Odds of being pQTL (95% CI)&quot;
+  ) +
+  theme_classic() +
+  scale_color_manual(values = c(&quot;Cis-pQTL&quot; = &quot;dodgerblue4&quot;, &quot;Trans-pQTL&quot; = &quot;orange3&quot;))</code></pre>
+<p><img src="figure/DOX_prot_pQTL_Fig3.Rmd/pqtl%20enrichment%20across%20network%20proteins-2.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="fig-3c-cistran-pqtl-snp-beta" class="section level1">
+<h1>Fig-3C cis/tran pQTL SNP beta</h1>
+<pre class="r"><code>#### Cis or trans SNP-Effect size #### 
+
+# Read in data from UK biobank paper: https://doi.org/10.1038/s41586-023-06592-6 
+pQTL_data &lt;- read.csv(file = &quot;/Users/omarjohnson/Documents/Projects/Dox_Proteomics/Data/Proteomics/Data_sets/GWAS/pQTL_Genetic_reg_plasmaproteome.csv&quot;, header = TRUE)
+
+# Get the data frame with expressed proteins in the set 
+pQTL_data_exp &lt;- pQTL_data[pQTL_data$Target.UniProt %in% Toptable_Modules$Protein, ]
+
+# Get All proteins mapped to at least one cis and one trans  
+pQTL_data_Trans &lt;- pQTL_data_exp[pQTL_data_exp$cis.trans == &quot;trans&quot;, ]
+pQTL_data_Cis &lt;- pQTL_data_exp[pQTL_data_exp$cis.trans == &quot;cis&quot;, ]
+
+# Summarize All pQTL effect sizes 
+pQTL_data_summary &lt;- pQTL_data_exp %&gt;%
+  group_by(Target.UniProt) %&gt;%
+  arrange(BETA) %&gt;%
+  summarise(
+    Mean_BETA = mean(abs(BETA), na.rm = TRUE),
+    Median_BETA = median(abs(BETA), na.rm = TRUE),
+    Max_BETA = max(abs(BETA), na.rm = TRUE)
+  )
+pQTL_data_summary$Max_BETA %&gt;% hist()</code></pre>
+<p><img src="figure/DOX_prot_pQTL_Fig3.Rmd/cis/tran%20pQTL%20SNP%20beta-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code># Summarize Trans pQTL effect sizes
+Trans_pQTL_data_summary &lt;- pQTL_data_Trans %&gt;%
+  group_by(Target.UniProt) %&gt;%
+  arrange(BETA) %&gt;%
+  summarise(
+    Mean_BETA = mean(abs(BETA), na.rm = TRUE),
+    Median_BETA = median(abs(BETA), na.rm = TRUE),
+    Max_BETA = max(abs(BETA), na.rm = TRUE)
+  )
+Trans_pQTL_data_summary$Max_BETA %&gt;% hist()</code></pre>
+<p><img src="figure/DOX_prot_pQTL_Fig3.Rmd/cis/tran%20pQTL%20SNP%20beta-2.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>Trans_pQTL_data_summary$Max_BETA %&gt;% median()</code></pre>
+<pre><code>[1] 0.0985</code></pre>
+<pre class="r"><code># Summarize Cis pQTL effect sizes
+Cis_pQTL_data_summary &lt;- pQTL_data_Cis %&gt;%
+  group_by(Target.UniProt) %&gt;%
+  arrange(BETA) %&gt;%
+  summarise(
+    Mean_BETA = mean(abs(BETA), na.rm = TRUE),
+    Median_BETA = median(abs(BETA), na.rm = TRUE),
+    Max_BETA = max(abs(BETA), na.rm = TRUE)
+  )
+Cis_pQTL_data_summary$Max_BETA %&gt;% hist()</code></pre>
+<p><img src="figure/DOX_prot_pQTL_Fig3.Rmd/cis/tran%20pQTL%20SNP%20beta-3.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>Cis_pQTL_data_summary$Max_BETA %&gt;% median()</code></pre>
+<pre><code>[1] 0.2295</code></pre>
+<pre class="r"><code># Merge pQTL SNP Data with Toptable_Modules- Cis or Trans
+pQTL_data_merged &lt;- merge(Toptable_Modules, pQTL_data_summary, by.x =&quot;Protein&quot; , by.y =&quot;Target.UniProt&quot; )
+
+Cis_pQTL_data_merged &lt;- merge(Toptable_Modules, Cis_pQTL_data_summary, by.x =&quot;Protein&quot; , by.y =&quot;Target.UniProt&quot; )
+
+Trans_pQTL_data_merged &lt;- merge(Toptable_Modules, Trans_pQTL_data_summary, by.x =&quot;Protein&quot; , by.y =&quot;Target.UniProt&quot; )
+
+
+
+
+
+
+# Hub vs not hub 
+# Network differences in effect size 
+All_pQTL_DAPs &lt;- pQTL_data_merged[pQTL_data_merged$Protein %in% hubs$Gene,  ]
+All_pQTL_NonDAPs &lt;- pQTL_data_merged[!pQTL_data_merged$Protein %in% hubs$Gene,  ]
+
+Cis_pQTL_DAPs &lt;- Cis_pQTL_data_merged[Cis_pQTL_data_merged$Protein %in% hubs$Gene,  ]
+Cis_pQTL_NonDAPs &lt;- Cis_pQTL_data_merged[!Cis_pQTL_data_merged$Protein %in% hubs$Gene,  ]
+
+Trans_pQTL_DAPs &lt;- Trans_pQTL_data_merged[Trans_pQTL_data_merged$Protein %in% hubs$Gene,  ]
+Trans_pQTL_NonDAPs &lt;- Trans_pQTL_data_merged[!Trans_pQTL_data_merged$Protein %in% hubs$Gene,  ]
+
+
+# Test 
+# 1. 
+wilcox.test(All_pQTL_DAPs$Max_BETA , All_pQTL_NonDAPs$Max_BETA)</code></pre>
+<pre><code>
+    Wilcoxon rank sum test with continuity correction
+
+data:  All_pQTL_DAPs$Max_BETA and All_pQTL_NonDAPs$Max_BETA
+W = 23719, p-value = 0.77
+alternative hypothesis: true location shift is not equal to 0</code></pre>
+<pre class="r"><code># 2. 
+wilcox.test(Cis_pQTL_DAPs$Max_BETA , Cis_pQTL_NonDAPs$Max_BETA)</code></pre>
+<pre><code>
+    Wilcoxon rank sum test with continuity correction
+
+data:  Cis_pQTL_DAPs$Max_BETA and Cis_pQTL_NonDAPs$Max_BETA
+W = 12867, p-value = 0.3136
+alternative hypothesis: true location shift is not equal to 0</code></pre>
+<pre class="r"><code># 3. 
+wilcox.test(Trans_pQTL_DAPs$Max_BETA , Trans_pQTL_NonDAPs$Max_BETA)</code></pre>
+<pre><code>
+    Wilcoxon rank sum test with continuity correction
+
+data:  Trans_pQTL_DAPs$Max_BETA and Trans_pQTL_NonDAPs$Max_BETA
+W = 19615, p-value = 0.744
+alternative hypothesis: true location shift is not equal to 0</code></pre>
+<pre class="r"><code># DOX corr. vs not DOX corr.  
+# Network differences in effect size 
+
+All_pQTL_DAPs &lt;- pQTL_data_merged[pQTL_data_merged$Modules %in% c(&quot;green&quot;, &quot;darkgreen&quot;,&quot;midnightblue&quot;,&quot;salmon&quot;,&quot;lightyellow&quot;),  ]
+All_pQTL_NonDAPs &lt;- pQTL_data_merged[!pQTL_data_merged$Modules %in% c(&quot;green&quot;, &quot;darkgreen&quot;,&quot;midnightblue&quot;,&quot;salmon&quot;,&quot;lightyellow&quot;),  ]
+
+
+Cis_pQTL_DAPs &lt;- Cis_pQTL_data_merged[Cis_pQTL_data_merged$Modules %in% c(&quot;green&quot;, &quot;darkgreen&quot;,&quot;midnightblue&quot;,&quot;salmon&quot;,&quot;lightyellow&quot;),  ]
+Cis_pQTL_NonDAPs &lt;- Cis_pQTL_data_merged[!Cis_pQTL_data_merged$Modules %in% c(&quot;green&quot;, &quot;darkgreen&quot;,&quot;midnightblue&quot;,&quot;salmon&quot;,&quot;lightyellow&quot;),  ]
+
+
+
+Trans_pQTL_DAPs &lt;- Trans_pQTL_data_merged[Trans_pQTL_data_merged$Modules %in% c(&quot;green&quot;, &quot;darkgreen&quot;,&quot;midnightblue&quot;,&quot;salmon&quot;,&quot;lightyellow&quot;),  ]
+Trans_pQTL_NonDAPs &lt;- Trans_pQTL_data_merged[!Trans_pQTL_data_merged$Modules %in% c(&quot;green&quot;, &quot;darkgreen&quot;,&quot;midnightblue&quot;,&quot;salmon&quot;,&quot;lightyellow&quot;),  ]
+
+
+
+
+
+# Test 
+# 1. 
+wilcox.test(All_pQTL_DAPs$Max_BETA , All_pQTL_NonDAPs$Max_BETA)</code></pre>
+<pre><code>
+    Wilcoxon rank sum test with continuity correction
+
+data:  All_pQTL_DAPs$Max_BETA and All_pQTL_NonDAPs$Max_BETA
+W = 54728, p-value = 0.02904
+alternative hypothesis: true location shift is not equal to 0</code></pre>
+<pre class="r"><code># 2. 
+wilcox.test(Cis_pQTL_DAPs$Max_BETA , Cis_pQTL_NonDAPs$Max_BETA)</code></pre>
+<pre><code>
+    Wilcoxon rank sum test with continuity correction
+
+data:  Cis_pQTL_DAPs$Max_BETA and Cis_pQTL_NonDAPs$Max_BETA
+W = 29894, p-value = 0.456
+alternative hypothesis: true location shift is not equal to 0</code></pre>
+<pre class="r"><code># 3. 
+wilcox.test(Trans_pQTL_DAPs$Max_BETA , Trans_pQTL_NonDAPs$Max_BETA)</code></pre>
+<pre><code>
+    Wilcoxon rank sum test with continuity correction
+
+data:  Trans_pQTL_DAPs$Max_BETA and Trans_pQTL_NonDAPs$Max_BETA
+W = 48899, p-value = 0.1127
+alternative hypothesis: true location shift is not equal to 0</code></pre>
+<pre class="r"><code># Now showing only the ones that you want
+# Create a data frame
+pLI_Hubs_DF_Boxplot &lt;- data.frame(
+  # 1. Generate values to compare 
+  values = c( 
+             Cis_pQTL_DAPs$Max_BETA, 
+             Cis_pQTL_NonDAPs$Max_BETA, 
+             Trans_pQTL_DAPs$Max_BETA, 
+             Trans_pQTL_NonDAPs$Max_BETA),
+  
+  # 2. Factor values to compare 
+  group = factor(
+                c(rep(&quot;Cis_DOXcor.&quot;, length(Cis_pQTL_DAPs$Max_BETA)),
+                c(rep(&quot;Cis_Not_DOXcor.&quot;, length(Cis_pQTL_NonDAPs$Max_BETA)),
+                c(rep(&quot;Trans_DOXcor.&quot;, length(Trans_pQTL_DAPs$Max_BETA)),
+                c(rep(&quot;Trans_Not_DOXcor.&quot;,length(Trans_pQTL_NonDAPs$Max_BETA))
+                  
+                             
+                             ))))))
+
+
+
+
+# Create boxplot
+ggplot(pLI_Hubs_DF_Boxplot, aes(x = group, y = values)) +
+  geom_boxplot() +
+  labs(x = &quot;Group&quot;, y = &quot;pQTL-Max-BETA&quot;) +
+  ggtitle(&quot;pQTL max SNP effect size: DOXcor. vs Not DOXcor.&quot;)+
+  theme_classic()+
+  coord_cartesian(ylim = c(0, 1.0))+
+  theme(axis.text.x = element_text(color = &quot;grey20&quot;, size = 10, angle = 90, hjust = .5, vjust = .5, face = &quot;plain&quot;))</code></pre>
+<p><img src="figure/DOX_prot_pQTL_Fig3.Rmd/cis/tran%20pQTL%20SNP%20beta-4.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code># DOX corr. vs not DOX corr.  hubs
+All_pQTL_DAPs &lt;- pQTL_data_merged[(pQTL_data_merged$Modules %in% c(&quot;green&quot;, &quot;darkgreen&quot;,&quot;midnightblue&quot;,&quot;salmon&quot;,&quot;lightyellow&quot;)) &amp; (pQTL_data_merged$Protein %in% hubs$Gene),  ]
+
+All_pQTL_NonDAPs &lt;- pQTL_data_merged[(!pQTL_data_merged$Modules %in% c(&quot;green&quot;, &quot;darkgreen&quot;,&quot;midnightblue&quot;,&quot;salmon&quot;,&quot;lightyellow&quot;)) &amp; (pQTL_data_merged$Protein %in% hubs$Gene) ,  ]
+
+
+Cis_pQTL_DAPs &lt;- Cis_pQTL_data_merged[(Cis_pQTL_data_merged$Modules %in% c(&quot;green&quot;, &quot;darkgreen&quot;,&quot;midnightblue&quot;,&quot;salmon&quot;,&quot;lightyellow&quot;)) &amp; (Cis_pQTL_data_merged$Protein %in% hubs$Gene) ,  ]
+
+Cis_pQTL_NonDAPs &lt;- Cis_pQTL_data_merged[(!Cis_pQTL_data_merged$Modules %in% c(&quot;green&quot;, &quot;darkgreen&quot;,&quot;midnightblue&quot;,&quot;salmon&quot;,&quot;lightyellow&quot;)) &amp; (Cis_pQTL_data_merged$Protein %in% hubs$Gene) ,  ]
+
+
+Trans_pQTL_DAPs &lt;- Trans_pQTL_data_merged[(Trans_pQTL_data_merged$Modules %in% c(&quot;green&quot;, &quot;darkgreen&quot;,&quot;midnightblue&quot;,&quot;salmon&quot;,&quot;lightyellow&quot;)) &amp; (Trans_pQTL_data_merged$Protein %in% hubs$Gene) ,  ]
+
+Trans_pQTL_NonDAPs &lt;- Trans_pQTL_data_merged[(!Trans_pQTL_data_merged$Modules %in% c(&quot;green&quot;, &quot;darkgreen&quot;,&quot;midnightblue&quot;,&quot;salmon&quot;,&quot;lightyellow&quot;)) &amp; (Trans_pQTL_data_merged$Protein %in% hubs$Gene),  ]
+
+
+
+# Test 
+# 1. 
+wilcox.test(All_pQTL_DAPs$Max_BETA , All_pQTL_NonDAPs$Max_BETA)</code></pre>
+<pre><code>
+    Wilcoxon rank sum test with continuity correction
+
+data:  All_pQTL_DAPs$Max_BETA and All_pQTL_NonDAPs$Max_BETA
+W = 286.5, p-value = 0.001232
+alternative hypothesis: true location shift is not equal to 0</code></pre>
+<pre class="r"><code># 2. 
+wilcox.test(Cis_pQTL_DAPs$Max_BETA , Cis_pQTL_NonDAPs$Max_BETA)</code></pre>
+<pre><code>Warning in wilcox.test.default(Cis_pQTL_DAPs$Max_BETA,
+Cis_pQTL_NonDAPs$Max_BETA): cannot compute exact p-value with ties</code></pre>
+<pre><code>
+    Wilcoxon rank sum test with continuity correction
+
+data:  Cis_pQTL_DAPs$Max_BETA and Cis_pQTL_NonDAPs$Max_BETA
+W = 106.5, p-value = 0.007926
+alternative hypothesis: true location shift is not equal to 0</code></pre>
+<pre class="r"><code># 3. 
+wilcox.test(Trans_pQTL_DAPs$Max_BETA , Trans_pQTL_NonDAPs$Max_BETA)</code></pre>
+<pre><code>Warning in wilcox.test.default(Trans_pQTL_DAPs$Max_BETA,
+Trans_pQTL_NonDAPs$Max_BETA): cannot compute exact p-value with ties</code></pre>
+<pre><code>
+    Wilcoxon rank sum test with continuity correction
+
+data:  Trans_pQTL_DAPs$Max_BETA and Trans_pQTL_NonDAPs$Max_BETA
+W = 277.5, p-value = 0.02179
+alternative hypothesis: true location shift is not equal to 0</code></pre>
+<pre class="r"><code># Now showing only the ones that you want: 
+# Create a data frame
+pLI_Hubs_DF_Boxplot &lt;- data.frame(
+  # 1. Generate values to compare 
+  values = c( 
+             Cis_pQTL_DAPs$Max_BETA, 
+             Cis_pQTL_NonDAPs$Max_BETA, 
+             Trans_pQTL_DAPs$Max_BETA, 
+             Trans_pQTL_NonDAPs$Max_BETA
+             ),
+  
+  # 2. Factor values to compare 
+  group = factor(
+                c(rep(&quot;Cis_DOXcor.Hub&quot;, length(Cis_pQTL_DAPs$Max_BETA)),
+                c(rep(&quot;Cis_Not_DOXcor. Hub&quot;, length(Cis_pQTL_NonDAPs$Max_BETA)),
+                c(rep(&quot;Trans_DOXcor. Hub&quot;, length(Trans_pQTL_DAPs$Max_BETA)),
+                c(rep(&quot;Trans_Not_DOXcor. Hub&quot;,length(Trans_pQTL_NonDAPs$Max_BETA))
+                             ))))))
+
+
+
+# Create boxplot
+ggplot(pLI_Hubs_DF_Boxplot, aes(x = group, y = values)) +
+  geom_boxplot() +
+  labs(x = &quot;&quot;, y = &quot;Max-BETA&quot;) +
+  ggtitle(&quot;pQTL max SNP effects Hub-DOXcor. vs Hub-Not DOXcor.&quot;)+
+  theme_classic()+
+  coord_cartesian(ylim = c(0, 1.0))+
+  theme(axis.text.x = element_text(color = &quot;grey20&quot;, size = 10, angle = 90, hjust = .5, vjust = .5, face = &quot;plain&quot;))</code></pre>
+<p><img src="figure/DOX_prot_pQTL_Fig3.Rmd/cis/tran%20pQTL%20SNP%20beta-5.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="fig-3d-pqtls-across-connectivities" class="section level1">
+<h1>Fig-3D pQTLs across connectivities</h1>
+<pre class="r"><code>#### pQTL connectivity #### 
+# Function to generate decile labels
+
+pQTL_pro_unique &lt;- pQTL_data$Target.UniProt %&gt;% unique()
+kIN_DF_TT &lt;- Toptable_Modules
+kIN_DF_TT2 &lt;- kIN_DF_TT
+
+# Generate deciles
+kIN_DF_TT2$Decile &lt;- group_by_deciles(kIN_DF_TT2$Norm_kOut)
+pQTL_pro_unique_exp &lt;- intersect(pQTL_pro_unique, Toptable_Modules$Protein)
+
+
+
+
+# Check if a protein is a cis or trans pQTL protein
+kIN_DF_TT2$is_cis_pQTL &lt;- kIN_DF_TT2$Protein %in% Cis_pQTL_data_summary$Target.UniProt
+kIN_DF_TT2$is_trans_pQTL &lt;- kIN_DF_TT2$Protein %in% Trans_pQTL_data_summary$Target.UniProt
+
+# Calculate the total number of proteins in each decile
+total_proteins_per_decile &lt;- kIN_DF_TT2 %&gt;%
+  group_by(Decile) %&gt;%
+  summarise(total_proteins = n())
+total_proteins_per_decile</code></pre>
+<pre><code># A tibble: 10 × 2
+   Decile total_proteins
+   &lt;fct&gt;           &lt;int&gt;
+ 1 D1                418
+ 2 D2                418
+ 3 D3                418
+ 4 D4                417
+ 5 D5                418
+ 6 D6                418
+ 7 D7                417
+ 8 D8                418
+ 9 D9                418
+10 D10               418</code></pre>
+<pre class="r"><code># Calculate the number of cis pQTL proteins in each decile
+cis_pQTL_proteins_per_decile &lt;- kIN_DF_TT2 %&gt;%
+  filter(is_cis_pQTL) %&gt;%
+  group_by(Decile) %&gt;%
+  summarise(cis_pQTL_proteins = n())
+
+
+# Calculate the number of trans pQTL proteins in each decile
+trans_pQTL_proteins_per_decile &lt;- kIN_DF_TT2 %&gt;%
+  filter(is_trans_pQTL) %&gt;%
+  group_by(Decile) %&gt;%
+  summarise(trans_pQTL_proteins = n())
+
+
+# Merge the data frames
+decile_summary &lt;- total_proteins_per_decile %&gt;%
+  left_join(cis_pQTL_proteins_per_decile, by = &quot;Decile&quot;) %&gt;%
+  left_join(trans_pQTL_proteins_per_decile, by = &quot;Decile&quot;)
+
+# Replace NA values with 0 (for deciles with no pQTL proteins)
+decile_summary$cis_pQTL_proteins[is.na(decile_summary$cis_pQTL_proteins)] &lt;- 0
+
+decile_summary$trans_pQTL_proteins[is.na(decile_summary$trans_pQTL_proteins)] &lt;- 0
+
+# Calculate the percentage of cis and trans pQTL proteins in each decile
+decile_summary &lt;- decile_summary %&gt;%
+  mutate(percentage_cis_pQTL = (cis_pQTL_proteins / total_proteins) * 100,
+         percentage_trans_pQTL = (trans_pQTL_proteins / total_proteins) * 100)
+
+# Reshape the data for plotting
+decile_summary_long &lt;- decile_summary %&gt;%
+  pivot_longer(cols = starts_with(&quot;percentage_&quot;), names_to = &quot;Type&quot;, values_to = &quot;Percentage&quot;)
+
+
+# Replace &quot;percentage_&quot; with an empty string for better labels
+decile_summary_long$Type &lt;- gsub(&quot;percentage_&quot;, &quot;&quot;, decile_summary_long$Type)
+
+# Plot the data
+ggplot(decile_summary_long, aes(x = Decile, y = Percentage, color = Type, group = Type)) +
+  geom_line() +
+  geom_point(size = 2) +
+  labs(
+    title = &quot;pQTL proportion across kIN deciles&quot;,
+    x = &quot;Decile&quot;,
+    y = &quot;% pQTL&quot;
+  ) +
+  theme_minimal() +
+  scale_color_manual(values = c(&quot;cis_pQTL&quot; = &quot;darkblue&quot;, &quot;trans_pQTL&quot; = &quot;tan3&quot;)) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))+
+  coord_cartesian(ylim = c(0,25))</code></pre>
+<p><img src="figure/DOX_prot_pQTL_Fig3.Rmd/pQTLs%20across%20connectivities-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>kIN_DF_TT2_DOX &lt;- kIN_DF_TT2[kIN_DF_TT2$Modules %in% c(&quot;green&quot;, &quot;darkgreen&quot;,&quot;midnightblue&quot;,&quot;salmon&quot;,&quot;lightyellow&quot;), ]
+
+kIN_DF_TT2_DOX$Decile &lt;- group_by_deciles(kIN_DF_TT2_DOX$Norm_kIN)
+
+
+
+
+# Check if a protein is a cis or trans pQTL protein
+kIN_DF_TT2_DOX$is_cis_pQTL &lt;- kIN_DF_TT2_DOX$Protein %in% Cis_pQTL_data_summary$Target.UniProt
+kIN_DF_TT2_DOX$is_trans_pQTL &lt;- kIN_DF_TT2_DOX$Protein %in% Trans_pQTL_data_summary$Target.UniProt
+
+# Calculate the total number of proteins in each decile
+total_proteins_per_decile &lt;- kIN_DF_TT2_DOX %&gt;%
+  group_by(Decile) %&gt;%
+  summarise(total_proteins = n())
+
+# Calculate the number of cis pQTL proteins in each decile
+cis_pQTL_proteins_per_decile &lt;- kIN_DF_TT2_DOX %&gt;%
+  filter(is_cis_pQTL) %&gt;%
+  group_by(Decile) %&gt;%
+  summarise(cis_pQTL_proteins = n())
+
+# Calculate the number of trans pQTL proteins in each decile
+trans_pQTL_proteins_per_decile &lt;- kIN_DF_TT2_DOX %&gt;%
+  filter(is_trans_pQTL) %&gt;%
+  group_by(Decile) %&gt;%
+  summarise(trans_pQTL_proteins = n())
+
+# Merge the data frames
+decile_summary &lt;- total_proteins_per_decile %&gt;%
+  left_join(cis_pQTL_proteins_per_decile, by = &quot;Decile&quot;) %&gt;%
+  left_join(trans_pQTL_proteins_per_decile, by = &quot;Decile&quot;)
+
+# Replace NA values with 0 (for deciles with no pQTL proteins)
+decile_summary$cis_pQTL_proteins[is.na(decile_summary$cis_pQTL_proteins)] &lt;- 0
+decile_summary$trans_pQTL_proteins[is.na(decile_summary$trans_pQTL_proteins)] &lt;- 0
+
+# Calculate the percentage of cis and trans pQTL proteins in each decile
+decile_summary &lt;- decile_summary %&gt;%
+  mutate(percentage_cis_pQTL = (cis_pQTL_proteins / total_proteins) * 100,
+         percentage_trans_pQTL = (trans_pQTL_proteins / total_proteins) * 100)
+
+# Reshape the data for plotting
+decile_summary_long &lt;- decile_summary %&gt;%
+  pivot_longer(cols = starts_with(&quot;percentage_&quot;), names_to = &quot;Type&quot;, values_to = &quot;Percentage&quot;)
+
+
+# Replace &quot;percentage_&quot; with an empty string for better labels
+decile_summary_long$Type &lt;- gsub(&quot;percentage_&quot;, &quot;&quot;, decile_summary_long$Type)
+
+# Plot the data
+Plot1 &lt;- ggplot(decile_summary_long, aes(x = Decile, y = Percentage, color = Type, group = Type)) +
+  geom_line() +
+  geom_point(size = 2) +
+  labs(
+    title = &quot;DOXcorr pQTL proportion across kIN deciles&quot;,
+    x = &quot;Decile&quot;,
+    y = &quot;% pQTL&quot;
+  ) +
+  theme_minimal() +
+  scale_color_manual(values = c(&quot;cis_pQTL&quot; = &quot;darkblue&quot;, &quot;trans_pQTL&quot; = &quot;tan3&quot;)) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))+
+  coord_cartesian(ylim = c(2.5,25))
+
+
+
+
+kIN_DF_TT2_NOT_DOX &lt;- kIN_DF_TT2[!kIN_DF_TT2$Modules %in% c(&quot;green&quot;, &quot;darkgreen&quot;,&quot;midnightblue&quot;,&quot;salmon&quot;,&quot;lightyellow&quot;), ]
+kIN_DF_TT2_NOT_DOX$Decile &lt;- group_by_deciles(kIN_DF_TT2_NOT_DOX$Norm_kIN)
+
+
+
+# Check if a protein is a cis or trans pQTL protein
+kIN_DF_TT2_NOT_DOX$is_cis_pQTL &lt;- kIN_DF_TT2_NOT_DOX$Protein %in% Cis_pQTL_data_summary$Target.UniProt
+kIN_DF_TT2_NOT_DOX$is_trans_pQTL &lt;- kIN_DF_TT2_NOT_DOX$Protein %in% Trans_pQTL_data_summary$Target.UniProt
+
+# Calculate the total number of proteins in each decile
+total_proteins_per_decile &lt;- kIN_DF_TT2_NOT_DOX %&gt;%
+  group_by(Decile) %&gt;%
+  summarise(total_proteins = n())
+
+# Calculate the number of cis pQTL proteins in each decile
+cis_pQTL_proteins_per_decile &lt;- kIN_DF_TT2_NOT_DOX %&gt;%
+  filter(is_cis_pQTL) %&gt;%
+  group_by(Decile) %&gt;%
+  summarise(cis_pQTL_proteins = n())
+
+# Calculate the number of trans pQTL proteins in each decile
+trans_pQTL_proteins_per_decile &lt;- kIN_DF_TT2_NOT_DOX %&gt;%
+  filter(is_trans_pQTL) %&gt;%
+  group_by(Decile) %&gt;%
+  summarise(trans_pQTL_proteins = n())
+
+# Merge the data frames
+decile_summary &lt;- total_proteins_per_decile %&gt;%
+  left_join(cis_pQTL_proteins_per_decile, by = &quot;Decile&quot;) %&gt;%
+  left_join(trans_pQTL_proteins_per_decile, by = &quot;Decile&quot;)
+
+# Replace NA values with 0 (for deciles with no pQTL proteins)
+decile_summary$cis_pQTL_proteins[is.na(decile_summary$cis_pQTL_proteins)] &lt;- 0
+decile_summary$trans_pQTL_proteins[is.na(decile_summary$trans_pQTL_proteins)] &lt;- 0
+
+# Calculate the percentage of cis and trans pQTL proteins in each decile
+decile_summary &lt;- decile_summary %&gt;%
+  mutate(percentage_cis_pQTL = (cis_pQTL_proteins / total_proteins) * 100,
+         percentage_trans_pQTL = (trans_pQTL_proteins / total_proteins) * 100)
+
+# Reshape the data for plotting
+decile_summary_long &lt;- decile_summary %&gt;%
+  pivot_longer(cols = starts_with(&quot;percentage_&quot;), names_to = &quot;Type&quot;, values_to = &quot;Percentage&quot;)
+
+# Replace &quot;percentage_&quot; with an empty string for better labels
+decile_summary_long$Type &lt;- gsub(&quot;percentage_&quot;, &quot;&quot;, decile_summary_long$Type)
+
+# Plot the data
+Plot2 &lt;- ggplot(decile_summary_long, aes(x = Decile, y = Percentage, color = Type, group = Type)) +
+  geom_line() +
+  geom_point(size = 2) +
+  labs(
+    title = &quot;Non-DOXcorr pQTL proportion across kIN deciles&quot;,
+    x = &quot;Decile&quot;,
+    y = &quot;% pQTL&quot;
+  ) +
+  theme_minimal() +
+  scale_color_manual(values = c(&quot;cis_pQTL&quot; = &quot;darkblue&quot;, &quot;trans_pQTL&quot; = &quot;tan3&quot;)) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))+
+  coord_cartesian(ylim = c(2.5,25))
+
+Plot1 + Plot2</code></pre>
+<p><img src="figure/DOX_prot_pQTL_Fig3.Rmd/pQTLs%20across%20connectivities-2.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>### ALL PQTLs 
+# 
+kIN_DF_TT2_DOX &lt;- kIN_DF_TT2[kIN_DF_TT2$Modules %in% c(&quot;green&quot;, &quot;darkgreen&quot;,&quot;midnightblue&quot;,&quot;salmon&quot;,&quot;lightyellow&quot;), ]
+
+kIN_DF_TT2_DOX$Decile &lt;- group_by_deciles(kIN_DF_TT2_DOX$Norm_kIN)
+
+
+# Check if a protein is a pQTL protein
+kIN_DF_TT2_DOX$is_pQTL &lt;- kIN_DF_TT2_DOX$Protein %in% pQTL_pro_unique_exp
+
+# Calculate the total number of proteins in each decile
+total_proteins_per_decile &lt;- kIN_DF_TT2_DOX %&gt;%
+  group_by(Decile) %&gt;%
+  summarise(total_proteins = n())
+
+# Calculate the number of pQTL proteins in each decile
+pQTL_proteins_per_decile &lt;- kIN_DF_TT2_DOX %&gt;%
+  filter(is_pQTL) %&gt;%
+  group_by(Decile) %&gt;%
+  summarise(pQTL_proteins = n())
+
+# Merge the two data frames
+decile_summary &lt;- merge(total_proteins_per_decile, pQTL_proteins_per_decile, by = &quot;Decile&quot;, all.x = TRUE)
+
+# Replace NA values with 0 (for deciles with no pQTL proteins)
+decile_summary$pQTL_proteins[is.na(decile_summary$pQTL_proteins)] &lt;- 0
+
+
+# Calculate the percentage of pQTL proteins in each decile
+decile_summary &lt;- decile_summary %&gt;%
+  mutate(percentage_pQTL = (pQTL_proteins / total_proteins) * 100)
+
+
+
+
+decile_summary_DOXcorr &lt;- decile_summary
+kIN_DF_TT2_NOT_DOX &lt;- kIN_DF_TT2[!kIN_DF_TT2$Modules %in% c(&quot;green&quot;, &quot;darkgreen&quot;,&quot;midnightblue&quot;,&quot;salmon&quot;,&quot;lightyellow&quot;), ]
+
+
+kIN_DF_TT2_NOT_DOX$Decile &lt;- group_by_deciles(kIN_DF_TT2_NOT_DOX$Norm_kIN)
+
+
+# Check if a protein is a pQTL protein
+kIN_DF_TT2_NOT_DOX$is_pQTL &lt;- kIN_DF_TT2_NOT_DOX$Protein %in% pQTL_pro_unique_exp
+
+# Calculate the total number of proteins in each decile
+total_proteins_per_decile &lt;- kIN_DF_TT2_NOT_DOX %&gt;%
+  group_by(Decile) %&gt;%
+  summarise(total_proteins = n())
+
+# Calculate the number of pQTL proteins in each decile
+pQTL_proteins_per_decile &lt;- kIN_DF_TT2_NOT_DOX %&gt;%
+  filter(is_pQTL) %&gt;%
+  group_by(Decile) %&gt;%
+  summarise(pQTL_proteins = n())
+
+# Merge the two data frames
+decile_summary &lt;- merge(total_proteins_per_decile, pQTL_proteins_per_decile, by = &quot;Decile&quot;, all.x = TRUE)
+
+# Replace NA values with 0 (for deciles with no pQTL proteins)
+decile_summary$pQTL_proteins[is.na(decile_summary$pQTL_proteins)] &lt;- 0
+
+# Calculate the percentage of pQTL proteins in each decile
+decile_summary &lt;- decile_summary %&gt;%
+  mutate(percentage_pQTL = (pQTL_proteins / total_proteins) * 100)
+ decile_summary_NOTDOX &lt;- decile_summary
+ decile_summary_DOXcorr$Type &lt;- c(&quot;DOX-corr.&quot;)
+ decile_summary_NOTDOX$Type &lt;- c(&quot;Not-DOX-corr.&quot;)
+ decile_summary_ALL &lt;- rbind(decile_summary_DOXcorr,decile_summary_NOTDOX )
+  
+ 
+ 
+ 
+# Define the colors for each type
+type_colors &lt;- c(&quot;DOX-corr.&quot; = &quot;red&quot;, &quot;Not-DOX-corr.&quot; = &quot;blue&quot;)
+# Plot the data
+ggplot(decile_summary_ALL, aes(x = Decile, y = percentage_pQTL, color = Type, group = Type)) +
+  geom_line() +
+  geom_point(size = 2) +
+  labs(
+    title = &quot;Percentage of pQTL Proteins Across Deciles&quot;,
+    x = &quot;Decile&quot;,
+    y = &quot;Percentage of pQTL Proteins&quot;
+  ) +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  scale_color_manual(values = type_colors)</code></pre>
+<p><img src="figure/DOX_prot_pQTL_Fig3.Rmd/pQTLs%20across%20connectivities-3.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>decile_summary_ALL</code></pre>
+<pre><code>   Decile total_proteins pQTL_proteins percentage_pQTL          Type
+1      D1            202            33       16.336634     DOX-corr.
+2     D10            202            16        7.920792     DOX-corr.
+3      D2            202            35       17.326733     DOX-corr.
+4      D3            201            42       20.895522     DOX-corr.
+5      D4            202            30       14.851485     DOX-corr.
+6      D5            202            26       12.871287     DOX-corr.
+7      D6            201            36       17.910448     DOX-corr.
+8      D7            202            46       22.772277     DOX-corr.
+9      D8            201            21       10.447761     DOX-corr.
+10     D9            202            20        9.900990     DOX-corr.
+11     D1            217            19        8.755760 Not-DOX-corr.
+12    D10            216            46       21.296296 Not-DOX-corr.
+13     D2            216            26       12.037037 Not-DOX-corr.
+14     D3            216            36       16.666667 Not-DOX-corr.
+15     D4            216            35       16.203704 Not-DOX-corr.
+16     D5            216            49       22.685185 Not-DOX-corr.
+17     D6            216            41       18.981481 Not-DOX-corr.
+18     D7            216            55       25.462963 Not-DOX-corr.
+19     D8            216            38       17.592593 Not-DOX-corr.
+20     D9            216            52       24.074074 Not-DOX-corr.</code></pre>
+</div>
+<div id="supp.-analyses" class="section level1">
+<h1>Supp. analyses</h1>
+</div>
+<div id="fig.-s13-pqtl-enrichment-for-different-modules"
+class="section level1">
+<h1>Fig. S13 pQTL enrichment for different modules</h1>
+<pre class="r"><code>pQTL_vec &lt;- pQTL_data$Target.UniProt %&gt;% unique()
+
+
+intersect(pQTL_vec, Toptable_Modules$Proteins) %&gt;% length()</code></pre>
+<pre><code>[1] 702</code></pre>
+<pre class="r"><code>pQTL_list &lt;- 
+  list(
+    pQtLs = intersect(pQTL_vec, Toptable_Modules$Proteins)
+  )
+
+DF_mod_pQTL &lt;- perform_module_disease_analysis_genes_3(toptable = Toptable_Modules, diseaseGenes = pQTL_list, module_col = &quot;Modules.x&quot;, gene_col = &quot;Proteins&quot; )
+
+
+DF_mod_pQTL[DF_mod_pQTL$FisherPValue &lt; 0.05, !colnames(DF_mod_pQTL) %in% c(&quot;IntersectingGenes&quot;)]</code></pre>
+<pre><code>                  Modules Disease  ChiSqPValue FisherPValue PercentOverlap
+royalblue_pQtLs royalblue   pQtLs 0.0012550255 0.0014152420      21.367521
+green_pQtLs         green   pQtLs 0.0002270321 0.0001214582       9.401709
+salmon_pQtLs       salmon   pQtLs 0.0468286671 0.0363309392       3.418803
+darkgreen_pQtLs darkgreen   pQtLs 0.0462909462 0.0448996496      15.811966
+                OddsRatio ConfIntLower ConfIntUpper
+royalblue_pQtLs 1.3999360    1.1360479    1.7185803
+green_pQtLs     0.5994186    0.4502424    0.7879571
+salmon_pQtLs    0.6333870    0.3924937    0.9814196
+darkgreen_pQtLs 1.2661220    1.0007249    1.5924660</code></pre>
+<pre class="r"><code>DF_mod_pQTL$FisherPValue_adj &lt;- p.adjust(DF_mod_pQTL$FisherPValue, &quot;BH&quot;)
+DF_mod_pQTL[DF_mod_pQTL$FisherPValue_adj &lt; 0.05, ]$Modules</code></pre>
+<pre><code>[1] &quot;royalblue&quot; &quot;green&quot;    </code></pre>
+<pre class="r"><code>DF_mod_pQTL[DF_mod_pQTL$FisherPValue_adj &lt; 0.05, !colnames(DF_mod_pQTL) %in% c(&quot;IntersectingGenes&quot;) ]</code></pre>
+<pre><code>                  Modules Disease  ChiSqPValue FisherPValue PercentOverlap
+royalblue_pQtLs royalblue   pQtLs 0.0012550255 0.0014152420      21.367521
+green_pQtLs         green   pQtLs 0.0002270321 0.0001214582       9.401709
+                OddsRatio ConfIntLower ConfIntUpper FisherPValue_adj
+royalblue_pQtLs 1.3999360    1.1360479    1.7185803      0.009199073
+green_pQtLs     0.5994186    0.4502424    0.7879571      0.001578957</code></pre>
+<pre class="r"><code>Module_order_DOX &lt;- c(&quot;green&quot;, &quot;darkgreen&quot;, &quot;midnightblue&quot;, &quot;salmon&quot;,&quot;lightyellow&quot;,&quot;lightgreen&quot;,&quot;blue&quot;,&quot;magenta&quot;,&quot;darkred&quot;,&quot;brown&quot;, &quot;yellow&quot;, &quot;royalblue&quot;, &quot;grey&quot; )
+
+DF_mod_pQTL$Modules &lt;- factor(x = DF_mod_pQTL$Modules, levels = c(&quot;green&quot;, &quot;darkgreen&quot;, &quot;midnightblue&quot;, &quot;salmon&quot;,&quot;lightyellow&quot;,&quot;lightgreen&quot;,&quot;blue&quot;,&quot;magenta&quot;,&quot;darkred&quot;,&quot;brown&quot;, &quot;yellow&quot;, &quot;royalblue&quot;, &quot;grey&quot;))
+
+
+ggplot(DF_mod_pQTL, aes(x = Modules, y = Disease, fill = OddsRatio)) +
+  geom_tile(color = &quot;white&quot;) + 
+  # Add stars to cells where FisherPValue_adj &lt; 0.05
+  geom_text(
+    data = filter(DF_mod_pQTL, FisherPValue_adj &lt; 0.05),
+    aes(x = Modules, y = Disease),
+    label = &quot;*&quot;,
+    color = &quot;black&quot;,
+    size = 6,          # adjust star size
+    vjust = 0.5,       # vertical justification
+    hjust = 0.5        # horizontal justification
+  ) +
+  scale_fill_gradient2(low = &quot;blue&quot;, mid = &quot;white&quot;, high = &quot;red&quot;, midpoint = 1) +
+  labs(x = &quot;Modules&quot;, y = &quot;&quot;, fill = &quot;Odds Ratio&quot;) +
+  theme_classic() +
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1)
+  )</code></pre>
+<p><img src="figure/DOX_prot_pQTL_Fig3.Rmd/unnamed-chunk-2-1.png" width="672" style="display: block; margin: auto;" /></p>
+<br>
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
+<span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>
+Session information
+</button>
+</p>
+<div id="workflowr-sessioninfo" class="collapse">
+<pre class="r"><code>sessionInfo()</code></pre>
+<pre><code>R version 4.4.1 (2024-06-14)
+Platform: x86_64-apple-darwin20
+Running under: macOS Sonoma 14.6.1
+
+Matrix products: default
+BLAS:   /Library/Frameworks/R.framework/Versions/4.4-x86_64/Resources/lib/libRblas.0.dylib 
+LAPACK: /Library/Frameworks/R.framework/Versions/4.4-x86_64/Resources/lib/libRlapack.dylib;  LAPACK version 3.12.0
+
+locale:
+[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
+
+time zone: America/Chicago
+tzcode source: internal
+
+attached base packages:
+[1] stats4    stats     graphics  grDevices utils     datasets  methods  
+[8] base     
+
+other attached packages:
+ [1] scales_1.3.0                impute_1.78.0              
+ [3] WGCNA_1.72-5                fastcluster_1.2.6          
+ [5] dynamicTreeCut_1.63-1       BioNERO_1.12.0             
+ [7] reshape2_1.4.4              ggridges_0.5.6             
+ [9] biomaRt_2.60.1              UpSetR_1.4.0               
+[11] DOSE_3.30.4                 org.Hs.eg.db_3.19.1        
+[13] AnnotationDbi_1.66.0        clusterProfiler_4.12.6     
+[15] pheatmap_1.0.12             qvalue_2.36.0              
+[17] cluster_2.1.6               ggfortify_0.4.17           
+[19] lubridate_1.9.3             forcats_1.0.0              
+[21] stringr_1.5.1               dplyr_1.1.4                
+[23] purrr_1.0.2                 readr_2.1.5                
+[25] tidyr_1.3.1                 tibble_3.2.1               
+[27] ggplot2_3.5.1               tidyverse_2.0.0            
+[29] RColorBrewer_1.1-3          RUVSeq_1.38.0              
+[31] edgeR_4.2.1                 limma_3.60.4               
+[33] EDASeq_2.38.0               ShortRead_1.62.0           
+[35] GenomicAlignments_1.40.0    SummarizedExperiment_1.34.0
+[37] MatrixGenerics_1.16.0       matrixStats_1.4.1          
+[39] Rsamtools_2.20.0            GenomicRanges_1.56.2       
+[41] Biostrings_2.72.1           GenomeInfoDb_1.40.1        
+[43] XVector_0.44.0              IRanges_2.38.1             
+[45] S4Vectors_0.42.1            BiocParallel_1.38.0        
+[47] Biobase_2.64.0              BiocGenerics_0.50.0        
+[49] workflowr_1.7.1            
+
+loaded via a namespace (and not attached):
+  [1] fs_1.6.4                bitops_1.0-8            enrichplot_1.24.2      
+  [4] httr_1.4.7              doParallel_1.0.17       backports_1.5.0        
+  [7] tools_4.4.1             utf8_1.2.4              R6_2.5.1               
+ [10] mgcv_1.9-1              lazyeval_0.2.2          GetoptLong_1.0.5       
+ [13] withr_3.0.1             prettyunits_1.2.0       gridExtra_2.3          
+ [16] preprocessCore_1.66.0   cli_3.6.3               network_1.18.2         
+ [19] scatterpie_0.2.4        labeling_0.4.3          sass_0.4.9             
+ [22] genefilter_1.86.0       yulab.utils_0.1.7       foreign_0.8-87         
+ [25] gson_0.1.0              R.utils_2.12.3          rstudioapi_0.16.0      
+ [28] RSQLite_2.3.7           generics_0.1.3          gridGraphics_0.5-1     
+ [31] shape_1.4.6.1           BiocIO_1.14.0           hwriter_1.3.2.1        
+ [34] GO.db_3.19.1            Matrix_1.7-0            interp_1.1-6           
+ [37] fansi_1.0.6             abind_1.4-8             R.methodsS3_1.8.2      
+ [40] lifecycle_1.0.4         whisker_0.4.1           yaml_2.3.10            
+ [43] SparseArray_1.4.8       BiocFileCache_2.12.0    grid_4.4.1             
+ [46] blob_1.2.4              promises_1.3.0          crayon_1.5.3           
+ [49] pwalign_1.0.0           lattice_0.22-6          cowplot_1.1.3          
+ [52] annotate_1.82.0         GenomicFeatures_1.56.0  KEGGREST_1.44.1        
+ [55] pillar_1.9.0            knitr_1.48              ComplexHeatmap_2.20.0  
+ [58] fgsea_1.30.0            rjson_0.2.22            codetools_0.2-20       
+ [61] fastmatch_1.1-4         glue_1.7.0              getPass_0.2-4          
+ [64] ggfun_0.1.6             data.table_1.16.0       vctrs_0.6.5            
+ [67] png_0.1-8               treeio_1.28.0           gtable_0.3.5           
+ [70] cachem_1.1.0            aroma.light_3.34.0      xfun_0.47              
+ [73] S4Arrays_1.4.1          tidygraph_1.3.1         coda_0.19-4.1          
+ [76] survival_3.7-0          iterators_1.0.14        statmod_1.5.0          
+ [79] nlme_3.1-166            ggtree_3.12.0           bit64_4.0.5            
+ [82] progress_1.2.3          filelock_1.0.3          GENIE3_1.26.0          
+ [85] rprojroot_2.0.4         bslib_0.8.0             rpart_4.1.23           
+ [88] Hmisc_5.1-3             colorspace_2.1-1        DBI_1.2.3              
+ [91] nnet_7.3-19             tidyselect_1.2.1        processx_3.8.4         
+ [94] bit_4.0.5               compiler_4.4.1          curl_5.2.2             
+ [97] git2r_0.35.0            httr2_1.0.4             htmlTable_2.4.3        
+[100] intergraph_2.0-4        xml2_1.3.6              ggdendro_0.2.0         
+[103] DelayedArray_0.30.1     shadowtext_0.1.4        rtracklayer_1.64.0     
+[106] checkmate_2.3.2         callr_3.7.6             rappdirs_0.3.3         
+[109] digest_0.6.37           rmarkdown_2.28          RhpcBLASctl_0.23-42    
+[112] base64enc_0.1-3         htmltools_0.5.8.1       pkgconfig_2.0.3        
+[115] jpeg_0.1-10             highr_0.11              dbplyr_2.5.0           
+[118] fastmap_1.2.0           htmlwidgets_1.6.4       rlang_1.1.4            
+[121] GlobalOptions_0.1.2     UCSC.utils_1.0.0        farver_2.1.2           
+[124] jquerylib_0.1.4         jsonlite_1.8.8          statnet.common_4.9.0   
+[127] GOSemSim_2.30.2         R.oo_1.26.0             RCurl_1.98-1.16        
+[130] magrittr_2.0.3          ggnetwork_0.5.13        Formula_1.2-5          
+[133] GenomeInfoDbData_1.2.12 ggplotify_0.1.2         patchwork_1.2.0        
+[136] munsell_0.5.1           Rcpp_1.0.13             ape_5.8                
+[139] viridis_0.6.5           minet_3.62.0            stringi_1.8.4          
+[142] ggraph_2.2.1            zlibbioc_1.50.0         MASS_7.3-61            
+[145] plyr_1.8.9              parallel_4.4.1          ggrepel_0.9.6          
+[148] deldir_2.0-4            graphlayouts_1.1.1      splines_4.4.1          
+[151] hms_1.1.3               circlize_0.4.16         locfit_1.5-9.10        
+[154] ps_1.8.0                igraph_2.0.3            XML_3.99-0.17          
+[157] evaluate_0.24.0         latticeExtra_0.6-30     tzdb_0.4.0             
+[160] foreach_1.5.2           tweenr_2.0.3            httpuv_1.6.15          
+[163] polyclip_1.10-7         clue_0.3-65             ggforce_0.4.2          
+[166] xtable_1.8-4            restfulr_0.0.15         NetRep_1.2.7           
+[169] tidytree_0.4.6          later_1.3.2             viridisLite_0.4.2      
+[172] aplot_0.2.3             memoise_2.0.1           sva_3.52.0             
+[175] timechange_0.3.0       </code></pre>
+</div>
+</div>
+
+
+<!-- Adjust MathJax settings so that all math formulae are shown using
+TeX fonts only; see
+https://docs.mathjax.org/en/latest/web/configuration.html. This will make
+the presentation more consistent at the cost of the webpage sometimes
+taking slightly longer to load. Note that this only works because the
+footer is added to webpages before the MathJax javascript. -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    "HTML-CSS": { availableFonts: ["TeX"] }
+  });
+</script>
+
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
