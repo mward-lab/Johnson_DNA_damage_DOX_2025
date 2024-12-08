@@ -1,0 +1,714 @@
+---
+title: "DOX_prot_Fig4_pLI"
+author: "Omar Johnson"
+date: "2024-12-08"
+output: html_document
+---
+
+
+# Load Libraries 
+```{r Libraries, include=FALSE}
+library(EDASeq)
+library(RUVSeq)
+library(RColorBrewer)
+library(edgeR)
+library(limma)
+library(Biobase)
+library(SummarizedExperiment)
+library(tidyverse) 
+library(ggfortify)
+library(cluster)
+library(edgeR)
+library(limma)
+library(BiocParallel)
+library(qvalue)
+library(pheatmap)
+library(clusterProfiler)
+library(AnnotationDbi)
+library(RColorBrewer)
+library(DOSE)
+library(UpSetR)
+library(biomaRt)
+library(ggridges)
+library(reshape2)
+library(BioNERO)
+library(WGCNA)
+library(impute)
+library(dynamicTreeCut)
+library(scales)
+
+```
+
+# Read in Data 
+```{r Read in data, include=FALSE}
+
+# 1. RUVg Corrected data across all 10 samples that has been log2 transformed. It has not yet been quantile normalized. 
+ RUVg_Log2_quantnormalized_all10samples <- read.csv(file = "/Users/omarjohnson/Documents/Projects/Dox_Proteomics/Data/Data_Frames/DIA_proteins/RUVIII_Imputed/RUVIII_10samples_log2_notquantilenormalized.csv", header = TRUE, row.names = 1)
+RUVg_Log2_quantnormalized_all10samples <- RUVg_Log2_quantnormalized_all10samples^2
+ 
+
+# 2. Toptable correspondding to the Diff.Abundance test from #1 
+toptable_summary <- read.csv(file = "/Users/omarjohnson/Documents/Projects/Dox_Proteomics/Data/Data_Frames/DIA_proteins/RUVIII_Imputed/Toptable_summary_RUVIII.csv", header = TRUE, row.names = 1)
+
+
+# 3. Meta data for all 10 samples in our study. 
+Meta <- read.csv(file = "/Users/omarjohnson/Documents/Projects/Dox_Proteomics/Data/Data_Frames/DIA_proteins/RUVIII_Imputed/Meta.csv", header = TRUE, row.names = 1)
+
+
+Toptable_Modules <- read.csv(file = "/Users/omarjohnson/Documents/Projects/Dox_Proteomics/Data/Proteomics/Data_sets/Supplement/SUPP_Table_2.csv", header = TRUE)
+
+colnames(Toptable_Modules) <- c("X", "Protein","kTotal", "kWithin",        "kOut", "kDiff", "logFC", "AveExpr", "t", "P.Value","adj.P.Val" ,"B" , "threshold_P", "Modules", "DE_or_Not", "Norm_kIN", "Norm_kOut", "logFC.y",     "AveExpr.y", "t.y", "P.Value.y", "adj.P.Val.y", "B.y" , "threshold_P.y",    "Modules.y", "DE_or_Not.y", "Is_DA", "Is_DOXcorrelated", "Is_Hub", "Is_Cis_pQTL", "Is_Trans_pQTL", "Is_pQTL", "pLI_assigned", "pLI_Mut.Intolerant", "pLI_Mut.Tolerant", "Is_Druggable", "Is_CVD_protein",    "Is_CVD_PPI_protein")
+
+New_RNA_PRO_DF_2 <- read.csv(file = "/Users/omarjohnson/Documents/Projects/Dox_Proteomics/Data/Data_Frames/DIA_proteins/RUVIII_Imputed/New_RNA_PRO_DF.csv", header = TRUE, row.names = 1)
+
+
+New_RNA_PRO_DF_3 <- merge(Toptable_Modules, New_RNA_PRO_DF_2, by.x = "Protein", by.y = "uniprotswissprot")
+
+
+hubs <- read.csv( file = "/Users/omarjohnson/Documents/Projects/Dox_Proteomics/Data/Proteomics/Data_sets/Supplement/hubs.csv", header = TRUE)
+
+
+GO_results_DOX <- read.csv(file = "/Users/omarjohnson/Documents/Projects/Dox_Proteomics/Data/Proteomics/Data_sets/Supplement/GO_results.csv", header = TRUE)
+
+
+HPA_General3 <- readRDS("/Users/omarjohnson/Documents/Projects/Dox_Proteomics/Data/Proteomics/Data_sets/Supplement/HPA_General3_test.RData")
+
+HPA_General4_test <- readRDS("/Users/omarjohnson/Documents/Projects/Dox_Proteomics/Data/Proteomics/Data_sets/Supplement/HPA_General4.RData")
+
+HPA_General2_test <- readRDS("/Users/omarjohnson/Documents/Projects/Dox_Proteomics/Data/Proteomics/Data_sets/Supplement/HPA_General2.RData")
+
+
+dbd_uniprot_list_test<- readRDS("/Users/omarjohnson/Documents/Projects/Dox_Proteomics/Data/Proteomics/Data_sets/Supplement/dbd_uniprot_list.RData")
+
+
+RBP_pros_uniprot_3 <- read.csv(file = "/Users/omarjohnson/Documents/Projects/Dox_Proteomics/Data/Proteomics/Data_sets/Supplement/RBP_pros_uniprot_3.csv", header = TRUE)
+
+# Set the path to the folder containing the .tsv files
+folder_path <- "/Users/omarjohnson/Documents/Projects/Dox_Proteomics/Data/Proteomics/Data_sets/HPA_Metabolism" 
+
+EnzymeTable <- read.csv(file ="/Users/omarjohnson/Documents/Projects/Dox_Proteomics/Data/Proteomics/Data_sets/HPA_Metabolism_Labels/HPA_Metabo_labels.csv" , header = TRUE)
+
+TF_UNIPROT_ENSEMBL_2_2 <- read.csv(file ="/Users/omarjohnson/Documents/Projects/Dox_Proteomics/Data/Proteomics/Data_sets/Supplement/TF_UNIPROT_ENSEMBL_2.csv" , header = TRUE)
+
+
+GeneDose_File_path <- "/Users/omarjohnson/Documents/Projects/Dox_Proteomics/Data/Proteomics/Data_sets/Gene_dose/NIHMS1819123-supplement-14.csv"
+
+pLI_DF_File_path <- "/Users/omarjohnson/Documents/Projects/Dox_Proteomics/Data/Proteomics/Data_sets/pLI/Genes_pLI_Scores.csv"
+```
+
+# Functions 
+```{r ,include=FALSE}
+perform_module_comparisons_mutexc_2 <- function(df, module_col, value_col) {
+  # Ensure the necessary columns exist
+  if (!(module_col %in% names(df) && value_col %in% names(df))) {
+    stop("Specified columns do not exist in the dataframe.")
+  }
+
+  # Get a list of all unique modules
+  modules <- unique(df[[module_col]])
+
+  # Initialize an empty list to store combined data frames
+  combined_df_list <- list()
+
+  # Initialize an empty dataframe to store results
+  results <- data.frame(Module1 = character(),
+                        Module2 = character(),
+                        WilcoxPValue = numeric(),
+                        stringsAsFactors = FALSE)
+
+  # Loop through each module
+  for (module in modules) {
+    # Data for the current module
+    current_data <- df %>% filter(!!sym(module_col) == module) %>% 
+                    mutate(Group = as.character(module))
+
+    # Data for all other modules
+    other_data <- df %>% filter(!!sym(module_col) != module) %>% 
+                    mutate(Group = paste("Not", module, sep=""))
+
+    # Combine current module data with other module data
+    combined_data <- rbind(current_data, other_data)
+
+    # Add the combined data to the list
+    combined_df_list[[module]] <- combined_data
+
+    # Perform the Wilcoxon test
+    test_result <- wilcox.test(current_data[[value_col]], other_data[[value_col]])
+
+    # Add the results to the dataframe
+    results <- rbind(results, data.frame(Module1 = module,
+                                         Module2 = "Others",
+                                         WilcoxPValue = test_result$p.value))
+  }
+
+  return(list("results" = results, "combined_data" = combined_df_list))
+}
+
+
+
+
+# Function assignment 
+perform_fisher_test_FP <- function(vec1, vec2, vec1_name, vec2_name, plot = FALSE) {
+  # Create labeled factors for vec1 and vec2
+  vec1_label <- factor(vec1, labels = c(paste0("Not", vec1_name), paste0("Is", vec1_name)))
+  vec2_label <- factor(vec2, labels = c(paste0("Not", vec2_name), paste0("Is", vec2_name)))
+
+  # Create contingency table with labeled factors
+  table <- table(vec1_label, vec2_label)
+
+  # Perform Fisher's exact test
+  test_result <- fisher.test(table)
+  p_value <- test_result$p.value
+OR <- test_result$estimate
+CI <- test_result$conf.int
+
+  # Prepare result
+  result <- list(
+    ContingencyTable = table,
+    PValue = p_value, 
+    Odds_ratio = test_result$estimate,
+    Confidence_Interval = test_result$conf.int
+  )
+
+  # Generate plot 
+  if (plot) {
+    # Convert table to data frame for ggplot
+    table_df <- as.data.frame(as.table(table))
+    colnames(table_df) <- c("vec1_label", "vec2_label", "Freq")
+
+    # Calculate totals for each vec1_label
+    totals <- aggregate(Freq ~ vec1_label, data = table_df, sum)
+
+    # Merge totals with table_df and calculate percentages
+    table_df <- merge(table_df, totals, by = "vec1_label", all.x = TRUE)
+    table_df$Percentage <- with(table_df, Freq.x / Freq.y * 100)
+    table_df$Group <- table_df$vec2_label
+
+    # Stacked bar chart
+    p <- ggplot(table_df, aes(x = vec1_label, y = Percentage, fill = Group)) +
+      geom_bar(stat = "identity", position = "stack") +  # Adjust position to "stack"
+      facet_wrap(~ vec1_label) +
+      theme_minimal() +
+      labs(x = vec1_name, y = "Percentage", fill = vec2_name, title = paste("")) +
+      theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+    result$Plot <- p
+  }
+
+  return(result)
+}
+
+
+group_by_deciles <- function(x) {
+  deciles <- cut(x, 
+                 breaks = quantile(x, probs = seq(0, 1, by = 0.1), na.rm = TRUE), 
+                 include.lowest = TRUE, 
+                 labels = paste0("D", 1:10))
+  return(deciles)
+}
+```
+
+
+# S14 Triplosensitivity (pTriplo)
+```{r Triplosensitivity (pTriplo)}
+
+
+pLI_Data <- read.csv(file = GeneDose_File_path, header = TRUE)
+pLI_Data %>% dim()
+pLI_Data %>% head()
+
+
+pLI_Data_sub <- merge(pLI_Data, New_RNA_PRO_DF_3, by.x = "Gene", by.y = "hgnc_symbol")
+
+pLI_Data_sub_pop <- pLI_Data_sub
+
+
+
+# 1. For all genes in genome 
+ggplot(pLI_Data, aes(x = pTriplo, y=..density..)) + 
+  geom_histogram(position = "dodge", binwidth = 0.01, color = "black") +  # Add color for bin borders
+  theme_minimal() +
+  labs(title = "pTriplo scores across all genes",
+       x = "pTriplo score",
+       y = "Density") 
+
+ 
+# 2. For network proteins 
+ggplot(pLI_Data_sub, aes(x = pTriplo, y=..density..)) + 
+  geom_histogram(position = "dodge", binwidth = 0.01, color = "black") + 
+  theme_minimal() +
+  labs(title = "pTriplo score for expressed proteins ",
+       x = "pTriplo score",
+       y = "Density") 
+  
+  
+
+
+
+# pTriplo Ridge plot 
+ggplot(pLI_Data_sub, aes(x = pTriplo, y = Modules, fill = Modules)) +
+  ggridges::geom_density_ridges(alpha = 0.8) +
+  labs(title = "Dox Associated Module LogFC distribution from DE test",
+       x = "pTriplo score",
+       y = "Modules") +
+  ggridges::theme_ridges() +
+  scale_fill_identity(guide = "legend")
+
+
+
+
+
+PlI_mutually_exc <- perform_module_comparisons_mutexc_2(df =pLI_Data_sub , module_col = "Modules", value_col = "pTriplo")
+
+
+
+PlI_mutually_exc_combined <- do.call(rbind, PlI_mutually_exc$combined_data)
+
+
+Group_order <- c("green", "Notgreen","darkgreen", "Notdarkgreen", "midnightblue","Notmidnightblue", "salmon","Notsalmon", "lightyellow", "Notlightyellow", "lightgreen", "Notlightgreen","blue", "Notblue", "magenta" ,"Notmagenta","darkred", "Notdarkred", "brown", "Notbrown", "yellow", "Notyellow","royalblue", "Notroyalblue", "grey", "Notgrey" )
+
+# Factor the Module column in Fulltrait_df
+PlI_mutually_exc_combined$Group <- factor(PlI_mutually_exc_combined$Group, levels = Group_order)
+PlI_mutually_exc_combined$Group %>% unique()
+
+# Boxplot  
+my_colors <- c("green", "green","darkgreen", "darkgreen", "midnightblue","midnightblue", "salmon","salmon", "lightyellow", "lightyellow", "lightgreen", "lightgreen","blue", "blue", "magenta" ,"magenta","darkred", "darkred", "brown", "brown", "yellow", "yellow","royalblue", "royalblue", "grey", "grey")
+
+ggplot(PlI_mutually_exc_combined, aes(x = Group, y = pTriplo, fill = Group)) + 
+  geom_boxplot() +
+  scale_fill_manual(values = my_colors) +  
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1),
+        legend.position = "none") +  # Removing the legend
+  labs(title = "pTriplo",
+       x = "",
+       y = "pTriplo score ") +
+coord_cartesian(ylim = c(0,1))
+
+PlI_mutually_exc$results[PlI_mutually_exc$results$WilcoxPValue < 0.05, ]
+
+
+PlI_mutually_exc_combined_DOX <- PlI_mutually_exc_combined[PlI_mutually_exc_combined$Group %in% c("green", "Notgreen","darkgreen", "Notdarkgreen", "midnightblue","Notmidnightblue", "salmon","Notsalmon", "lightyellow", "Notlightyellow"), ]
+ggplot(PlI_mutually_exc_combined_DOX, aes(x = Group, y = pTriplo, fill = Group)) + 
+  geom_boxplot() +
+  scale_fill_manual(values = my_colors) +  
+  theme_classic() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1),
+        legend.position = "none") +  # Removing the legend
+  labs(title = "pTriplo across DOX-corr. Modules",
+       x = "",
+       y = "pTriplo score ") +
+coord_cartesian(ylim = c(0,1))
+
+
+```
+
+# S14 Haploinsufficiency (pHaplo)
+```{r Haploinsufficiency (pHaplo)}
+pLI_Data <- read.csv(file = GeneDose_File_path, header = TRUE)
+
+pLI_Data_sub <- merge(pLI_Data, New_RNA_PRO_DF_3, by.x = "Gene", by.y = "hgnc_symbol")
+
+# 1. For all genes 
+ggplot(pLI_Data, aes(x = pHaplo, y=..density..)) + 
+  geom_histogram(position = "dodge", binwidth = 0.01, color = "black") +  # Add color for bin borders
+  theme_minimal() +
+  labs(title = "pHaplo scores across all human genes",
+       x = "pHaplo score",
+       y = "Density") 
+
+ 
+# 2. For network proteins  
+ggplot(pLI_Data_sub, aes(x = pHaplo, y=..density..)) + 
+  geom_histogram(position = "dodge", binwidth = 0.01, color = "black") + 
+  theme_minimal() +
+  labs(title = "pHaplo score across all genes encoding detected proteins in our data",
+       x = "pHaplo score",
+       y = "Density") 
+  
+  
+
+# pHaplo Ridge plot 
+ggplot(pLI_Data_sub, aes(x = pHaplo, y = Modules, fill = Modules)) +
+  ggridges::geom_density_ridges(alpha = 0.8) +
+  labs(title = "pHaplo scores across modules",
+       x = "pHaplo score",
+       y = "") +
+  ggridges::theme_ridges() +
+  scale_fill_identity(guide = "legend")
+
+
+
+PlI_mutually_exc <- perform_module_comparisons_mutexc_2(df =pLI_Data_sub , module_col = "Modules", value_col = "pHaplo")
+
+
+
+PlI_mutually_exc_combined <- do.call(rbind, PlI_mutually_exc$combined_data)
+
+
+Group_order <- c("green", "Notgreen","darkgreen", "Notdarkgreen", "midnightblue","Notmidnightblue", "salmon","Notsalmon", "lightyellow", "Notlightyellow", "lightgreen", "Notlightgreen","blue", "Notblue", "magenta" ,"Notmagenta","darkred", "Notdarkred", "brown", "Notbrown", "yellow", "Notyellow","royalblue", "Notroyalblue", "grey", "Notgrey" )
+
+
+# Factor the Module column in Fulltrait_df
+PlI_mutually_exc_combined$Group <- factor(PlI_mutually_exc_combined$Group, levels = Group_order)
+PlI_mutually_exc_combined$Group %>% unique()
+
+# Boxplot  
+my_colors <- c("green", "green","darkgreen", "darkgreen", "midnightblue","midnightblue", "salmon","salmon", "lightyellow", "lightyellow", "lightgreen", "lightgreen","blue", "blue", "magenta" ,"magenta","darkred", "darkred", "brown", "brown", "yellow", "yellow","royalblue", "royalblue", "grey", "grey")
+
+ggplot(PlI_mutually_exc_combined, aes(x = Group, y = pHaplo, fill = Group)) + 
+  geom_boxplot() +
+  scale_fill_manual(values = my_colors) +  
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1),
+        legend.position = "none") +  # Removing the legend
+  labs(title = "pHaplo",
+       x = "",
+       y = "pHaple score ") +
+coord_cartesian(ylim = c(0,1))
+
+PlI_mutually_exc$results[PlI_mutually_exc$results$WilcoxPValue < 0.05, ]
+
+
+
+# Boxplot  
+my_colors <- c("green", "green","darkgreen", "darkgreen", "midnightblue","midnightblue", "salmon","salmon", "lightyellow", "lightyellow", "lightgreen", "lightgreen","blue", "blue", "magenta" ,"magenta","darkred", "darkred", "brown", "brown", "yellow", "yellow","royalblue", "royalblue", "grey", "grey")
+
+PlI_mutually_exc_combined_DOX <- PlI_mutually_exc_combined[PlI_mutually_exc_combined$Group %in% c("green", "Notgreen","darkgreen", "Notdarkgreen", "midnightblue","Notmidnightblue", "salmon","Notsalmon", "lightyellow", "Notlightyellow"), ]
+
+
+ggplot(PlI_mutually_exc_combined_DOX, aes(x = Group, y = pHaplo, fill = Group)) + 
+  geom_boxplot() +
+  scale_fill_manual(values = my_colors) +  
+  theme_classic() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1),
+        legend.position = "none") +  # Removing the legend
+  labs(title = "pHaplo accross DOX-corr. Modules",
+       x = "",
+       y = "pHaple score ") +
+coord_cartesian(ylim = c(0,1))
+
+PlI_mutually_exc$results[PlI_mutually_exc$results$WilcoxPValue < 0.05, ]
+```
+
+# Fig-4A Probability loss of function intolerant (pLI)
+```{r pli modules}
+pLI_Data <- read.csv(file = pLI_DF_File_path, header = TRUE)
+pLI_Data %>% dim()
+
+
+pLI_Data_sub <- merge(pLI_Data, New_RNA_PRO_DF_3, by.x = "gene", by.y = "hgnc_symbol")
+
+
+pLI_Data_sub_pop <- pLI_Data_sub
+pLI_Data_sub_pop_hub <- pLI_Data_sub_pop[pLI_Data_sub_pop$Protein %in% hubs$Gene, ]
+
+
+# 1. For all genes 
+ggplot(pLI_Data, aes(x = pLI, y=..density..)) + 
+  geom_histogram(position = "dodge", binwidth = 0.1) + 
+  theme_minimal() +
+  labs(title = "pLI scores aacross all human genes",
+       x = "pLI Score",
+       y = "density") 
+
+ 
+
+# 2. For network proteins
+ggplot(pLI_Data_sub, aes(x = pLI, y=..density..)) + 
+  geom_histogram(position = "dodge", binwidth = 0.1) + 
+  theme_minimal() +
+  labs(title = "pLI scores across all detected iPSC-CM proteins ",
+       x = "pLI Score",
+       y = "density") 
+  
+  
+# 1. For all detected proteins across modules  
+ggplot(pLI_Data_sub, aes(x = pLI, fill = Modules, y=..density..)) + 
+  geom_histogram(position = "dodge", binwidth = 0.2) + 
+  theme_minimal() +
+  labs(title = "pLI scores for all detected proteins across modules",
+       x = "pLI Score",
+       y = "density") +
+  scale_fill_identity(guide = "legend")
+
+
+
+
+ggplot(pLI_Data_sub, aes(x = Modules, y = pLI, fill = Modules)) +
+  geom_boxplot() +
+  geom_jitter(width = 0.1, size = 1, alpha = 0.2, col = "black") + # Add this line
+  scale_fill_identity() +  
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  labs(title = "pLI scores across modules",
+       x = "Module",
+       y = "pLI Score") +
+  scale_fill_identity(guide = "legend")
+
+
+
+PlI_mutually_exc <- perform_module_comparisons_mutexc_2(df = pLI_Data_sub , module_col = "Modules", value_col = "pLI")
+
+
+
+PlI_mutually_exc_combined <- do.call(rbind, PlI_mutually_exc$combined_data)
+
+
+
+
+
+
+Group_order <- c("green", "Notgreen","darkgreen", "Notdarkgreen", "midnightblue","Notmidnightblue", "salmon","Notsalmon", "lightyellow", "Notlightyellow", "lightgreen", "Notlightgreen","blue", "Notblue", "magenta" ,"Notmagenta","darkred", "Notdarkred", "brown", "Notbrown", "yellow", "Notyellow","royalblue", "Notroyalblue", "grey", "Notgrey" )
+
+# Factor the Module column in Fulltrait_df
+PlI_mutually_exc_combined$Group <- factor(PlI_mutually_exc_combined$Group, levels = Group_order)
+PlI_mutually_exc_combined$Group %>% unique()
+
+# Boxplot  
+my_colors <- c("green", "green","darkgreen", "darkgreen", "midnightblue","midnightblue", "salmon","salmon", "lightyellow", "lightyellow", "lightgreen", "lightgreen","blue", "blue", "magenta" ,"magenta","darkred", "darkred", "brown", "brown", "yellow", "yellow","royalblue", "royalblue", "grey", "grey")
+
+ggplot(PlI_mutually_exc_combined, aes(x = Group, y = pLI, fill = Group)) + 
+  geom_boxplot() +
+  scale_fill_manual(values = my_colors) +  
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1),
+        legend.position = "none") +  # Removing the legend
+  labs(title = "probability of being loss-of-function intolerant",
+       x = "",
+       y = "PLI score ") +
+  ylim(0, 1)
+
+
+PlI_mutually_exc$results[PlI_mutually_exc$results$WilcoxPValue < 0.05, ]
+
+
+
+
+
+PlI_mutually_exc_combined_DOX <- PlI_mutually_exc_combined[PlI_mutually_exc_combined$Group %in% c("green", "Notgreen","darkgreen", "Notdarkgreen", "midnightblue","Notmidnightblue", "salmon","Notsalmon", "lightyellow", "Notlightyellow"), ]
+
+ggplot(PlI_mutually_exc_combined_DOX, aes(x = Group, y = pLI, fill = Group)) + 
+  geom_boxplot() +
+  scale_fill_manual(values = my_colors) +  
+  theme_classic() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1),
+        legend.position = "none") +  # Removing the legend
+  labs(title = "pLI across DOX-corr. modules",
+       x = "",
+       y = "PLI score ") +
+  ylim(0, 1)
+
+PlI_mutually_exc$results[PlI_mutually_exc$results$WilcoxPValue < 0.05, ]
+
+```
+
+# Fig-4B pLI & Norm_K
+```{r pLI & Norm_K}
+pLI_kIN_DF_TT <- merge(Toptable_Modules, pLI_Data_sub, by.x = "Protein" , by.y = "Protein")
+pLI_kIN_DF_TT %>% colnames()
+
+pLI_kIN_DF_TT_2 <- pLI_kIN_DF_TT[,c(1,2,3,4,5,6,7,10,14,16,17,28,33,34,35,38,40)]
+pLI_kIN_DF_TT_2 %>% colnames()
+
+colnames(pLI_kIN_DF_TT_2) <- c("Protein","X","kTotal","kWithin","kOut", "kDiff", "logFC", "P.Value", "Modules", "Norm_kIN", "Norm_kOut","Is_DOXcorrelated", "pLI_assigned","pLI_Mut.Intolerant","pLI_Mut.Tolerant", "Is_CVD_PPI_protein", "pLI")
+
+
+pLI_kIN_DF_TT_unique <- pLI_kIN_DF_TT_2 %>%
+  distinct(Protein, .keep_all = TRUE)
+
+
+# Calculate the total number of members
+total_net_members <- nrow(pLI_kIN_DF_TT_unique)
+total_net_members
+# Normalize kOut by the number of members not in the module
+pLI_kIN_DF_TT_unique_2 <- pLI_kIN_DF_TT_unique %>%
+  group_by(Modules) %>%
+  mutate(Norm_kIN = kWithin / n(),
+         Norm_kOut = kOut / (total_net_members - n())) %>%
+  ungroup()
+
+pLI_kIN_DF_TT_unique_2$Norm_kOut %>% hist(breaks = 20)
+pLI_kIN_DF_TT_unique_2_high <- pLI_kIN_DF_TT_unique_2[pLI_kIN_DF_TT_unique_2$pLI >= 0.9, ]
+pLI_kIN_DF_TT_unique_2_high %>% dim()
+
+pLI_kIN_DF_TT_unique_2_low <- pLI_kIN_DF_TT_unique_2[pLI_kIN_DF_TT_unique_2$pLI <= 0.1, ]
+pLI_kIN_DF_TT_unique_2_low %>% dim()
+
+
+
+
+wilcox.test(pLI_kIN_DF_TT_unique_2_high$Norm_kIN, pLI_kIN_DF_TT_unique_2_low$Norm_kIN)
+wilcox.test(pLI_kIN_DF_TT_unique_2_high$Norm_kOut, pLI_kIN_DF_TT_unique_2_low$Norm_kOut)
+
+# Create a data frame
+pLI_Hubs_DF_Boxplot <- data.frame(
+  # 1. Generate values to compare 
+  values = c(pLI_kIN_DF_TT_unique_2_high$Norm_kIN, 
+             pLI_kIN_DF_TT_unique_2_low$Norm_kIN),
+  
+  # 2. Factor values to compare 
+  group = factor(c(rep("High_pLI_kIN", length(pLI_kIN_DF_TT_unique_2_high$Norm_kIN)),
+                c(rep("Low_pLI_kIN", length(pLI_kIN_DF_TT_unique_2_low$Norm_kIN)))
+                ))
+                  )
+
+
+
+
+# Create boxplot
+ggplot(pLI_Hubs_DF_Boxplot, aes(x = group, y = values)) +
+  geom_boxplot() +
+  labs(x = "Group", y = "Normalized intramodular connectivity (kIN)") +
+  ggtitle("Connectivity differences between mutatiion tolerant/intolerant proteins")+
+  theme_classic()+
+  coord_cartesian(ylim = c(0, 0.25))
+```
+
+# Fig-4C pLI & all connectivity 
+```{r pLI & all connectivity} 
+pLI_kIN_DF_TT_unique$DOXcorchar <- as.character(pLI_kIN_DF_TT_unique$Is_DOXcorrelated)
+
+
+
+
+pLI_data_summary_KIN_Tot <- pLI_kIN_DF_TT_unique
+pLI_data_summary_KIN_NormKIN <- pLI_kIN_DF_TT_unique
+pLI_data_summary_KIN_NormkOUT <- pLI_kIN_DF_TT_unique
+
+
+pLI_data_summary_KIN_Tot$Decile <- 
+group_by_deciles(pLI_data_summary_KIN_Tot$kTotal)
+pLI_data_summary_KIN_Tot$Type <- c("kTotal")
+
+
+pLI_data_summary_KIN_NormKIN$Decile <- 
+group_by_deciles(pLI_data_summary_KIN_NormKIN$Norm_kIN)
+pLI_data_summary_KIN_NormKIN$Type <- c("kIN")
+
+
+
+pLI_data_summary_KIN_NormkOUT$Decile <- 
+group_by_deciles(pLI_data_summary_KIN_NormkOUT$Norm_kOut)
+pLI_data_summary_KIN_NormkOUT$Type <- c("kOut")
+
+
+pLI_data_summary_KIN_ALL <- rbind(pLI_data_summary_KIN_Tot,pLI_data_summary_KIN_NormKIN,pLI_data_summary_KIN_NormkOUT)
+
+pLI_data_summary_KIN_ALL %>% colnames()
+
+
+
+# Summarize the data
+pLI_connectivity_summarized <- pLI_data_summary_KIN_ALL %>%
+  group_by(Type, DOXcorchar, Decile) %>%
+  summarize(median_pLI = median(pLI, na.rm = TRUE)) %>%
+  ungroup()
+
+
+pLI_connectivity_summarized$Type <- factor(x = pLI_connectivity_summarized$Type, levels = c("kTotal","kIN","kOut"))
+
+
+ggplot(pLI_connectivity_summarized, aes(x = Decile, y = median_pLI, color = DOXcorchar, linetype = Type, group = interaction(Type, DOXcorchar))) +
+  geom_line(size = 1) +
+  scale_y_continuous(breaks = seq(0, 1, by = 0.1), limits = c(0, 1)) +  # Add y-axis ticks
+  labs(title = "Mutation intolerance determined by connectivity",
+       x = "Connetivity Deciles",
+       y = "Probabilty of mutation intolerance (pLI)",
+       color = "DOXcorchar",
+       linetype = "Type") +
+  theme_classic()
+
+```
+
+# fig-4D Mutation tolerant/intolerant enrichment 
+```{r Mutation tolerant/intolerant enrichment}
+pLI_Data <- read.csv(file = pLI_DF_File_path, header = TRUE)
+
+pLI_Data_sub <- merge(pLI_Data, New_RNA_PRO_DF_3, by.x = "gene", by.y = "hgnc_symbol")
+
+pLI_Data_sub2 <- pLI_Data_sub
+
+
+
+pLI_Data_sub2 <- pLI_Data_sub2 %>%
+  mutate(Hub = if_else(pLI_Data_sub2$Protein %in% hubs$Gene, 1, 0))
+
+pLI_Data_sub2 <- pLI_Data_sub2 %>%
+  mutate(DOXcorr = if_else(pLI_Data_sub2$Modules %in% c("green","darkgreen", "midnightblue", "salmon","lightyellow"), 1, 0))
+
+pLI_Data_sub2 <- pLI_Data_sub2 %>%
+  mutate(Mut_Intolerant = if_else(pLI_Data_sub2$pLI >= 0.9, 1, 0))
+
+pLI_Data_sub2 <- pLI_Data_sub2 %>%
+  mutate(Mut_Resistant = if_else(pLI_Data_sub2$pLI <= 0.1 , 1, 0))
+
+pLI_Data_sub2_hub <- pLI_Data_sub2[pLI_Data_sub2$Hub == 1, ]
+
+
+# Tests 
+FP_DOXcorr_High <- perform_fisher_test_FP(vec1 = pLI_Data_sub2$DOXcorr, vec2 = pLI_Data_sub2$Mut_Intolerant, vec1_name = "", vec2_name = "",  plot = FALSE)
+
+
+
+FP_DOXcorr_Low <- perform_fisher_test_FP(vec1 = pLI_Data_sub2$DOXcorr, vec2 = pLI_Data_sub2$Mut_Resistant, vec1_name = "", vec2_name = "",  plot = FALSE)
+
+
+
+FP_Hub_High <- perform_fisher_test_FP(vec1 = pLI_Data_sub2$Hub, vec2 = pLI_Data_sub2$Mut_Intolerant, vec1_name = "", vec2_name = "",  plot = FALSE)
+
+
+FP_Hub_Low <- perform_fisher_test_FP(vec1 = pLI_Data_sub2$Hub, vec2 = pLI_Data_sub2$Mut_Resistant, vec1_name = "", vec2_name = "",  plot = FALSE)
+
+
+
+FP_DOXcorr_Hub_High <- perform_fisher_test_FP(vec1 = pLI_Data_sub2_hub$DOXcorr, vec2 = pLI_Data_sub2_hub$Mut_Intolerant, vec1_name = "", vec2_name = "",  plot = FALSE)
+
+
+FP_DOXcorr_Hub_Low <- perform_fisher_test_FP(vec1 = pLI_Data_sub2_hub$DOXcorr, vec2 = pLI_Data_sub2_hub$Mut_Resistant, vec1_name = "", vec2_name = "",  plot = FALSE)
+
+
+
+FP_List <- list(FP_DOXcorr_High, FP_DOXcorr_Low, FP_Hub_High, FP_Hub_Low, FP_DOXcorr_Hub_High, FP_DOXcorr_Hub_Low)
+
+FP_DF <- data.frame(
+  Odds_ratio = numeric(length(FP_List)),
+  Lower_CI = numeric(length(FP_List)),
+  Upper_CI = numeric(length(FP_List)), 
+  Pval = numeric(length(FP_List))
+)
+
+for (i in 1:length(FP_List)) {
+  FP_DF$Odds_ratio[i] <- FP_List[[i]]$Odds_ratio
+  FP_DF$Lower_CI[i] <- FP_List[[i]]$Confidence_Interval[1]
+  FP_DF$Upper_CI[i] <- FP_List[[i]]$Confidence_Interval[2]
+  FP_DF$Pval[i] <- FP_List[[i]]$PValue
+}
+
+# Add row names for the labels in the forest plot
+FP_DF$Label <- c("FP_DOXcorr_High", "FP_DOXcorr_Low", "FP_Hub_High", "FP_Hub_Low", "FP_DOXcorr_Hub_High", "FP_DOXcorr_Hub_Low")
+
+
+FP_DF$Label <- factor(FP_DF$Label, levels = rev(c("FP_Hub_High", "FP_Hub_Low", "FP_DOXcorr_High", "FP_DOXcorr_Low", "FP_DOXcorr_Hub_High", "FP_DOXcorr_Hub_Low")))
+
+
+# Add a new column to indicate "cis" or "trans"
+FP_DF$Type <- ifelse(grepl("High", FP_DF$Label), "Mutation Intolerant", "Mutation Tolerant")
+
+
+# Plot with color based on "Type"
+ggplot(FP_DF, aes(x = Label, y = Odds_ratio, ymin = Lower_CI, ymax = Upper_CI, color = Type)) +
+  geom_pointrange() +
+  geom_hline(yintercept = 1, linetype = "dashed", color = "red") +
+  coord_flip() +
+  labs(
+    title = "Odds of mutation tolerance",
+    x = "",
+    y = "Odds Ratio (95% CI)"
+  ) +
+  theme_classic() +
+  scale_color_manual(values = c("Mutation Tolerant" = "dodgerblue4", "Mutation Intolerant" = "darkred"))
+
+
+
+```
