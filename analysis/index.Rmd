@@ -7,5 +7,11 @@ output:
 editor_options:
   chunk_output_type: console
 ---
+Research website for the project "DNA damage-associated protein co-expression network in cardiomyocytes informs on tolerance to genetic variation and disease". 
 
-Welcome to my research website.
+
+
+# Preprocessing and comparison of protein acqustion types 
+[Unwanted tehnical variation removal and differential abundance testing  ](https://omar-johnson.github.io/DNA_damage_DOX/DOX_prot_DAP_tests_ruv.html)
+
+
