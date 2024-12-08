@@ -1,0 +1,555 @@
+---
+title: "DOX_prot_Fig5_AFHF"
+author: "Omar Johnson"
+date: "2024-12-08"
+output: html_document
+---
+
+# Load Libraries 
+```{r Libraries, include=FALSE}
+library(EDASeq)
+library(RUVSeq)
+library(RColorBrewer)
+library(edgeR)
+library(limma)
+library(Biobase)
+library(SummarizedExperiment)
+library(tidyverse) 
+library(ggfortify)
+library(cluster)
+library(edgeR)
+library(limma)
+library(BiocParallel)
+library(qvalue)
+library(pheatmap)
+library(clusterProfiler)
+library(AnnotationDbi)
+library(org.Hs.eg.db)
+library(RColorBrewer)
+library(DOSE)
+library(UpSetR)
+library(biomaRt)
+library(ggridges)
+library(reshape2)
+library(BioNERO)
+library(WGCNA)
+library(impute)
+library(dynamicTreeCut)
+library(scales)
+
+```
+
+
+# Read in Data 
+```{r Read in data, include=FALSE}
+
+# 1. RUVg Corrected data across all 10 samples that has been log2 transformed. It has not yet been quantile normalized. 
+ RUVg_Log2_quantnormalized_all10samples <- read.csv(file = "/Users/omarjohnson/Documents/Projects/Dox_Proteomics/Data/Data_Frames/DIA_proteins/RUVIII_Imputed/RUVIII_10samples_log2_notquantilenormalized.csv", header = TRUE, row.names = 1)
+RUVg_Log2_quantnormalized_all10samples <- RUVg_Log2_quantnormalized_all10samples^2
+ 
+
+# 2. Toptable correspondding to the Diff.Abundance test from #1 
+toptable_summary <- read.csv(file = "/Users/omarjohnson/Documents/Projects/Dox_Proteomics/Data/Data_Frames/DIA_proteins/RUVIII_Imputed/Toptable_summary_RUVIII.csv", header = TRUE, row.names = 1)
+
+
+# 3. Meta data for all 10 samples in our study. 
+Meta <- read.csv(file = "/Users/omarjohnson/Documents/Projects/Dox_Proteomics/Data/Data_Frames/DIA_proteins/RUVIII_Imputed/Meta.csv", header = TRUE, row.names = 1)
+
+
+Toptable_Modules <- read.csv(file = "/Users/omarjohnson/Documents/Projects/Dox_Proteomics/Data/Proteomics/Data_sets/Supplement/SUPP_Table_2.csv", header = TRUE)
+
+colnames(Toptable_Modules) <- c("X", "Protein","kTotal", "kWithin",        "kOut", "kDiff", "logFC", "AveExpr", "t", "P.Value","adj.P.Val" ,"B" , "threshold_P", "Modules", "DE_or_Not", "Norm_kIN", "Norm_kOut", "logFC.y",     "AveExpr.y", "t.y", "P.Value.y", "adj.P.Val.y", "B.y" , "threshold_P.y",    "Modules.y", "DE_or_Not.y", "Is_DA", "Is_DOXcorrelated", "Is_Hub", "Is_Cis_pQTL", "Is_Trans_pQTL", "Is_pQTL", "pLI_assigned", "pLI_Mut.Intolerant", "pLI_Mut.Tolerant", "Is_Druggable", "Is_CVD_protein",    "Is_CVD_PPI_protein")
+
+New_RNA_PRO_DF_2 <- read.csv(file = "/Users/omarjohnson/Documents/Projects/Dox_Proteomics/Data/Data_Frames/DIA_proteins/RUVIII_Imputed/New_RNA_PRO_DF.csv", header = TRUE, row.names = 1)
+
+
+New_RNA_PRO_DF_3 <- merge(Toptable_Modules, New_RNA_PRO_DF_2, by.x = "Protein", by.y = "uniprotswissprot")
+
+
+hubs <- read.csv( file = "/Users/omarjohnson/Documents/Projects/Dox_Proteomics/Data/Proteomics/Data_sets/Supplement/hubs.csv", header = TRUE)
+
+
+GO_results_DOX <- read.csv(file = "/Users/omarjohnson/Documents/Projects/Dox_Proteomics/Data/Proteomics/Data_sets/Supplement/GO_results.csv", header = TRUE)
+
+
+HPA_General3 <- readRDS("/Users/omarjohnson/Documents/Projects/Dox_Proteomics/Data/Proteomics/Data_sets/Supplement/HPA_General3_test.RData")
+
+HPA_General4_test <- readRDS("/Users/omarjohnson/Documents/Projects/Dox_Proteomics/Data/Proteomics/Data_sets/Supplement/HPA_General4.RData")
+
+HPA_General2_test <- readRDS("/Users/omarjohnson/Documents/Projects/Dox_Proteomics/Data/Proteomics/Data_sets/Supplement/HPA_General2.RData")
+
+
+dbd_uniprot_list_test<- readRDS("/Users/omarjohnson/Documents/Projects/Dox_Proteomics/Data/Proteomics/Data_sets/Supplement/dbd_uniprot_list.RData")
+
+
+RBP_pros_uniprot_3 <- read.csv(file = "/Users/omarjohnson/Documents/Projects/Dox_Proteomics/Data/Proteomics/Data_sets/Supplement/RBP_pros_uniprot_3.csv", header = TRUE)
+
+# Set the path to the folder containing the .tsv files
+folder_path <- "/Users/omarjohnson/Documents/Projects/Dox_Proteomics/Data/Proteomics/Data_sets/HPA_Metabolism" 
+
+EnzymeTable <- read.csv(file ="/Users/omarjohnson/Documents/Projects/Dox_Proteomics/Data/Proteomics/Data_sets/HPA_Metabolism_Labels/HPA_Metabo_labels.csv" , header = TRUE)
+
+TF_UNIPROT_ENSEMBL_2_2 <- read.csv(file ="/Users/omarjohnson/Documents/Projects/Dox_Proteomics/Data/Proteomics/Data_sets/Supplement/TF_UNIPROT_ENSEMBL_2.csv" , header = TRUE)
+
+unique_genes_df_2 <- read.csv("/Users/omarjohnson/Documents/Projects/Dox_Proteomics/Data/Proteomics/Data_sets/Supplement/unique_genes_df_2.csv",header = TRUE, row.names	
+ = 1)
+
+unique_genes_df_2 %>% dim()
+unique_genes_df_2 <- unique_genes_df_2[!unique_genes_df_2$Genes %in% c(""), ]
+
+```
+
+
+# Functions 
+```{r Functions, include = FALSE}
+perform_fisher_test_FP <- function(vec1, vec2, vec1_name, vec2_name, plot = FALSE) {
+  # Create labeled factors for vec1 and vec2
+  vec1_label <- factor(vec1, labels = c(paste0("Not", vec1_name), paste0("Is", vec1_name)))
+  vec2_label <- factor(vec2, labels = c(paste0("Not", vec2_name), paste0("Is", vec2_name)))
+
+  # Create contingency table with labeled factors
+  table <- table(vec1_label, vec2_label)
+
+  # Perform Fisher's exact test
+  test_result <- fisher.test(table)
+  p_value <- test_result$p.value
+OR <- test_result$estimate
+CI <- test_result$conf.int
+
+  # Prepare result
+  result <- list(
+    ContingencyTable = table,
+    PValue = p_value, 
+    Odds_ratio = test_result$estimate,
+    Confidence_Interval = test_result$conf.int
+  )
+
+  # Generate plot if required
+  if (plot) {
+    # Convert table to data frame for ggplot
+    table_df <- as.data.frame(as.table(table))
+    colnames(table_df) <- c("vec1_label", "vec2_label", "Freq")
+
+    # Calculate totals for each vec1_label
+    totals <- aggregate(Freq ~ vec1_label, data = table_df, sum)
+
+    # Merge totals with table_df and calculate percentages
+    table_df <- merge(table_df, totals, by = "vec1_label", all.x = TRUE)
+    table_df$Percentage <- with(table_df, Freq.x / Freq.y * 100)
+    table_df$Group <- table_df$vec2_label
+
+    # Stacked bar chart
+    p <- ggplot(table_df, aes(x = vec1_label, y = Percentage, fill = Group)) +
+      geom_bar(stat = "identity", position = "stack") +  # Adjust position to "stack"
+      facet_wrap(~ vec1_label) +
+      theme_minimal() +
+      labs(x = vec1_name, y = "Percentage", fill = vec2_name, title = paste("")) +
+      theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+    result$Plot <- p
+  }
+
+  return(result)
+}
+
+
+group_by_deciles <- function(x) {
+  deciles <- cut(x, 
+                 breaks = quantile(x, probs = seq(0, 1, by = 0.1), na.rm = TRUE), 
+                 include.lowest = TRUE, 
+                 labels = paste0("D", 1:10))
+  return(deciles)
+}
+```
+
+
+# Fig 5D Using- heatmap for heart failure and atrial fibrillation 
+```{r }
+# Data frame with 
+unique_genes_df_2 %>% head()
+
+unique_genes_df_2_DOXcorr. <- unique_genes_df_2[unique_genes_df_2$Is_DOXcorrelated ==1, ]
+
+
+
+# Geom tile with All Risk proteins 
+# Plot 1: LogFC Heatmap
+logfc_plot <- ggplot(unique_genes_df_2, aes(x = "LogFC", y = Genes, fill = Pro_LogFC)) +
+  geom_tile(color = "white") +
+  scale_fill_gradient2(low = "blue", mid = "white", high = "red", midpoint = 0, name = "LogFC") +
+  labs(title = "LogFC Heatmap", x = "", y = "Genes") +
+  theme_void() +
+  theme(axis.text.x = element_blank(), axis.ticks.x = element_blank(), axis.text.y = element_text(size = 8))
+logfc_plot
+
+
+module_plot <- ggplot(unique_genes_df_2, aes(x = "Module", y = Genes, fill = Modules)) +
+  geom_tile(color = "white") +
+  scale_fill_identity() +
+  labs(title = "Module Heatmap", x = "", y = "Genes") +
+  theme_void() +
+  theme(axis.text.x = element_blank(), axis.ticks.x = element_blank(), axis.text.y = element_text(size = 8))
+module_plot
+
+
+# Plot 3: Binary Attributes Heatmap
+# Reshape the binary data
+binary_data <- unique_genes_df_2 %>%
+  dplyr::select(Genes, Is_DA, Is_DOXcorrelated, Is_Hub, Atrial.fibrillation, Heart.failure) %>%
+  pivot_longer(cols = -Genes, names_to = "Attribute", values_to = "Value")
+
+binary_plot <- ggplot(binary_data, aes(x = Attribute, y = Genes, fill = as.factor(Value))) +
+  geom_tile(color = "white") +
+  scale_fill_manual(values = c("0" = "steelblue", "1" = "orange"), name = "Binary") +
+  labs(title = "Binary Attributes Heatmap (1= Yes, 0 =No)", x = "Attributes", y = "Genes") +
+  theme_void() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 8), axis.text.y = element_text(size = 8))
+binary_plot
+
+
+
+binary_data_2 <- unique_genes_df_2 %>%
+  dplyr::select(Genes, Is_Hub) %>%
+  pivot_longer(cols = -Genes, names_to = "Attribute", values_to = "Value")
+
+binary_plot_2 <- ggplot(binary_data_2, aes(x = Attribute, y = Genes, fill = as.factor(Value))) +
+  geom_tile(color = "white") +
+  scale_fill_manual(values = c("0" = "grey", "1" = "black"), name = "Binary") +
+  labs(title = "Binary Attributes Heatmap (1= Yes, 0 =No)", x = "Attributes", y = "Genes") +
+  theme_void() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 8), axis.text.y = element_text(size = 8))
+binary_plot_2
+
+
+
+```
+
+
+
+# Fig 5 B&C AF/HF enrrichment tests  
+```{r }
+# assigning AF/HF gene vectors 
+Afib_genes <- unique_genes_df_2[(unique_genes_df_2$Atrial.fibrillation == 1) & (!unique_genes_df_2$Genes %in% c("")), ]$Genes
+HF_genes <- unique_genes_df_2[(unique_genes_df_2$Heart.failure == 1) & (!unique_genes_df_2$Genes %in% c("")), ]$Genes
+
+# gene names 
+Afib_genes
+HF_genes
+
+# gene set lengths 
+Afib_genes %>% length()
+HF_genes %>% length()
+
+# Adding risk gene info into data frame
+New_RNA_PRO_DF_5 <-New_RNA_PRO_DF_3
+New_RNA_PRO_DF_5$Modules
+
+New_RNA_PRO_DF_5$Is_Afib <- ifelse(New_RNA_PRO_DF_5$hgnc_symbol %in% Afib_genes, 1, 0)
+New_RNA_PRO_DF_5$Is_HF <- ifelse(New_RNA_PRO_DF_5$hgnc_symbol %in% HF_genes, 1, 0)
+
+
+# Get all unique module names
+unique_modules <- unique(New_RNA_PRO_DF_5$Modules)
+
+# Loop through each unique module name and create a new column
+for (module in unique_modules) {
+  # Create a new column indicating membership (1 if row belongs to module, 0 otherwise)
+  New_RNA_PRO_DF_5[[paste0("Is_", module)]] <- ifelse(New_RNA_PRO_DF_5$Modules == module, 1, 0)
+}
+
+# View the resulting dataframe
+New_RNA_PRO_DF_5 %>% head()
+
+
+
+
+
+
+# The afib tests 
+Afib_green <- perform_fisher_test_FP(vec1 = New_RNA_PRO_DF_5$Is_green, vec2 =New_RNA_PRO_DF_5$Is_Afib, vec1_name = "", vec2_name = "",  plot = FALSE)
+
+Afib_darkgreen <- perform_fisher_test_FP(vec1 = New_RNA_PRO_DF_5$Is_darkgreen, vec2 =New_RNA_PRO_DF_5$Is_Afib, vec1_name = "", vec2_name = "",  plot = FALSE)
+
+Afib_midnightblue <- perform_fisher_test_FP(vec1 = New_RNA_PRO_DF_5$Is_midnightblue, vec2 =New_RNA_PRO_DF_5$Is_Afib, vec1_name = "", vec2_name = "",  plot = FALSE)
+
+Afib_salmon <- perform_fisher_test_FP(vec1 = New_RNA_PRO_DF_5$Is_salmon, vec2 =New_RNA_PRO_DF_5$Is_Afib, vec1_name = "", vec2_name = "",  plot = FALSE)
+
+Afib_lightyellow <- perform_fisher_test_FP(vec1 = New_RNA_PRO_DF_5$Is_lightyellow, vec2 =New_RNA_PRO_DF_5$Is_Afib, vec1_name = "", vec2_name = "",  plot = FALSE)
+
+Afib_lightgreen <- perform_fisher_test_FP(vec1 = New_RNA_PRO_DF_5$Is_lightgreen, vec2 =New_RNA_PRO_DF_5$Is_Afib, vec1_name = "", vec2_name = "",  plot = FALSE)
+
+Afib_blue <- perform_fisher_test_FP(vec1 = New_RNA_PRO_DF_5$Is_blue, vec2 =New_RNA_PRO_DF_5$Is_Afib, vec1_name = "", vec2_name = "",  plot = FALSE)
+
+Afib_magenta <- perform_fisher_test_FP(vec1 = New_RNA_PRO_DF_5$Is_magenta, vec2 =New_RNA_PRO_DF_5$Is_Afib, vec1_name = "", vec2_name = "",  plot = FALSE)
+
+Afib_brown <- perform_fisher_test_FP(vec1 = New_RNA_PRO_DF_5$Is_brown, vec2 =New_RNA_PRO_DF_5$Is_Afib, vec1_name = "", vec2_name = "",  plot = FALSE)
+
+Afib_darkred <- perform_fisher_test_FP(vec1 = New_RNA_PRO_DF_5$Is_darkred, vec2 =New_RNA_PRO_DF_5$Is_Afib, vec1_name = "", vec2_name = "",  plot = FALSE)
+
+Afib_yellow <- perform_fisher_test_FP(vec1 = New_RNA_PRO_DF_5$Is_yellow, vec2 =New_RNA_PRO_DF_5$Is_Afib, vec1_name = "", vec2_name = "",  plot = FALSE)
+
+Afib_royalblue <- perform_fisher_test_FP(vec1 = New_RNA_PRO_DF_5$Is_royalblue, vec2 =New_RNA_PRO_DF_5$Is_Afib, vec1_name = "", vec2_name = "",  plot = FALSE)
+
+Afib_grey <- perform_fisher_test_FP(vec1 = New_RNA_PRO_DF_5$Is_grey, vec2 =New_RNA_PRO_DF_5$Is_Afib, vec1_name = "", vec2_name = "",  plot = FALSE)
+Afib_green
+Afib_darkgreen
+Afib_midnightblue
+Afib_salmon
+Afib_lightyellow
+Afib_lightgreen
+Afib_blue
+Afib_magenta
+Afib_brown
+Afib_darkred
+Afib_yellow
+Afib_royalblue
+Afib_grey
+
+
+
+# The HF tests 
+HF_green <- perform_fisher_test_FP(vec1 = New_RNA_PRO_DF_5$Is_green, vec2 =New_RNA_PRO_DF_5$Is_HF, vec1_name = "", vec2_name = "",  plot = FALSE)
+
+HF_darkgreen <- perform_fisher_test_FP(vec1 = New_RNA_PRO_DF_5$Is_darkgreen, vec2 =New_RNA_PRO_DF_5$Is_HF, vec1_name = "", vec2_name = "",  plot = FALSE)
+
+HF_midnightblue <- perform_fisher_test_FP(vec1 = New_RNA_PRO_DF_5$Is_midnightblue, vec2 =New_RNA_PRO_DF_5$Is_HF, vec1_name = "", vec2_name = "",  plot = FALSE)
+
+HF_salmon <- perform_fisher_test_FP(vec1 = New_RNA_PRO_DF_5$Is_salmon, vec2 =New_RNA_PRO_DF_5$Is_HF, vec1_name = "", vec2_name = "",  plot = FALSE)
+
+HF_lightyellow <- perform_fisher_test_FP(vec1 = New_RNA_PRO_DF_5$Is_lightyellow, vec2 =New_RNA_PRO_DF_5$Is_HF, vec1_name = "", vec2_name = "",  plot = FALSE)
+
+HF_lightgreen <- perform_fisher_test_FP(vec1 = New_RNA_PRO_DF_5$Is_lightgreen, vec2 =New_RNA_PRO_DF_5$Is_HF, vec1_name = "", vec2_name = "",  plot = FALSE)
+
+HF_blue <- perform_fisher_test_FP(vec1 = New_RNA_PRO_DF_5$Is_blue, vec2 =New_RNA_PRO_DF_5$Is_HF, vec1_name = "", vec2_name = "",  plot = FALSE)
+
+HF_magenta <- perform_fisher_test_FP(vec1 = New_RNA_PRO_DF_5$Is_magenta, vec2 =New_RNA_PRO_DF_5$Is_HF, vec1_name = "", vec2_name = "",  plot = FALSE)
+
+HF_brown <- perform_fisher_test_FP(vec1 = New_RNA_PRO_DF_5$Is_brown, vec2 =New_RNA_PRO_DF_5$Is_HF, vec1_name = "", vec2_name = "",  plot = FALSE)
+
+HF_darkred <- perform_fisher_test_FP(vec1 = New_RNA_PRO_DF_5$Is_darkred, vec2 =New_RNA_PRO_DF_5$Is_HF, vec1_name = "", vec2_name = "",  plot = FALSE)
+
+HF_yellow <- perform_fisher_test_FP(vec1 = New_RNA_PRO_DF_5$Is_yellow, vec2 =New_RNA_PRO_DF_5$Is_HF, vec1_name = "", vec2_name = "",  plot = FALSE)
+
+HF_royalblue <- perform_fisher_test_FP(vec1 = New_RNA_PRO_DF_5$Is_royalblue, vec2 =New_RNA_PRO_DF_5$Is_HF, vec1_name = "", vec2_name = "",  plot = FALSE)
+
+HF_grey <- perform_fisher_test_FP(vec1 = New_RNA_PRO_DF_5$Is_grey, vec2 =New_RNA_PRO_DF_5$Is_HF, vec1_name = "", vec2_name = "",  plot = FALSE)
+HF_green
+HF_darkgreen
+HF_midnightblue
+HF_salmon
+HF_lightyellow
+HF_lightgreen
+HF_blue
+HF_magenta
+HF_brown
+HF_darkred
+HF_yellow
+HF_royalblue
+HF_grey
+
+
+
+
+
+
+
+
+# Afib workflow for forest plot 
+
+FP_List <- list(Afib_green,
+Afib_darkgreen,
+Afib_midnightblue,
+Afib_salmon,
+Afib_lightyellow,
+Afib_lightgreen,
+Afib_blue,
+Afib_magenta,
+Afib_darkred,
+Afib_brown,
+Afib_yellow,
+Afib_royalblue,
+Afib_grey)
+
+FP_DF <- data.frame(
+  Odds_ratio = numeric(length(FP_List)),
+  Lower_CI = numeric(length(FP_List)),
+  Upper_CI = numeric(length(FP_List)), 
+  Pval = numeric(length(FP_List))
+)
+
+for (i in 1:length(FP_List)) {
+  FP_DF$Odds_ratio[i] <- FP_List[[i]]$Odds_ratio
+  FP_DF$Lower_CI[i] <- FP_List[[i]]$Confidence_Interval[1]
+  FP_DF$Upper_CI[i] <- FP_List[[i]]$Confidence_Interval[2]
+  FP_DF$Pval[i] <- FP_List[[i]]$PValue
+}
+
+# Add row names for the labels in the forest plot
+FP_DF$Label <- c("Afib_green",
+"Afib_darkgreen",
+"Afib_midnightblue",
+"Afib_salmon",
+"Afib_lightyellow",
+"Afib_lightgreen",
+"Afib_blue",
+"Afib_magenta",
+"Afib_darkred",
+"Afib_brown",
+"Afib_yellow",
+"Afib_royalblue",
+"Afib_grey")
+
+
+FP_DF$Label <- factor(FP_DF$Label, levels = rev(c(c("Afib_green",
+"Afib_darkgreen",
+"Afib_midnightblue",
+"Afib_salmon",
+"Afib_lightyellow",
+"Afib_lightgreen",
+"Afib_blue",
+"Afib_magenta",
+"Afib_darkred",
+"Afib_brown",
+"Afib_yellow",
+"Afib_royalblue",
+"Afib_grey"))))
+
+
+# Add a new column 
+FP_DF$Type <- c("green", "darkgreen", "midnightblue", "salmon","lightyellow","lightgreen","blue","magenta","darkred","brown", "yellow", "royalblue", "grey" )
+
+FP_DF$Type
+ggplot(FP_DF, aes(x = Label, y = Odds_ratio, fill = Type)) +
+  geom_pointrange(aes(ymin = Lower_CI, ymax = Upper_CI), position = position_dodge(width = 0.5)) +  # Add error bars with color
+  geom_point(aes(fill = Type), size = 3, shape = 21, position = position_dodge(width = 0.5)) +  # Add filled points
+  geom_hline(yintercept = 1, linetype = "dashed", color = "black") +
+  coord_flip() +
+  labs(
+    title = "Odds of being afib risk protein",
+    x = "",
+    y = "Odds Ratio (95% CI)"
+  ) +
+  theme_classic() +
+  scale_fill_identity()
+
+
+
+
+ggplot(FP_DF, aes(x = Label, y = Odds_ratio, color = Type)) +
+  geom_pointrange(aes(ymin = Lower_CI, ymax = Upper_CI), position = position_dodge(width = 0.5)) +  # Add error bars with color
+  geom_point(aes(fill = Type), size = 3, shape = 21, position = position_dodge(width = 0.5)) +  # Add filled points
+  geom_hline(yintercept = 1, linetype = "dashed", color = "red") +
+  coord_flip() +
+  labs(
+    title = "Odds of being afib risk protein",
+    x = "",
+    y = "Odds Ratio (95% CI)"
+  ) +
+  theme_classic() 
+
+
+
+
+
+
+
+
+
+HF_green
+HF_darkgreen
+HF_midnightblue
+HF_salmon
+HF_lightyellow
+HF_lightgreen
+HF_blue
+HF_magenta
+HF_darkred
+HF_brown
+HF_yellow
+HF_royalblue
+HF_grey
+
+
+
+
+
+
+# Afib workflow for forest plot 
+
+FP_List <- list(HF_green,
+HF_darkgreen,
+HF_midnightblue,
+HF_salmon,
+HF_lightyellow,
+HF_lightgreen,
+HF_blue,
+HF_magenta,
+HF_darkred,
+HF_brown,
+HF_yellow,
+HF_royalblue,
+HF_grey)
+
+FP_DF <- data.frame(
+  Odds_ratio = numeric(length(FP_List)),
+  Lower_CI = numeric(length(FP_List)),
+  Upper_CI = numeric(length(FP_List)), 
+  Pval = numeric(length(FP_List))
+)
+
+for (i in 1:length(FP_List)) {
+  FP_DF$Odds_ratio[i] <- FP_List[[i]]$Odds_ratio
+  FP_DF$Lower_CI[i] <- FP_List[[i]]$Confidence_Interval[1]
+  FP_DF$Upper_CI[i] <- FP_List[[i]]$Confidence_Interval[2]
+  FP_DF$Pval[i] <- FP_List[[i]]$PValue
+}
+
+# Add row names for the labels in the forest plot
+FP_DF$Label <- c("HF_green",
+"HF_darkgreen",
+"HF_midnightblue",
+"HF_salmon",
+"HF_lightyellow",
+"HF_lightgreen",
+"HF_blue",
+"HF_magenta",
+"HF_darkred",
+"HF_brown",
+"HF_yellow",
+"HF_royalblue",
+"HF_grey")
+
+
+FP_DF$Label <- factor(FP_DF$Label, levels = rev(c(c("HF_green",
+"HF_darkgreen",
+"HF_midnightblue",
+"HF_salmon",
+"HF_lightyellow",
+"HF_lightgreen",
+"HF_blue",
+"HF_magenta",
+"HF_darkred",
+"HF_brown",
+"HF_yellow",
+"HF_royalblue",
+"HF_grey"))))
+
+
+# Add a new column 
+FP_DF$Type <- c("green", "darkgreen", "midnightblue", "salmon","lightyellow","lightgreen","blue","magenta","darkred","brown", "yellow", "royalblue", "grey" )
+
+FP_DF
+ggplot(FP_DF, aes(x = Label, y = Odds_ratio, fill = Type)) +
+  geom_pointrange(aes(ymin = Lower_CI, ymax = Upper_CI), position = position_dodge(width = 0.5)) +  # Add error bars with color
+  geom_point(aes(fill = Type), size = 3, shape = 21, position = position_dodge(width = 0.5)) +  # Add filled points
+  geom_hline(yintercept = 1, linetype = "dashed", color = "black") +
+  coord_flip() +
+  labs(
+    title = "Odds of being HF risk protein",
+    x = "",
+    y = "Odds Ratio (95% CI)"
+  ) +
+  theme_classic() +
+  scale_fill_identity()
+
+```

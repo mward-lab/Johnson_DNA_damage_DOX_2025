@@ -17,7 +17,17 @@ Research website for the project "DNA damage-associated protein co-expression ne
 
 
 # Main Figures & additional analyses
+
+[Figure 1: Figure 1: iPSC-CM protein samples cluster by DOX treatment and most closely resemble the heart ventricle proteome.  ](https://omar-johnson.github.io/DNA_damage_DOX/DOX_prot_Fig1_overview.html)
+
+[Figure 2: Network analysis of the iPSC-CM proteome identifies protein co-expression modules correlated with DOX treatment.  ](https://omar-johnson.github.io/DNA_damage_DOX/DOX_prot_Fig2_Network.html)
+
 [Figure 3: Hub proteins in DOX-correlated modules are depleted for pQTLs. ](https://omar-johnson.github.io/DNA_damage_DOX/DOX_prot_pQTL_Fig3.html)
 
 [Figure 4: DOX-correlated hub proteins are enriched for loss-of-function intolerant proteins.  ](https://omar-johnson.github.io/DNA_damage_DOX/DOX_prot_Fig4_pLI.html)
+
+[Figure 5: DOX-correlated modules contain proteins associated with risk for atrial fibrillation and heart failure. ](https://omar-johnson.github.io/DNA_damage_DOX/DOX_prot_Fig5_AFHF.html)
+
+[Figure 6: DOX-correlated hub proteins are enriched for physical protein interactors of CVD risk proteins.  ](https://omar-johnson.github.io/DNA_damage_DOX/DOX_prot_Fig6_PPI.html)
+
 

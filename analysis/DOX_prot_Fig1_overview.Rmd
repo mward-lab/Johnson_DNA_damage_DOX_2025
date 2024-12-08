@@ -1,0 +1,167 @@
+---
+title: "DOX_prot_Fig1_overview"
+author: "Omar Johnson"
+date: "2024-12-08"
+output: html_document
+---
+
+# Load Libraries 
+```{r Libraries, include=FALSE}
+library(EDASeq)
+library(RUVSeq)
+library(RColorBrewer)
+library(edgeR)
+library(limma)
+library(Biobase)
+library(SummarizedExperiment)
+library(tidyverse) 
+library(ggfortify)
+library(cluster)
+library(edgeR)
+library(limma)
+library(BiocParallel)
+library(qvalue)
+library(pheatmap)
+library(clusterProfiler)
+library(AnnotationDbi)
+library(org.Hs.eg.db)
+library(RColorBrewer)
+library(DOSE)
+library(UpSetR)
+library(biomaRt)
+library(ggridges)
+library(reshape2)
+library(BioNERO)
+library(WGCNA)
+library(impute)
+library(dynamicTreeCut)
+library(igraph)
+library(ggraph)
+library(Hmisc)
+```
+
+
+# Load data 
+```{r Load data, include=FALSE }
+ RUVg_Log2_quantnormalized_all10samples <- read.csv(file = "/Users/omarjohnson/Documents/Projects/Dox_Proteomics/Data/Data_Frames/DIA_proteins/RUVIII_Imputed/RUVIII_10samples_log2_notquantilenormalized.csv", header = TRUE, row.names = 1)
+
+Meta <- read.csv(file = "/Users/omarjohnson/Documents/Projects/Dox_Proteomics/Data/Data_Frames/DIA_proteins/RUVIII_Imputed/Meta.csv", header = TRUE, row.names = 1)
+
+Proteomics <- read.csv(file = "/Users/omarjohnson/Documents/Projects/Dox_Proteomics/Data/Proteomics/Data_sets/Sayan_data/Proteomics_alt.csv", header = TRUE)
+
+Gtex <-read.csv(file = "/Users/omarjohnson/Documents/Projects/Dox_Proteomics/Data/Proteomics/Data_sets/Sayan_data/GTEX_alt.csv", header = TRUE)
+
+Gtex_genelist <- read.csv( file = "/Users/omarjohnson/Documents/Projects/Dox_Proteomics/Data/Proteomics/Data_sets/Sayan_data/Gtex_genelist", header = TRUE)
+```
+
+
+# Fig-1-D- Correlation heatmap
+```{r Correlation heatmap}
+# correlation matrix 
+Prot_cor_matrix <- cor(RUVg_Log2_quantnormalized_all10samples %>% as.matrix())
+
+# Heatmap 1. 
+pheatmap(Prot_cor_matrix, 
+         color = colorRampPalette(c("blue", "white", "red"))(200),
+         display_numbers = TRUE)
+
+# Adjust column names 
+rownames(Prot_cor_matrix) <- Meta$Cond_Ind
+colnames(Prot_cor_matrix) <- Meta$Cond_Ind
+
+# Heatmap 2. 
+pheatmap(mat = Prot_cor_matrix, 
+         color = colorRampPalette(c("blue", "white", "red"))(200),
+         display_numbers = TRUE
+            )
+```
+
+
+# Fig-1-E iPSC-CM proteome compared to other tissue (GTEx)
+```{r iPSC-CM proteome compared to other tissue (GTEx), fig.width = 15, fig.height = 15}
+Proteomics  %>% head()
+Gtex %>% head()
+Gtex_genelist %>% head()
+
+
+
+Protein_list <- Proteomics %>% 
+  dplyr::select(Entrez.Gene.ID,Abundance..F1..Sample..Dox..n.a, Abundance..F3..Sample..Dox..n.a,Abundance..F5..Sample..Dox..Dox,Abundance..F7..Sample..Dox..Dox,Abundance..F9..Sample..Dox..Dox,Abundance..F2..Control..Veh..n.a,Abundance..F4..Control..Veh..n.a,Abundance..F6..Control..Veh..Veh,Abundance..F8..Control..Veh..Veh,Abundance..F10..Control..Veh..Veh) %>% 
+  mutate(Abundance..F1..Sample..Dox..n.a=as.numeric(Abundance..F1..Sample..Dox..n.a)) %>% 
+  mutate(Abundance..F3..Sample..Dox..n.a=as.numeric(Abundance..F3..Sample..Dox..n.a)) %>% 
+  mutate(Abundance..F5..Sample..Dox..Dox=as.numeric(Abundance..F5..Sample..Dox..Dox)) %>% 
+  mutate(Abundance..F7..Sample..Dox..Dox=as.numeric(Abundance..F7..Sample..Dox..Dox)) %>% 
+  mutate(Abundance..F9..Sample..Dox..Dox=as.numeric(Abundance..F9..Sample..Dox..Dox)) %>%
+  mutate(Abundance..F2..Control..Veh..n.a=as.numeric(Abundance..F2..Control..Veh..n.a)) %>% 
+  mutate(Abundance..F4..Control..Veh..n.a=as.numeric(Abundance..F4..Control..Veh..n.a)) %>% 
+  mutate(Abundance..F6..Control..Veh..Veh=as.numeric(Abundance..F6..Control..Veh..Veh)) %>% 
+  mutate(Abundance..F8..Control..Veh..Veh=as.numeric(Abundance..F8..Control..Veh..Veh)) %>% 
+  mutate(Abundance..F10..Control..Veh..Veh=as.numeric(Abundance..F10..Control..Veh..Veh)) %>% 
+  mutate("log2_abundance_77-1_Dox"= log2(Abundance..F1..Sample..Dox..n.a)) %>%
+  mutate("log2_abundance_87-1_Dox"= log2(Abundance..F3..Sample..Dox..n.a)) %>%
+  mutate("log2_abundance_048-A_1_Dox"= log2(Abundance..F5..Sample..Dox..Dox)) %>%
+  mutate("log2_abundance_048-A_2_Dox"= log2(Abundance..F7..Sample..Dox..Dox)) %>%
+  mutate("log2_abundance_048-A_3_Dox"= log2(Abundance..F9..Sample..Dox..Dox)) %>%
+  mutate("log2_abundance_77-1_Veh"= log2(Abundance..F2..Control..Veh..n.a)) %>%
+  mutate("log2_abundance_87-1_Veh"= log2(Abundance..F4..Control..Veh..n.a)) %>%
+  mutate("log2_abundance_048-A_1_Veh"= log2(Abundance..F6..Control..Veh..Veh)) %>%
+  mutate("log2_abundance_048-A_2_Veh"= log2(Abundance..F8..Control..Veh..Veh)) %>%
+  mutate("log2_abundance_048-A_3_Veh"= log2(Abundance..F10..Control..Veh..Veh)) %>%
+  mutate(Entrez.Gene.ID=as.numeric(Entrez.Gene.ID)) %>% 
+  na.omit(.)
+  
+
+
+
+# Gtex Dataframe ----------------------------------------------------------
+Convert <- Gtex %>% full_join(., Gtex_genelist, by=c("gene.id"="ensembl_gene_id"))
+
+
+
+Convert_List<- Protein_list %>% left_join (., Convert, by=c("Entrez.Gene.ID"="entrezgene_id"), relationship = "many-to-many") %>% 
+    distinct(Entrez.Gene.ID,.keep_all = TRUE) %>% 
+  column_to_rownames("Entrez.Gene.ID") %>% 
+  dplyr::select(!c("Abundance..F1..Sample..Dox..n.a", "Abundance..F3..Sample..Dox..n.a","Abundance..F5..Sample..Dox..Dox","Abundance..F7..Sample..Dox..Dox","Abundance..F9..Sample..Dox..Dox","Abundance..F2..Control..Veh..n.a","Abundance..F4..Control..Veh..n.a","Abundance..F6..Control..Veh..Veh","Abundance..F8..Control..Veh..Veh","Abundance..F10..Control..Veh..Veh","hgnc_symbol", "gene.id"))
+  
+
+
+
+Test <- rcorr
+Test<- rcorr(as.matrix(Convert_List), type = "spearman")
+Test<- rcorr(as.matrix(Convert_List), type = "pearson")
+pheatmap(Test$r, display_numbers = TRUE)
+pheatmap(Test$r, display_numbers = FALSE)
+```
+
+
+# Fig-1-F Median abundance of cardiac proteins
+```{r Median abundance of cardiac proteins, fig.width = 5, fig.height = 5}
+RUVg_Log2_quantnormalized_all10samples_unlogged <- RUVg_Log2_quantnormalized_all10samples^2
+
+RUVg_Log2_quantnormalized_all10samples_unlogged %>% head()
+
+
+Heartspecpro <- RUVg_Log2_quantnormalized_all10samples_unlogged[c("P12883", "Q8WZ42", "Q14896","P13533", "P35609", "P45379", "P10916", "P27797", "P19429", "Q92736", "Q14524"), ] 
+
+Heartspecpro_matrix <- Heartspecpro %>% as.matrix()
+Median_abundances <- Heartspecpro_matrix %>% rowMedians()
+
+Heartspecpro$Median_abundances <- Median_abundances
+
+Heartspecpro$names <- c("P12883", "Q8WZ42", "Q14896","P13533", "P35609", "P45379", "P10916", "P27797", "P19429", "Q92736", "Q14524")
+
+Heartspecpro$genes <- c("MYH7", "TTN", "MYBPC3", "MYH6", "ACTN2", "TNNT2", "MYL2", "CALR", "TNNI3", "RYR2", "SCN5A")
+
+Heartspecpro$genes <- factor(x = Heartspecpro$genes, levels = rev(c("ACTN2","CALR","MYBPC3", "MYH6","MYH7","MYL2","RYR2","SCN5A", "TNNI3", "TNNT2","TTN")))
+ 
+ ggplot(Heartspecpro, aes(x = 1, y = genes, fill = Median_abundances)) + 
+  geom_tile(color = "black", size = 0.5) +  # Tiles with borders
+  scale_fill_gradient(low = "white", high = "red", limits = c(300, 750)) + # Gradient fill
+  geom_text(aes(label = paste(genes, Median_abundances, sep = "\n")), color = "black", size = 3) + 
+  theme_minimal() + 
+  theme(
+    axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1),
+    axis.text.y = element_blank(),  
+    axis.ticks.y = element_blank())
+
+```
