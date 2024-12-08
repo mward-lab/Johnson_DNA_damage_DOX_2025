@@ -1,0 +1,1449 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Omar Johnson" />
+
+<meta name="date" content="2024-12-08" />
+
+<title>DOX_prot_Fig4_pLI</title>
+
+<script src="site_libs/header-attrs-2.28/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.13.2/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-6.4.2/css/all.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet" />
+
+<link rel="icon" href="https://github.com/workflowr/workflowr-assets/raw/main/img/reproducible.png">
+<!-- Add a small amount of space between sections. -->
+<style type="text/css">
+div.section {
+  padding-top: 12px;
+}
+</style>
+
+
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">DNA_damage_DOX_project</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="about.html">About</a>
+</li>
+<li>
+  <a href="license.html">License</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/Omar-Johnson/DNA_damage_DOX">
+    <span class="fab fa-github"></span>
+     
+    Source code
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">DOX_prot_Fig4_pLI</h1>
+<h4 class="author">Omar Johnson</h4>
+<h4 class="date">2024-12-08</h4>
+
+</div>
+
+
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
+<span class="glyphicon glyphicon-list" aria-hidden="true"></span>
+workflowr <span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span>
+</button>
+</p>
+<div id="workflowr-report" class="collapse">
+<ul class="nav nav-tabs">
+<li class="active">
+<a data-toggle="tab" href="#summary">Summary</a>
+</li>
+<li>
+<a data-toggle="tab" href="#checks"> Checks <span
+class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
+</a>
+</li>
+<li>
+<a data-toggle="tab" href="#versions">Past versions</a>
+</li>
+</ul>
+<div class="tab-content">
+<div id="summary" class="tab-pane fade in active">
+<p>
+<strong>Last updated:</strong> 2024-12-07
+</p>
+<p>
+<strong>Checks:</strong> <span
+class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7
+<span class="glyphicon glyphicon-exclamation-sign text-danger"
+aria-hidden="true"></span> 0
+</p>
+<p>
+<strong>Knit directory:</strong> <code>DNA_damage_DOX/</code> <span
+class="glyphicon glyphicon-question-sign" aria-hidden="true"
+title="This is the local directory in which the code in this file was executed.">
+</span>
+</p>
+<p>
+This reproducible <a href="https://rmarkdown.rstudio.com">R Markdown</a>
+analysis was created with <a
+  href="https://github.com/workflowr/workflowr">workflowr</a> (version
+1.7.1). The <em>Checks</em> tab describes the reproducibility checks
+that were applied when the results were created. The <em>Past
+versions</em> tab lists the development history.
+</p>
+<hr>
+</div>
+<div id="checks" class="tab-pane fade">
+<div id="workflowr-checks" class="panel-group">
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRMarkdownfilestronguptodate">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>R Markdown file:</strong> up-to-date
+</a>
+</p>
+</div>
+<div id="strongRMarkdownfilestronguptodate"
+class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great! Since the R Markdown file has been committed to the Git
+repository, you know the exact version of the code that produced these
+results.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongEnvironmentstrongempty">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Environment:</strong> empty </a>
+</p>
+</div>
+<div id="strongEnvironmentstrongempty" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! The global environment was empty. Objects defined in the
+global environment can affect the analysis in your R Markdown file in
+unknown ways. For reproduciblity it’s best to always run the code in an
+empty environment.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSeedstrongcodesetseed20241207code">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Seed:</strong>
+<code>set.seed(20241207)</code> </a>
+</p>
+</div>
+<div id="strongSeedstrongcodesetseed20241207code"
+class="panel-collapse collapse">
+<div class="panel-body">
+<p>The command <code>set.seed(20241207)</code> was run prior to running
+the code in the R Markdown file. Setting a seed ensures that any results
+that rely on randomness, e.g. subsampling or permutations, are
+reproducible.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongSessioninformationstrongrecorded">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Session information:</strong>
+recorded </a>
+</p>
+</div>
+<div id="strongSessioninformationstrongrecorded"
+class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Recording the operating system, R version, and package
+versions is critical for reproducibility.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongCachestrongnone">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Cache:</strong> none </a>
+</p>
+</div>
+<div id="strongCachestrongnone" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Nice! There were no cached chunks for this analysis, so you can be
+confident that you successfully produced the results during this
+run.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongFilepathsstrongrelative">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>File paths:</strong> relative </a>
+</p>
+</div>
+<div id="strongFilepathsstrongrelative" class="panel-collapse collapse">
+<div class="panel-body">
+<p>Great job! Using relative paths to the files within your workflowr
+project makes it easier to run your code on other machines.</p>
+</div>
+</div>
+</div>
+<div class="panel panel-default">
+<div class="panel-heading">
+<p class="panel-title">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomOmarJohnsonDNAdamageDOXtree09c28e1873af96beaa5b10cbbec4fffd3b1e67a8targetblank09c28e1a">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>Repository version:</strong>
+<a href="https://github.com/Omar-Johnson/DNA_damage_DOX/tree/09c28e1873af96beaa5b10cbbec4fffd3b1e67a8" target="_blank">09c28e1</a>
+</a>
+</p>
+</div>
+<div
+id="strongRepositoryversionstrongahrefhttpsgithubcomOmarJohnsonDNAdamageDOXtree09c28e1873af96beaa5b10cbbec4fffd3b1e67a8targetblank09c28e1a"
+class="panel-collapse collapse">
+<div class="panel-body">
+<p>
+Great! You are using Git for version control. Tracking code development
+and connecting the code version to the results is critical for
+reproducibility.
+</p>
+<p>
+The results in this page were generated with repository version
+<a href="https://github.com/Omar-Johnson/DNA_damage_DOX/tree/09c28e1873af96beaa5b10cbbec4fffd3b1e67a8" target="_blank">09c28e1</a>.
+See the <em>Past versions</em> tab to see a history of the changes made
+to the R Markdown and HTML files.
+</p>
+<p>
+Note that you need to be careful to ensure that all relevant files for
+the analysis have been committed to Git prior to generating the results
+(you can use <code>wflow_publish</code> or
+<code>wflow_git_commit</code>). workflowr only checks the R Markdown
+file, but you know if there are other scripts or data files that it
+depends on. Below is the status of the Git repository when the results
+were generated:
+</p>
+<pre><code>
+Ignored files:
+    Ignored:    .DS_Store
+
+</code></pre>
+<p>
+Note that any generated files, e.g. HTML, png, CSS, etc., are not
+included in this status report because it is ok for generated content to
+have uncommitted changes.
+</p>
+</div>
+</div>
+</div>
+</div>
+<hr>
+</div>
+<div id="versions" class="tab-pane fade">
+
+<p>
+These are the previous versions of the repository in which changes were
+made to the R Markdown (<code>analysis/DOX_prot_Fig4_pLI.Rmd</code>) and
+HTML (<code>docs/DOX_prot_Fig4_pLI.html</code>) files. If you’ve
+configured a remote Git repository (see <code>?wflow_git_remote</code>),
+click on the hyperlinks in the table below to view the files as they
+were in that past version.
+</p>
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+File
+</th>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+<th>
+Message
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/Omar-Johnson/DNA_damage_DOX/blob/09c28e1873af96beaa5b10cbbec4fffd3b1e67a8/analysis/DOX_prot_Fig4_pLI.Rmd" target="_blank">09c28e1</a>
+</td>
+<td>
+Omar-Johnson
+</td>
+<td>
+2024-12-07
+</td>
+<td>
+Add Fig4
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr>
+</div>
+</div>
+</div>
+<div id="load-libraries" class="section level1">
+<h1>Load Libraries</h1>
+</div>
+<div id="read-in-data" class="section level1">
+<h1>Read in Data</h1>
+</div>
+<div id="functions" class="section level1">
+<h1>Functions</h1>
+</div>
+<div id="s14-triplosensitivity-ptriplo" class="section level1">
+<h1>S14 Triplosensitivity (pTriplo)</h1>
+<pre class="r"><code>pLI_Data &lt;- read.csv(file = GeneDose_File_path, header = TRUE)
+pLI_Data %&gt;% dim()</code></pre>
+<pre><code>[1] 18641    16</code></pre>
+<pre class="r"><code>pLI_Data %&gt;% head()</code></pre>
+<pre><code>      Gene pHaplo pTriplo gnomAD.pLI gnomAD.LOEUF gnomAD.MisOEUF
+1   CREBBP  0.999   1.000          1        0.066          0.747
+2   MED13L  0.999   1.000          1        0.064          0.741
+3     NSD1  0.999   1.000          1        0.095          0.785
+4 ARHGEF12  0.999   1.000          1        0.179          0.733
+5   CAMTA1  0.999   0.999          1        0.172          0.757
+6  CACNA1C  0.999   1.000          1        0.102          0.528
+  ExAC.DEL.Z.Score ExAC.DUP.Z.Score ExAC.CNV.Z.Score RVIS.Pct. HI.Index  sHet
+1            1.310            0.848            1.196     0.596    1.000 0.713
+2            0.818           -0.319            0.071     1.496    0.722 0.144
+3            1.442            0.955            1.314     1.134    0.565 0.237
+4            1.640            1.409            1.759     4.633    0.389 0.098
+5            0.838            1.395            1.388     7.097    0.196 0.338
+6            1.452           -1.872           -1.042     5.767    0.588 0.084
+  CCDG.DEL.Score CCDG.DUP.Score Episcore   EDS
+1          0.767          0.934    0.822 0.609
+2          0.976          1.103    0.878 0.861
+3          0.906          0.856    0.881 0.566
+4          0.882          1.174    0.851 0.692
+5          1.936          0.807    0.885 0.892
+6          1.522          1.518    0.716 0.953</code></pre>
+<pre class="r"><code>pLI_Data_sub &lt;- merge(pLI_Data, New_RNA_PRO_DF_3, by.x = &quot;Gene&quot;, by.y = &quot;hgnc_symbol&quot;)
+
+pLI_Data_sub_pop &lt;- pLI_Data_sub
+
+
+
+# 1. For all genes in genome 
+ggplot(pLI_Data, aes(x = pTriplo, y=..density..)) + 
+  geom_histogram(position = &quot;dodge&quot;, binwidth = 0.01, color = &quot;black&quot;) +  # Add color for bin borders
+  theme_minimal() +
+  labs(title = &quot;pTriplo scores across all genes&quot;,
+       x = &quot;pTriplo score&quot;,
+       y = &quot;Density&quot;) </code></pre>
+<pre><code>Warning: The dot-dot notation (`..density..`) was deprecated in ggplot2 3.4.0.
+ℹ Please use `after_stat(density)` instead.
+This warning is displayed once every 8 hours.
+Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
+generated.</code></pre>
+<p><img src="figure/DOX_prot_Fig4_pLI.Rmd/Triplosensitivity%20(pTriplo)-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code># 2. For network proteins 
+ggplot(pLI_Data_sub, aes(x = pTriplo, y=..density..)) + 
+  geom_histogram(position = &quot;dodge&quot;, binwidth = 0.01, color = &quot;black&quot;) + 
+  theme_minimal() +
+  labs(title = &quot;pTriplo score for expressed proteins &quot;,
+       x = &quot;pTriplo score&quot;,
+       y = &quot;Density&quot;) </code></pre>
+<p><img src="figure/DOX_prot_Fig4_pLI.Rmd/Triplosensitivity%20(pTriplo)-2.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code># pTriplo Ridge plot 
+ggplot(pLI_Data_sub, aes(x = pTriplo, y = Modules, fill = Modules)) +
+  ggridges::geom_density_ridges(alpha = 0.8) +
+  labs(title = &quot;Dox Associated Module LogFC distribution from DE test&quot;,
+       x = &quot;pTriplo score&quot;,
+       y = &quot;Modules&quot;) +
+  ggridges::theme_ridges() +
+  scale_fill_identity(guide = &quot;legend&quot;)</code></pre>
+<pre><code>Picking joint bandwidth of 0.0924</code></pre>
+<p><img src="figure/DOX_prot_Fig4_pLI.Rmd/Triplosensitivity%20(pTriplo)-3.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>PlI_mutually_exc &lt;- perform_module_comparisons_mutexc_2(df =pLI_Data_sub , module_col = &quot;Modules&quot;, value_col = &quot;pTriplo&quot;)
+
+
+
+PlI_mutually_exc_combined &lt;- do.call(rbind, PlI_mutually_exc$combined_data)
+
+
+Group_order &lt;- c(&quot;green&quot;, &quot;Notgreen&quot;,&quot;darkgreen&quot;, &quot;Notdarkgreen&quot;, &quot;midnightblue&quot;,&quot;Notmidnightblue&quot;, &quot;salmon&quot;,&quot;Notsalmon&quot;, &quot;lightyellow&quot;, &quot;Notlightyellow&quot;, &quot;lightgreen&quot;, &quot;Notlightgreen&quot;,&quot;blue&quot;, &quot;Notblue&quot;, &quot;magenta&quot; ,&quot;Notmagenta&quot;,&quot;darkred&quot;, &quot;Notdarkred&quot;, &quot;brown&quot;, &quot;Notbrown&quot;, &quot;yellow&quot;, &quot;Notyellow&quot;,&quot;royalblue&quot;, &quot;Notroyalblue&quot;, &quot;grey&quot;, &quot;Notgrey&quot; )
+
+# Factor the Module column in Fulltrait_df
+PlI_mutually_exc_combined$Group &lt;- factor(PlI_mutually_exc_combined$Group, levels = Group_order)
+PlI_mutually_exc_combined$Group %&gt;% unique()</code></pre>
+<pre><code> [1] lightyellow     Notlightyellow  grey            Notgrey        
+ [5] royalblue       Notroyalblue    darkred         Notdarkred     
+ [9] darkgreen       Notdarkgreen    yellow          Notyellow      
+[13] midnightblue    Notmidnightblue brown           Notbrown       
+[17] magenta         Notmagenta      green           Notgreen       
+[21] lightgreen      Notlightgreen   salmon          Notsalmon      
+[25] blue            Notblue        
+26 Levels: green Notgreen darkgreen Notdarkgreen ... Notgrey</code></pre>
+<pre class="r"><code># Boxplot  
+my_colors &lt;- c(&quot;green&quot;, &quot;green&quot;,&quot;darkgreen&quot;, &quot;darkgreen&quot;, &quot;midnightblue&quot;,&quot;midnightblue&quot;, &quot;salmon&quot;,&quot;salmon&quot;, &quot;lightyellow&quot;, &quot;lightyellow&quot;, &quot;lightgreen&quot;, &quot;lightgreen&quot;,&quot;blue&quot;, &quot;blue&quot;, &quot;magenta&quot; ,&quot;magenta&quot;,&quot;darkred&quot;, &quot;darkred&quot;, &quot;brown&quot;, &quot;brown&quot;, &quot;yellow&quot;, &quot;yellow&quot;,&quot;royalblue&quot;, &quot;royalblue&quot;, &quot;grey&quot;, &quot;grey&quot;)
+
+ggplot(PlI_mutually_exc_combined, aes(x = Group, y = pTriplo, fill = Group)) + 
+  geom_boxplot() +
+  scale_fill_manual(values = my_colors) +  
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1),
+        legend.position = &quot;none&quot;) +  # Removing the legend
+  labs(title = &quot;pTriplo&quot;,
+       x = &quot;&quot;,
+       y = &quot;pTriplo score &quot;) +
+coord_cartesian(ylim = c(0,1))</code></pre>
+<p><img src="figure/DOX_prot_Fig4_pLI.Rmd/Triplosensitivity%20(pTriplo)-4.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>PlI_mutually_exc$results[PlI_mutually_exc$results$WilcoxPValue &lt; 0.05, ]</code></pre>
+<pre><code>      Module1 Module2 WilcoxPValue
+3   royalblue  Others 3.453783e-07
+10      green  Others 2.598900e-17
+11 lightgreen  Others 4.957535e-02
+12     salmon  Others 1.702820e-04</code></pre>
+<pre class="r"><code>PlI_mutually_exc_combined_DOX &lt;- PlI_mutually_exc_combined[PlI_mutually_exc_combined$Group %in% c(&quot;green&quot;, &quot;Notgreen&quot;,&quot;darkgreen&quot;, &quot;Notdarkgreen&quot;, &quot;midnightblue&quot;,&quot;Notmidnightblue&quot;, &quot;salmon&quot;,&quot;Notsalmon&quot;, &quot;lightyellow&quot;, &quot;Notlightyellow&quot;), ]
+ggplot(PlI_mutually_exc_combined_DOX, aes(x = Group, y = pTriplo, fill = Group)) + 
+  geom_boxplot() +
+  scale_fill_manual(values = my_colors) +  
+  theme_classic() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1),
+        legend.position = &quot;none&quot;) +  # Removing the legend
+  labs(title = &quot;pTriplo across DOX-corr. Modules&quot;,
+       x = &quot;&quot;,
+       y = &quot;pTriplo score &quot;) +
+coord_cartesian(ylim = c(0,1))</code></pre>
+<p><img src="figure/DOX_prot_Fig4_pLI.Rmd/Triplosensitivity%20(pTriplo)-5.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="s14-haploinsufficiency-phaplo" class="section level1">
+<h1>S14 Haploinsufficiency (pHaplo)</h1>
+<pre class="r"><code>pLI_Data &lt;- read.csv(file = GeneDose_File_path, header = TRUE)
+
+pLI_Data_sub &lt;- merge(pLI_Data, New_RNA_PRO_DF_3, by.x = &quot;Gene&quot;, by.y = &quot;hgnc_symbol&quot;)
+
+# 1. For all genes 
+ggplot(pLI_Data, aes(x = pHaplo, y=..density..)) + 
+  geom_histogram(position = &quot;dodge&quot;, binwidth = 0.01, color = &quot;black&quot;) +  # Add color for bin borders
+  theme_minimal() +
+  labs(title = &quot;pHaplo scores across all human genes&quot;,
+       x = &quot;pHaplo score&quot;,
+       y = &quot;Density&quot;) </code></pre>
+<p><img src="figure/DOX_prot_Fig4_pLI.Rmd/Haploinsufficiency%20(pHaplo)-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code># 2. For network proteins  
+ggplot(pLI_Data_sub, aes(x = pHaplo, y=..density..)) + 
+  geom_histogram(position = &quot;dodge&quot;, binwidth = 0.01, color = &quot;black&quot;) + 
+  theme_minimal() +
+  labs(title = &quot;pHaplo score across all genes encoding detected proteins in our data&quot;,
+       x = &quot;pHaplo score&quot;,
+       y = &quot;Density&quot;) </code></pre>
+<p><img src="figure/DOX_prot_Fig4_pLI.Rmd/Haploinsufficiency%20(pHaplo)-2.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code># pHaplo Ridge plot 
+ggplot(pLI_Data_sub, aes(x = pHaplo, y = Modules, fill = Modules)) +
+  ggridges::geom_density_ridges(alpha = 0.8) +
+  labs(title = &quot;pHaplo scores across modules&quot;,
+       x = &quot;pHaplo score&quot;,
+       y = &quot;&quot;) +
+  ggridges::theme_ridges() +
+  scale_fill_identity(guide = &quot;legend&quot;)</code></pre>
+<pre><code>Picking joint bandwidth of 0.095</code></pre>
+<p><img src="figure/DOX_prot_Fig4_pLI.Rmd/Haploinsufficiency%20(pHaplo)-3.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>PlI_mutually_exc &lt;- perform_module_comparisons_mutexc_2(df =pLI_Data_sub , module_col = &quot;Modules&quot;, value_col = &quot;pHaplo&quot;)
+
+
+
+PlI_mutually_exc_combined &lt;- do.call(rbind, PlI_mutually_exc$combined_data)
+
+
+Group_order &lt;- c(&quot;green&quot;, &quot;Notgreen&quot;,&quot;darkgreen&quot;, &quot;Notdarkgreen&quot;, &quot;midnightblue&quot;,&quot;Notmidnightblue&quot;, &quot;salmon&quot;,&quot;Notsalmon&quot;, &quot;lightyellow&quot;, &quot;Notlightyellow&quot;, &quot;lightgreen&quot;, &quot;Notlightgreen&quot;,&quot;blue&quot;, &quot;Notblue&quot;, &quot;magenta&quot; ,&quot;Notmagenta&quot;,&quot;darkred&quot;, &quot;Notdarkred&quot;, &quot;brown&quot;, &quot;Notbrown&quot;, &quot;yellow&quot;, &quot;Notyellow&quot;,&quot;royalblue&quot;, &quot;Notroyalblue&quot;, &quot;grey&quot;, &quot;Notgrey&quot; )
+
+
+# Factor the Module column in Fulltrait_df
+PlI_mutually_exc_combined$Group &lt;- factor(PlI_mutually_exc_combined$Group, levels = Group_order)
+PlI_mutually_exc_combined$Group %&gt;% unique()</code></pre>
+<pre><code> [1] lightyellow     Notlightyellow  grey            Notgrey        
+ [5] royalblue       Notroyalblue    darkred         Notdarkred     
+ [9] darkgreen       Notdarkgreen    yellow          Notyellow      
+[13] midnightblue    Notmidnightblue brown           Notbrown       
+[17] magenta         Notmagenta      green           Notgreen       
+[21] lightgreen      Notlightgreen   salmon          Notsalmon      
+[25] blue            Notblue        
+26 Levels: green Notgreen darkgreen Notdarkgreen ... Notgrey</code></pre>
+<pre class="r"><code># Boxplot  
+my_colors &lt;- c(&quot;green&quot;, &quot;green&quot;,&quot;darkgreen&quot;, &quot;darkgreen&quot;, &quot;midnightblue&quot;,&quot;midnightblue&quot;, &quot;salmon&quot;,&quot;salmon&quot;, &quot;lightyellow&quot;, &quot;lightyellow&quot;, &quot;lightgreen&quot;, &quot;lightgreen&quot;,&quot;blue&quot;, &quot;blue&quot;, &quot;magenta&quot; ,&quot;magenta&quot;,&quot;darkred&quot;, &quot;darkred&quot;, &quot;brown&quot;, &quot;brown&quot;, &quot;yellow&quot;, &quot;yellow&quot;,&quot;royalblue&quot;, &quot;royalblue&quot;, &quot;grey&quot;, &quot;grey&quot;)
+
+ggplot(PlI_mutually_exc_combined, aes(x = Group, y = pHaplo, fill = Group)) + 
+  geom_boxplot() +
+  scale_fill_manual(values = my_colors) +  
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1),
+        legend.position = &quot;none&quot;) +  # Removing the legend
+  labs(title = &quot;pHaplo&quot;,
+       x = &quot;&quot;,
+       y = &quot;pHaple score &quot;) +
+coord_cartesian(ylim = c(0,1))</code></pre>
+<p><img src="figure/DOX_prot_Fig4_pLI.Rmd/Haploinsufficiency%20(pHaplo)-4.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>PlI_mutually_exc$results[PlI_mutually_exc$results$WilcoxPValue &lt; 0.05, ]</code></pre>
+<pre><code>       Module1 Module2 WilcoxPValue
+1  lightyellow  Others 1.711268e-02
+3    royalblue  Others 1.037996e-05
+10       green  Others 9.021108e-21
+11  lightgreen  Others 4.132253e-02
+12      salmon  Others 4.035474e-04</code></pre>
+<pre class="r"><code># Boxplot  
+my_colors &lt;- c(&quot;green&quot;, &quot;green&quot;,&quot;darkgreen&quot;, &quot;darkgreen&quot;, &quot;midnightblue&quot;,&quot;midnightblue&quot;, &quot;salmon&quot;,&quot;salmon&quot;, &quot;lightyellow&quot;, &quot;lightyellow&quot;, &quot;lightgreen&quot;, &quot;lightgreen&quot;,&quot;blue&quot;, &quot;blue&quot;, &quot;magenta&quot; ,&quot;magenta&quot;,&quot;darkred&quot;, &quot;darkred&quot;, &quot;brown&quot;, &quot;brown&quot;, &quot;yellow&quot;, &quot;yellow&quot;,&quot;royalblue&quot;, &quot;royalblue&quot;, &quot;grey&quot;, &quot;grey&quot;)
+
+PlI_mutually_exc_combined_DOX &lt;- PlI_mutually_exc_combined[PlI_mutually_exc_combined$Group %in% c(&quot;green&quot;, &quot;Notgreen&quot;,&quot;darkgreen&quot;, &quot;Notdarkgreen&quot;, &quot;midnightblue&quot;,&quot;Notmidnightblue&quot;, &quot;salmon&quot;,&quot;Notsalmon&quot;, &quot;lightyellow&quot;, &quot;Notlightyellow&quot;), ]
+
+
+ggplot(PlI_mutually_exc_combined_DOX, aes(x = Group, y = pHaplo, fill = Group)) + 
+  geom_boxplot() +
+  scale_fill_manual(values = my_colors) +  
+  theme_classic() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1),
+        legend.position = &quot;none&quot;) +  # Removing the legend
+  labs(title = &quot;pHaplo accross DOX-corr. Modules&quot;,
+       x = &quot;&quot;,
+       y = &quot;pHaple score &quot;) +
+coord_cartesian(ylim = c(0,1))</code></pre>
+<p><img src="figure/DOX_prot_Fig4_pLI.Rmd/Haploinsufficiency%20(pHaplo)-5.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>PlI_mutually_exc$results[PlI_mutually_exc$results$WilcoxPValue &lt; 0.05, ]</code></pre>
+<pre><code>       Module1 Module2 WilcoxPValue
+1  lightyellow  Others 1.711268e-02
+3    royalblue  Others 1.037996e-05
+10       green  Others 9.021108e-21
+11  lightgreen  Others 4.132253e-02
+12      salmon  Others 4.035474e-04</code></pre>
+</div>
+<div id="fig-4a-probability-loss-of-function-intolerant-pli"
+class="section level1">
+<h1>Fig-4A Probability loss of function intolerant (pLI)</h1>
+<pre class="r"><code>pLI_Data &lt;- read.csv(file = pLI_DF_File_path, header = TRUE)
+pLI_Data %&gt;% dim()</code></pre>
+<pre><code>[1] 19704     2</code></pre>
+<pre class="r"><code>pLI_Data_sub &lt;- merge(pLI_Data, New_RNA_PRO_DF_3, by.x = &quot;gene&quot;, by.y = &quot;hgnc_symbol&quot;)
+
+
+pLI_Data_sub_pop &lt;- pLI_Data_sub
+pLI_Data_sub_pop_hub &lt;- pLI_Data_sub_pop[pLI_Data_sub_pop$Protein %in% hubs$Gene, ]
+
+
+# 1. For all genes 
+ggplot(pLI_Data, aes(x = pLI, y=..density..)) + 
+  geom_histogram(position = &quot;dodge&quot;, binwidth = 0.1) + 
+  theme_minimal() +
+  labs(title = &quot;pLI scores aacross all human genes&quot;,
+       x = &quot;pLI Score&quot;,
+       y = &quot;density&quot;) </code></pre>
+<pre><code>Warning: Removed 507 rows containing non-finite outside the scale range
+(`stat_bin()`).</code></pre>
+<p><img src="figure/DOX_prot_Fig4_pLI.Rmd/pli%20modules-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code># 2. For network proteins
+ggplot(pLI_Data_sub, aes(x = pLI, y=..density..)) + 
+  geom_histogram(position = &quot;dodge&quot;, binwidth = 0.1) + 
+  theme_minimal() +
+  labs(title = &quot;pLI scores across all detected iPSC-CM proteins &quot;,
+       x = &quot;pLI Score&quot;,
+       y = &quot;density&quot;) </code></pre>
+<pre><code>Warning: Removed 1 row containing non-finite outside the scale range
+(`stat_bin()`).</code></pre>
+<p><img src="figure/DOX_prot_Fig4_pLI.Rmd/pli%20modules-2.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code># 1. For all detected proteins across modules  
+ggplot(pLI_Data_sub, aes(x = pLI, fill = Modules, y=..density..)) + 
+  geom_histogram(position = &quot;dodge&quot;, binwidth = 0.2) + 
+  theme_minimal() +
+  labs(title = &quot;pLI scores for all detected proteins across modules&quot;,
+       x = &quot;pLI Score&quot;,
+       y = &quot;density&quot;) +
+  scale_fill_identity(guide = &quot;legend&quot;)</code></pre>
+<pre><code>Warning: Removed 1 row containing non-finite outside the scale range
+(`stat_bin()`).</code></pre>
+<p><img src="figure/DOX_prot_Fig4_pLI.Rmd/pli%20modules-3.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>ggplot(pLI_Data_sub, aes(x = Modules, y = pLI, fill = Modules)) +
+  geom_boxplot() +
+  geom_jitter(width = 0.1, size = 1, alpha = 0.2, col = &quot;black&quot;) + # Add this line
+  scale_fill_identity() +  
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  labs(title = &quot;pLI scores across modules&quot;,
+       x = &quot;Module&quot;,
+       y = &quot;pLI Score&quot;) +
+  scale_fill_identity(guide = &quot;legend&quot;)</code></pre>
+<pre><code>Scale for fill is already present.
+Adding another scale for fill, which will replace the existing scale.</code></pre>
+<pre><code>Warning: Removed 1 row containing non-finite outside the scale range
+(`stat_boxplot()`).</code></pre>
+<pre><code>Warning: Removed 1 row containing missing values or values outside the scale range
+(`geom_point()`).</code></pre>
+<p><img src="figure/DOX_prot_Fig4_pLI.Rmd/pli%20modules-4.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>PlI_mutually_exc &lt;- perform_module_comparisons_mutexc_2(df = pLI_Data_sub , module_col = &quot;Modules&quot;, value_col = &quot;pLI&quot;)
+
+
+
+PlI_mutually_exc_combined &lt;- do.call(rbind, PlI_mutually_exc$combined_data)
+
+
+
+
+
+
+Group_order &lt;- c(&quot;green&quot;, &quot;Notgreen&quot;,&quot;darkgreen&quot;, &quot;Notdarkgreen&quot;, &quot;midnightblue&quot;,&quot;Notmidnightblue&quot;, &quot;salmon&quot;,&quot;Notsalmon&quot;, &quot;lightyellow&quot;, &quot;Notlightyellow&quot;, &quot;lightgreen&quot;, &quot;Notlightgreen&quot;,&quot;blue&quot;, &quot;Notblue&quot;, &quot;magenta&quot; ,&quot;Notmagenta&quot;,&quot;darkred&quot;, &quot;Notdarkred&quot;, &quot;brown&quot;, &quot;Notbrown&quot;, &quot;yellow&quot;, &quot;Notyellow&quot;,&quot;royalblue&quot;, &quot;Notroyalblue&quot;, &quot;grey&quot;, &quot;Notgrey&quot; )
+
+# Factor the Module column in Fulltrait_df
+PlI_mutually_exc_combined$Group &lt;- factor(PlI_mutually_exc_combined$Group, levels = Group_order)
+PlI_mutually_exc_combined$Group %&gt;% unique()</code></pre>
+<pre><code> [1] lightyellow     Notlightyellow  grey            Notgrey        
+ [5] royalblue       Notroyalblue    darkred         Notdarkred     
+ [9] darkgreen       Notdarkgreen    yellow          Notyellow      
+[13] midnightblue    Notmidnightblue brown           Notbrown       
+[17] magenta         Notmagenta      green           Notgreen       
+[21] lightgreen      Notlightgreen   salmon          Notsalmon      
+[25] blue            Notblue        
+26 Levels: green Notgreen darkgreen Notdarkgreen ... Notgrey</code></pre>
+<pre class="r"><code># Boxplot  
+my_colors &lt;- c(&quot;green&quot;, &quot;green&quot;,&quot;darkgreen&quot;, &quot;darkgreen&quot;, &quot;midnightblue&quot;,&quot;midnightblue&quot;, &quot;salmon&quot;,&quot;salmon&quot;, &quot;lightyellow&quot;, &quot;lightyellow&quot;, &quot;lightgreen&quot;, &quot;lightgreen&quot;,&quot;blue&quot;, &quot;blue&quot;, &quot;magenta&quot; ,&quot;magenta&quot;,&quot;darkred&quot;, &quot;darkred&quot;, &quot;brown&quot;, &quot;brown&quot;, &quot;yellow&quot;, &quot;yellow&quot;,&quot;royalblue&quot;, &quot;royalblue&quot;, &quot;grey&quot;, &quot;grey&quot;)
+
+ggplot(PlI_mutually_exc_combined, aes(x = Group, y = pLI, fill = Group)) + 
+  geom_boxplot() +
+  scale_fill_manual(values = my_colors) +  
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1),
+        legend.position = &quot;none&quot;) +  # Removing the legend
+  labs(title = &quot;probability of being loss-of-function intolerant&quot;,
+       x = &quot;&quot;,
+       y = &quot;PLI score &quot;) +
+  ylim(0, 1)</code></pre>
+<pre><code>Warning: Removed 13 rows containing non-finite outside the scale range
+(`stat_boxplot()`).</code></pre>
+<p><img src="figure/DOX_prot_Fig4_pLI.Rmd/pli%20modules-5.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>PlI_mutually_exc$results[PlI_mutually_exc$results$WilcoxPValue &lt; 0.05, ]</code></pre>
+<pre><code>       Module1 Module2 WilcoxPValue
+1  lightyellow  Others 4.798651e-07
+3    royalblue  Others 1.222661e-08
+4      darkred  Others 1.483659e-03
+5    darkgreen  Others 3.993146e-02
+10       green  Others 2.618431e-19</code></pre>
+<pre class="r"><code>PlI_mutually_exc_combined_DOX &lt;- PlI_mutually_exc_combined[PlI_mutually_exc_combined$Group %in% c(&quot;green&quot;, &quot;Notgreen&quot;,&quot;darkgreen&quot;, &quot;Notdarkgreen&quot;, &quot;midnightblue&quot;,&quot;Notmidnightblue&quot;, &quot;salmon&quot;,&quot;Notsalmon&quot;, &quot;lightyellow&quot;, &quot;Notlightyellow&quot;), ]
+
+ggplot(PlI_mutually_exc_combined_DOX, aes(x = Group, y = pLI, fill = Group)) + 
+  geom_boxplot() +
+  scale_fill_manual(values = my_colors) +  
+  theme_classic() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1),
+        legend.position = &quot;none&quot;) +  # Removing the legend
+  labs(title = &quot;pLI across DOX-corr. modules&quot;,
+       x = &quot;&quot;,
+       y = &quot;PLI score &quot;) +
+  ylim(0, 1)</code></pre>
+<pre><code>Warning: Removed 5 rows containing non-finite outside the scale range
+(`stat_boxplot()`).</code></pre>
+<p><img src="figure/DOX_prot_Fig4_pLI.Rmd/pli%20modules-6.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>PlI_mutually_exc$results[PlI_mutually_exc$results$WilcoxPValue &lt; 0.05, ]</code></pre>
+<pre><code>       Module1 Module2 WilcoxPValue
+1  lightyellow  Others 4.798651e-07
+3    royalblue  Others 1.222661e-08
+4      darkred  Others 1.483659e-03
+5    darkgreen  Others 3.993146e-02
+10       green  Others 2.618431e-19</code></pre>
+</div>
+<div id="fig-4b-pli-norm_k" class="section level1">
+<h1>Fig-4B pLI &amp; Norm_K</h1>
+<pre class="r"><code>pLI_kIN_DF_TT &lt;- merge(Toptable_Modules, pLI_Data_sub, by.x = &quot;Protein&quot; , by.y = &quot;Protein&quot;)
+pLI_kIN_DF_TT %&gt;% colnames()</code></pre>
+<pre><code> [1] &quot;Protein&quot;              &quot;X.x&quot;                  &quot;kTotal.x&quot;            
+ [4] &quot;kWithin.x&quot;            &quot;kOut.x&quot;               &quot;kDiff.x&quot;             
+ [7] &quot;logFC.x&quot;              &quot;AveExpr.x&quot;            &quot;t.x&quot;                 
+[10] &quot;P.Value.x&quot;            &quot;adj.P.Val.x&quot;          &quot;B.x&quot;                 
+[13] &quot;threshold_P.x&quot;        &quot;Modules.x&quot;            &quot;DE_or_Not.x&quot;         
+[16] &quot;Norm_kIN.x&quot;           &quot;Norm_kOut.x&quot;          &quot;logFC.y.x&quot;           
+[19] &quot;AveExpr.y.x&quot;          &quot;t.y.x&quot;                &quot;P.Value.y.x&quot;         
+[22] &quot;adj.P.Val.y.x&quot;        &quot;B.y.x&quot;                &quot;threshold_P.y.x&quot;     
+[25] &quot;Modules.y.x&quot;          &quot;DE_or_Not.y.x&quot;        &quot;Is_DA.x&quot;             
+[28] &quot;Is_DOXcorrelated.x&quot;   &quot;Is_Hub.x&quot;             &quot;Is_Cis_pQTL.x&quot;       
+[31] &quot;Is_Trans_pQTL.x&quot;      &quot;Is_pQTL.x&quot;            &quot;pLI_assigned.x&quot;      
+[34] &quot;pLI_Mut.Intolerant.x&quot; &quot;pLI_Mut.Tolerant.x&quot;   &quot;Is_Druggable.x&quot;      
+[37] &quot;Is_CVD_protein.x&quot;     &quot;Is_CVD_PPI_protein.x&quot; &quot;gene&quot;                
+[40] &quot;pLI&quot;                  &quot;X.y&quot;                  &quot;kTotal.y&quot;            
+[43] &quot;kWithin.y&quot;            &quot;kOut.y&quot;               &quot;kDiff.y&quot;             
+[46] &quot;logFC.y&quot;              &quot;AveExpr.y&quot;            &quot;t.y&quot;                 
+[49] &quot;P.Value.y&quot;            &quot;adj.P.Val.y&quot;          &quot;B.y&quot;                 
+[52] &quot;threshold_P.y&quot;        &quot;Modules.y&quot;            &quot;DE_or_Not.y&quot;         
+[55] &quot;Norm_kIN.y&quot;           &quot;Norm_kOut.y&quot;          &quot;logFC.y.y&quot;           
+[58] &quot;AveExpr.y.y&quot;          &quot;t.y.y&quot;                &quot;P.Value.y.y&quot;         
+[61] &quot;adj.P.Val.y.y&quot;        &quot;B.y.y&quot;                &quot;threshold_P.y.y&quot;     
+[64] &quot;Modules.y.y&quot;          &quot;DE_or_Not.y.y&quot;        &quot;Is_DA.y&quot;             
+[67] &quot;Is_DOXcorrelated.y&quot;   &quot;Is_Hub.y&quot;             &quot;Is_Cis_pQTL.y&quot;       
+[70] &quot;Is_Trans_pQTL.y&quot;      &quot;Is_pQTL.y&quot;            &quot;pLI_assigned.y&quot;      
+[73] &quot;pLI_Mut.Intolerant.y&quot; &quot;pLI_Mut.Tolerant.y&quot;   &quot;Is_Druggable.y&quot;      
+[76] &quot;Is_CVD_protein.y&quot;     &quot;Is_CVD_PPI_protein.y&quot; &quot;RNA_LogFC&quot;           
+[79] &quot;RNA_Pval&quot;             &quot;Pro_LogFC&quot;            &quot;Pro_Pval&quot;            
+[82] &quot;sign_match&quot;          </code></pre>
+<pre class="r"><code>pLI_kIN_DF_TT_2 &lt;- pLI_kIN_DF_TT[,c(1,2,3,4,5,6,7,10,14,16,17,28,33,34,35,38,40)]
+pLI_kIN_DF_TT_2 %&gt;% colnames()</code></pre>
+<pre><code> [1] &quot;Protein&quot;              &quot;X.x&quot;                  &quot;kTotal.x&quot;            
+ [4] &quot;kWithin.x&quot;            &quot;kOut.x&quot;               &quot;kDiff.x&quot;             
+ [7] &quot;logFC.x&quot;              &quot;P.Value.x&quot;            &quot;Modules.x&quot;           
+[10] &quot;Norm_kIN.x&quot;           &quot;Norm_kOut.x&quot;          &quot;Is_DOXcorrelated.x&quot;  
+[13] &quot;pLI_assigned.x&quot;       &quot;pLI_Mut.Intolerant.x&quot; &quot;pLI_Mut.Tolerant.x&quot;  
+[16] &quot;Is_CVD_PPI_protein.x&quot; &quot;pLI&quot;                 </code></pre>
+<pre class="r"><code>colnames(pLI_kIN_DF_TT_2) &lt;- c(&quot;Protein&quot;,&quot;X&quot;,&quot;kTotal&quot;,&quot;kWithin&quot;,&quot;kOut&quot;, &quot;kDiff&quot;, &quot;logFC&quot;, &quot;P.Value&quot;, &quot;Modules&quot;, &quot;Norm_kIN&quot;, &quot;Norm_kOut&quot;,&quot;Is_DOXcorrelated&quot;, &quot;pLI_assigned&quot;,&quot;pLI_Mut.Intolerant&quot;,&quot;pLI_Mut.Tolerant&quot;, &quot;Is_CVD_PPI_protein&quot;, &quot;pLI&quot;)
+
+
+pLI_kIN_DF_TT_unique &lt;- pLI_kIN_DF_TT_2 %&gt;%
+  distinct(Protein, .keep_all = TRUE)
+
+
+# Calculate the total number of members
+total_net_members &lt;- nrow(pLI_kIN_DF_TT_unique)
+total_net_members</code></pre>
+<pre><code>[1] 3846</code></pre>
+<pre class="r"><code># Normalize kOut by the number of members not in the module
+pLI_kIN_DF_TT_unique_2 &lt;- pLI_kIN_DF_TT_unique %&gt;%
+  group_by(Modules) %&gt;%
+  mutate(Norm_kIN = kWithin / n(),
+         Norm_kOut = kOut / (total_net_members - n())) %&gt;%
+  ungroup()
+
+pLI_kIN_DF_TT_unique_2$Norm_kOut %&gt;% hist(breaks = 20)</code></pre>
+<p><img src="figure/DOX_prot_Fig4_pLI.Rmd/pLI%20&%20Norm_K-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>pLI_kIN_DF_TT_unique_2_high &lt;- pLI_kIN_DF_TT_unique_2[pLI_kIN_DF_TT_unique_2$pLI &gt;= 0.9, ]
+pLI_kIN_DF_TT_unique_2_high %&gt;% dim()</code></pre>
+<pre><code>[1] 1067   17</code></pre>
+<pre class="r"><code>pLI_kIN_DF_TT_unique_2_low &lt;- pLI_kIN_DF_TT_unique_2[pLI_kIN_DF_TT_unique_2$pLI &lt;= 0.1, ]
+pLI_kIN_DF_TT_unique_2_low %&gt;% dim()</code></pre>
+<pre><code>[1] 2066   17</code></pre>
+<pre class="r"><code>wilcox.test(pLI_kIN_DF_TT_unique_2_high$Norm_kIN, pLI_kIN_DF_TT_unique_2_low$Norm_kIN)</code></pre>
+<pre><code>
+    Wilcoxon rank sum test with continuity correction
+
+data:  pLI_kIN_DF_TT_unique_2_high$Norm_kIN and pLI_kIN_DF_TT_unique_2_low$Norm_kIN
+W = 1235856, p-value = 1.691e-08
+alternative hypothesis: true location shift is not equal to 0</code></pre>
+<pre class="r"><code>wilcox.test(pLI_kIN_DF_TT_unique_2_high$Norm_kOut, pLI_kIN_DF_TT_unique_2_low$Norm_kOut)</code></pre>
+<pre><code>
+    Wilcoxon rank sum test with continuity correction
+
+data:  pLI_kIN_DF_TT_unique_2_high$Norm_kOut and pLI_kIN_DF_TT_unique_2_low$Norm_kOut
+W = 1203212, p-value = 1.877e-05
+alternative hypothesis: true location shift is not equal to 0</code></pre>
+<pre class="r"><code># Create a data frame
+pLI_Hubs_DF_Boxplot &lt;- data.frame(
+  # 1. Generate values to compare 
+  values = c(pLI_kIN_DF_TT_unique_2_high$Norm_kIN, 
+             pLI_kIN_DF_TT_unique_2_low$Norm_kIN),
+  
+  # 2. Factor values to compare 
+  group = factor(c(rep(&quot;High_pLI_kIN&quot;, length(pLI_kIN_DF_TT_unique_2_high$Norm_kIN)),
+                c(rep(&quot;Low_pLI_kIN&quot;, length(pLI_kIN_DF_TT_unique_2_low$Norm_kIN)))
+                ))
+                  )
+
+
+
+
+# Create boxplot
+ggplot(pLI_Hubs_DF_Boxplot, aes(x = group, y = values)) +
+  geom_boxplot() +
+  labs(x = &quot;Group&quot;, y = &quot;Normalized intramodular connectivity (kIN)&quot;) +
+  ggtitle(&quot;Connectivity differences between mutatiion tolerant/intolerant proteins&quot;)+
+  theme_classic()+
+  coord_cartesian(ylim = c(0, 0.25))</code></pre>
+<pre><code>Warning: Removed 2 rows containing non-finite outside the scale range
+(`stat_boxplot()`).</code></pre>
+<p><img src="figure/DOX_prot_Fig4_pLI.Rmd/pLI%20&%20Norm_K-2.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="fig-4c-pli-all-connectivity" class="section level1">
+<h1>Fig-4C pLI &amp; all connectivity</h1>
+<pre class="r"><code>pLI_kIN_DF_TT_unique$DOXcorchar &lt;- as.character(pLI_kIN_DF_TT_unique$Is_DOXcorrelated)
+
+
+
+
+pLI_data_summary_KIN_Tot &lt;- pLI_kIN_DF_TT_unique
+pLI_data_summary_KIN_NormKIN &lt;- pLI_kIN_DF_TT_unique
+pLI_data_summary_KIN_NormkOUT &lt;- pLI_kIN_DF_TT_unique
+
+
+pLI_data_summary_KIN_Tot$Decile &lt;- 
+group_by_deciles(pLI_data_summary_KIN_Tot$kTotal)
+pLI_data_summary_KIN_Tot$Type &lt;- c(&quot;kTotal&quot;)
+
+
+pLI_data_summary_KIN_NormKIN$Decile &lt;- 
+group_by_deciles(pLI_data_summary_KIN_NormKIN$Norm_kIN)
+pLI_data_summary_KIN_NormKIN$Type &lt;- c(&quot;kIN&quot;)
+
+
+
+pLI_data_summary_KIN_NormkOUT$Decile &lt;- 
+group_by_deciles(pLI_data_summary_KIN_NormkOUT$Norm_kOut)
+pLI_data_summary_KIN_NormkOUT$Type &lt;- c(&quot;kOut&quot;)
+
+
+pLI_data_summary_KIN_ALL &lt;- rbind(pLI_data_summary_KIN_Tot,pLI_data_summary_KIN_NormKIN,pLI_data_summary_KIN_NormkOUT)
+
+pLI_data_summary_KIN_ALL %&gt;% colnames()</code></pre>
+<pre><code> [1] &quot;Protein&quot;            &quot;X&quot;                  &quot;kTotal&quot;            
+ [4] &quot;kWithin&quot;            &quot;kOut&quot;               &quot;kDiff&quot;             
+ [7] &quot;logFC&quot;              &quot;P.Value&quot;            &quot;Modules&quot;           
+[10] &quot;Norm_kIN&quot;           &quot;Norm_kOut&quot;          &quot;Is_DOXcorrelated&quot;  
+[13] &quot;pLI_assigned&quot;       &quot;pLI_Mut.Intolerant&quot; &quot;pLI_Mut.Tolerant&quot;  
+[16] &quot;Is_CVD_PPI_protein&quot; &quot;pLI&quot;                &quot;DOXcorchar&quot;        
+[19] &quot;Decile&quot;             &quot;Type&quot;              </code></pre>
+<pre class="r"><code># Summarize the data
+pLI_connectivity_summarized &lt;- pLI_data_summary_KIN_ALL %&gt;%
+  group_by(Type, DOXcorchar, Decile) %&gt;%
+  summarize(median_pLI = median(pLI, na.rm = TRUE)) %&gt;%
+  ungroup()</code></pre>
+<pre><code>`summarise()` has grouped output by &#39;Type&#39;, &#39;DOXcorchar&#39;. You can override
+using the `.groups` argument.</code></pre>
+<pre class="r"><code>pLI_connectivity_summarized$Type &lt;- factor(x = pLI_connectivity_summarized$Type, levels = c(&quot;kTotal&quot;,&quot;kIN&quot;,&quot;kOut&quot;))
+
+
+ggplot(pLI_connectivity_summarized, aes(x = Decile, y = median_pLI, color = DOXcorchar, linetype = Type, group = interaction(Type, DOXcorchar))) +
+  geom_line(size = 1) +
+  scale_y_continuous(breaks = seq(0, 1, by = 0.1), limits = c(0, 1)) +  # Add y-axis ticks
+  labs(title = &quot;Mutation intolerance determined by connectivity&quot;,
+       x = &quot;Connetivity Deciles&quot;,
+       y = &quot;Probabilty of mutation intolerance (pLI)&quot;,
+       color = &quot;DOXcorchar&quot;,
+       linetype = &quot;Type&quot;) +
+  theme_classic()</code></pre>
+<pre><code>Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
+ℹ Please use `linewidth` instead.
+This warning is displayed once every 8 hours.
+Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
+generated.</code></pre>
+<p><img src="figure/DOX_prot_Fig4_pLI.Rmd/pLI%20&%20all%20connectivity-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="fig-4d-mutation-tolerantintolerant-enrichment"
+class="section level1">
+<h1>fig-4D Mutation tolerant/intolerant enrichment</h1>
+<pre class="r"><code>pLI_Data &lt;- read.csv(file = pLI_DF_File_path, header = TRUE)
+
+pLI_Data_sub &lt;- merge(pLI_Data, New_RNA_PRO_DF_3, by.x = &quot;gene&quot;, by.y = &quot;hgnc_symbol&quot;)
+
+pLI_Data_sub2 &lt;- pLI_Data_sub
+
+
+
+pLI_Data_sub2 &lt;- pLI_Data_sub2 %&gt;%
+  mutate(Hub = if_else(pLI_Data_sub2$Protein %in% hubs$Gene, 1, 0))
+
+pLI_Data_sub2 &lt;- pLI_Data_sub2 %&gt;%
+  mutate(DOXcorr = if_else(pLI_Data_sub2$Modules %in% c(&quot;green&quot;,&quot;darkgreen&quot;, &quot;midnightblue&quot;, &quot;salmon&quot;,&quot;lightyellow&quot;), 1, 0))
+
+pLI_Data_sub2 &lt;- pLI_Data_sub2 %&gt;%
+  mutate(Mut_Intolerant = if_else(pLI_Data_sub2$pLI &gt;= 0.9, 1, 0))
+
+pLI_Data_sub2 &lt;- pLI_Data_sub2 %&gt;%
+  mutate(Mut_Resistant = if_else(pLI_Data_sub2$pLI &lt;= 0.1 , 1, 0))
+
+pLI_Data_sub2_hub &lt;- pLI_Data_sub2[pLI_Data_sub2$Hub == 1, ]
+
+
+# Tests 
+FP_DOXcorr_High &lt;- perform_fisher_test_FP(vec1 = pLI_Data_sub2$DOXcorr, vec2 = pLI_Data_sub2$Mut_Intolerant, vec1_name = &quot;&quot;, vec2_name = &quot;&quot;,  plot = FALSE)
+
+
+
+FP_DOXcorr_Low &lt;- perform_fisher_test_FP(vec1 = pLI_Data_sub2$DOXcorr, vec2 = pLI_Data_sub2$Mut_Resistant, vec1_name = &quot;&quot;, vec2_name = &quot;&quot;,  plot = FALSE)
+
+
+
+FP_Hub_High &lt;- perform_fisher_test_FP(vec1 = pLI_Data_sub2$Hub, vec2 = pLI_Data_sub2$Mut_Intolerant, vec1_name = &quot;&quot;, vec2_name = &quot;&quot;,  plot = FALSE)
+
+
+FP_Hub_Low &lt;- perform_fisher_test_FP(vec1 = pLI_Data_sub2$Hub, vec2 = pLI_Data_sub2$Mut_Resistant, vec1_name = &quot;&quot;, vec2_name = &quot;&quot;,  plot = FALSE)
+
+
+
+FP_DOXcorr_Hub_High &lt;- perform_fisher_test_FP(vec1 = pLI_Data_sub2_hub$DOXcorr, vec2 = pLI_Data_sub2_hub$Mut_Intolerant, vec1_name = &quot;&quot;, vec2_name = &quot;&quot;,  plot = FALSE)
+
+
+FP_DOXcorr_Hub_Low &lt;- perform_fisher_test_FP(vec1 = pLI_Data_sub2_hub$DOXcorr, vec2 = pLI_Data_sub2_hub$Mut_Resistant, vec1_name = &quot;&quot;, vec2_name = &quot;&quot;,  plot = FALSE)
+
+
+
+FP_List &lt;- list(FP_DOXcorr_High, FP_DOXcorr_Low, FP_Hub_High, FP_Hub_Low, FP_DOXcorr_Hub_High, FP_DOXcorr_Hub_Low)
+
+FP_DF &lt;- data.frame(
+  Odds_ratio = numeric(length(FP_List)),
+  Lower_CI = numeric(length(FP_List)),
+  Upper_CI = numeric(length(FP_List)), 
+  Pval = numeric(length(FP_List))
+)
+
+for (i in 1:length(FP_List)) {
+  FP_DF$Odds_ratio[i] &lt;- FP_List[[i]]$Odds_ratio
+  FP_DF$Lower_CI[i] &lt;- FP_List[[i]]$Confidence_Interval[1]
+  FP_DF$Upper_CI[i] &lt;- FP_List[[i]]$Confidence_Interval[2]
+  FP_DF$Pval[i] &lt;- FP_List[[i]]$PValue
+}
+
+# Add row names for the labels in the forest plot
+FP_DF$Label &lt;- c(&quot;FP_DOXcorr_High&quot;, &quot;FP_DOXcorr_Low&quot;, &quot;FP_Hub_High&quot;, &quot;FP_Hub_Low&quot;, &quot;FP_DOXcorr_Hub_High&quot;, &quot;FP_DOXcorr_Hub_Low&quot;)
+
+
+FP_DF$Label &lt;- factor(FP_DF$Label, levels = rev(c(&quot;FP_Hub_High&quot;, &quot;FP_Hub_Low&quot;, &quot;FP_DOXcorr_High&quot;, &quot;FP_DOXcorr_Low&quot;, &quot;FP_DOXcorr_Hub_High&quot;, &quot;FP_DOXcorr_Hub_Low&quot;)))
+
+
+# Add a new column to indicate &quot;cis&quot; or &quot;trans&quot;
+FP_DF$Type &lt;- ifelse(grepl(&quot;High&quot;, FP_DF$Label), &quot;Mutation Intolerant&quot;, &quot;Mutation Tolerant&quot;)
+
+
+# Plot with color based on &quot;Type&quot;
+ggplot(FP_DF, aes(x = Label, y = Odds_ratio, ymin = Lower_CI, ymax = Upper_CI, color = Type)) +
+  geom_pointrange() +
+  geom_hline(yintercept = 1, linetype = &quot;dashed&quot;, color = &quot;red&quot;) +
+  coord_flip() +
+  labs(
+    title = &quot;Odds of mutation tolerance&quot;,
+    x = &quot;&quot;,
+    y = &quot;Odds Ratio (95% CI)&quot;
+  ) +
+  theme_classic() +
+  scale_color_manual(values = c(&quot;Mutation Tolerant&quot; = &quot;dodgerblue4&quot;, &quot;Mutation Intolerant&quot; = &quot;darkred&quot;))</code></pre>
+<p><img src="figure/DOX_prot_Fig4_pLI.Rmd/Mutation%20tolerant/intolerant%20enrichment-1.png" width="672" style="display: block; margin: auto;" /></p>
+<br>
+<p>
+<button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
+<span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>
+Session information
+</button>
+</p>
+<div id="workflowr-sessioninfo" class="collapse">
+<pre class="r"><code>sessionInfo()</code></pre>
+<pre><code>R version 4.4.1 (2024-06-14)
+Platform: x86_64-apple-darwin20
+Running under: macOS Sonoma 14.6.1
+
+Matrix products: default
+BLAS:   /Library/Frameworks/R.framework/Versions/4.4-x86_64/Resources/lib/libRblas.0.dylib 
+LAPACK: /Library/Frameworks/R.framework/Versions/4.4-x86_64/Resources/lib/libRlapack.dylib;  LAPACK version 3.12.0
+
+locale:
+[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
+
+time zone: America/Chicago
+tzcode source: internal
+
+attached base packages:
+[1] stats4    stats     graphics  grDevices utils     datasets  methods  
+[8] base     
+
+other attached packages:
+ [1] scales_1.3.0                impute_1.78.0              
+ [3] WGCNA_1.72-5                fastcluster_1.2.6          
+ [5] dynamicTreeCut_1.63-1       BioNERO_1.12.0             
+ [7] reshape2_1.4.4              ggridges_0.5.6             
+ [9] biomaRt_2.60.1              UpSetR_1.4.0               
+[11] DOSE_3.30.4                 AnnotationDbi_1.66.0       
+[13] clusterProfiler_4.12.6      pheatmap_1.0.12            
+[15] qvalue_2.36.0               cluster_2.1.6              
+[17] ggfortify_0.4.17            lubridate_1.9.3            
+[19] forcats_1.0.0               stringr_1.5.1              
+[21] dplyr_1.1.4                 purrr_1.0.2                
+[23] readr_2.1.5                 tidyr_1.3.1                
+[25] tibble_3.2.1                ggplot2_3.5.1              
+[27] tidyverse_2.0.0             RColorBrewer_1.1-3         
+[29] RUVSeq_1.38.0               edgeR_4.2.1                
+[31] limma_3.60.4                EDASeq_2.38.0              
+[33] ShortRead_1.62.0            GenomicAlignments_1.40.0   
+[35] SummarizedExperiment_1.34.0 MatrixGenerics_1.16.0      
+[37] matrixStats_1.4.1           Rsamtools_2.20.0           
+[39] GenomicRanges_1.56.2        Biostrings_2.72.1          
+[41] GenomeInfoDb_1.40.1         XVector_0.44.0             
+[43] IRanges_2.38.1              S4Vectors_0.42.1           
+[45] BiocParallel_1.38.0         Biobase_2.64.0             
+[47] BiocGenerics_0.50.0         workflowr_1.7.1            
+
+loaded via a namespace (and not attached):
+  [1] fs_1.6.4                bitops_1.0-8            enrichplot_1.24.2      
+  [4] httr_1.4.7              doParallel_1.0.17       backports_1.5.0        
+  [7] tools_4.4.1             utf8_1.2.4              R6_2.5.1               
+ [10] mgcv_1.9-1              lazyeval_0.2.2          GetoptLong_1.0.5       
+ [13] withr_3.0.1             prettyunits_1.2.0       gridExtra_2.3          
+ [16] preprocessCore_1.66.0   cli_3.6.3               network_1.18.2         
+ [19] scatterpie_0.2.4        labeling_0.4.3          sass_0.4.9             
+ [22] genefilter_1.86.0       yulab.utils_0.1.7       foreign_0.8-87         
+ [25] gson_0.1.0              R.utils_2.12.3          rstudioapi_0.16.0      
+ [28] RSQLite_2.3.7           generics_0.1.3          gridGraphics_0.5-1     
+ [31] shape_1.4.6.1           BiocIO_1.14.0           hwriter_1.3.2.1        
+ [34] GO.db_3.19.1            Matrix_1.7-0            interp_1.1-6           
+ [37] fansi_1.0.6             abind_1.4-8             R.methodsS3_1.8.2      
+ [40] lifecycle_1.0.4         whisker_0.4.1           yaml_2.3.10            
+ [43] SparseArray_1.4.8       BiocFileCache_2.12.0    grid_4.4.1             
+ [46] blob_1.2.4              promises_1.3.0          crayon_1.5.3           
+ [49] pwalign_1.0.0           lattice_0.22-6          cowplot_1.1.3          
+ [52] annotate_1.82.0         GenomicFeatures_1.56.0  KEGGREST_1.44.1        
+ [55] pillar_1.9.0            knitr_1.48              ComplexHeatmap_2.20.0  
+ [58] fgsea_1.30.0            rjson_0.2.22            codetools_0.2-20       
+ [61] fastmatch_1.1-4         glue_1.7.0              getPass_0.2-4          
+ [64] ggfun_0.1.6             data.table_1.16.0       vctrs_0.6.5            
+ [67] png_0.1-8               treeio_1.28.0           gtable_0.3.5           
+ [70] cachem_1.1.0            aroma.light_3.34.0      xfun_0.47              
+ [73] S4Arrays_1.4.1          tidygraph_1.3.1         coda_0.19-4.1          
+ [76] survival_3.7-0          iterators_1.0.14        statmod_1.5.0          
+ [79] nlme_3.1-166            ggtree_3.12.0           bit64_4.0.5            
+ [82] progress_1.2.3          filelock_1.0.3          GENIE3_1.26.0          
+ [85] rprojroot_2.0.4         bslib_0.8.0             rpart_4.1.23           
+ [88] Hmisc_5.1-3             colorspace_2.1-1        DBI_1.2.3              
+ [91] nnet_7.3-19             tidyselect_1.2.1        processx_3.8.4         
+ [94] bit_4.0.5               compiler_4.4.1          curl_5.2.2             
+ [97] git2r_0.35.0            httr2_1.0.4             htmlTable_2.4.3        
+[100] intergraph_2.0-4        xml2_1.3.6              ggdendro_0.2.0         
+[103] DelayedArray_0.30.1     shadowtext_0.1.4        rtracklayer_1.64.0     
+[106] checkmate_2.3.2         callr_3.7.6             rappdirs_0.3.3         
+[109] digest_0.6.37           rmarkdown_2.28          RhpcBLASctl_0.23-42    
+[112] base64enc_0.1-3         htmltools_0.5.8.1       pkgconfig_2.0.3        
+[115] jpeg_0.1-10             highr_0.11              dbplyr_2.5.0           
+[118] fastmap_1.2.0           htmlwidgets_1.6.4       rlang_1.1.4            
+[121] GlobalOptions_0.1.2     UCSC.utils_1.0.0        farver_2.1.2           
+[124] jquerylib_0.1.4         jsonlite_1.8.8          statnet.common_4.9.0   
+[127] GOSemSim_2.30.2         R.oo_1.26.0             RCurl_1.98-1.16        
+[130] magrittr_2.0.3          ggnetwork_0.5.13        Formula_1.2-5          
+[133] GenomeInfoDbData_1.2.12 ggplotify_0.1.2         patchwork_1.2.0        
+[136] munsell_0.5.1           Rcpp_1.0.13             ape_5.8                
+[139] viridis_0.6.5           minet_3.62.0            stringi_1.8.4          
+[142] ggraph_2.2.1            zlibbioc_1.50.0         MASS_7.3-61            
+[145] plyr_1.8.9              parallel_4.4.1          ggrepel_0.9.6          
+[148] deldir_2.0-4            graphlayouts_1.1.1      splines_4.4.1          
+[151] hms_1.1.3               circlize_0.4.16         locfit_1.5-9.10        
+[154] ps_1.8.0                igraph_2.0.3            XML_3.99-0.17          
+[157] evaluate_0.24.0         latticeExtra_0.6-30     tzdb_0.4.0             
+[160] foreach_1.5.2           tweenr_2.0.3            httpuv_1.6.15          
+[163] polyclip_1.10-7         clue_0.3-65             ggforce_0.4.2          
+[166] xtable_1.8-4            restfulr_0.0.15         NetRep_1.2.7           
+[169] tidytree_0.4.6          later_1.3.2             viridisLite_0.4.2      
+[172] aplot_0.2.3             memoise_2.0.1           sva_3.52.0             
+[175] timechange_0.3.0       </code></pre>
+</div>
+</div>
+
+
+<!-- Adjust MathJax settings so that all math formulae are shown using
+TeX fonts only; see
+https://docs.mathjax.org/en/latest/web/configuration.html. This will make
+the presentation more consistent at the cost of the webpage sometimes
+taking slightly longer to load. Note that this only works because the
+footer is added to webpages before the MathJax javascript. -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    "HTML-CSS": { availableFonts: ["TeX"] }
+  });
+</script>
+
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
