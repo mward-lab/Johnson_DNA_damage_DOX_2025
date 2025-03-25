@@ -12,7 +12,7 @@ Research website for the project "DNA damage-associated protein co-expression ne
 
 
 # Preprocessing and comparison of protein acquisition types 
-[Unwanted tehnical variation removal and differential abundance testing  ](https://omar-johnson.github.io/DNA_damage_DOX/DOX_prot_DAP_tests_ruv.html)
+[Unwanted tehnical variation removal and differential abundance testing  ](https://mward-lab.github.io/Johnson_DNA_damage_DOX_2025/DOX_prot_DAP_tests_ruv.html)
 
 
 
